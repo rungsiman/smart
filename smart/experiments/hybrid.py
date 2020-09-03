@@ -1,33 +1,24 @@
-import json
 import os
-from datetime import datetime
 
-from smart.experiments.base import BaseExperiment
+from smart.experiments.base import BaseExperiment, BertConfig
+
+
+class DeepConfig:
+    def __init__(self, labels, multiple_label=None, paired_binary=None):
+        self.labels = labels
+        self.multiple_label = multiple_label or BertConfig()
+        self.paired_binary = paired_binary or BertConfig()
 
 
 class Experiment(BaseExperiment):
-    version = '0.5-aws'
-    experiment = 'bert-binary'
+    version = '0.6-aws'
+    experiment = 'bert-hybrid'
     identifier = 'sandbox'
-    model = 'bert-base-uncased'
     description = 'Sandbox for testing on AWS'
-    
+
     seed = 42
-    epochs = 4
-    batch_size = 32
-    test_ratio = .1
-
-    # IMPORTANT: For evaluating the source code on low-performance machine only.
-    # Set to None for full training
-    data_size = 500
-
-    # The amount of negative examples
-    neg_size = 1
-
-    # Set to True to drop the last incomplete batch, if the dataset size is not divisible 
-    # by the batch size. If False and the size of dataset is not divisible by the batch size, 
-    # then the last batch will be smaller.
-    drop_last = False
+    tokenizer_model = 'bert-base-uncased'
+    tokenizer_lowercase = True
 
     # Distributed computing
     ddp_master_address = '127.0.0.1'
@@ -39,14 +30,16 @@ class Experiment(BaseExperiment):
     class Paths(BaseExperiment.Config):
         root = 'data'
 
-        def __init__(self, experiment, model, identifier):
+        def __init__(self, experiment, identifier):
             super().__init__()
             self.input = os.path.join(self.root, 'input')
-            self.output = os.path.join(self.root, f'intermediate/resources/{experiment}-{identifier}/{model}')
+            self.output = os.path.join(self.root, f'intermediate/hybrid/{experiment}-{identifier}')
 
             Experiment.prepare(self.output)
-    
+
     class DBpedia(BaseExperiment.Config):
+        name = 'dbpedia'
+
         def __init__(self, paths):
             super().__init__()
             self.input_root = os.path.join(paths.input, 'dbpedia')
@@ -60,20 +53,17 @@ class Experiment(BaseExperiment):
 
             Experiment.prepare(self.output_root, self.output, self.output_models, self.output_analyses)
 
-    class Bert(BaseExperiment.Config):
-        learning_rate = 2e-5      # Default: 5e-5
-        eps = 1e-8                # Adam's epsilon, default: 1e-8
-        warmup_steps = 0
-        max_grad_norm = 1.0
-        
-        def __init__(self):
-            super().__init__()
+            self.deep = [
+                DeepConfig(['dbo:Place', 'dbo:Agent', 'dbo:Work']),
+                DeepConfig(['dbo:Person', 'dbo:PopulatedPlace', 'dbo:Organisation']),
+                DeepConfig(['dbo:Settlement', 'dbo:Country', 'dbo:State', 'dbo:Company'],),
+                DeepConfig(['dbo:City', 'dbo:University', 'dbo:Stream']),
+                DeepConfig(['dbo:River'])]
     
     def __init__(self):
         super().__init__()
-        self.paths = Experiment.Paths(self.experiment, self.model, self.identifier)
+        self.paths = Experiment.Paths(self.experiment, self.identifier)
         self.task = Experiment.DBpedia(self.paths)
-        self.bert = Experiment.Bert()
 
         # Apply to sklearn.model_selection.train_test_split.
         # Controls the shuffling applied to the data before applying the split.
