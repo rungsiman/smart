@@ -1,7 +1,11 @@
 import datetime
+import json
+import matplotlib.pyplot as plt
+import numpy as np
 import os
 import time
 import torch
+import torch.distributed as dist
 from torch.nn.parallel import DistributedDataParallel
 from torch.nn.utils import clip_grad_norm_
 from tqdm import tqdm
@@ -16,8 +20,7 @@ class NDCGConfig:
 
 
 class TrainBase:
-    train_records = {'loss': [], 'time': []}
-    eval_records = {'time': []}
+    train_records = {'loss': [], 'train_time': [], 'eval_time': None}
     train_data, train_dataloader = ..., ...
     eval_data, eval_dataloader = ..., ...
     checkpoint = ...
@@ -26,12 +29,11 @@ class TrainBase:
     path_label = ...
     path_model = ...
 
-    def __init__(self, rank, world_size, level, experiment, model, data, config, shared, lock):
+    def __init__(self, rank, world_size, experiment, model, data, config, shared, lock):
         self.rank = rank
         self.world_size = world_size
         self.experiment = experiment
         self.data = data
-        self.level = level
         self.config = config
         self.lock = lock
         self.shared = shared
@@ -51,15 +53,17 @@ class TrainBase:
         self.path_model = os.path.join(self.experiment.task.output_models, self.identifier)
         self.path_analyses = os.path.join(self.experiment.task.output_analyses, self.identifier)
 
-        for path in [self.path_output, self.path_model, self.path_analyses]:
-            if not os.path.exists(path):
-                os.makedirs(path)
+        if rank == 0:
+            for path in [self.path_output, self.path_model, self.path_analyses]:
+                if not os.path.exists(path):
+                    os.makedirs(path)
 
         print(f'GPU #{rank}: Initialized')
 
     def __call__(self):
         self.model.train()
         loss = None
+        dist.barrier()
 
         for epoch in range(self.config.epochs):
             accumulated_loss = 0
@@ -67,7 +71,7 @@ class TrainBase:
             self.sampler.set_epoch(epoch)
 
             for step, batch in (enumerate(tqdm(self.train_dataloader, desc=f'GPU #{self.rank}: Training'))
-            if self.rank == 0 else enumerate(self.train_dataloader)):
+                                if self.rank == 0 else enumerate(self.train_dataloader)):
                 self.optimizer.zero_grad()
 
                 loss = self._train_forward(batch)
@@ -90,7 +94,7 @@ class TrainBase:
                 print(status)
 
             self.train_records['loss'].append(average_loss)
-            self.train_records['time'].append(training_time)
+            self.train_records['train_time'].append(training_time)
 
         self.checkpoint = {'epoch': self.config.epochs - 1, 'model': self.model.state_dict(), 'optimizer': self.optimizer.state_dict(),
                            'scheduler': self.scheduler.state_dict(), 'loss': loss}
@@ -110,8 +114,27 @@ class TrainBase:
 
     def save(self):
         if self.rank == 0:
+            now = datetime.datetime.now()
             torch.save(self.checkpoint, os.path.join(self.path_model, 'model.checkpoint'))
+            json.dump(self.train_records, open(os.path.join(self.path_analyses, 'train_records.json'), 'w'))
 
+            with open(os.path.join(self.path_analyses, 'env.txt'), 'w') as writer:
+                writer.write(f'Timestamp: {now.strftime("%Y-%m-%d %H:%M:%S")}\n')
+                writer.write(f'Number of GPUs: {self.world_size}')
+
+            with open(os.path.join(self.path_analyses, 'config.json'), 'w') as writer:
+                writer.write(self.experiment.describe())
+
+            loss = np.array(self.train_records['loss'])
+            plt.plot(loss, label='Training loss')
+            plt.title(f'{self.experiment.experiment}-{self.experiment.identifier}-{self.identifier}')
+            plt.ylabel('Loss')
+            plt.xlabel('Epochs')
+            plt.legend()
+            plt.savefig(os.path.join(self.path_analyses, 'loss.png'), dpi=300)
+            plt.clf()
+
+        dist.barrier()
         return self
 
     @staticmethod

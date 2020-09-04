@@ -7,7 +7,7 @@ class Ontology:
     def __init__(self, experiment, tokenizer):
         self.experiment = experiment
         self.labels, self.ids = {}, []
-        max_level = 0
+        self.max_level = 0
 
         with open(experiment.task.input_ontology) as reader:
             items = csv.reader(reader, delimiter='\t')
@@ -22,7 +22,7 @@ class Ontology:
                                         'level': int(item[1]),
                                         'parent': item[2]}
                 self.ids.append(item[0])
-                max_level = max(max_level, int(item[1]))
+                self.max_level = max(self.max_level, int(item[1]))
 
         max_len = tokenizer.find_max_len([label['text'] for label in self.labels.values()])
 

@@ -1,11 +1,10 @@
 import json
-import numpy as np
 import os
 import random
 import sys
+import time
 import torch
 import torch.distributed as dist
-import torch.nn.functional as F
 from sklearn.metrics import classification_report
 from sklearn.model_selection import train_test_split
 from torch.utils.data import TensorDataset, DataLoader
@@ -30,9 +29,9 @@ class TrainPairedBinaryClassification(TrainBase):
             self.labels = TrainPairedBinaryClassification.Data.Tokens(labels)
             self.tags = torch.tensor(tags)
 
-    def __init__(self, rank, world_size, level, experiment, model, data, config, shared, lock):
-        self.identifier = f'level-{level}-paired-binary'
-        super().__init__(rank, world_size, level, experiment, model, data, config, shared, lock)
+    def __init__(self, rank, world_size, experiment, model, data, config, shared, lock, level=None):
+        self.identifier = f'level-{level + 1}-paired-binary' if level is not None else 'paired-binary'
+        super().__init__(rank, world_size, experiment, model, data, config, shared, lock)
 
     def pack(self):
         ids = self.data.df.id.values
@@ -86,6 +85,7 @@ class TrainPairedBinaryClassification(TrainBase):
         print(f'GPU #{self.rank}: Started evaluation')
         sys.stdout.flush()
         dist.barrier()
+        eval_start = time.time()
 
         for step, batch in (enumerate(tqdm(self.eval_dataloader, desc=f'GPU #{self.rank}: Evaluating'))
                             if self.rank == 0 else enumerate(self.eval_dataloader)):
@@ -104,6 +104,7 @@ class TrainPairedBinaryClassification(TrainBase):
         print(f'GPU #{self.rank}: Predictions for evaluation complete')
         print(f'.. Prediction size: {pred_size}')
         dist.barrier()
+        self.train_records['eval_time'] = TrainPairedBinaryClassification._format_time(time.time() - eval_start)
 
         if self.rank == 0:
             y_ids, y_lids, y_true, y_pred = [], [], [], []
@@ -126,24 +127,12 @@ class TrainPairedBinaryClassification(TrainBase):
             json.dump(answers, open(os.path.join(self.path_output, 'eval_answers.json'), 'w'), indent=4)
 
             ndcg_config = NDCGConfig(self.experiment, self.path_output)
-            ndcg_evaluate(ndcg_config)
+            ndcg_result = ndcg_evaluate(ndcg_config)
+
+            with open(os.path.join(self.path_analyses, 'ndcg_result.txt'), 'w') as writer:
+                writer.write(ndcg_result)
 
         return self
-
-    def _train_forward(self, batch):
-        return self.model(*tuple(t.cuda(self.rank) for t in batch[2:-1]), labels=batch[-1].cuda(self.rank), return_dict=True).loss
-
-    def _build_answers(self, y_ids, y_lids, y_pred):
-        answers = self._get_data(y_ids)
-
-        for answer in answers:
-            types = []
-
-            for qid, lid, pred in zip(y_ids, y_lids, y_pred):
-                if (str(qid) == answer['id'] or 'dbpedia_' + str(qid) == answer['id']) and pred == 1:
-                    types.append(self.data.ontology.ids[lid])
-
-        return answers
 
     def _build_dataloader(self, data):
         dataset = TensorDataset(data.ids,
@@ -161,3 +150,18 @@ class TrainPairedBinaryClassification(TrainBase):
                           sampler=self.sampler,
                           batch_size=self.config.batch_size,
                           drop_last=self.config.drop_last)
+
+    def _train_forward(self, batch):
+        return self.model(*tuple(t.cuda(self.rank) for t in batch[2:-1]), labels=batch[-1].cuda(self.rank), return_dict=True).loss
+
+    def _build_answers(self, y_ids, y_lids, y_pred):
+        answers = self._get_data(y_ids)
+
+        for answer in answers:
+            types = []
+
+            for qid, lid, pred in zip(y_ids, y_lids, y_pred):
+                if (str(qid) == answer['id'] or 'dbpedia_' + str(qid) == answer['id']) and pred == 1:
+                    types.append(self.data.ontology.ids[lid])
+
+        return answers

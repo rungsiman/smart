@@ -1,12 +1,10 @@
 import json
-import numpy as np
 import os
 import random
 import sys
 import time
 import torch
 import torch.distributed as dist
-import torch.nn.functional as F
 from sklearn.metrics import classification_report
 from sklearn.model_selection import train_test_split
 from torch.utils.data import TensorDataset, DataLoader
@@ -17,7 +15,7 @@ from smart.test.evaluation import main as ndcg_evaluate
 from smart.train.base import TrainBase, NDCGConfig
 
 
-class TrainMultipleLabelClassification(TrainBase):
+class TrainSequenceClassification(TrainBase):
     class Data:
         class Tokens:
             def __init__(self, items):
@@ -26,13 +24,13 @@ class TrainMultipleLabelClassification(TrainBase):
 
         def __init__(self, ids, questions, tags):
             self.ids = torch.tensor(ids)
-            self.questions = TrainMultipleLabelClassification.Data.Tokens(questions)
+            self.questions = TrainSequenceClassification.Data.Tokens(questions)
             self.tags = torch.tensor(tags)
 
     def __init__(self, rank, world_size, experiment, model, data, labels, config, shared, lock, level=None, data_neg=None):
         self.labels = labels
         self.data_neg = data_neg
-        self.identifier = f'level-{level + 1}-multiple-label' if level is not None else 'multiple-label'
+        self.identifier = f'level-{level}-sequence' if level is not None else 'sequence'
         super().__init__(rank, world_size, experiment, model, data, config, shared, lock)
 
     def pack(self):
@@ -42,13 +40,13 @@ class TrainMultipleLabelClassification(TrainBase):
         neg_qids = []
 
         if self.data_neg is not None:
-            if self.data.size <= self.data_neg.size:
+            if self.data.size >= self.data_neg.size:
                 neg_qids = random.sample(range(self.data_neg.size), self.data.size)
             else:
-                while len(neg_qids) < self.data.size:
+                while len(neg_qids) < self.data_neg.size:
                     neg_qids += random.sample(range(self.data_neg.size), self.data_neg.size)
 
-                neg_qids = neg_qids[:self.data.size]
+                neg_qids = neg_qids[:self.data_neg.size]
 
         input_ids = []
         input_questions = []
@@ -57,12 +55,12 @@ class TrainMultipleLabelClassification(TrainBase):
         for i, qid, question, question_labels in tqdm(zip(range(len(questions)), ids, questions, labels)):
             input_ids.append(int(qid.replace('dbpedia_', '')))
             input_questions.append(self.data.tokenized[question])
-            input_tags.append([int(label in question_labels) for label in self.labels] + [0])
+            input_tags.append(self.labels.index(question_labels[0]))
 
             if self.data_neg is not None:
                 input_ids.append(neg_qids[i])
                 input_questions.append(self.data.tokenized[self.data_neg.df.iloc[neg_qids[i]]['question']])
-                input_tags.append([0] * len(self.labels) + [1])
+                input_tags.append(len(self.labels))
 
         split = train_test_split(input_ids, input_questions, input_tags,
                                  random_state=self.experiment.split_random_state,
@@ -70,8 +68,8 @@ class TrainMultipleLabelClassification(TrainBase):
 
         train_ids, eval_ids, train_questions, eval_questions, train_tags, eval_tags = split
 
-        self.train_data = TrainMultipleLabelClassification.Data(train_ids, train_questions, train_tags)
-        self.eval_data = TrainMultipleLabelClassification.Data(eval_ids, eval_questions, eval_tags)
+        self.train_data = TrainSequenceClassification.Data(train_ids, train_questions, train_tags)
+        self.eval_data = TrainSequenceClassification.Data(eval_ids, eval_questions, eval_tags)
         return self
 
     def evaluate(self):
@@ -89,7 +87,7 @@ class TrainMultipleLabelClassification(TrainBase):
         for step, batch in (enumerate(tqdm(self.eval_dataloader, desc=f'GPU #{self.rank}: Evaluating'))
                             if self.rank == 0 else enumerate(self.eval_dataloader)):
             logits = self.model(*tuple(t.cuda(self.rank) for t in batch[1:-1]), return_dict=True).logits
-            preds = (F.softmax(logits, dim=1) >= 0.5).long().detach().cpu().numpy().tolist()
+            preds = torch.argmax(logits, dim=1).detach().cpu().numpy().tolist()
 
             with self.lock:
                 evaluation = self.shared['evaluation']
@@ -102,7 +100,7 @@ class TrainMultipleLabelClassification(TrainBase):
         print(f'GPU #{self.rank}: Predictions for evaluation complete')
         print(f'.. Prediction size: {pred_size}')
         dist.barrier()
-        self.train_records['eval_time'] = TrainMultipleLabelClassification._format_time(time.time() - eval_start)
+        self.train_records['eval_time'] = TrainSequenceClassification._format_time(time.time() - eval_start)
 
         if self.rank == 0:
             y_ids, y_true, y_pred = [], [], []
@@ -112,7 +110,7 @@ class TrainMultipleLabelClassification(TrainBase):
                 y_true += self.shared['evaluation'][i]['y_true']
                 y_pred += self.shared['evaluation'][i]['y_pred']
 
-            report = classification_report(np.array(y_true).reshape(-1), np.array(y_pred).reshape(-1), digits=4)
+            report = classification_report(y_true, y_pred, digits=4)
             print(report)
 
             with open(os.path.join(self.path_analyses, 'eval_result.txt'), 'w') as writer:
@@ -148,8 +146,8 @@ class TrainMultipleLabelClassification(TrainBase):
         answers = self._get_data(y_ids)
 
         for answer in answers:
-            for qid, preds in zip(y_ids, y_pred):
+            for qid, pred in zip(y_ids, y_pred):
                 if str(qid) == answer['id'] or 'dbpedia_' + str(qid) == answer['id']:
-                    answer['type'] = [self.labels[i] for i in range(len(preds)) if i < len(self.labels) and preds[i] == 1]
+                    answer['type'] = [self.labels[pred]] if pred < len(self.labels) else []
 
         return answers

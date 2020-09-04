@@ -4,8 +4,8 @@ import torch.multiprocessing as mp
 from smart.data.base import Ontology, DBpediaTrainingData
 from smart.data.tokenizers import CustomAutoTokenizer
 from smart.dist.multiprocessing import init_process
-from smart.experiments.hybrid import HybridExperiment
-from smart.train.hybrid import DeepHybridTrain
+from smart.experiments.literal import LiteralExperiment
+from smart.train.literal import DeepLiteralTrain
 from smart.utils.devices import describe_devices
 from smart.utils.reproducibility import set_seed
 
@@ -16,12 +16,12 @@ def process(rank, world_size, experiment, data, shared, lock):
     init_process(rank, world_size, experiment)
 
     data.tokenize()
-    train = DeepHybridTrain(rank, world_size, experiment, data, shared, lock)
+    train = DeepLiteralTrain(rank, world_size, experiment, data, shared, lock)
     train()
 
 
 def run():
-    experiment = HybridExperiment()
+    experiment = LiteralExperiment()
     set_seed(experiment)
     describe_devices()
     print(experiment.describe())

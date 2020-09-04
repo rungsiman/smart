@@ -4,6 +4,17 @@ from datetime import datetime
 
 
 class BaseExperiment:
+    seed = 42
+    tokenizer_model = 'bert-base-uncased'
+    tokenizer_lowercase = True
+
+    # Distributed computing
+    ddp_master_address = '127.0.0.1'
+    ddp_master_port = '29500'
+
+    # If set to None, the worker processes will utilize all available GPUs
+    num_gpu = None
+
     class Config:
         _obj = False
         
@@ -15,7 +26,10 @@ class BaseExperiment:
     
     @staticmethod
     def attrs(config):
-        if any([isinstance(config, t) for t in [str, bool, int, float]]) or config is None:
+        if '<class' in str(config) and not getattr(config, '_obj', False):
+            return str(config)
+
+        elif any([isinstance(config, t) for t in [str, bool, int, float]]) or config is None:
             return config
 
         else:
@@ -39,7 +53,7 @@ class BaseExperiment:
 
             return descriptions
     
-    def __str__(self):
+    def describe(self):
         return json.dumps(BaseExperiment.attrs(self), indent=4)
 
     @staticmethod
@@ -49,7 +63,7 @@ class BaseExperiment:
                 os.makedirs(path)
 
 
-class BertConfig:
+class BertExperimentConfig:
     model = 'bert-base-uncased'
 
     epochs = 4
@@ -78,4 +92,4 @@ class BertConfig:
             super().__init__()
 
     def __init__(self):
-        self.bert = BertConfig.Bert()
+        self.bert = BertExperimentConfig.Bert()

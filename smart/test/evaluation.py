@@ -274,6 +274,15 @@ def evaluate(system_output, ground_truth, type_hierarchy, max_depth):
     print('  NDCG@5:  {:5.3f}'.format(sum(ndcg_5) / len(ndcg_5)))
     print('  NDCG@10: {:5.3f}'.format(sum(ndcg_10) / len(ndcg_10)))
 
+    outputs = ['Evaluation results:']
+    outputs += ['-------------------']
+    outputs += ['Category prediction (based on {} questions)'.format(len(accuracy))]
+    outputs += ['  Accuracy: {:5.3f}'.format(sum(accuracy) / len(accuracy))]
+    outputs += ['Type ranking (based on {} questions)'.format(len(ndcg_5))]
+    outputs += ['  NDCG@5:  {:5.3f}'.format(sum(ndcg_5) / len(ndcg_5))]
+    outputs += ['  NDCG@10: {:5.3f}'.format(sum(ndcg_10) / len(ndcg_10))]
+    return '\n'.join(outputs)
+
 
 def arg_parser():
     parser = argparse.ArgumentParser()
@@ -291,7 +300,7 @@ def main(args):
     type_hierarchy, max_depth = load_type_hierarchy(args.type_hierarchy_tsv)
     ground_truth = load_ground_truth(args.ground_truth_json, type_hierarchy)
     system_output = load_system_output(args.system_output_json)
-    evaluate(system_output, ground_truth, type_hierarchy, max_depth)
+    return evaluate(system_output, ground_truth, type_hierarchy, max_depth)
 
 
 if __name__ == "__main__":
