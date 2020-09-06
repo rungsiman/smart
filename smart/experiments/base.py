@@ -23,6 +23,15 @@ class BaseExperiment:
         
         def __init__(self):
             self._obj = True
+
+    class ClassConfig:
+        _obj = False
+
+        def __init__(self, cls, *, args=None, kwargs=None):
+            self._obj = True
+            self.cls = cls
+            self.args = args or []
+            self.kwargs = kwargs or {}
             
     def __init__(self):
         self.timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -86,11 +95,11 @@ class BertExperimentConfig:
     drop_last = False
 
     class Bert(BaseExperiment.Config):
-        learning_rate = 2e-5  # Default: 5e-5
-        optimizer = AdamW
-        scheduler = LinearScheduleWithWarmup
-        eps = 1e-8  # Adam's epsilon, default: 1e-8
-        warmup_steps = 0
+        optimizer = BaseExperiment.ClassConfig(AdamW, kwargs={
+            'lr': 2e-5,             # Default learning rate: 5e-5
+            'eps': 1e-8})           # Adam's epsilon, default: 1e-8
+        scheduler = BaseExperiment.ClassConfig(LinearScheduleWithWarmup, kwargs={
+            'num_warmup_steps': 0})
         max_grad_norm = 1.0
 
         def __init__(self):

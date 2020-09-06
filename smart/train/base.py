@@ -56,11 +56,15 @@ class TrainBase(StageBase):
         model.cuda(rank)
 
         self.model = DistributedDataParallel(model, device_ids=[rank])
-        self.optimizer = self.config.bert.optimizer(model.parameters(),
-                                                    lr=config.bert.learning_rate)
-        self.scheduler = self.config.bert.scheduler(self.optimizer,
-                                                    num_warmup_steps=config.bert.warmup_steps,
-                                                    num_training_steps=num_training_steps).scheduler
+        self.optimizer = self.config.bert.optimizer.cls(model.parameters(),
+                                                        *self.config.bert.optimizer.args,
+                                                        **self.config.bert.optimizer.kwargs)
+        self.scheduler = self.config.bert.scheduler.cls(self.optimizer,
+                                                        num_training_steps=num_training_steps,
+                                                        *self.config.bert.scheduler.args,
+                                                        **self.config.bert.scheduler.kwargs)
+        if hasattr(self.scheduler, 'scheduler_'):
+            self.scheduler = self.scheduler.scheduler_
 
         self.path_output = os.path.join(self.experiment.dataset.output_train, self.identifier)
         self.path_models = os.path.join(self.experiment.dataset.output_models, self.identifier)
