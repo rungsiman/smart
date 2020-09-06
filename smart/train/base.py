@@ -59,6 +59,10 @@ class TrainBase(StageBase):
         self.optimizer = self.config.bert.optimizer.cls(model.parameters(),
                                                         *self.config.bert.optimizer.args,
                                                         **self.config.bert.optimizer.kwargs)
+
+        if hasattr(self.optimizer, 'optimizer_'):
+            self.optimizer = self.optimizer.optimizer_
+
         self.scheduler = self.config.bert.scheduler.cls(self.optimizer,
                                                         num_training_steps=num_training_steps,
                                                         *self.config.bert.scheduler.args,

@@ -30,8 +30,10 @@ class HybridTrainPipeline:
             bert_config = BertConfig.from_pretrained(config.model)
             bert_config.num_labels = len(labels) + 1
 
+            # For secondary data, if filter only with (labels, reverse=True), the rest of the data on all levels will still be included.
+            # If filter only with (reversed_labels), questions having both primary and secondary types will be included.
             data_primary = self.data.clone().filter(labels)
-            data_secondary = self.data.clone().filter(labels, reverse=True)
+            data_secondary = self.data.clone().filter(labels, reverse=True).filter(reversed_labels)
 
             pipeline_records.append({'primary': {'data': data_primary.size, 'labels': len(labels)},
                                      'secondary': {'data': data_secondary.size, 'labels': len(reversed_labels)}})

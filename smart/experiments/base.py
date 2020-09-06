@@ -97,7 +97,7 @@ class BertExperimentConfig:
     class Bert(BaseExperiment.Config):
         optimizer = BaseExperiment.ClassConfig(AdamW, kwargs={
             'lr': 2e-5,             # Default learning rate: 5e-5
-            'eps': 1e-8})           # Adam's epsilon, default: 1e-8
+            'eps': 1e-8})           # Adam's epsilon, default: 1e-6
         scheduler = BaseExperiment.ClassConfig(LinearScheduleWithWarmup, kwargs={
             'num_warmup_steps': 0})
         max_grad_norm = 1.0
