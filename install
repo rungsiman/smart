@@ -1,3 +1,5 @@
+#!/bin/bash
+
 python3 -m pip install tensorflow
 python3 -m pip install torch
 python3 -m pip install tqdm

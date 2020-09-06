@@ -1,5 +1,4 @@
-import json
-import os
+import abc
 import random
 import sys
 import time
@@ -10,12 +9,35 @@ from sklearn.model_selection import train_test_split
 from torch.utils.data import TensorDataset, DataLoader
 from torch.utils.data.distributed import DistributedSampler
 from tqdm import tqdm
-from smart.test.evaluation import main as ndcg_evaluate
 
-from smart.train.base import TrainBase, NDCGConfig
+from smart.train.base import TrainBase
 
 
-class TrainPairedBinaryClassification(TrainBase):
+class PairedBinaryClassificationBase(object):
+    __metaclass__ = abc.ABCMeta
+    data = ...
+
+    @abc.abstractmethod
+    def _get_data(self, y_ids):
+        ...
+
+    def _build_answers(self, y_ids, y_lids, y_pred):
+        answers = self._get_data(y_ids)
+
+        for answer in answers:
+            answer['type'] = []
+
+            for qid, lid, pred in zip(y_ids, y_lids, y_pred):
+                if (qid == answer['id'] or 'dbpedia_' + str(qid) == answer['id']) and pred == 1:
+                    answer['type'].append(self.data.ontology.ids[lid])
+
+            if len(answer['type']) == 0:
+                answer['category'] = 'resource'
+
+        return answers
+
+
+class TrainPairedBinaryClassification(TrainBase, PairedBinaryClassificationBase):
     class Data:
         class Tokens:
             def __init__(self, items):
@@ -47,20 +69,20 @@ class TrainPairedBinaryClassification(TrainBase):
         # For each question, generate pairs of question-label for every label,
         # as well as for a certain amount of invalid labels (negative examples)
         for qid, question, labels_pos in tqdm(zip(ids, questions, labels)):
-            labels_pos = [label for label in labels_pos if label in self.data.ontology.labels]
-            question_ids = self.data.tokenized[question]
-            input_questions += [question_ids] * (len(labels_pos) + self.config.neg_size)
-            input_labels += [self.data.ontology.labels[label] for label in labels_pos]
+            if len(labels_pos):
+                question_ids = self.data.tokenized[question]
+                input_questions += [question_ids] * (len(labels_pos) + self.config.neg_size)
+                input_labels += [self.data.ontology.labels[label] for label in labels_pos]
 
-            choices = list(filter(lambda label: label not in labels_pos, self.data.ontology.labels.keys()))
-            labels_neg = [random.choice(choices) for _ in range(self.config.neg_size)]
-            input_labels += [self.data.ontology.labels[label] for label in labels_neg]
+                choices = list(filter(lambda label: label not in labels_pos, self.data.ontology.labels.keys()))
+                labels_neg = [random.choice(choices) for _ in range(self.config.neg_size)]
+                input_labels += [self.data.ontology.labels[label] for label in labels_neg]
 
-            # Set tags to 1 for valid question-label pairs and 0 for invalid pairs
-            input_tags += [1] * len(labels_pos) + [0] * len(labels_neg)
-            input_ids += [int(qid.replace('dbpedia_', ''))] * (len(labels_pos) + len(labels_neg))
-            input_lids += [self.data.ontology.labels[label]['id'] for label in labels_pos] + \
-                          [self.data.ontology.labels[label]['id'] for label in labels_neg]
+                # Set tags to 1 for valid question-label pairs and 0 for invalid pairs
+                input_tags += [1] * len(labels_pos) + [0] * len(labels_neg)
+                input_ids += [int(qid.replace('dbpedia_', '')) if isinstance(qid, str) else qid] * (len(labels_pos) + len(labels_neg))
+                input_lids += [self.data.ontology.labels[label]['id'] for label in labels_pos] + \
+                              [self.data.ontology.labels[label]['id'] for label in labels_neg]
 
         split = train_test_split(input_ids, input_lids, input_questions, input_labels, input_tags,
                                  random_state=self.experiment.split_random_state,
@@ -116,21 +138,11 @@ class TrainPairedBinaryClassification(TrainBase):
                 y_pred += self.shared['evaluation'][i]['y_pred']
 
             report = classification_report(y_true, y_pred, digits=4)
-            print(report)
-
-            with open(os.path.join(self.path_analyses, 'eval_result.txt'), 'w') as writer:
-                writer.write(report)
-
             truths = self._get_data(y_ids)
             answers = self._build_answers(y_ids, y_lids, y_pred)
-            json.dump(truths, open(os.path.join(self.path_output, 'eval_truth.json'), 'w'), indent=4)
-            json.dump(answers, open(os.path.join(self.path_output, 'eval_answers.json'), 'w'), indent=4)
 
-            ndcg_config = NDCGConfig(self.experiment, self.path_output)
-            ndcg_result = ndcg_evaluate(ndcg_config)
-
-            with open(os.path.join(self.path_analyses, 'ndcg_result.txt'), 'w') as writer:
-                writer.write(ndcg_result)
+            self._save_evaluate(report, truths, answers)
+            print(report)
 
         return self
 
@@ -153,15 +165,3 @@ class TrainPairedBinaryClassification(TrainBase):
 
     def _train_forward(self, batch):
         return self.model(*tuple(t.cuda(self.rank) for t in batch[2:-1]), labels=batch[-1].cuda(self.rank), return_dict=True).loss
-
-    def _build_answers(self, y_ids, y_lids, y_pred):
-        answers = self._get_data(y_ids)
-
-        for answer in answers:
-            types = []
-
-            for qid, lid, pred in zip(y_ids, y_lids, y_pred):
-                if (str(qid) == answer['id'] or 'dbpedia_' + str(qid) == answer['id']) and pred == 1:
-                    types.append(self.data.ontology.ids[lid])
-
-        return answers

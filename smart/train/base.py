@@ -1,3 +1,4 @@
+import abc
 import datetime
 import json
 import matplotlib.pyplot as plt
@@ -9,27 +10,39 @@ import torch.distributed as dist
 from torch.nn.parallel import DistributedDataParallel
 from torch.nn.utils import clip_grad_norm_
 from tqdm import tqdm
-from transformers import AdamW, get_linear_schedule_with_warmup
+
+from smart.test.evaluation import main as ndcg_evaluate
 
 
 class NDCGConfig:
     def __init__(self, experiment, path_output):
-        self.type_hierarchy_tsv = experiment.task.input_ontology
+        self.type_hierarchy_tsv = experiment.dataset.input_ontology
         self.ground_truth_json = os.path.join(path_output, 'eval_truth.json')
         self.system_output_json = os.path.join(path_output, 'eval_answers.json')
 
 
-class TrainBase:
-    train_records = {'loss': [], 'train_time': [], 'eval_time': None}
+class StageBase(object):
+    __metaclass__ = abc.ABCMeta
+    data = ...
+
+    def _get_data(self, y_ids):
+        y_dbpedia_ids = ['dbpedia_' + str(qid) for qid in y_ids]
+        data = self.data.df.loc[self.data.df.id.isin(y_ids)].to_dict('records')
+        data += self.data.df.loc[self.data.df.id.isin(y_dbpedia_ids)].to_dict('records')
+        return data
+
+
+class TrainBase(StageBase):
+    path_output, path_models, path_analyses = ..., ..., ...
     train_data, train_dataloader = ..., ...
     eval_data, eval_dataloader = ..., ...
+    train_records = ...
     checkpoint = ...
     sampler = ...
     identifier = ...
-    path_label = ...
-    path_model = ...
 
     def __init__(self, rank, world_size, experiment, model, data, config, shared, lock):
+        self.train_records = {'loss': [], 'train_time': [], 'eval_time': None}
         self.rank = rank
         self.world_size = world_size
         self.experiment = experiment
@@ -43,18 +56,18 @@ class TrainBase:
         model.cuda(rank)
 
         self.model = DistributedDataParallel(model, device_ids=[rank])
-        self.optimizer = AdamW(model.parameters(),
-                               lr=config.bert.learning_rate)
-        self.scheduler = get_linear_schedule_with_warmup(self.optimizer,
-                                                         num_warmup_steps=config.bert.warmup_steps,
-                                                         num_training_steps=num_training_steps)
+        self.optimizer = self.config.bert.optimizer(model.parameters(),
+                                                    lr=config.bert.learning_rate)
+        self.scheduler = self.config.bert.scheduler(self.optimizer,
+                                                    num_warmup_steps=config.bert.warmup_steps,
+                                                    num_training_steps=num_training_steps).scheduler
 
-        self.path_output = os.path.join(self.experiment.task.output, self.identifier)
-        self.path_model = os.path.join(self.experiment.task.output_models, self.identifier)
-        self.path_analyses = os.path.join(self.experiment.task.output_analyses, self.identifier)
+        self.path_output = os.path.join(self.experiment.dataset.output_train, self.identifier)
+        self.path_models = os.path.join(self.experiment.dataset.output_models, self.identifier)
+        self.path_analyses = os.path.join(self.experiment.dataset.output_analyses, self.identifier)
 
         if rank == 0:
-            for path in [self.path_output, self.path_model, self.path_analyses]:
+            for path in [self.path_output, self.path_models, self.path_analyses]:
                 if not os.path.exists(path):
                     os.makedirs(path)
 
@@ -101,24 +114,15 @@ class TrainBase:
 
         return self
 
-    def build_dataloaders(self):
-        self.train_dataloader = self._build_dataloader(self.train_data)
-        self.eval_dataloader = self._build_dataloader(self.eval_data)
-        return self
-
-    def _get_data(self, y_ids):
-        y_dbpedia_ids = ['dbpedia_' + str(qid) for qid in y_ids]
-        data = self.data.df.loc[self.data.df.id.isin(y_ids)].to_dict('records')
-        data += self.data.df.loc[self.data.df.id.isin(y_dbpedia_ids)].to_dict('records')
-        return data
-
     def save(self):
         if self.rank == 0:
             now = datetime.datetime.now()
-            torch.save(self.checkpoint, os.path.join(self.path_model, 'model.checkpoint'))
+            torch.save(self.checkpoint, os.path.join(self.path_models, 'model.checkpoint'))
+            self.model.module.config.to_json_file(os.path.join(self.path_models, 'config.json'))
+            self.data.tokenizer.save(self.path_models)
             json.dump(self.train_records, open(os.path.join(self.path_analyses, 'train_records.json'), 'w'))
 
-            with open(os.path.join(self.path_analyses, 'env.txt'), 'w') as writer:
+            with open(os.path.join(self.path_analyses, 'train_env.txt'), 'w') as writer:
                 writer.write(f'Timestamp: {now.strftime("%Y-%m-%d %H:%M:%S")}\n')
                 writer.write(f'Number of GPUs: {self.world_size}')
 
@@ -137,20 +141,44 @@ class TrainBase:
         dist.barrier()
         return self
 
+    def build_dataloaders(self):
+        self.train_dataloader = self._build_dataloader(self.train_data)
+        self.eval_dataloader = self._build_dataloader(self.eval_data)
+        return self
+
+    def _save_evaluate(self, report, truths, answers):
+        with open(os.path.join(self.path_analyses, 'eval_result.txt'), 'w') as writer:
+            writer.write(report)
+
+        json.dump(truths, open(os.path.join(self.path_output, 'eval_truth.json'), 'w'), indent=4)
+        json.dump(answers, open(os.path.join(self.path_output, 'eval_answers.json'), 'w'), indent=4)
+
+        ndcg_config = NDCGConfig(self.experiment, self.path_output)
+        ndcg_result = ndcg_evaluate(ndcg_config)
+
+        with open(os.path.join(self.path_analyses, 'ndcg_result.txt'), 'w') as writer:
+            writer.write(ndcg_result)
+
+        return self
+
     @staticmethod
     def _format_time(elapsed):
         elapsed_rounded = int(round(elapsed))
         return str(datetime.timedelta(seconds=elapsed_rounded))
 
+    @abc.abstractmethod
     def pack(self):
-        return self
+        ...
 
+    @abc.abstractmethod
     def evaluate(self):
-        return self
+        ...
 
+    @abc.abstractmethod
     def _train_forward(self, batch):
         ...
 
     @staticmethod
+    @abc.abstractmethod
     def _build_dataloader(data):
         ...

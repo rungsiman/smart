@@ -1,0 +1,7 @@
+#!/bin/bash
+
+export PYTHONPATH="$(pwd):$PYTHONPATH"
+export PYTHONHASHSEED=42
+
+echo "INFO: Python hash seed = $PYTHONHASHSEED"
+echo "WARNING: Don't forget to freeze by executing 'bash freeze'"

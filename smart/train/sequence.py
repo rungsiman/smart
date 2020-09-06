@@ -1,5 +1,4 @@
-import json
-import os
+import abc
 import random
 import sys
 import time
@@ -11,11 +10,34 @@ from torch.utils.data import TensorDataset, DataLoader
 from torch.utils.data.distributed import DistributedSampler
 from tqdm import tqdm
 
-from smart.test.evaluation import main as ndcg_evaluate
-from smart.train.base import TrainBase, NDCGConfig
+from smart.train.base import TrainBase
 
 
-class TrainSequenceClassification(TrainBase):
+class SequenceClassificationBase(object):
+    __metaclass__ = abc.ABCMeta
+    labels = ...
+
+    def _build_answers(self, y_ids, y_pred):
+        answers = self._get_data(y_ids)
+
+        for answer in answers:
+            answer['type'] = []
+
+            for qid, pred in zip(y_ids, y_pred):
+                if qid == answer['id'] or 'dbpedia_' + str(qid) == answer['id']:
+                    answer['type'] = [self.labels[pred]] if pred < len(self.labels) else []
+
+            if len(answer['type']) == 0:
+                answer['category'] = 'resource'
+
+        return answers
+
+    @abc.abstractmethod
+    def _get_data(self, y_ids):
+        ...
+
+
+class TrainSequenceClassification(TrainBase, SequenceClassificationBase):
     class Data:
         class Tokens:
             def __init__(self, items):
@@ -52,15 +74,28 @@ class TrainSequenceClassification(TrainBase):
         input_questions = []
         input_tags = []
 
-        for i, qid, question, question_labels in tqdm(zip(range(len(questions)), ids, questions, labels)):
-            input_ids.append(int(qid.replace('dbpedia_', '')))
-            input_questions.append(self.data.tokenized[question])
-            input_tags.append(self.labels.index(question_labels[0]))
+        multiple_labels_found = 0
 
-            if self.data_neg is not None:
-                input_ids.append(neg_qids[i])
-                input_questions.append(self.data.tokenized[self.data_neg.df.iloc[neg_qids[i]]['question']])
-                input_tags.append(len(self.labels))
+        for i, qid, question, question_labels in tqdm(zip(range(len(questions)), ids, questions, labels)):
+            if len(question_labels):
+                tags = [label for label in question_labels if label in self.labels]
+
+                input_ids.append(int(qid.replace('dbpedia_', '')) if isinstance(qid, str) else qid)
+                input_questions.append(self.data.tokenized[question])
+                input_tags.append(self.labels.index(tags[0]))
+
+                if len(tags) > 1:
+                    multiple_labels_found += 1
+
+                if self.data_neg is not None:
+                    input_ids.append(neg_qids[i])
+                    input_questions.append(self.data.tokenized[self.data_neg.df.iloc[neg_qids[i]]['question']])
+                    input_tags.append(len(self.labels))
+
+        if multiple_labels_found:
+            warning = f'WARNING: {multiple_labels_found} questions have multiple tags.\n'
+            warning += '.. Consider using multiple-label classifier instead'
+            print(warning)
 
         split = train_test_split(input_ids, input_questions, input_tags,
                                  random_state=self.experiment.split_random_state,
@@ -111,21 +146,11 @@ class TrainSequenceClassification(TrainBase):
                 y_pred += self.shared['evaluation'][i]['y_pred']
 
             report = classification_report(y_true, y_pred, digits=4)
-            print(report)
-
-            with open(os.path.join(self.path_analyses, 'eval_result.txt'), 'w') as writer:
-                writer.write(report)
-
             truths = self._get_data(y_ids)
             answers = self._build_answers(y_ids, y_pred)
-            json.dump(truths, open(os.path.join(self.path_output, 'eval_truth.json'), 'w'), indent=4)
-            json.dump(answers, open(os.path.join(self.path_output, 'eval_answers.json'), 'w'), indent=4)
 
-            ndcg_config = NDCGConfig(self.experiment, self.path_output)
-            ndcg_result = ndcg_evaluate(ndcg_config)
-
-            with open(os.path.join(self.path_analyses, 'ndcg_result.txt'), 'w') as writer:
-                writer.write(ndcg_result)
+            self._save_evaluate(report, truths, answers)
+            print(report)
 
         return self
 
@@ -141,13 +166,3 @@ class TrainSequenceClassification(TrainBase):
 
     def _train_forward(self, batch):
         return self.model(*tuple(t.cuda(self.rank) for t in batch[1:-1]), labels=batch[-1].cuda(self.rank), return_dict=True).loss
-
-    def _build_answers(self, y_ids, y_pred):
-        answers = self._get_data(y_ids)
-
-        for answer in answers:
-            for qid, pred in zip(y_ids, y_pred):
-                if str(qid) == answer['id'] or 'dbpedia_' + str(qid) == answer['id']:
-                    answer['type'] = [self.labels[pred]] if pred < len(self.labels) else []
-
-        return answers

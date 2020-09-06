@@ -1,6 +1,9 @@
 import json
 import os
 from datetime import datetime
+from transformers import AdamW
+
+from smart.utils.schedulers import LinearScheduleWithWarmup
 
 
 class BaseExperiment:
@@ -26,7 +29,7 @@ class BaseExperiment:
     
     @staticmethod
     def attrs(config):
-        if '<class' in str(config) and not getattr(config, '_obj', False):
+        if (str(config).startswith('<class') and not getattr(config, '_obj', False)) or str(config).startswith('<function'):
             return str(config)
 
         elif any([isinstance(config, t) for t in [str, bool, int, float]]) or config is None:
@@ -84,6 +87,8 @@ class BertExperimentConfig:
 
     class Bert(BaseExperiment.Config):
         learning_rate = 2e-5  # Default: 5e-5
+        optimizer = AdamW
+        scheduler = LinearScheduleWithWarmup
         eps = 1e-8  # Adam's epsilon, default: 1e-8
         warmup_steps = 0
         max_grad_norm = 1.0

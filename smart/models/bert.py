@@ -44,7 +44,8 @@ class BertForPairedBinaryClassification(BertPreTrainedModel):
         loss = None
         
         if labels is not None:
-            loss = CrossEntropyLoss()(logits, labels)
+            loss_fct = CrossEntropyLoss()
+            loss = loss_fct(logits, labels)
 
         if return_dict is None:
             return loss if labels is not None else logits

@@ -1,3 +1,4 @@
+import abc
 import csv
 import pandas as pd
 import re
@@ -5,11 +6,10 @@ import re
 
 class Ontology:
     def __init__(self, experiment, tokenizer):
-        self.experiment = experiment
         self.labels, self.ids = {}, []
         self.max_level = 0
 
-        with open(experiment.task.input_ontology) as reader:
+        with open(experiment.dataset.input_ontology) as reader:
             items = csv.reader(reader, delimiter='\t')
 
             # Skip header row
@@ -40,29 +40,42 @@ class Ontology:
         return reversed_labels
 
 
-class TrainingDataBase:
-    def __init__(self, experiment, ontology, tokenizer, df=None, tokenized=None):
+class DataBase:
+    __metaclass__ = abc.ABCMeta
+    df = ...
+
+    def __init__(self, experiment, ontology, tokenizer, tokenized=None):
         self.experiment = experiment
         self.ontology = ontology
         self.tokenizer = tokenizer
-        self.df = pd.read_json(experiment.task.input_train) if df is None else df
         self.tokenized = tokenized
 
     @property
     def size(self):
         return len(self.df)
+
+    @property
+    def literal(self):
+        self.df = self.df.loc[(self.df.category != 'resource')]
+        return self
     
     @property
     def resource(self):
         self.df = self.df.loc[(self.df.category == 'resource')]
         return self
 
-    def filter(self, labels):
+    def filter(self, labels, reverse=False):
         removes = []
 
-        for i, row in self.df.iterrows():
-            if all(t not in labels for t in row.type):
-                removes.append(i)
+        if reverse:
+            for i, row in self.df.iterrows():
+                if any(t in labels for t in row.type):
+                    removes.append(i)
+
+        else:
+            for i, row in self.df.iterrows():
+                if all(t not in labels for t in row.type):
+                    removes.append(i)
 
         self.df = self.df.drop(removes)
         return self
@@ -82,30 +95,45 @@ class TrainingDataBase:
 
         return self
 
-    def clone(self):
-        ...
-
-    def clean(self):
-        self.df = self.df.drop([i for i, row in self.df.iterrows() if row.question is None])
-        return self
-
-
-class DBpediaTrainingData(TrainingDataBase):
-    def clone(self):
-        return DBpediaTrainingData(self.experiment, self.ontology, self.tokenizer, df=self.df.copy(), tokenized=self.tokenized)
-
     def clean(self):
         def map_labels(types):
             labels = []
 
             for label in types:
-                if label == 'dbo:Location':
-                    label = 'dbo:Place'
-
-                labels.append(label)
+                if label not in ('dbo:MedicalSpecialty', 'something', 'dbo:Location'):
+                    labels.append(label)
 
             return labels
 
-        super().clean()
-        self.df = self.df.assign(type=self.df['type'].apply(map_labels))
+        self.df = self.df.drop([i for i, row in self.df.iterrows() if row.question is None])
+
+        if 'type' in self.df.columns:
+            self.df = self.df.assign(type=self.df['type'].apply(map_labels))
+
+        return self
+
+    @abc.abstractmethod
+    def clone(self):
+        ...
+
+
+class DataForTrain(DataBase):
+    def __init__(self, experiment, ontology, tokenizer, df=None, tokenized=None):
+        super().__init__(experiment, ontology, tokenizer, tokenized)
+        self.df = pd.read_json(experiment.dataset.input_train) if df is None else df
+
+    def clone(self):
+        return DataForTrain(self.experiment, self.ontology, self.tokenizer, df=self.df.copy(), tokenized=self.tokenized)
+
+
+class DataForTest(DataBase):
+    def __init__(self, experiment, ontology, tokenizer, df=None, tokenized=None):
+        super().__init__(experiment, ontology, tokenizer, tokenized)
+        self.df = pd.read_json(experiment.dataset.input_test) if df is None else df
+
+    def clone(self):
+        return DataForTest(self.experiment, self.ontology, self.tokenizer, df=self.df.copy(), tokenized=self.tokenized)
+
+    def blind(self):
+        self.df = self.df.drop(['category', 'type'])
         return self
