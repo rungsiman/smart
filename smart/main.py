@@ -1,5 +1,6 @@
 import argparse
 import torch
+import torch.distributed as dist
 import torch.multiprocessing as mp
 
 from smart.data.base import Ontology, DataForTrain, DataForTest
@@ -13,20 +14,26 @@ from smart.utils.devices import describe_devices
 from smart.utils.reproducibility import set_seed
 
 
-def process(rank, world_size, experiment, data, stage, pipeline, shared, lock):
+def process(rank, world_size, experiment, stage, pipeline, shared, lock):
     set_seed(experiment)
     torch.cuda.set_device(rank)
     init_process(rank, world_size, experiment)
 
-    data.tokenize()
+    tokenizer = CustomAutoTokenizer(experiment)
+    ontology = Ontology(experiment, tokenizer)
 
     if stage == 'train':
+        data = DataForTrain(experiment, ontology, tokenizer).clean().tokenize()
+
         if pipeline == 'literal':
             train = LiteralTrainPipeline(rank, world_size, experiment, data, shared, lock)
         else:
             train = HybridTrainPipeline(rank, world_size, experiment, data, shared, lock)
 
         train()
+
+    else:
+        data = DataForTest(experiment, ontology, tokenizer).clean().blind().tokenize()
 
 
 def run(stage, pipeline, dataset):
@@ -40,18 +47,11 @@ def run(stage, pipeline, dataset):
     print(experiment.describe())
 
     world_size = experiment.num_gpu or torch.cuda.device_count()
-    tokenizer = CustomAutoTokenizer(experiment)
-    ontology = Ontology(experiment, tokenizer)
-
-    if stage == 'train':
-        data = DataForTrain(experiment, ontology, tokenizer).clean()
-    else:
-        data = DataForTest(experiment, ontology, tokenizer).clean().blind()
 
     with mp.Manager() as manager:
         shared = manager.dict()
         lock = manager.Lock()
-        mp.spawn(process, args=(world_size, experiment, data, stage, pipeline, shared, lock), nprocs=world_size, join=True)
+        mp.spawn(process, args=(world_size, experiment, stage, pipeline, shared, lock), nprocs=world_size, join=True)
 
 
 def verify(stage, pipeline, dataset):
