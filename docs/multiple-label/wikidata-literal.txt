@@ -1,0 +1,104 @@
+4691: Where is the river source of the Rhine?
+.. Category: literal
+.. Labels: ['number', 'string']
+
+4744: What five U.S. states does the Delaware River drain from?
+.. Category: literal
+.. Labels: ['number', 'string']
+
+5206: Where will be Namada after she leaves river source?
+.. Category: literal
+.. Labels: ['string', 'number']
+
+8501: Where is the beginning of the Dnieper River?
+.. Category: literal
+.. Labels: ['number', 'string']
+
+4094: What are the coordinates of the Amur river mouth?
+.. Category: literal
+.. Labels: ['number', 'string']
+
+3749: Where is the mouth of the Daugava River located?
+.. Category: literal
+.. Labels: ['string', 'number']
+
+4313: Where is the location of the river source for the Hudson River?
+.. Category: literal
+.. Labels: ['string', 'number']
+
+16266: What is the length and cause of human fertilizaiton?
+.. Category: literal
+.. Labels: ['number', 'date']
+
+9144: What is coordinate location of Mekong River that is applies to part of river mouth ?
+.. Category: literal
+.. Labels: ['number', 'string']
+
+28425: Which is the coordinate location for Saskatchewan?
+.. Category: literal
+.. Labels: ['string', 'number']
+
+7690: give me the coordinates of the river mouth of the river Ganges.
+.. Category: literal
+.. Labels: ['string', 'number']
+
+6017: What are the coordinates for the location of the Limpopo river source?
+.. Category: literal
+.. Labels: ['string', 'number']
+
+8762: What is the longitude and latitude of the atomic bombing that happened in Nagasaki?
+.. Category: literal
+.. Labels: ['string', 'number']
+
+5933: What are the coordinates for the source of the Krishna River?
+.. Category: literal
+.. Labels: ['number', 'string']
+
+5151: Where is the mouth of the Rhone river?
+.. Category: literal
+.. Labels: ['number', 'string']
+
+6386: What is the actual play time of an American football game?
+.. Category: literal
+.. Labels: ['number', 'date']
+
+15118: What is the number of plays of Euroleague Basketball?
+.. Category: literal
+.. Labels: ['number', 'date']
+
+6278: What are the coordinates of Douro's river mouth?
+.. Category: literal
+.. Labels: ['string', 'number']
+
+28385: Which is the duration of Jurassic Park?
+.. Category: literal
+.. Labels: ['date', 'number']
+
+5725: Where is the river mouth located that's part of Danube?
+.. Category: literal
+.. Labels: ['number', 'string']
+
+9257: Where is Kura River as river source?
+.. Category: literal
+.. Labels: ['number', 'string']
+
+4084: What are the coordinate locations of the Angara River mouth?
+.. Category: literal
+.. Labels: ['number', 'string']
+
+6973: How long is passover in Israel?
+.. Category: literal
+.. Labels: ['number', 'date']
+
+3943: What are the coordinates for the river source of Moselle?
+.. Category: literal
+.. Labels: ['string', 'number']
+
+7726: What are the coordinates to the source of the Murray River?
+.. Category: literal
+.. Labels: ['number', 'string']
+
+3989: What are the coordinates of Yamuna that is part of the river mouth?
+.. Category: literal
+.. Labels: ['number', 'string']
+

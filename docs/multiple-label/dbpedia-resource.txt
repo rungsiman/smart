@@ -1,0 +1,2112 @@
+dbpedia_1335: Which is the state and country of the Watergate scandal?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_6019: Where does the holder of the position of Lech Kaczynski live?
+.. Labels: [[], ['dbo:Place'], ['dbo:ArchitecturalStructure'], ['dbo:Building'], ['dbo:Museum', 'dbo:Castle'], [], [], []]
+
+dbpedia_22706: Which key person of Clinton Foundation is also the president of Jim Sasser ?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:OfficeHolder', 'dbo:Politician'], ['dbo:President'], [], [], []]
+
+dbpedia_21199: Where was WiZeefa founded ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Settlement'], ['dbo:City'], [], [], []]
+
+dbpedia_9088: Which country is Wellington located?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_3191: WHO was the commonwealth participant of the north african campaign?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_21657: What tv shows were born out of a collaboration of playtone and dreamworks?
+.. Labels: [[], ['dbo:Work'], ['dbo:Film', 'dbo:TelevisionShow'], [], [], [], [], []]
+
+dbpedia_2928: Which state has the city that is the twin city of Geneva?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_13810: Which sovereign state has the highest speed limit?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_18247: List the common sports between Fr. Agnel Multipurpose School  and Jamiatu Muslim Mindanao
+.. Labels: [[], ['dbo:Activity'], ['dbo:Sport', 'dbo:Game'], [], [], [], [], []]
+
+dbpedia_15318: Which is the ancient civilization culture of Rome?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Region', 'dbo:State'], ['dbo:HistoricalRegion'], [], [], []]
+
+dbpedia_21188: List all the former broadcast network of WMDN ?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:Broadcaster'], ['dbo:TelevisionStation', 'dbo:BroadcastNetwork'], [], [], []]
+
+dbpedia_8519: Which sovereign state shares a border with the Austrian Empire?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_4293: What is the {next job holder} in {West Germany} that is a {member of} an {Asian Development Bank}?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_18948: Name the  former broadcast network of the television station which is the sister stations of WGBC?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:Broadcaster'], ['dbo:TelevisionStation', 'dbo:BroadcastNetwork'], [], [], []]
+
+dbpedia_23333: List the seven kings of Rome.
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:Royalty', 'dbo:OfficeHolder'], [], [], [], []]
+
+dbpedia_11761: What is the currency for the Australian dollar used in the British Empire?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_15044: What Saarland outcome is applied to the jurisdiction of indecent exposure?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_1011: What is the country of the Bangalore?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_22233: Where is the school which is the rival of Somerset Berkley Regional High?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Settlement', 'dbo:Country'], [], [], [], []]
+
+dbpedia_21937: Which constructor's team won the 1967 Mexican Grand Prix ?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:Company', 'dbo:SportsTeam'], ['dbo:FormulaOneTeam'], [], [], []]
+
+dbpedia_21238: List the regions served by the company which serves in Pacific Ocean ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Continent'], [], [], [], []]
+
+dbpedia_20812: Which television shows have been produced by Erik Bork?
+.. Labels: [[], ['dbo:Work'], ['dbo:TelevisionShow', 'dbo:Film'], [], [], [], [], []]
+
+dbpedia_21198: What water bodies have primary inflows sa Kemijoki?
+.. Labels: [[], ['dbo:Place'], ['dbo:NaturalPlace'], ['dbo:BodyOfWater'], ['dbo:Lake', 'dbo:Sea'], [], [], []]
+
+dbpedia_10243: What country is the North African Campaign a part of?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:State', 'dbo:Country'], [], [], [], []]
+
+dbpedia_14981: Give me the country where the 20th Century Fox headquarters known as Fox Plaza is located?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_23067: Sean Parnell was the governor of which U.S. state?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Region', 'dbo:Settlement'], ['dbo:AdministrativeRegion'], [], [], []]
+
+dbpedia_21395: What is the title of the Kakae and also the district of the Robert William Wilcox ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Settlement', 'dbo:Island'], [], [], [], []]
+
+dbpedia_6079: Which region of Zealand is headed by Christopher of Bavaria?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_22972: What city gave birth to Mishal Raheja and also houses New India Assurance?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Settlement'], ['dbo:City'], [], [], []]
+
+dbpedia_10464: who federal state for indigenous to of american english?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_18865: Name the basketball team which is coached by Louis Dunbar and has president as Jeff Munn ?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:SportsTeam'], ['dbo:BasketballTeam', 'dbo:SoccerClub'], [], [], []]
+
+dbpedia_18067: Where does the successor of Thongsuk Samdaengpan reside?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Settlement'], [], [], [], []]
+
+dbpedia_20231: What is the division of Serbia national American football team ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Continent'], [], [], [], []]
+
+dbpedia_20147: Where does the river end which starts in Richmond Park?
+.. Labels: [[], ['dbo:Place'], ['dbo:NaturalPlace', 'dbo:PopulatedPlace'], ['dbo:BodyOfWater', 'dbo:Settlement'], ['dbo:Stream'], ['dbo:River'], [], []]
+
+dbpedia_19406: which president was served by Joseph Stiglitz?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:Politician', 'dbo:OfficeHolder'], ['dbo:President'], [], [], []]
+
+dbpedia_5240: What was the political party of Jefferson Davis?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_19259: Which destination of the Novair International Airways is also the  predecessor of the Chevrolet Caprice?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Continent'], [], [], [], []]
+
+dbpedia_348: Where did Pierre Curie live, which has the timezone of UTC-02:00?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_3465: What is the capital of the secular state of Montevideo?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_10965: Which republic that is a member of the International Finance Corporation has the lowest Human Development Index?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_11383: who  jurisdiction of legally established by of water pollution ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_1598: Which country shares its border with Andorra which is named Andorra-France border?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_21650: What is the type of Naval Station Bremerton ?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:MilitaryUnit', 'dbo:PublicTransitSystem'], [], [], [], []]
+
+dbpedia_1004: What is the name of the democratic republic, previously occupied by indigenous people, which now the majority of its population speaks American English?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_16059: canada
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_19687: What are the mascots of the teams participating in the Turkish Handball Super League?
+.. Labels: [[], ['dbo:Species'], ['dbo:Eukaryote'], ['dbo:Animal', 'dbo:Plant'], ['dbo:Mammal'], [], [], []]
+
+dbpedia_11751: Tell me about the unitary state that contains the administrative territorial entity of Sofia.
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_5918: where is the country  and the continent of brussels?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_18317: Who all did their high school in Denbigh high School?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:Athlete'], ['dbo:GridironFootballPlayer', 'dbo:CollegeCoach'], ['dbo:AmericanFootballPlayer'], [], []]
+
+dbpedia_21191: What discipline was The Chess Monthly about ?
+.. Labels: [[], ['dbo:Activity'], ['dbo:Game', 'dbo:Sport'], [], [], [], [], []]
+
+dbpedia_21852: What are all the countires where food related to tuna salad is consumed ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Continent', 'dbo:Island'], [], [], [], []]
+
+dbpedia_15061: "Where is {endemism} of {Rosella}, which has {monarch} is {John Kerr} ?"
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_8227: What is the birth place of Syrian Darley Arabian?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_212: What is the Commonwealth area with the lowest real gross domestic product growth rate whose diplomatic relation is Taiwan?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_15494: In what mountain range is Mt. Anhui located?
+.. Labels: [[], ['dbo:Place'], ['dbo:NaturalPlace', 'dbo:ProtectedArea'], ['dbo:MountainRange'], [], [], [], []]
+
+dbpedia_12679: What is succeeded by Thirteen Colonies, that has diplomatic relation with Maldives?"
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_18302: List all the artist of the TV shows which has McClain as one of the artist ?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person', 'dbo:Organisation'], ['dbo:Group'], ['dbo:Band'], [], [], []]
+
+dbpedia_19505: What is the TV Show whose theme is composed by someone signed up with Prawn Song Records?
+.. Labels: [[], ['dbo:Work'], ['dbo:TelevisionShow', 'dbo:Film'], [], [], [], [], []]
+
+dbpedia_12148: Name the country that is a member of the UN's Educational, Scientific & Cultural Organization with the least amount of compulsory educations?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_22470: What is the baseball team whose club manager is Chip Hale?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:SportsTeam'], ['dbo:SoccerClub', 'dbo:BaseballTeam'], [], [], []]
+
+dbpedia_21237: What is the state of origin of the person who is the successor of Tetsugen Bernard Glassman?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Continent'], [], [], [], []]
+
+dbpedia_2068: Who is native to the British English area, that has diplomatic relation to Russia?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_10990: Latin America diplomatic link is what?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_11891: Which is the country that is located in the administrative territorial entity of Sindh?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_2919: what is the county of American Indians ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_10344: Tell me the republic that is the administrative territorial entity of Mizoram.
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_9810: "What is {located in} of {Western Front}, which is {member of} is {CERN}
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_18551: Among which basket ball team having arena as The Palace of Auburn hills has president as Stan Van Gundy ?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:SportsTeam'], ['dbo:BasketballTeam', 'dbo:SoccerClub'], [], [], []]
+
+dbpedia_22873: Which is the common past team of the Charlie Justice (American football player) and Bobby Hoppe ?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:SportsTeam'], ['dbo:SoccerClub', 'dbo:AmericanFootballTeam'], [], [], []]
+
+dbpedia_5190: Which federation has the largest Gini coefficient?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_20401: Who founded the city at the end of the Pittsburgh Line route?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:OfficeHolder', 'dbo:MilitaryPerson'], [], [], [], []]
+
+dbpedia_21748: Where was the designer of REP Parasol born?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Settlement'], ['dbo:City'], [], [], []]
+
+dbpedia_13558: What country celebrates the holiday Nowruz?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_22183: Name the source of Raa ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Settlement', 'dbo:Country'], [], [], [], []]
+
+dbpedia_5715: "What is {is in the Indian reserve of} of {Fujian}, which has {borders} of {Afghanistan} ?"
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_1519: What are the diplomatic relations of the Kam people living in South Sudan?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_14911: Which sovereign state replaced Czechoslovakia ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_16731: What is the name of Scientific and Cultural organization of the United Nations?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_1897: Name something based in New Mexico that has diplomatic relations with the Caymen Islands.
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_13240: In what city is Australian currency manufactured?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:State', 'dbo:Country'], [], [], [], []]
+
+dbpedia_15339: Which of the member states in the multilateral Investment Guarantee Agency has the highest PPPGDP per capita?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_14086: Which is the dominion of the British Empire of the participation in World War II?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_12897: What countries are a part of the German Democratic Republic?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_21997: Name the island with archipelago as Society Islands and has the largest city named Faaa ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Island'], [], [], [], []]
+
+dbpedia_7029: Moon Jae-in is the head of state of which sovereign state ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_10388: In what country and sovereign state did the Watergate Scandal occur?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_6741: Who is the head of country (or state)?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_1407: Name the venue in Romania that had diplomatic relations in Israel during World War I.
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_8521: Where were the borders of the Adams-Onis Treaty?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:State', 'dbo:Country'], [], [], [], []]
+
+dbpedia_19962: Name the common former team of Marv mcFadden and Carlos Emmons ?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:SportsTeam'], ['dbo:AmericanFootballTeam', 'dbo:SoccerClub'], [], [], []]
+
+dbpedia_16290: Who is in voivodership of Asyut Governorate, that has diplomatic relations in Russia?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_4174: Which academic field for the history of the United States divides into the state of Michigan?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_8371: In what country did the Watergate Scandal occur?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_1469: What is the country with the lowest median income whose member of is International Bank for Reconstruction and Development ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_21229: Who is the president when Loretta Ucelli used to work for Democratic party?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:Politician', 'dbo:OfficeHolder'], ['dbo:President'], [], [], []]
+
+dbpedia_18762: Where did the aristocrats die whose mother was Maria Ludwika Krasiska?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Settlement'], [], [], [], []]
+
+dbpedia_8207: What was discovered at Astatine that is in the country of Lesotho?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_19035: Which TV show's producer is Stephen E. Ambrose and company is DreamWorks Television?
+.. Labels: [[], ['dbo:Work'], ['dbo:Film', 'dbo:TelevisionShow'], [], [], [], [], []]
+
+dbpedia_21427: WHich region of the Providence Chapel, Charlwood is also the region of the Joseph Case High School
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Settlement'], [], [], [], []]
+
+dbpedia_15917: What is the diplomacy of Malawi?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_9873: What is basin country  for Vättern
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_15474: Of what country was Jefferson Davis a citizen?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_18867: Under which president did Loretta Ucelli and Ann Lewis hold an office?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:Politician', 'dbo:OfficeHolder'], ['dbo:President'], [], [], []]
+
+dbpedia_6125: What type of government replaced the ruling of the thirteen colonies?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_20512: Name the sea with Helsinki as one of the shore city and is also an outflow for Danish straits?
+.. Labels: [[], ['dbo:Place'], ['dbo:NaturalPlace'], ['dbo:BodyOfWater'], ['dbo:Lake', 'dbo:Sea'], [], [], []]
+
+dbpedia_13798: Name a country who is diplomatic towards the Russian Empire.
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_2357: When did country for participant of of World War II?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_18940: Where common region are soylent and bannock sold?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Continent'], [], [], [], []]
+
+dbpedia_10090: What country are Evanescence from?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_5795: What is the headquarters of the International Hydrographic Organization that has mayor Serge Telle?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_18391: Of all the teams that Andrew Economos played for, which one did Jerrel Jackson play his first game for?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:SportsTeam'], ['dbo:AmericanFootballTeam', 'dbo:SoccerClub'], [], [], []]
+
+dbpedia_20659: List down the TV shows whose producer is Stephen E. Ambros and writer is John Orloff ?
+.. Labels: [[], ['dbo:Work'], ['dbo:Film', 'dbo:TelevisionShow'], [], [], [], [], []]
+
+dbpedia_3711: Who  is the burial place of Nebettawy ?
+.. Labels: [[], ['dbo:Place'], ['dbo:NaturalPlace', 'dbo:Cemetery'], ['dbo:Valley'], [], [], [], []]
+
+dbpedia_22897: Where is the king buried whose predecessor was Iyasu II?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Settlement', 'dbo:Country'], ['dbo:City'], [], [], []]
+
+dbpedia_21611: Who is the President of United World College of Costa Rica ?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:OfficeHolder', 'dbo:Royalty'], [], [], [], []]
+
+dbpedia_20846: To which senator did military unit VMF-155 belong?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:Politician', 'dbo:MilitaryPerson'], ['dbo:Senator'], [], [], []]
+
+dbpedia_22464: Which senator served in military units VMF-155 and VMF-218?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:Politician', 'dbo:MilitaryPerson'], ['dbo:Senator'], [], [], []]
+
+dbpedia_21513: Which football team is in a city where A J Clark was a builder?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:SportsTeam'], ['dbo:AmericanFootballTeam', 'dbo:SoccerClub'], [], [], []]
+
+dbpedia_20726: Who was the president at the time when both Carl Stokes and Joseph Stiglitz held a position in US political framework?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:Politician', 'dbo:OfficeHolder'], ['dbo:President'], [], [], []]
+
+dbpedia_8953: "Which name after Hamburger, has a twin city in Leon?"
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:State', 'dbo:Settlement'], ['dbo:City'], [], [], []]
+
+dbpedia_5133: Which is the production statistics of Champagne?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_10955: WHICH IS THE FEDERATION WITH THE MOST PPP GDP PER CAPITAL
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:State', 'dbo:Country'], [], [], [], []]
+
+dbpedia_10971: Which is the country of origin for The X-Files?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_16346: What is {diplomatic relation} of {Seychelles}, that has {subdivided into}  {Tianjin} ?"
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_14488: Mention the real gross rate of domestic product growth in Unitary state?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:State', 'dbo:Country'], [], [], [], []]
+
+dbpedia_14061: What is county seat for Tunis, that has diplomatic relation with Malaysia?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_8365: What state with the lowest mains voltage is a member of Interpol?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_21935: From which team did Marv McFadden played ?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:SportsTeam'], ['dbo:AmericanFootballTeam', 'dbo:SoccerClub'], [], [], []]
+
+dbpedia_22901: who was the president under whom winston bryant served as a lieutenant?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:Politician', 'dbo:OfficeHolder'], ['dbo:President'], [], [], []]
+
+dbpedia_21373: What team has Sam Keller and Jim McMilin played for?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:SportsTeam'], ['dbo:AmericanFootballTeam', 'dbo:SoccerClub'], [], [], []]
+
+dbpedia_22070: Companies founded in Taiwan have typically which divisions?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Continent'], [], [], [], []]
+
+dbpedia_16509: Who is the diplomatic relation to the United States of America whose Chief of State is Mswati III?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_6214: n/a
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_4779: What is Leslie Lamport's country of citizenship?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_20600: Which coach of England national under 21 footbal team is also the coach of Aston Villa F.C season ?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:SportsManager'], ['dbo:SoccerPlayer', 'dbo:SoccerManager'], [], [], []]
+
+dbpedia_5686: What is the country of origin and language of work of Catch-22?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_7439: What is the diplomatic relation of Cambodia whose national anthem is Hatikvah?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_18024: Name the origin of Henry Cluney ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Settlement', 'dbo:Country'], ['dbo:City'], [], [], []]
+
+dbpedia_9469: What is the deal in the village of Western Cape, having a diplomatic relation with the United Kingdom?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_5017: Which sovereign state is located in the administrative territorial entity of Khyber Pakhtunkhwa?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_22182: Where does the river begin whose left tributary is Krapanski Potok?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Settlement', 'dbo:Country'], [], [], [], []]
+
+dbpedia_16800: What country is next to Tim Conway?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:State', 'dbo:Country'], [], [], [], []]
+
+dbpedia_19389: Where is the rival school of Somerset Berkeley Regional High school?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Settlement'], [], [], [], []]
+
+dbpedia_22705: In which region is the rival school of Somerset, Massachusetts located?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Settlement', 'dbo:Country'], [], [], [], []]
+
+dbpedia_1044: What is the motto of Shahada?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_21673: Bud Adams owns which american football team?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:SportsTeam'], ['dbo:AmericanFootballTeam', 'dbo:SoccerClub'], [], [], []]
+
+dbpedia_18919: Where are the philosophers from, whose main work is on the matter of feminism in Canada?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Continent'], [], [], [], []]
+
+dbpedia_20002: Paul Morphy compiled journals of which field?
+.. Labels: [[], ['dbo:Activity'], ['dbo:Game', 'dbo:Sport'], [], [], [], [], []]
+
+dbpedia_6675: What is the voivodeship of Beni Suef Governorate that has diplomatic relation to South Korea?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_4246: Moon Jae-in is the head of state of which constitutional republic?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_4288: Oscar Niemeyer died in Rio de Janeiro, which is located in what country?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_6375: which is the sovereign state for the renminbi currency?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_1498: What country is Santa Monica in where Fred MacMurray died?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_20914: Who are the opponents of Gervase Helwys?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:Judge', 'dbo:Philosopher'], [], [], [], []]
+
+dbpedia_17366: Who is the county seat of the Nordic Council?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_20218: Name the district of Robert William Wilcox ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Settlement', 'dbo:Island'], [], [], [], []]
+
+dbpedia_13759: What is applied to jurisdiction in National People's Congress, which is confused with China?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_11003: In which country did American English originate?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_13636: What is the diplomatic relationship between Ibibio people and India?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_20996: What is the mascot of Galatasaray Handball Team ?
+.. Labels: [[], ['dbo:Species'], ['dbo:Eukaryote'], ['dbo:Animal', 'dbo:Plant'], ['dbo:Mammal'], [], [], []]
+
+dbpedia_12302: In what country is Stanford University's Stanford headquarters?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_2958: What are diplomatic relations like between Belgium and the Netherlands?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_10926: From what country did Atlas Shrugged originate, and in what language was the work written?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_20682: Where can i find salad based food?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Continent', 'dbo:Island'], [], [], [], []]
+
+dbpedia_23327: In which U.S. state is Fort Knox located?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Region', 'dbo:Settlement'], ['dbo:AdministrativeRegion'], [], [], []]
+
+dbpedia_22022: For which games are Sam Loyd and Eric Schiller both famous?
+.. Labels: [[], ['dbo:Activity'], ['dbo:Sport', 'dbo:Game'], [], [], [], [], []]
+
+dbpedia_10230: What what is triumphal arch heritage designationed by MHC and also which starts with letter p
+.. Labels: [[], ['dbo:Place'], ['dbo:Monument', 'dbo:ArchitecturalStructure'], [], [], [], [], []]
+
+dbpedia_20444: Which key person of the Clinton Foundation is also the president of Edward J. Perkins ?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:Politician', 'dbo:OfficeHolder'], ['dbo:President'], [], [], []]
+
+dbpedia_16164: which is the {country} for {Hrant Dink} that has {place of death} as {Istanbul} ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_20723: From which country is Lawrence Okoye's nationality ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Island'], [], [], [], []]
+
+dbpedia_6885: What is the sovereign state of Oslo
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_9220: What is in the district of Nord-Pas-de-Calais whose member is International Hydrographic Organization?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_9857: Which is the country that is replaced by the Thirteen Colonies?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_18211: What genre isPyChess from, which employes Craig Van Tilbury?
+.. Labels: [[], ['dbo:Activity'], ['dbo:Game', 'dbo:Sport'], [], [], [], [], []]
+
+dbpedia_15491: Which county seat of New York City has got diplomatic relation with Georgia?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_21169: Where was the current champion of Egyptian Open born ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Settlement'], ['dbo:City'], [], [], []]
+
+dbpedia_13307: What administrative unit of Visayas has a king named José  P. Laurel?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_22453: what is the headquarters of Juan Dalmau Ramerez?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Settlement'], [], [], [], []]
+
+dbpedia_20361: What is the nationality of the David King-Wood and John Steed ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Island'], [], [], [], []]
+
+dbpedia_393: whos is owner of the kiss that have members of is g20
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_20062: What is the death place of the Abiye Abebe and is the birthplace of the Amsale Aberra?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Settlement', 'dbo:Country'], [], [], [], []]
+
+dbpedia_15739: Also known as Richard Neutra's place of death, in what country is Wuppertail located?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_15761: What country is Saint Martin in?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_11478: Which jurisdiction of Parliament of the United Kingdom that has diplomatic relation to Malta?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_16292: Which is {county seat} {active in} {Alexander H. Stephens} ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_19409: Name the tenant of Ever bank field which has also has player named Dan Shamash ?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:SportsTeam'], ['dbo:AmericanFootballTeam', 'dbo:SoccerClub'], [], [], []]
+
+dbpedia_19994: Danny Felice, the Gibraltarian guitarist is from which city?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Settlement', 'dbo:Country'], ['dbo:City'], [], [], []]
+
+dbpedia_17356: Which county seat of Bridgetown has a member of an African, Caribbean or Pacific Group of States?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_19856: What is the region of Kim Sawchuk ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Continent'], [], [], [], []]
+
+dbpedia_10489: Name the designation being held accountable by John Jay while being as the United states ambassador
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:Ambassador', 'dbo:Politician'], [], [], [], []]
+
+dbpedia_4663: Which country replaced Czechoslovakia?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_13131: When during the history of Turkey did the country have diplomatic relations with Argentina?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_10088: In a notable incident during the World Premiere, what is the place of Don Giovanni's first performance?
+.. Labels: [[], ['dbo:Place'], ['dbo:ArchitecturalStructure'], ['dbo:Building', 'dbo:Venue'], ['dbo:Theatre'], [], [], []]
+
+dbpedia_7456: Which state has the oldest Canadian diplomats?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_20707: List some people who were opponents of someone who was died by hanging? 
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:Judge', 'dbo:Philosopher'], [], [], [], []]
+
+dbpedia_6711: Which sovereign member of the International Bank for Reconstruction and Development has the lowest speed limit.
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_21741: What is the deathplace of the rugby player who is the relatives of Anton Oliver ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Settlement'], [], [], [], []]
+
+dbpedia_12007: What country is The Star-Spangled Banner connect to?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_10610: What is in the principal area of Bouvet Island that is also a member of the Group on Earth Observations?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_1957: Which landlocked country follows the Islam religion?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_2453: What is the island nation with the lowest marriageable age whose member of is United Nations Educational, Scientific and Cultural Organization?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_23274: Which U.S. states are in the same time zone as Utah?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Region', 'dbo:Settlement'], ['dbo:AdministrativeRegion'], [], [], []]
+
+dbpedia_6066: What is in the administrative unit of Imo State, specifically the one who's capital city is Lagos?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_12454: Which is the museum that is commissioned by the Suleiman the Magnificent?
+.. Labels: [[], ['dbo:Place'], ['dbo:ArchitecturalStructure'], ['dbo:Building'], ['dbo:Museum', 'dbo:ReligiousBuilding'], ['dbo:Mosque'], [], []]
+
+dbpedia_16352: Give the name of the island nation with the most International Finance Corporation members
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_23532: Who is the mayor of Tel Aviv?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:Politician', 'dbo:MilitaryPerson'], [], [], [], []]
+
+dbpedia_2871: Which is the locality of Vojvodina having a diplomatic relation of Holy See?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_13125: Of all the unitary states which are members of the International Centre for Settlement of Investment Disputes, which has the highest GDP per capita in nominal terms?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_22920: In which team did Dave Bing and Ron Reed started their basketball career?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:SportsTeam'], ['dbo:SoccerClub', 'dbo:BasketballTeam'], [], [], []]
+
+dbpedia_13052: The Star-Spangled Banner originated in which constitutional republic country?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_12933: Where was yttrium discovered that has an executive branch in the Finnish Government?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_7689: Emmanuelle Alt is the editor for Vogue in which country?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_22368: Organization holding stocks of  Galician and German wikipedias?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:Non-ProfitOrganisation', 'dbo:Company'], [], [], [], []]
+
+dbpedia_18142: Which of the continents that Digitalb worked in, was christine rolfes born in?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Continent'], [], [], [], []]
+
+dbpedia_12610: Who is licensed to broadcast to CBS?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_11097: What is in the commune of Taraba State that is also a member of Group on Earth Observations?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_2825: What is {workplace} of {Cnut the Great}, that has {diplomatic relation} is {Romania}
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_9459: Which is the {country of origin} and the {language of work or name} of {Of_Mice_and_Men} ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_10468: Which is the constitutional republic for the anthem of The Star-Spangled Banner?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_21434: What basketball league's champion is Golden State Warriors
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:SportsLeague'], ['dbo:BasketballLeague', 'dbo:SoccerLeague'], [], [], []]
+
+dbpedia_22652: Which american football team is owned by Mark davis and is located in O.co Colliseum ?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:SportsTeam'], ['dbo:SoccerClub', 'dbo:AmericanFootballTeam'], [], [], []]
+
+dbpedia_2649: What is Family Guy's country of origin and the language?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_7145: What is the Country of origin of Mojito?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_22371: What sport played at Islamic azad uni employes Craig Van Tilbury?
+.. Labels: [[], ['dbo:Activity'], ['dbo:Sport', 'dbo:Game'], [], [], [], [], []]
+
+dbpedia_11249: Tell me me a city-state whose name consist of the word "hamburg" and whose highest point hasselbrack.
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:State', 'dbo:Settlement'], ['dbo:City'], [], [], []]
+
+dbpedia_7817: What statement is Uzbekistan is a subject of in diplomatic Pakistan-Uzbekistan relations?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_21045: Name the species of Southwest African lion ?
+.. Labels: [[], ['dbo:Species'], ['dbo:Eukaryote'], ['dbo:Animal', 'dbo:Plant'], ['dbo:Mammal'], [], [], []]
+
+dbpedia_19559: Who is the tenant of the home stadium of Toronto Phantoms?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:SportsTeam'], ['dbo:HockeyTeam', 'dbo:SoccerClub'], [], [], []]
+
+dbpedia_22859: Where is the headquarters of Sigma TV
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Settlement'], ['dbo:City'], [], [], []]
+
+dbpedia_11814: What is the sequel to The Matrix?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_8287: In which country is the territory of Tripura?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_21141: Which athletics of Jaimatu Muslim Mindano is same as the genre of the Fritz Chess ?
+.. Labels: [[], ['dbo:Activity'], ['dbo:Game', 'dbo:Sport'], [], [], [], [], []]
+
+dbpedia_18056: What is the occupation of the Irving Chernev and Karen Grigorian?
+.. Labels: [[], ['dbo:Activity'], ['dbo:Game', 'dbo:Sport'], [], [], [], [], []]
+
+dbpedia_11956: Where is Priyanka Chopra's citizenship and what is her religion?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_14779: Name the significance of county of Saskatchewan and has its category of association with Canadian people.
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_10770: What countries participated in the Cuban Missile Crisis?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_1910: For Bryansk Oblast, what is the aspect of Russian literature that has cities?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_1612: Name the country maintaining the diplomatic relationship with Soviet Union
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_19458: Which school teams are there in schools of Arlington Heights, Illinois?
+.. Labels: [[], ['dbo:Species'], ['dbo:Eukaryote'], ['dbo:Animal', 'dbo:Plant'], ['dbo:Mammal', 'dbo:Bird', 'dbo:Insect'], [], [], []]
+
+dbpedia_18376: List the governers of Jimmie Lou Fisher?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:Politician', 'dbo:OfficeHolder'], ['dbo:President', 'dbo:Governor'], [], [], []]
+
+dbpedia_19433: Of the sports commonly played at Islamic Azad Uni, tehran, which one does Jon Speelman play?
+.. Labels: [[], ['dbo:Activity'], ['dbo:Game', 'dbo:Sport'], [], [], [], [], []]
+
+dbpedia_4666: What republic was the Indian Independence movement a significant event for?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_19661: Which domain's journals did Willard Fiske edit?
+.. Labels: [[], ['dbo:Activity'], ['dbo:Game', 'dbo:Sport'], [], [], [], [], []]
+
+dbpedia_14713: Who was Herbert von Karajan employed by when he was replaced by Paul van Kempen?
+.. Labels: [[], ['dbo:Place'], ['dbo:ArchitecturalStructure'], ['dbo:Building', 'dbo:Venue'], ['dbo:Theatre'], [], [], []]
+
+dbpedia_2682: What federation has the highest median income?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_12854: Name the ancient civilization that gave us the public holiday Saturnalia that starts a A
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Region', 'dbo:State'], ['dbo:HistoricalRegion'], [], [], []]
+
+dbpedia_7000: In what division is the service operator of Airbus A380?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:PublicTransitSystem', 'dbo:Company'], ['dbo:Airline'], [], [], []]
+
+dbpedia_14100: "Where is {deathplace} of {Louisa Lawson}, which has {queen} is {Bill Hayden} ?"
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_22019: Which television show 's producer is Stephen E. Ambrose and written by Erik Jendresen?
+.. Labels: [[], ['dbo:Work'], ['dbo:TelevisionShow', 'dbo:Film'], [], [], [], [], []]
+
+dbpedia_10801: What island nation  has highest marriage age ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_10425: Montevideo is the capital of what state?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_22512: Where did Georges Wolinski and Judson Huss die/
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Settlement'], ['dbo:City'], [], [], []]
+
+dbpedia_462: Who is in the administrative territorial entity of Tbilisi and when is the end time?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_18023: What is the incumbent of the Al Gore presidential campaign, 2000 and also the president of the Ann Lewis ?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:Politician', 'dbo:OfficeHolder'], ['dbo:President'], [], [], []]
+
+dbpedia_19146: who are all the people who have managed the England's under 20 soccer team?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:SportsManager'], ['dbo:SoccerManager', 'dbo:SoccerPlayer'], [], [], []]
+
+dbpedia_9216: What part of Ireland's history includes the Nuclear Suppliers Group?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_17270: What is the transfer location for Tokyo International Airport?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:Company', 'dbo:PublicTransitSystem'], ['dbo:Airline'], [], [], []]
+
+dbpedia_18570: What made Jon Speelman and Eric Schiller famous?
+.. Labels: [[], ['dbo:Activity'], ['dbo:Game', 'dbo:Sport'], [], [], [], [], []]
+
+dbpedia_17072: What is the history of the country of Israel?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_7172: Name the spot of neon that has diplomatic relation in Denmark.
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_18923: What is the official residence of Sarah Kazemy ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Settlement'], ['dbo:City'], [], [], []]
+
+dbpedia_11562: What country uses renminbi as its currency?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_20320: Name the species of Liger ?
+.. Labels: [[], ['dbo:Species'], ['dbo:Eukaryote'], ['dbo:Animal', 'dbo:Plant'], ['dbo:Mammal'], [], [], []]
+
+dbpedia_9148: Where was Kristen Stewart born and where is her citizenship?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_9084: What location is Beauty and the Beast set in, that is a rural city in the Midi-Pyrenees?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_9291: What country has the word "States" in its name?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_22956: Which governer of Winston Bryant is the president of Joseph Stiglitz ?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:OfficeHolder', 'dbo:Politician'], ['dbo:President'], [], [], []]
+
+dbpedia_18505: What team did Joe Porter and Eddie Anderson play for?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:SportsTeam'], ['dbo:AmericanFootballTeam', 'dbo:SoccerClub'], [], [], []]
+
+dbpedia_22763: List the places where the relatives of Mark Donaldson died ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Settlement'], [], [], [], []]
+
+dbpedia_2249: In which country is Beijing?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_19702: What is the sea connected to Oulu and Turku?
+.. Labels: [[], ['dbo:Place'], ['dbo:NaturalPlace'], ['dbo:BodyOfWater'], ['dbo:Lake', 'dbo:Sea'], [], [], []]
+
+dbpedia_13838: What theater is operated by the University of Toronto?
+.. Labels: [[], ['dbo:Place'], ['dbo:ArchitecturalStructure'], ['dbo:Building', 'dbo:Venue'], ['dbo:Theatre'], [], [], []]
+
+dbpedia_22049: Give the name of the  managers of England national under-20 football team and England national under-21 football team?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:SportsManager'], ['dbo:SoccerManager', 'dbo:SoccerPlayer'], [], [], []]
+
+dbpedia_13823: Which republic has the highest retirement age?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_130: Which country housed the Indian Independence Movement?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_17899: Tell me about the history of sovereign India.
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_19096: Which incumbent of Al Gore presidential campaign wass also the president of Mike McCurry ?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:Politician', 'dbo:OfficeHolder'], ['dbo:President'], [], [], []]
+
+dbpedia_3217: Which landlocked country has the highest GDP PPP?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_18534: Who served a vice president buried in United First Parish Church?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:OfficeHolder', 'dbo:Politician'], ['dbo:President'], [], [], []]
+
+dbpedia_16022: Who is in the administrative unit of the South Khorasan Province?  Who has administrative divisions in the North Khorasan Province?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_20028: Where did isabelle caro and judson huss both die?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Settlement'], ['dbo:City'], [], [], []]
+
+dbpedia_2412: Which is the country of Iloilo City?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_18613: Which TV show's writer is Erik Jendresen and distributor is HBO?
+.. Labels: [[], ['dbo:Work'], ['dbo:Film', 'dbo:TelevisionShow'], [], [], [], [], []]
+
+dbpedia_17433: Which administrative unit is adjacent to Clementi, Singapore?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State', 'dbo:Settlement'], ['dbo:City'], [], [], []]
+
+dbpedia_22025: Who created the Women in the Garden and also the L'Enfant a la tasse ?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:Writer', 'dbo:Artist'], [], [], [], []]
+
+dbpedia_3943: who country for head of government of mauricio macri?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_13893: Name the republic with the highest fertility rate ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_4916: What is the diplomatic relation of Ireland, that has people of Chinese Canadian?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_21413: Which team did Bill Murphy and Jean Segura play for?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:SportsTeam'], ['dbo:BaseballTeam', 'dbo:SoccerClub'], [], [], []]
+
+dbpedia_1040: What place was Oliver Hazard Perry born that has a diplomatic relation to Chile?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_22435: Which series was written by Eric Jendresen and John Orloff?
+.. Labels: [[], ['dbo:Work'], ['dbo:TelevisionShow', 'dbo:Film'], [], [], [], [], []]
+
+dbpedia_3955: What diplomatic ties exist between China and Eritrea?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_6050: n/a
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Region', 'dbo:State'], ['dbo:HistoricalRegion'], [], [], []]
+
+dbpedia_4900: Which archipelagic state has the highest inflation rate?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_22000: Name the HBO TV show written by Erik jendresen  ?
+.. Labels: [[], ['dbo:Work'], ['dbo:Film', 'dbo:TelevisionShow'], [], [], [], [], []]
+
+dbpedia_19822: What are some organizations in Auckland created to do?
+.. Labels: [[], ['dbo:Activity'], ['dbo:Game', 'dbo:Sport'], [], [], [], [], []]
+
+dbpedia_4787: The executive branch of the Government of Islamic Republic of Iran is in what village of the Hormozgan Province?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_22764: What are some artists on the show whose opening theme is Send It On?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person', 'dbo:Organisation'], ['dbo:Group'], ['dbo:Band'], [], [], []]
+
+dbpedia_20700: Name the sstadium of 2015 Pro Duta FC season ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace', 'dbo:ArchitecturalStructure'], ['dbo:SportFacility'], ['dbo:Stadium'], [], [], []]
+
+dbpedia_21255: Which field's journals are edited by Paul Morphy?
+.. Labels: [[], ['dbo:Activity'], ['dbo:Game', 'dbo:Sport'], [], [], [], [], []]
+
+dbpedia_4832: Is the French economy the main topic of the Court of Cassation, the highest judicial authority?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_21697: Where was Thomy Bourdelle born?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Settlement'], ['dbo:City'], [], [], []]
+
+dbpedia_8971: What Indian reservation region of Japan has diplomatic relations with Brazil?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_4604: To which sovereign state and diplomatic relation does the Arab League belong?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_19555: In which ice hockey league, did the team coached by Joel Quenneville win?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:SportsLeague'], ['dbo:IceHockeyLeague', 'dbo:SoccerLeague'], [], [], []]
+
+dbpedia_11972: What is the flag for the Flag of China?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_9837: which is diplomatic relation of east timor that is statement is subject of east timor-indonesia relations?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_18052: What are some Louisiana based models known for?
+.. Labels: [[], ['dbo:Work'], ['dbo:WrittenWork', 'dbo:TelevisionShow'], ['dbo:PeriodicalLiterature'], ['dbo:Magazine'], [], [], []]
+
+dbpedia_19075: What is common between genre of battle chess and purpose of New Zealand Chess ?
+.. Labels: [[], ['dbo:Activity'], ['dbo:Game', 'dbo:Sport'], [], [], [], [], []]
+
+dbpedia_14119: who democratic republic for anthem of The Star-Spangled banner?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_21816: what are some common games played at both Fr Agnel Multipurpose School and Vishwajyot High School?
+.. Labels: [[], ['dbo:Activity'], ['dbo:Sport', 'dbo:Game'], [], [], [], [], []]
+
+dbpedia_21143: Which TV show's company is PlayTone and is produced by Stephen E. Ambrose ?
+.. Labels: [[], ['dbo:Work'], ['dbo:Film', 'dbo:TelevisionShow'], [], [], [], [], []]
+
+dbpedia_9905: Where is the work location of Harthacanute which belongs to Asian Development Bank
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_4183: What is the great power with maximum exports?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_20533: Which are the previous broadcast networks of sister channels of WGBC?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:Broadcaster'], ['dbo:TelevisionStation', 'dbo:BroadcastNetwork'], [], [], []]
+
+dbpedia_5535: What arrondissement is the Waikato Region, the highest judicial authority in the Supreme Court of New Zealand?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_21817: Which things are Breann McGregor known for ?
+.. Labels: [[], ['dbo:Work'], ['dbo:WrittenWork', 'dbo:TelevisionShow'], ['dbo:PeriodicalLiterature'], ['dbo:Magazine'], [], [], []]
+
+dbpedia_19860: Where was Liliya Lobanova born?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Settlement'], [], [], [], []]
+
+dbpedia_2150: What diplomatic relation to Canada is in the administrative unit of Victoria?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_10827: What is the country whose leader is Donald Trump ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_5971: Where can beryllium be found, that has diplomatic relation in Romania?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_12475: Which country has the currency Japanese yen?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_14271: Name the country with the lowest age of majority in the country.
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_6951: What is the {capital} of {Kangwon Province}, which is a {member of} the {International Federation of Red Cross and Red Crescent Societies}?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_20976: Name the sport league of Hampton Roads Rhinos ?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:SportsLeague'], ['dbo:IceHockeyLeague', 'dbo:SoccerLeague'], [], [], []]
+
+dbpedia_11765: What what is city-state highest judical authority by HCC and also which starts with letter h
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:State', 'dbo:Settlement'], ['dbo:City'], [], [], []]
+
+dbpedia_10327: Which volcano has the most topographic isolation?
+.. Labels: [[], ['dbo:Place'], ['dbo:NaturalPlace'], ['dbo:Volcano', 'dbo:Mountain'], [], [], [], []]
+
+dbpedia_22154: Which american football team  has stadium as O.co Coliseum?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:SportsTeam'], ['dbo:SoccerClub', 'dbo:AmericanFootballTeam'], [], [], []]
+
+dbpedia_18771: Which basketball team's president studied in the Brockport Golden Eagles?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:SportsTeam'], ['dbo:BasketballTeam', 'dbo:SoccerClub'], [], [], []]
+
+dbpedia_4693: What is the country of Abkhazia whose statement is disputed by Russia?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_7250: What countries are involved in the African Union?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_19515: In which television shows have Steven Moffat served as an executive producer?
+.. Labels: [[], ['dbo:Work'], ['dbo:TelevisionShow', 'dbo:TelevisionEpisode'], [], [], [], [], []]
+
+dbpedia_6873: which is the  country for August has named after as Alp Arslan?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_11547: What is Bermuda's diplomatic relation, that has the same time zone as Alaska?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_10404: What is preceded by the Emirate of Sicily, which is on the continent of Europe?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_21359: Which European sea has Oulu as one of the shore city ?
+.. Labels: [[], ['dbo:Place'], ['dbo:NaturalPlace'], ['dbo:BodyOfWater'], ['dbo:Lake', 'dbo:Sea'], [], [], []]
+
+dbpedia_361: Freddy Krueger and Fred Krueger, is a serial killer and the main antagonist of the A Nightmare on Elm Street series. A family man on the surface, Krueger was actually the serial killer known as the "Springwood Slasher". When he was caught and subsequently released on a technicality, the parents of his victims tracked him to the boiler room of the power plant he once worked at and burned him alive. Krueger was offered the chance to continue after his physical death, becoming a Dream Demon that could enter his victims' dreams and kill them in the Dream World, which would thus cause their death in the physical world and absorb their souls afterwards.
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_3623: Who are the participants in the Battle of Greece, which is a member of the Organisation for the Prohibition of Chemical Weapons?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_12588: Where is the birth county of Dave Scott of Oregon?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_3443: "What is {main topic} of {history of Afghanistan}, which has {governor} is {Mohammed Nadir Shah} ?"
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_8160: What is the  Commonwealth realm  of Australian history for the history of topic
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_20964: Producers of what have died in Mississippi?
+.. Labels: [[], ['dbo:Work'], ['dbo:Film', 'dbo:TelevisionShow'], [], [], [], [], []]
+
+dbpedia_3669: What is the area of responsibility for the NPR, that has a time of UTC -07:00?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_5193: Tell me about socialist state for public holiday of Chinese New Year?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_12045: Inform us about the maximum total reserves of the country?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_18789: which person created the women in the garden?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:Artist', 'dbo:Writer'], [], [], [], []]
+
+dbpedia_20729: List all the presidents of the school which had atleast one of the president as Queen Noor of Jordan ?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:OfficeHolder', 'dbo:Royalty'], [], [], [], []]
+
+dbpedia_4657: What is the Commonwealth realm with the highest number of children out of school?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_18167: What is operated by FedExField ?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:SportsTeam'], ['dbo:AmericanFootballTeam', 'dbo:SoccerClub'], [], [], []]
+
+dbpedia_11111: What country in Zürich did Hermann Weyl die in?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_5334: What country does the Star-Spangled Banner originate from
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_8968: Tell me the sovereign state of Nowruz for public holiday
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_12337: What country contains Beijing?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_20721: What is the famous relative of Mrunalini Kunte known for?
+.. Labels: [[], ['dbo:Activity'], ['dbo:Game', 'dbo:Sport'], [], [], [], [], []]
+
+dbpedia_3626: who zenith of borders of east java?
+.. Labels: [[], ['dbo:Place'], ['dbo:NaturalPlace'], ['dbo:Mountain', 'dbo:Volcano'], [], [], [], []]
+
+dbpedia_20033: Name the tv series produced by Stephen Ambrose and Erik Bork?
+.. Labels: [[], ['dbo:Work'], ['dbo:Film', 'dbo:TelevisionShow'], [], [], [], [], []]
+
+dbpedia_17111: Governmental
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_11600: Which is the country that is indigenous of the American English?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_18915: Which board game can be said as a mind based game?
+.. Labels: [[], ['dbo:Activity'], ['dbo:Game', 'dbo:Sport'], [], [], [], [], []]
+
+dbpedia_3342: In which sovereign state did the Indian Independence Movement happen in?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_19413: From which state do the White Plum Asangas come?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Continent'], [], [], [], []]
+
+dbpedia_19603: Who was the head coach of Middlesbrough F.C. season 2006-7 also the coach of England national under 21 footbal team ?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:SportsManager'], ['dbo:SoccerPlayer', 'dbo:SoccerManager'], [], [], []]
+
+dbpedia_7403: In what country is Sindh located?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_16589: What body of water borders B-29 Serial No. 45-21847?
+.. Labels: [[], ['dbo:Place'], ['dbo:ArchitecturalStructure'], ['dbo:Infrastructure'], ['dbo:Dam', 'dbo:PowerStation'], [], [], []]
+
+dbpedia_21515: List the teams for which Bobby Hoppe played ?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:SportsTeam'], ['dbo:AmericanFootballTeam', 'dbo:SoccerClub'], [], [], []]
+
+dbpedia_13275: What is  in the legislative body of United States Congress ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_19354: By what person of which political party is Balangir district led?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:PoliticalParty', 'dbo:OfficeHolder'], [], [], [], []]
+
+dbpedia_19891: What is the hub of Wan Air ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace', 'dbo:ArchitecturalStructure'], ['dbo:Country', 'dbo:Island', 'dbo:Infrastructure'], ['dbo:Airport'], [], [], []]
+
+dbpedia_14432: When did socialist state for contains administrative territorial entity of Beijing?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_17473: What is the hometown of the many-worlds interpretation?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_17911: What internment of Judah ha-Nasi has Chaim Weitzman as its monarch?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_10597: Which reptile is located in Finland?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_13989: Joko Widodo is the head of government for which island nation?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_18838: Who had  Joe Purcell and Winston Bryant as lieutenants ?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:Politician', 'dbo:OfficeHolder'], ['dbo:President'], [], [], []]
+
+dbpedia_4046: Which country does Roberto Rossellini, who died in Rome, belong to?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_11149: West Azarbijan Province, which has boroughs, is in the parish of Kerman Province.
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_13110: What members are a part of the Organization of American States?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:State', 'dbo:Country'], [], [], [], []]
+
+dbpedia_19615: To which family does korean fox belongs to ?
+.. Labels: [[], ['dbo:Species'], ['dbo:Eukaryote'], ['dbo:Animal'], ['dbo:Mammal', 'dbo:Insect'], [], [], []]
+
+dbpedia_974: What is the diplomatic relationship between Algeria and Indonesia?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_15321: What is the set in location of Anabasis whose diplomatic relation is Portugal?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_13720: "Where is {narrative set in} of {Lolita}, whichhas {diplomatic relation} is {Guyana} ?"
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_4277: Which  is public holiday for Eid al-Adha ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:State', 'dbo:Country'], [], [], [], []]
+
+dbpedia_19109: Name the death location of Judson Huss ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Settlement'], ['dbo:City'], [], [], []]
+
+dbpedia_23368: In which state Penn State University is located?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Region', 'dbo:Settlement'], ['dbo:AdministrativeRegion'], [], [], []]
+
+dbpedia_14827: What is language is spoken by the Gujarati people?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_23183: Which U.S. states possess gold minerals?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Region', 'dbo:Settlement'], ['dbo:AdministrativeRegion'], [], [], []]
+
+dbpedia_7821: Which is the city and state for the twinned administrative body of Auckland?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:State', 'dbo:Settlement'], ['dbo:City'], [], [], []]
+
+dbpedia_21455: Who wrote the mangas produced by Masahike Minami?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:Writer', 'dbo:Artist'], ['dbo:ComicsCreator'], [], [], []]
+
+dbpedia_5100: What is zenith of range for East Lake ?
+.. Labels: [[], ['dbo:Place'], ['dbo:NaturalPlace'], ['dbo:Mountain', 'dbo:Volcano'], [], [], [], []]
+
+dbpedia_21941: Who is the co-founder of the city where Owen Dougherty died?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:OfficeHolder', 'dbo:MilitaryPerson'], [], [], [], []]
+
+dbpedia_17351: Which sovereign state replaced Czechoslovakia ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_15464: What sovereign state uses the Russian ruble as currency
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_14463: "Where is {town} of {Al Jawf Region}, which has {diplomatic relation} is {Sweden} ?"
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_3801: What is Vietnam of Japan-Vietnam relations of statement is subject odf diplomatic relation?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_10695: What is the Indian reservation of Kaliningrad Oblast, that has local government areas including Udmurt Republic?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_7078: What cities of Central Europe have correspondence at the National Archives?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_7038: Where did Madam C. J. Walker, a member of ASEAN Regional Forum, deceased at?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_16032: What is Jammu and Kashmir's commune in their diplomatic relationship with Iceland?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_14904: What country is Colin Renfrew a citizen of?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:State', 'dbo:Country'], [], [], [], []]
+
+dbpedia_17493: n/a
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_4550: What are the republic which start with the letter zimbabwe
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_9252: What city, birthplace of Jonah Peretti, has divided into the Commonwealth of the Philippines?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_2454: Which country uses the pound sterling?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_17251: Name the secular state with lowest exports whose permanent duplicated item is ERROR1?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_8873: What is the taxon rank and the endemic to of Komodo_dragon ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_4076: In which country can you exchange the pound sterling for goods?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_6346: In which country Marilyn Chambers died at Santa Clarita?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_20789: What is the birth location of the pope who was canonized by Agatha of Sicily?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Settlement'], [], [], [], []]
+
+dbpedia_20572: Which broad cast area od CFRX is the country of North America Poker Tour ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Continent'], [], [], [], []]
+
+dbpedia_10559: Which country has Lockheed Martin's headquarters located in Bethesda?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_17245: What borders the Israel Museum?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_14843: What is the diplomatic relation between Iceland, which has arrondissements, and Arkhangelsk Oblast?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_15383: Where is the {country of origin} and the {language of work or name} of {The_Hobbit} ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_10950: What is the country of citizenship of Salman of Saudi Arabia
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_22485: Name the president of Wyche Fowler ?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:OfficeHolder', 'dbo:Politician'], ['dbo:President'], [], [], []]
+
+dbpedia_22553: What are the reason served by Toll Global Express which is also the country of LPGA ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Continent'], [], [], [], []]
+
+dbpedia_4673: Name the country with the most total exports, where Viktor Zubkov was Prime Minister?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_3116: What is the name of the skyscraper that has an architectural style of neo-futurism and that starts with the letter "t"?
+.. Labels: [[], ['dbo:Place'], ['dbo:ArchitecturalStructure'], ['dbo:Building'], ['dbo:Hotel', 'dbo:Skyscraper'], [], [], []]
+
+dbpedia_22739: Whose military units are VMF-218 and VMF-155?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:Politician', 'dbo:MilitaryPerson'], ['dbo:Senator'], [], [], []]
+
+dbpedia_20594: Who gave the musical score  of 9 to 5 (musical) ?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:Artist'], ['dbo:MusicalArtist', 'dbo:Band'], [], [], []]
+
+dbpedia_21978: Jimmie Fisher and Winston Bryant were governors under which president?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:Politician', 'dbo:OfficeHolder'], ['dbo:President', 'dbo:Governor'], [], [], []]
+
+dbpedia_19738: Which nickname of Lyons Township JHigh school is also the mascot of Galatasaray Handball Team ?
+.. Labels: [[], ['dbo:Species'], ['dbo:Eukaryote'], ['dbo:Animal', 'dbo:Plant'], ['dbo:Mammal'], [], [], []]
+
+dbpedia_18782: Name all those whose spouses have performed with Tony Bennett?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], [], ['dbo:Band', 'dbo:MusicalArtist'], [], [], []]
+
+dbpedia_21189: What is the mascot of Celal Bayar University ?
+.. Labels: [[], ['dbo:Species'], ['dbo:Eukaryote'], ['dbo:Plant'], ['dbo:FloweringPlant', 'dbo:Insect'], [], [], []]
+
+dbpedia_18492: What are some seas inside europe ?
+.. Labels: [[], ['dbo:Place'], ['dbo:NaturalPlace'], ['dbo:BodyOfWater'], ['dbo:Lake', 'dbo:Sea'], [], [], []]
+
+dbpedia_21948: What is the title of Kakae ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Settlement', 'dbo:Island'], [], [], [], []]
+
+dbpedia_611: What theatre did Frank Gehry design?
+.. Labels: [[], ['dbo:Place'], ['dbo:ArchitecturalStructure'], ['dbo:Building', 'dbo:Venue'], ['dbo:Theatre'], [], [], []]
+
+dbpedia_10855: n/a
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_18664: Who are the managers of clubs participating in the 2014-2015 Football League Championship?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:SportsManager'], ['dbo:SoccerManager', 'dbo:SoccerPlayer'], [], [], []]
+
+dbpedia_22653: The successor of Ulrich II, Count of East Frisia was born in what place?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Settlement'], [], [], [], []]
+
+dbpedia_14557: What is Israel's diplomatic position in Israel's and the United States relations?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_14641: What is the country and the World Heritage criteria of Taj_Mahal ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_18200: Which team of Dan Shamash is also the debutant team of John Estes ?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:SportsTeam'], ['dbo:AmericanFootballTeam', 'dbo:SoccerClub'], [], [], []]
+
+dbpedia_17745: Which United States Armed Forces  is an example of organization?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_11437: What is the nationality of Emmanuel Macron ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_16477: Which geographical locale is under Patagonia, whose appointed representatives form the cabinet of Chile?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_19010: What is the alma mater of the senator who is the successor of Warren Magnuson ?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:EducationalInstitution'], ['dbo:University', 'dbo:School'], [], [], []]
+
+dbpedia_15948: who is is indian reservation of indiana that have his disticts or oklahoma ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_6590: Which is {has county seat} {has capital} of {Abyssinia} ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_21854: Who is the coach of England national under-21 football team ?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:SportsManager'], ['dbo:SoccerPlayer', 'dbo:SoccerManager'], [], [], []]
+
+dbpedia_858: What is bordered by Netherlands Antilles and is located in the administrative unit of Amiens?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_2198: DC-3 is operated by which airline?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:PublicTransitSystem', 'dbo:Company'], ['dbo:Airline'], [], [], []]
+
+dbpedia_22023: Which cport of Vishwajyot High School is also the genere of Battle chess 
+.. Labels: [[], ['dbo:Activity'], ['dbo:Sport', 'dbo:Game'], [], [], [], [], []]
+
+dbpedia_301: What position did William Carmichael replace John Jay in?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:Ambassador', 'dbo:Politician'], [], [], [], []]
+
+dbpedia_2129: What sovereign state uses the Australian dollar as currency?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_6461: origin of people who speak japanese
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_23131: Which U.S. state has the abbreviation MN?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Region', 'dbo:Settlement'], ['dbo:AdministrativeRegion'], [], [], []]
+
+dbpedia_19631: Name the species of Panthera leo fossilis ?
+.. Labels: [[], ['dbo:Species'], ['dbo:Eukaryote'], ['dbo:Animal', 'dbo:Plant'], ['dbo:Mammal', 'dbo:Insect'], [], [], []]
+
+dbpedia_21528: Where was James McClure born ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Settlement', 'dbo:Country'], ['dbo:City'], [], [], []]
+
+dbpedia_13019: From what country is F. Scott Fitzgerald, who was born in St. Paul?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_351: What is the secular state of the MIN(PPP GDP per capita) whose diplomatic relation is with India?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:State', 'dbo:Country'], [], [], [], []]
+
+dbpedia_21736: Who rented the stadium where the UFC 152 take place?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:SportsTeam'], ['dbo:HockeyTeam', 'dbo:SoccerClub'], [], [], []]
+
+dbpedia_14666: Which place is adjacent to Turkmenistan that is a member of Commonwealth of Independent States?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_3112: What are the diplomatic relations between Brunei and Canada?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_13831: What border in Croatia subject of sharing between Croatia-Hungary?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_19021: Who founded the city where Pat Vincent die?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:OfficeHolder', 'dbo:MilitaryPerson'], [], [], [], []]
+
+dbpedia_18333: What is the mascot of the military unit whose commander is Herbert Bautista ?
+.. Labels: [[], ['dbo:Species'], ['dbo:Eukaryote'], ['dbo:Animal', 'dbo:Plant'], ['dbo:Mammal'], [], [], []]
+
+dbpedia_8403: Which sovereign state of Sofia has the administrative territorial entity?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_5716: What is the country with the highest median income whose member of is United Nations Educational, Scientific and Cultural Organization ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_2610: In what country does Mother's Day take place on March 8th?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_1793: WHAT COMES FROM LABEL OF LCD SOUNDSYSTEM ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_21111: Which board memeber of jimmy Wales also owns Latvian Wikipedia ?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:Company', 'dbo:Non-ProfitOrganisation'], [], [], [], []]
+
+dbpedia_3810: Who is the {dominion of the British Empire} for {history of topic} of {history of Australia}
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_12653: What is Roe v. Wade published in and what jurisdiction applies?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_3524: Which part of Adélie Land has a the second-level administrative country subdivision?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_9547: What is an exclave in Alaska?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_1564: WHAT IS CIVILISATION OF PLACE OF ACTIVITY OF CLEMENT XI?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Region', 'dbo:State'], ['dbo:HistoricalRegion'], [], [], []]
+
+dbpedia_8903: "What's the {aspect of} of {history of Georgia}, whose's {mayor} is {Giorgi Kvirikashvili}?"
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_7190: What is in the district of Tripura that shares a border with Bhutan?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_19811: Name the capital of Barony of Caux ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Continent'], [], [], [], []]
+
+dbpedia_6998: Which country is the Hebrew language spoken?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_10297: What is Jefferson Davis ' federal state of citizenship?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_724: Who is the {island nation} for {participant} of {North African Campaign}
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_4040: Which is the deepest point for Mekong River?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_12806: Which is the territory that overlaps Great Britain?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_19607: Where did anton ausserer die?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Settlement'], [], [], [], []]
+
+dbpedia_13512: What is the secular state with the MA compulsory education (minimum age) whose diplomatic relation is Australia ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:State', 'dbo:Country'], [], [], [], []]
+
+dbpedia_15343: Tell me about sovereign state for applies to jurisdiction of Australian dollar?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:State', 'dbo:Country'], [], [], [], []]
+
+dbpedia_11585: What is it?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_21343: Erik Jendresen is writer and Play tone is company of which TV show ?
+.. Labels: [[], ['dbo:Work'], ['dbo:Film', 'dbo:TelevisionShow'], [], [], [], [], []]
+
+dbpedia_19379: Which mascot of Celal Bayer university is also the nickname of kore Presbyterian Theological Seminar ?
+.. Labels: [[], ['dbo:Species'], ['dbo:Eukaryote'], ['dbo:Plant'], ['dbo:FloweringPlant', 'dbo:Insect'], [], [], []]
+
+dbpedia_18595: What are the death place of the models whose hair color was Red?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Settlement'], ['dbo:City'], [], [], []]
+
+dbpedia_2466: What are the origins of Run-D.M.C.?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:State', 'dbo:Country'], [], [], [], []]
+
+dbpedia_23226: Who was president of Pakistan in 1978?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:OfficeHolder', 'dbo:MilitaryPerson'], [], [], [], []]
+
+dbpedia_19232: Jeff Munn is the president of which basketball team ?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:SportsTeam'], ['dbo:BasketballTeam', 'dbo:SoccerClub'], [], [], []]
+
+dbpedia_23170: Which monarchs were married to a German?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:Monarch', 'dbo:Noble'], [], [], [], []]
+
+dbpedia_8113: "Which is {candidate} of {Battle of Oudenarde}, that has {diplomatic relation} is {Japan} ?"
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_4618: What is the name of Suleiman the Magnificent's church?
+.. Labels: [[], ['dbo:Place'], ['dbo:ArchitecturalStructure'], ['dbo:Building'], ['dbo:ReligiousBuilding'], ['dbo:Mosque', 'dbo:Church'], [], []]
+
+dbpedia_11152: What countries are part of the European Union?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:State', 'dbo:Country'], [], [], [], []]
+
+dbpedia_21840: What is the Team Name  of St. Viator High School ?
+.. Labels: [[], ['dbo:Species'], ['dbo:Eukaryote'], ['dbo:Animal', 'dbo:Plant'], ['dbo:Mammal'], [], [], []]
+
+dbpedia_3189: Which is the triumphal arch that Jean Chalgrin was the architect and contains the word arc in it's name!
+.. Labels: [[], ['dbo:Place'], ['dbo:ArchitecturalStructure', 'dbo:Monument'], [], [], [], [], []]
+
+dbpedia_14824: What is the compulsory education and the maximum age of the interpol member?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_20943: who is the governer of New Castile?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:Politician', 'dbo:MilitaryPerson'], ['dbo:Governor'], [], [], []]
+
+dbpedia_8205: Which is the federal state that was a participant in the Cuban Missile Crisis?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_9966: Which country on the Gold Coast did Jack Brabham die?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_13430: "What's the {border} of {Japan}, whose {language official} is {Buryat}?"
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_5028: What is the diplomatic relationship between Indonesia and Switzerland?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_20338: People who debuted from Houston Astros have played in which clubs?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:SportsTeam'], ['dbo:BaseballTeam', 'dbo:SoccerClub'], [], [], []]
+
+dbpedia_22608: What is the origin of the musical artist of A Todo Romantic Style ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Settlement'], ['dbo:City'], [], [], []]
+
+dbpedia_22624: What made jo garcia and merritt cabal both famous?
+.. Labels: [[], ['dbo:Work'], ['dbo:WrittenWork', 'dbo:TelevisionShow'], ['dbo:PeriodicalLiterature'], ['dbo:Magazine'], [], [], []]
+
+dbpedia_3310: What is located in the administrative unit of Aquascalientes, which has boroughs  called Nayarit?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_22416: List sports managers who managed Middlesbrough F.C. and England national under-21 football team?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:SportsManager'], ['dbo:SoccerManager', 'dbo:SoccerPlayer'], [], [], []]
+
+dbpedia_6104: What is Japan's diplomatic relationship with the jurisdiction of unconscionability?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_15206: Of what country is Moon Jae-in the leader?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_19207: What is the american football league whose champion is from Kansas City, Missouri?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:SportsLeague'], ['dbo:AmericanFootballLeague', 'dbo:SoccerClub'], [], [], []]
+
+dbpedia_20319: Which president had lieutenants whose governor was Bill Clinton?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:Politician', 'dbo:OfficeHolder'], ['dbo:President'], [], [], []]
+
+dbpedia_20078: Who founded the city where First Church of Christ, Scientist is located?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:OfficeHolder', 'dbo:MilitaryPerson'], [], [], [], []]
+
+dbpedia_8274: What country is Benghazi located in?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_23195: Which U.S. states are in the same timezone as Utah?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Region', 'dbo:Settlement'], ['dbo:AdministrativeRegion'], [], [], []]
+
+dbpedia_20249: In which continent do Air 2000 and Novair International airways operate?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Continent'], [], [], [], []]
+
+dbpedia_20770: Where is the radio broadcasted in, whose sister station is CKFM-FM?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Continent'], [], [], [], []]
+
+dbpedia_1882: What federal state was replaced by the Thirteen Colonies?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_21: What country is the current leader of the African Union ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_22886: What is the baseball team whose club manager's debut team is Houston Astros?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:SportsTeam'], ['dbo:BaseballTeam', 'dbo:SoccerClub'], [], [], []]
+
+dbpedia_5254: Which former British-dominated country has the highest retirement age as found in the Jewish Encyclopedia of Brockhaus and Efron?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_17581: Which administrative unit of Turks and Caicos Islands has a AUSCANNZUKUS member?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_17187: What is difference from Tsardom of Russia,that the official language is Nogai?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_4430: Which is the foundational text for Declaration of the Establishment of the State of Israel?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_19671: Name the notable commanders of Army Group Oberrhein ?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:OfficeHolder', 'dbo:MilitaryPerson'], [], [], [], []]
+
+dbpedia_9517: What is Kesha's native language and country of citizenship?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_10335: What is in the shire of Anhui, where the title of the head of government is Premier of the People's Republic of China?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_1244: Where did David Livingstone die?
+.. Labels: [[], ['dbo:Place'], ['dbo:ArchitecturalStructure', 'dbo:Monument'], [], [], [], [], []]
+
+dbpedia_4842: Which is designated as terrorist by of Boko Haram?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_7665: Moon Jae-in is the leader of what country?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_18990: List the destination of Novair International Airways ?
+.. Labels: [[], ['dbo:Place'], ['dbo:NaturalPlace', 'dbo:PopulatedPlace'], ['dbo:BodyOfWater', 'dbo:Country', 'dbo:Continent'], ['dbo:Sea'], ['dbo:River'], [], []]
+
+dbpedia_12344: What sister city to Haifa is the headquarters of Newcastle University?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Settlement'], ['dbo:City', 'dbo:Town'], [], [], []]
+
+dbpedia_17683: The British Overseas Territory G20 is a member of what voivodeship?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_18734: What is the genre of Battle Chess?
+.. Labels: [[], ['dbo:Activity'], ['dbo:Game', 'dbo:Sport'], [], [], [], [], []]
+
+dbpedia_20422: What is the Nickname of the school where Jeff Hornacek studied  ?
+.. Labels: [[], ['dbo:Species'], ['dbo:Eukaryote'], ['dbo:Animal', 'dbo:Plant'], ['dbo:Mammal'], [], [], []]
+
+dbpedia_22819: Which region of Bannock is the origin od Spaghetti squash ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Continent', 'dbo:Country'], [], [], [], []]
+
+dbpedia_8357: Did Pliny the Younger die in Brazil?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_22171: Name the mountain whose parent peak is located in Mexico.
+.. Labels: [[], ['dbo:Place'], ['dbo:NaturalPlace'], ['dbo:Mountain', 'dbo:Volcano'], [], [], [], []]
+
+dbpedia_8993: Which is the federal state for the head of state Donald Trump?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_22821: Which sport at Polytechnic University of the Philippines Taguig is the field of Jon speelman ?
+.. Labels: [[], ['dbo:Activity'], ['dbo:Sport', 'dbo:Game'], [], [], [], [], []]
+
+dbpedia_191: What is the country of citizenship and the religion of Elizabeth_Smart ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_2179: Which country has the highest quality of life according to the international center for settlement of investment disputes.
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_1464: What country is the current leader of the African Union ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_22124: To which american football teams does the Heinz Field serve as home stadium?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:SportsTeam'], ['dbo:SoccerClub', 'dbo:AmericanFootballTeam'], [], [], []]
+
+dbpedia_20335: Stan Van Gundy serves as a head coach and president for which basketball team?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:SportsTeam'], ['dbo:BasketballTeam', 'dbo:SoccerClub'], [], [], []]
+
+dbpedia_9105: What is the subitem of the history of Morocco, which has diplomatic relation to Russia?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_12780: Which endemism of emu has diplomatic relations with Peru?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_214: What sovereign state belonging to the International Finance Corporation has the lowest unemployment rate?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_6440: In what county seat does La Monte Young work?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_20794: Which destination of the Novair International Airway is the source origin of Spaghetti squash ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Continent'], [], [], [], []]
+
+dbpedia_22714: Which team won the American Football League?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:SportsTeam'], ['dbo:SoccerClub', 'dbo:AmericanFootballTeam'], [], [], []]
+
+dbpedia_21036: Where did Goran Cengic die?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Settlement', 'dbo:Country'], ['dbo:City'], [], [], []]
+
+dbpedia_22396: List the things for which the relatives of Mrunalini Kunte are known?
+.. Labels: [[], ['dbo:Activity'], ['dbo:Sport', 'dbo:Game'], [], [], [], [], []]
+
+dbpedia_19020: Panthera leo fossils and Liger belong to which species?
+.. Labels: [[], ['dbo:Species'], ['dbo:Eukaryote'], ['dbo:Animal', 'dbo:Plant'], ['dbo:Mammal'], [], [], []]
+
+dbpedia_19647: What sport has made Eric Schiller famous, and has employed Craig Van Tibury?
+.. Labels: [[], ['dbo:Activity'], ['dbo:Game', 'dbo:Sport'], [], [], [], [], []]
+
+dbpedia_12289: When did monument for depicts of Dante Alighieri?
+.. Labels: [[], ['dbo:Place'], ['dbo:ArchitecturalStructure', 'dbo:Monument'], [], [], [], [], []]
+
+dbpedia_5995: Who died in Francois Villon, which has diplomatic relation with Germany?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_17022: what is the country of Patricio Aylwin has place of death as Santiago ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_20652: where did Alfred Tarnowski die?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Settlement', 'dbo:Country'], [], [], [], []]
+
+dbpedia_22959: Under which president did the predecessor of Simon Ferro work?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:OfficeHolder', 'dbo:Politician'], ['dbo:President'], [], [], []]
+
+dbpedia_5399: What is {contains} of {working environment} of {Frederick II of Prussia} ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_21164: List all the tenants of the stadium where the WWF Summer Slam 2004 took place.
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:SportsTeam'], ['dbo:HockeyTeam', 'dbo:SoccerClub'], [], [], []]
+
+dbpedia_12793: The history of Azerbaijan, which contains the Masally District, falls under which topic?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_17374: Tell me about democratic republic for diplomatic relation of Russian Empire?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_18569: Which HBO's television series was produced by Erik Bork?
+.. Labels: [[], ['dbo:Work'], ['dbo:Film', 'dbo:TelevisionShow'], [], [], [], [], []]
+
+dbpedia_22169: Which governer of Winston bryant is also the president of Carl Stokes ?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:OfficeHolder', 'dbo:Politician'], ['dbo:President'], [], [], []]
+
+dbpedia_19231: Where did chancellor served by Rudolf Kirchschlger die?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Settlement', 'dbo:Country'], ['dbo:City'], [], [], []]
+
+dbpedia_15207: With which countries did the Russian Empire have diplomatic relations?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_7448: When was the ancient Roman Empire in power?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Region', 'dbo:State'], ['dbo:HistoricalRegion'], [], [], []]
+
+dbpedia_8369: Name the country associated with Himachal Pradesh.
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_5596: Name a country involved in Korean War
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_22798: Who is the owner of  Latvian Wikipedia and Wiktionary ?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:Non-ProfitOrganisation', 'dbo:Company'], [], [], [], []]
+
+dbpedia_20307: Name the TV show whose producer is Stephen E. Ambrose and company is HBO ?
+.. Labels: [[], ['dbo:Work'], ['dbo:Film', 'dbo:TelevisionShow'], [], [], [], [], []]
+
+dbpedia_4170: What's the country that has the lowest amount of school children who have family that work for the International Bank for Reconstruction and Development?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_20810: What mascot of the Galatasaray Handball Team is also the team name of Cristo Rey Jesuit high School ?
+.. Labels: [[], ['dbo:Species'], ['dbo:Eukaryote'], ['dbo:Animal', 'dbo:Plant'], ['dbo:Mammal'], [], [], []]
+
+dbpedia_2233: n/a
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_19798: What is pitro Gruszka hometown ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Settlement', 'dbo:Country'], [], [], [], []]
+
+dbpedia_21254: Which destinations of the Air 2000 is also the location continent of the Falken Tire ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Continent'], [], [], [], []]
+
+dbpedia_21378: What is the draft team of Gene Conley ?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:SportsTeam'], ['dbo:BasketballTeam', 'dbo:SoccerClub'], [], [], []]
+
+dbpedia_7068: What country that is a member of the International Centre for Settlement of Investment Disputes has the most GDP?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_10998: In the administrative unit of New Calendonia, has Lagun Onari won the award?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_1835: Tell me the federal states that starts with the letter s
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_2499: What is located on linear feature of the London Underground?
+.. Labels: [[], ['dbo:Place'], ['dbo:ArchitecturalStructure'], ['dbo:Infrastructure'], ['dbo:Station'], ['dbo:MetroStation', 'dbo:RailwayStation'], [], []]
+
+dbpedia_4782: What is the subtopic in the economy of Japan with diplomatic relation with Afghanistan?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_18417: What is the field of the Jon Speelman and occupation of the Karen Grigorian?
+.. Labels: [[], ['dbo:Activity'], ['dbo:Game', 'dbo:Sport'], [], [], [], [], []]
+
+dbpedia_4932: What is The Adventures of Tintin's country of orgin and the language used?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_18904: Name the sea located near Europe and has a nearby city as Rostock ?
+.. Labels: [[], ['dbo:Place'], ['dbo:NaturalPlace'], ['dbo:BodyOfWater'], ['dbo:Lake', 'dbo:Sea'], [], [], []]
+
+dbpedia_17415: which is the secular state with the highest total reserves whose diplomatic relation is eduador?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:State', 'dbo:Country'], [], [], [], []]
+
+dbpedia_1750: What is the  relation between South Ossetia and  Nicaragua-South Ossetia?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_15801: what is left wing of driving side
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_13334: Who is the head of government for the constitutional republic of Moon Jae-in?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_594: Give the name of the hill with the highest isolation whose is at a high range.
+.. Labels: [[], ['dbo:Place'], ['dbo:NaturalPlace'], ['dbo:Mountain', 'dbo:MountainRange', 'dbo:Volcano'], [], [], [], []]
+
+dbpedia_15473: What is the diplomatic relation of International Energy Agency member the Kingdom of Hawaii?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_22300: Who is the head coach of the teams in Middlesbrough FC?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:SportsManager'], ['dbo:SoccerManager', 'dbo:SoccerPlayer'], [], [], []]
+
+dbpedia_3490: Which is the island nation for the country of pound sterling?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_21554: What is the president whose lieutenants are Winston Bryant and Joe Purcell?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:Politician', 'dbo:OfficeHolder'], ['dbo:President'], [], [], []]
+
+dbpedia_1768: Which country is landlocked in East Asia
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_18403: What is the former team of the Athens borned basketball players ?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:SportsTeam'], ['dbo:BasketballTeam', 'dbo:SoccerClub'], [], [], []]
+
+dbpedia_4500: What is located in the state of Idaho that has diplomatic relations with Dominica?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_18896: Which artist was taught by Jos Ruiz y Blasco?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:Artist', 'dbo:Writer'], [], [], [], []]
+
+dbpedia_18519: From what american football teams did Carlos Emmons play?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:SportsTeam'], ['dbo:AmericanFootballTeam', 'dbo:SoccerClub'], [], [], []]
+
+dbpedia_18681: Name the home town of Cline Buckens ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Settlement'], ['dbo:City'], [], [], []]
+
+dbpedia_2407: When did country for contains administrative territorial entity of Tripura?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_18331:  Erik Jendresen is the writer of which television show?
+.. Labels: [[], ['dbo:Work'], ['dbo:TelevisionShow', 'dbo:Film'], [], [], [], [], []]
+
+dbpedia_26: Which member state of the International Centre for Settlement of Investment Disputes has the maximum inflation rate?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_3346: What country is Abuja the capitol of?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_18554: List the opponents of the relatives of Thomas Helwys?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:Judge', 'dbo:Philosopher'], [], [], [], []]
+
+dbpedia_4710: What is the Mona Lisa's sovereign state?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_6283: What country does Zinedine Zidane play sports for?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_7991: Name a country who is diplomatic towards the Russian Empire.
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_18691: What are Breann McGregor and Anika Knudsen, both known for?
+.. Labels: [[], ['dbo:Work'], ['dbo:WrittenWork', 'dbo:TelevisionShow'], ['dbo:PeriodicalLiterature'], ['dbo:Magazine'], [], [], []]
+
+dbpedia_12758: What lived in Florence Nightingale, Florence Nightingale diplomatic relation in Bangladesh
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_8377: In which museum is Hadrian buried?
+.. Labels: [[], ['dbo:Place'], ['dbo:ArchitecturalStructure'], ['dbo:Building'], ['dbo:Museum', 'dbo:Castle'], [], [], []]
+
+dbpedia_16433: Which is the country that contains the administrative territorial entity of Mizoram?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_11805: Who is Mongolia in diplomatic relations with, that has it local government in Hubei?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_8230: When did Commonwealth realm for currency of Australian dollar?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_11845: What is the name of the airline that operated Airbus A300?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:Company', 'dbo:PublicTransitSystem'], ['dbo:Airline'], [], [], []]
+
+dbpedia_19239: What is the death place of the Elbieta Czartoryska which is also place of birth of the Charles Journet
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Settlement', 'dbo:Country'], [], [], [], []]
+
+dbpedia_14316: Is New Jersey next to Querétaro, a subdivided neighborhood?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_5930: Which is the sovereign state for the history topic of Australia?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_23236: Where was JFK assassinated?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace', 'dbo:ArchitecturalStructure'], ['dbo:Settlement', 'dbo:Building'], ['dbo:City', 'dbo:Hospital'], [], [], []]
+
+dbpedia_23171: In which U.S. state is Area 51 located?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Region', 'dbo:Settlement'], ['dbo:AdministrativeRegion'], [], [], []]
+
+dbpedia_11301: What is the castle for the burial place of Hadrian?
+.. Labels: [[], ['dbo:Place'], ['dbo:ArchitecturalStructure'], ['dbo:Building'], ['dbo:Museum', 'dbo:Castle'], [], [], []]
+
+dbpedia_12524: What is the jurisdiction of the area of {East Nusa Tenggara Province}
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_23112: Where is Fort Knox located?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Region', 'dbo:Settlement'], ['dbo:AdministrativeRegion'], [], [], []]
+
+dbpedia_1042: What country has the lowest inflation rate?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_2607: What sovereign states have a diplomatic relationship with the Russian Empire?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_6124: Which is the democratic republic that is replaced by the Thirteen Colonies?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_2346: Mention the federal  state responsible for the Soviet Union's diplomatic relation.
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_21474: Name the president who has relations with Clinton family and had a lieutenant named Winston Bryant?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:Politician', 'dbo:OfficeHolder'], ['dbo:President'], [], [], []]
+
+dbpedia_21680: Whose work is in the Musee d'orsay?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:Artist', 'dbo:Writer'], [], [], [], []]
+
+dbpedia_14623: Which airline has the highest total revenue?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:PublicTransitSystem', 'dbo:Company'], ['dbo:Airline'], [], [], []]
+
+dbpedia_22130: Which sea is surrounded by Rostock and Kaliningrad?
+.. Labels: [[], ['dbo:Place'], ['dbo:NaturalPlace'], ['dbo:BodyOfWater'], ['dbo:Lake', 'dbo:Sea'], [], [], []]
+
+dbpedia_23053: Which U.S. state has the highest population density?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Region', 'dbo:Settlement'], ['dbo:AdministrativeRegion'], [], [], []]
+
+dbpedia_23417: Who is the mayor of Paris?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:Politician', 'dbo:OfficeHolder'], [], [], [], []]
+
+dbpedia_21286: What is the debut team of the football player whose college is UCLA Bruins football?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:SportsTeam'], ['dbo:AmericanFootballTeam', 'dbo:SoccerClub'], [], [], []]
+
+dbpedia_10083: Which is the country for which Rodrigo Duterte is the head of the government?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_19154: who was the president under which Joe Purcell is a lieutenant?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:OfficeHolder', 'dbo:Politician'], ['dbo:President'], [], [], []]
+
+dbpedia_3107: What country did John Barrymore die in if the city was Los Angeles?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_20223: What is the division of the companies who make Runes of Magic?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Continent'], [], [], [], []]
+
+dbpedia_20636: Which football teams are in a city where Oakland Athletics were the tenants?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:SportsTeam'], ['dbo:AmericanFootballTeam', 'dbo:SoccerClub'], [], [], []]
+
+dbpedia_18611: What is the television show whose company is Playtone and written by Erik Jendresen?
+.. Labels: [[], ['dbo:Work'], ['dbo:Film', 'dbo:TelevisionShow'], [], [], [], [], []]
+
+dbpedia_20377: Who managed England national under-20 football team and Middlesbrough F.C.?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:SportsManager'], ['dbo:SoccerPlayer', 'dbo:SoccerManager'], [], [], []]
+
+dbpedia_21346: List the goverener of Winston Bryant?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:OfficeHolder', 'dbo:Politician'], [], [], [], []]
+
+dbpedia_19027: Which division of the Runewaker Entertainment is also the  destinations of the Airtours International Airways?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Continent'], [], [], [], []]
+
+dbpedia_17954: What landlocked country that is a member of the United Nations Educational, Scientific and Cultural Organization has the lowest total fertility rate?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_9225: What is the diplomatic relation of the African Union?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_14291: Which is the republic in the history topic of the history of India?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_17752: how the wallaby's endenism has a diplomamatic relation with New caledonia ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_8399: What jurisdiction is applied to the limited liability company of which Harry S. Truman was chancellor?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_20798: What show has writing of Erik Jendresen and Graham Yost?
+.. Labels: [[], ['dbo:Work'], ['dbo:Film', 'dbo:TelevisionShow'], [], [], [], [], []]
+
+dbpedia_17203: Which is the district in Al-Qassim Region, that has diplomatic relation with Mongolia ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_19163: What is the home town of the band which is the artist of Your Ice Cream's Dirty ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Settlement', 'dbo:Country'], ['dbo:City'], [], [], []]
+
+dbpedia_18345: What artist of Charing Cross Bridge influenced Dorothea Sharp in her career?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:Artist', 'dbo:Writer'], [], [], [], []]
+
+dbpedia_21230: Which district of Robert William Wilcox os the place of birth of Kamaloohua ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Settlement', 'dbo:Island'], [], [], [], []]
+
+dbpedia_14878: Who was formed as the leader of Momoiro Clover Z?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_2522: "Which is {endemism} of {Mantella}, where {member of} is {International Bank for Reconstruction and Development} ?"
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_6822: Did Barbados have a diplomatic relationship with Nigeria in the past?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_20145: Louis Dunbar is the coach of which basketball team ?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:SportsTeam'], ['dbo:BasketballTeam', 'dbo:SoccerClub'], [], [], []]
+
+dbpedia_21912: What is the location of the pope whose major shrine is St. Peter's Basilica ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Settlement'], [], [], [], []]
+
+dbpedia_22944: What is the sea whose cities are Gdask and Oulu?
+.. Labels: [[], ['dbo:Place'], ['dbo:NaturalPlace'], ['dbo:BodyOfWater'], ['dbo:Lake', 'dbo:Sea'], [], [], []]
+
+dbpedia_16335: Japanese is the language used by which sovereign state?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_18189: What is the Home Stadium of the Kenya national under-20 football team where Matin Suji was also born ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Settlement'], ['dbo:City'], [], [], []]
+
+dbpedia_20016: To which families does the Koolakamba belong ?
+.. Labels: [[], ['dbo:Species'], ['dbo:Eukaryote'], ['dbo:Animal'], ['dbo:Insect', 'dbo:Mammal'], [], [], []]
+
+dbpedia_20989: For what is Abhijit Kunte known ?
+.. Labels: [[], ['dbo:Activity'], ['dbo:Game', 'dbo:Sport'], [], [], [], [], []]
+
+dbpedia_5504: Where is the administrative unit of {architecture of India}, whose {administrative centre} is {New Delhi}?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_2445: Where is {land} {adjacent to} {Villanova University} ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:State', 'dbo:Country'], [], [], [], []]
+
+dbpedia_12710: What is the item operator F / A Hornet of greeks culture?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_22583: Which broadcast area of CFRX is also the palce of birth of Anthony Raymond ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Continent', 'dbo:Country'], [], [], [], []]
+
+dbpedia_20536: Where did the editor of Charlie Mensuel die ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Settlement'], ['dbo:City'], [], [], []]
+
+dbpedia_18976: Which division of Serbia national team is also the region of Dobinsk Ice Cave ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Continent'], [], [], [], []]
+
+dbpedia_8601: In what country, which has diplomatic relations with Libya, was Sixto Durán Ballén born?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_3207: What is part of the background of Iran, that has racial group of I.A.?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_1455: God Save the Queen is the anthem for which island nation?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:State', 'dbo:Country'], [], [], [], []]
+
+dbpedia_17382: Which island nation has the largest real gross domestic product growth rate?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_20448: What nicknames do the universities in Norton, Massachusetts have?
+.. Labels: [[], ['dbo:Species'], ['dbo:Eukaryote'], ['dbo:Animal', 'dbo:Plant'], ['dbo:Mammal'], [], [], []]
+
+dbpedia_21726: Who is the founder of Pittsburgh ?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:OfficeHolder', 'dbo:MilitaryPerson'], [], [], [], []]
+
+dbpedia_23296: Who is the manager of Real Madrid?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:SportsManager'], ['dbo:SoccerManager', 'dbo:SoccerPlayer'], [], [], []]
+
+dbpedia_17103: in the aspect of UK history , what has been the diplomatic relation with Malta ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_20352: What is the residence of the person, who starred in Men Will Be Men ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Settlement'], ['dbo:City'], [], [], []]
+
+dbpedia_22160: List the sports of PATTS College of Aeronautics which are of interest of Jon Speelman ?
+.. Labels: [[], ['dbo:Activity'], ['dbo:Sport', 'dbo:Game'], [], [], [], [], []]
+
+dbpedia_5235: What country is Salman of Saudi Arabia a citizen of?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_3451: Joko Widodo is the head of government of which sovereign state ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_18581: Name presidents of the schools which have queen noor of Jordan as one of them ?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:OfficeHolder', 'dbo:Royalty'], [], [], [], []]
+
+dbpedia_7202: What country for May was named after Magtymguly Pyragy?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_22904: What are the bands associated with the artists of My Favorite Girl  ?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:Artist'], ['dbo:MusicalArtist', 'dbo:Band'], [], [], []]
+
+dbpedia_22747: In which team was the person drafted who has studied at the Worcester college, Oxford?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:SportsTeam'], ['dbo:SoccerClub', 'dbo:BasketballTeam'], [], [], []]
+
+dbpedia_13793: Where was the book of the history of Israel originally composed?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_13325: What is the sovereign state of Lisbon
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_18486: Which football teams is Shahid Khan proprietor to?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:SportsTeam'], ['dbo:SoccerClub', 'dbo:AmericanFootballTeam'], [], [], []]
+
+dbpedia_16316: What sovereign state contains Mizoram?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_20797: The president served by Haqqi al-Azm died where?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Settlement'], ['dbo:City'], [], [], []]
+
+dbpedia_18981: What is the former team of the football player who is the coach of 2006 Oakland Raiders season ?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:SportsTeam'], ['dbo:AmericanFootballTeam', 'dbo:SoccerClub'], [], [], []]
+
+dbpedia_20859: Where is the lake located into which the Winnipeg River flows?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Continent'], [], [], [], []]
+
+dbpedia_19924: Which president was served by someone whose lieutenant is Lewis Stuyvesant Chanler?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Person'], ['dbo:OfficeHolder', 'dbo:Politician'], ['dbo:President'], [], [], []]
+
+dbpedia_12736: Which is the sovereign state for the country that started The Star-Spangled Banner?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_20214: where are the sister stations of CFRB broadcasted?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Continent'], [], [], [], []]
+
+dbpedia_12711: What landlocked country replaced Czechoslovakia
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_15089: In what country is the Disney Channel Burbank headquarters?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_8061: In what Free imperial city did twinned administrative body of Auckland from?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:State', 'dbo:Settlement'], ['dbo:City'], [], [], []]
+
+dbpedia_21442: What is the basketball team whose President's college is Brockport Golden Eagles?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:SportsTeam'], ['dbo:BasketballTeam', 'dbo:SoccerClub'], [], [], []]
+
+dbpedia_21387: What team does John McGeever play for, which also employed Ben Dreith at some time?
+.. Labels: [[], ['dbo:Agent'], ['dbo:Organisation'], ['dbo:SportsLeague'], ['dbo:AmericanFootballLeague', 'dbo:SoccerClub'], [], [], []]
+
+dbpedia_13874: Wellington is the capitol of what island country?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_16408: What is the diplomatic relation of Carl von Ossietzky in Argentina ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_16101: What country was Zinedine Zidane born in?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_10479: What are the belligerents in the American Revolutionary War, who have divided into Cantabria?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_20827: What sport played in Polytechnic uni of San Juan has also made advocate nasiruddin famous?
+.. Labels: [[], ['dbo:Activity'], ['dbo:Game', 'dbo:Sport'], [], [], [], [], []]
+
+dbpedia_1569: What is the endemism of the lyrebird, which has diplomatic relation in Belgium?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:State'], [], [], [], []]
+
+dbpedia_18884: What is the broadcast area of WBCQ (SW) ?
+.. Labels: [[], ['dbo:Place'], ['dbo:PopulatedPlace'], ['dbo:Country', 'dbo:Continent'], [], [], [], []]
+

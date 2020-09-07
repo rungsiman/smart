@@ -21,8 +21,11 @@ class BaseExperiment:
     class Config:
         _obj = False
         
-        def __init__(self):
+        def __init__(self, **kwargs):
             self._obj = True
+
+            for key, value in kwargs.items():
+                setattr(self, key, value)
 
     class ClassConfig:
         _obj = False
@@ -75,7 +78,7 @@ class BaseExperiment:
                 os.makedirs(path)
 
 
-class BertExperimentConfig:
+class BertExperimentConfig(BaseExperiment.Config):
     model = 'bert-base-uncased'
 
     epochs = 4
@@ -102,8 +105,9 @@ class BertExperimentConfig:
             'num_warmup_steps': 0})
         max_grad_norm = 1.0
 
-        def __init__(self):
-            super().__init__()
+        def __init__(self, **kwargs):
+            super().__init__(**kwargs)
 
-    def __init__(self):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.bert = BertExperimentConfig.Bert()
