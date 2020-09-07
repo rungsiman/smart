@@ -83,7 +83,7 @@ class ExperimentConfigBase(ConfigBase):
                 os.makedirs(path)
 
 
-class BertModelConfig(ConfigBase):
+class BertModelConfigBase(ConfigBase):
     epochs = 4
     batch_size = 32
     eval_ratio = .1
@@ -113,4 +113,4 @@ class BertModelConfig(ConfigBase):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.bert = BertModelConfig.Bert()
+        self.bert = BertModelConfigBase.Bert()

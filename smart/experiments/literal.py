@@ -1,7 +1,7 @@
 import os
 from transformers import BertForSequenceClassification
 
-from smart.experiments.base import ExperimentConfigBase, ConfigBase, BertModelConfig
+from smart.experiments.base import ExperimentConfigBase, ConfigBase, BertModelConfigBase
 from smart.train.sequence import TrainSequenceClassification
 
 
@@ -40,7 +40,7 @@ class LiteralExperimentConfig(ExperimentConfigBase):
 
             LiteralExperimentConfig.prepare(self.output_root, self.output_train, self.output_test, self.output_models, self.output_analyses)
 
-            self.config = BertModelConfig()
+            self.config = BertModelConfigBase()
             self.classifier = BertForSequenceClassification
             self.trainer = TrainSequenceClassification
 
@@ -61,7 +61,7 @@ class LiteralExperimentConfig(ExperimentConfigBase):
 
             LiteralExperimentConfig.prepare(self.output_root, self.output_train, self.output_test, self.output_models, self.output_analyses)
 
-            self.config = BertModelConfig()
+            self.config = BertModelConfigBase()
             self.classifier = BertForSequenceClassification
             self.trainer = TrainSequenceClassification
 

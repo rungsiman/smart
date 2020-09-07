@@ -2,7 +2,7 @@ import os
 
 from smart.models.bert import BertForMultipleLabelClassification as BML
 from smart.models.bert import BertForPairedBinaryClassification as BPB
-from smart.experiments.base import ExperimentConfigBase, ConfigBase, BertModelConfig as BMC
+from smart.experiments.base import ExperimentConfigBase, ConfigBase, BertModelConfigBase as BMC
 from smart.train.multiple_label import TrainMultipleLabelClassification as TML
 from smart.train.paired_binary import TrainPairedBinaryClassification as TPB
 
