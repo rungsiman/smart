@@ -1,19 +1,19 @@
 import os
 from transformers import BertForSequenceClassification
 
-from smart.experiments.base import BaseExperiment, BertExperimentConfig
+from smart.experiments.base import ExperimentConfigBase, ConfigBase, BertModelConfig
 from smart.train.sequence import TrainSequenceClassification
 
 
-class LiteralExperiment(BaseExperiment):
-    version = '0.3-aws'
+class LiteralExperimentConfig(ExperimentConfigBase):
+    version = '0.4-aws'
     experiment = 'bert-literal'
     identifier = 'sandbox'
     description = 'Sandbox for testing on AWS'
 
     labels = ('boolean', 'string', 'date', 'number')
 
-    class Paths(BaseExperiment.Config):
+    class Paths(ConfigBase):
         root = 'data'
 
         def __init__(self, experiment, identifier):
@@ -21,9 +21,9 @@ class LiteralExperiment(BaseExperiment):
             self.input = os.path.join(self.root, 'input')
             self.output = os.path.join(self.root, f'intermediate/literal/{experiment}-{identifier}')
 
-            LiteralExperiment.prepare(self.output)
+            LiteralExperimentConfig.prepare(self.output)
 
-    class DBpedia(BaseExperiment.Config):
+    class DBpedia(ConfigBase):
         name = 'dbpedia'
 
         def __init__(self, paths):
@@ -38,13 +38,13 @@ class LiteralExperiment(BaseExperiment):
             self.output_models = os.path.join(self.output_root, 'models')
             self.output_analyses = os.path.join(self.output_root, 'analyses')
 
-            LiteralExperiment.prepare(self.output_root, self.output_train, self.output_test, self.output_models, self.output_analyses)
+            LiteralExperimentConfig.prepare(self.output_root, self.output_train, self.output_test, self.output_models, self.output_analyses)
 
-            self.config = BertExperimentConfig()
+            self.config = BertModelConfig()
             self.classifier = BertForSequenceClassification
             self.trainer = TrainSequenceClassification
 
-    class Wikidata(BaseExperiment.Config):
+    class Wikidata(ConfigBase):
         name = 'wikidata'
 
         def __init__(self, paths):
@@ -59,16 +59,16 @@ class LiteralExperiment(BaseExperiment):
             self.output_models = os.path.join(self.output_root, 'models')
             self.output_analyses = os.path.join(self.output_root, 'analyses')
 
-            LiteralExperiment.prepare(self.output_root, self.output_train, self.output_test, self.output_models, self.output_analyses)
+            LiteralExperimentConfig.prepare(self.output_root, self.output_train, self.output_test, self.output_models, self.output_analyses)
 
-            self.config = BertExperimentConfig()
+            self.config = BertModelConfig()
             self.classifier = BertForSequenceClassification
             self.trainer = TrainSequenceClassification
 
     def __init__(self, dataset):
         super().__init__()
-        self.paths = LiteralExperiment.Paths(self.experiment, self.identifier)
-        self.dataset = LiteralExperiment.DBpedia(self.paths) if dataset == 'dbpedia' else LiteralExperiment.Wikidata(self.paths)
+        self.paths = LiteralExperimentConfig.Paths(self.experiment, self.identifier)
+        self.dataset = LiteralExperimentConfig.DBpedia(self.paths) if dataset == 'dbpedia' else LiteralExperimentConfig.Wikidata(self.paths)
 
         # Apply to sklearn.model_selection.train_test_split.
         # Controls the shuffling applied to the data before applying the split.

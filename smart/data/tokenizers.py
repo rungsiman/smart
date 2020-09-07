@@ -12,10 +12,10 @@ class CustomTokenizer(object):
 class CustomAutoTokenizer(CustomTokenizer):
     def __init__(self, experiment, location=None):
         super().__init__(experiment)
-        if experiment.tokenizer_lowercase is not None:
-            self.tokenizer = AutoTokenizer.from_pretrained(location or experiment.tokenizer_model)
+        if experiment.lowercase is not None:
+            self.tokenizer = AutoTokenizer.from_pretrained(location or experiment.model)
         else:
-            self.tokenizer = AutoTokenizer.from_pretrained(location or experiment.tokenizer_model, do_lower_case=experiment.tokenizer_lowercase)
+            self.tokenizer = AutoTokenizer.from_pretrained(location or experiment.model, do_lower_case=experiment.lowercase)
 
     def encode(self, text, max_len):
         return self.tokenizer.encode_plus(text,

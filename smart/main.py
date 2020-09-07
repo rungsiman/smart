@@ -1,13 +1,12 @@
 import argparse
 import torch
-import torch.distributed as dist
 import torch.multiprocessing as mp
 
 from smart.data.base import Ontology, DataForTrain, DataForTest
 from smart.data.tokenizers import CustomAutoTokenizer
 from smart.dist.multiprocessing import init_process
-from smart.experiments.hybrid import HybridExperiment
-from smart.experiments.literal import LiteralExperiment
+from smart.experiments.hybrid import HybridExperimentConfig
+from smart.experiments.literal import LiteralExperimentConfig
 from smart.pipelines.hybrid import HybridTrainPipeline
 from smart.pipelines.literal import LiteralTrainPipeline
 from smart.utils.devices import describe_devices
@@ -34,13 +33,14 @@ def process(rank, world_size, experiment, stage, pipeline, shared, lock):
 
     else:
         data = DataForTest(experiment, ontology, tokenizer).clean().blind().tokenize()
+        ...
 
 
 def run(stage, pipeline, dataset):
     if pipeline == 'literal':
-        experiment = LiteralExperiment(dataset)
+        experiment = LiteralExperimentConfig(dataset)
     else:
-        experiment = HybridExperiment(dataset)
+        experiment = HybridExperimentConfig(dataset)
 
     set_seed(experiment)
     describe_devices()

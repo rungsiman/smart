@@ -2,7 +2,7 @@ import os
 
 from smart.models.bert import BertForMultipleLabelClassification as BML
 from smart.models.bert import BertForPairedBinaryClassification as BPB
-from smart.experiments.base import BaseExperiment, BertExperimentConfig as BEC
+from smart.experiments.base import ExperimentConfigBase, ConfigBase, BertModelConfig as BMC
 from smart.train.multiple_label import TrainMultipleLabelClassification as TML
 from smart.train.paired_binary import TrainPairedBinaryClassification as TPB
 
@@ -10,17 +10,17 @@ from smart.train.paired_binary import TrainPairedBinaryClassification as TPB
 class HybridConfig:
     def __init__(self, labels, primary=None, secondary=None):
         self.labels = labels
-        self.primary_config, self.primary_classifier, self.primary_trainer = primary or (BEC(), BML, TML)
-        self.secondary_config, self.secondary_classifier, self.secondary_trainer = secondary or (BEC(), BPB, TPB)
+        self.primary_config, self.primary_classifier, self.primary_trainer = primary or (BMC(), BML, TML)
+        self.secondary_config, self.secondary_classifier, self.secondary_trainer = secondary or (BMC(), BPB, TPB)
 
 
-class HybridExperiment(BaseExperiment):
-    version = '0.8-aws'
+class HybridExperimentConfig(ExperimentConfigBase):
+    version = '0.9-aws'
     experiment = 'bert-hybrid'
     identifier = 'sandbox'
     description = 'Sandbox for testing on AWS'
     
-    class Paths(BaseExperiment.Config):
+    class Paths(ConfigBase):
         root = 'data'
 
         def __init__(self, experiment, identifier):
@@ -28,9 +28,9 @@ class HybridExperiment(BaseExperiment):
             self.input = os.path.join(self.root, 'input')
             self.output = os.path.join(self.root, f'intermediate/hybrid/{experiment}-{identifier}')
 
-            HybridExperiment.prepare(self.output)
+            HybridExperimentConfig.prepare(self.output)
 
-    class DBpedia(BaseExperiment.Config):
+    class DBpedia(ConfigBase):
         name = 'dbpedia'
 
         def __init__(self, paths):
@@ -45,7 +45,7 @@ class HybridExperiment(BaseExperiment):
             self.output_models = os.path.join(self.output_root, 'models')
             self.output_analyses = os.path.join(self.output_root, 'analyses')
 
-            HybridExperiment.prepare(self.output_root, self.output_train, self.output_test, self.output_models, self.output_analyses)
+            HybridExperimentConfig.prepare(self.output_root, self.output_train, self.output_test, self.output_models, self.output_analyses)
 
             self.hybrid_default_config = HybridConfig([])
             self.hybrid = [HybridConfig(['dbo:Place', 'dbo:Agent', 'dbo:Work']),
@@ -54,7 +54,7 @@ class HybridExperiment(BaseExperiment):
                            HybridConfig(['dbo:City', 'dbo:University', 'dbo:Stream']),
                            HybridConfig(['dbo:River'])]
 
-    class Wikidata(BaseExperiment.Config):
+    class Wikidata(ConfigBase):
         name = 'wikidata'
 
         def __init__(self, paths):
@@ -69,7 +69,7 @@ class HybridExperiment(BaseExperiment):
             self.output_models = os.path.join(self.output_root, 'models')
             self.output_analyses = os.path.join(self.output_root, 'analyses')
 
-            HybridExperiment.prepare(self.output_root, self.output_train, self.output_test, self.output_models, self.output_analyses)
+            HybridExperimentConfig.prepare(self.output_root, self.output_train, self.output_test, self.output_models, self.output_analyses)
 
             self.hybrid_default_config = HybridConfig([])
             self.hybrid = [HybridConfig(['omnivore']),
@@ -83,8 +83,8 @@ class HybridExperiment(BaseExperiment):
     
     def __init__(self, dataset):
         super().__init__()
-        self.paths = HybridExperiment.Paths(self.experiment, self.identifier)
-        self.dataset = HybridExperiment.DBpedia(self.paths) if dataset == 'dbpedia' else HybridExperiment.Wikidata(self.paths)
+        self.paths = HybridExperimentConfig.Paths(self.experiment, self.identifier)
+        self.dataset = HybridExperimentConfig.DBpedia(self.paths) if dataset == 'dbpedia' else HybridExperimentConfig.Wikidata(self.paths)
 
         # Apply to sklearn.model_selection.train_test_split.
         # Controls the shuffling applied to the data before applying the split.

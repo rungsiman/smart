@@ -27,7 +27,7 @@ class HybridTrainPipeline:
             reversed_labels = self.data.ontology.reverse(labels, level + 1)
             config = hybrid.primary_config
 
-            bert_config = BertConfig.from_pretrained(config.model)
+            bert_config = BertConfig.from_pretrained(self.experiment.model)
             bert_config.num_labels = len(labels) + 1
 
             # For secondary data, if filter only with (labels, reverse=True), the rest of the data on all levels will still be included.
@@ -40,7 +40,7 @@ class HybridTrainPipeline:
 
             if len(labels) and data_primary.size > 0:
                 data_primary.cap(config.data_size_cap)
-                model = hybrid.primary_classifier.from_pretrained(config.model, config=bert_config)
+                model = hybrid.primary_classifier.from_pretrained(self.experiment.model, config=bert_config)
                 train = hybrid.primary_trainer(self.rank, self.world_size, self.experiment, model, data_primary, labels,
                                                config, self.shared, self.lock, level=level, data_neg=data_secondary)
                 self._train('primary', level, train, data_primary, labels, config)
@@ -51,7 +51,7 @@ class HybridTrainPipeline:
             if data_secondary.size > 0:
                 config = hybrid.secondary_config
                 data_secondary.cap(config.data_size_cap)
-                model = hybrid.secondary_classifier.from_pretrained(config.model, config=bert_config)
+                model = hybrid.secondary_classifier.from_pretrained(self.experiment.model, config=bert_config)
                 train = hybrid.secondary_trainer(self.rank, self.world_size, self.experiment, model, data_secondary,
                                                  config, self.shared, self.lock, level=level)
                 self._train('secondary', level, train, data_secondary, reversed_labels, config)
