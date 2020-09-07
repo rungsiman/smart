@@ -87,7 +87,7 @@ class TrainSequenceClassification(TrainBase, SequenceClassificationBase):
                 if len(tags) > 1:
                     multiple_labels_found += 1
 
-                if self.data_neg is not None:
+                if self.data_neg is not None and (self.config.neg_size is None or i < self.config.neg_size):
                     input_ids.append(neg_qids[i])
                     input_questions.append(self.data.tokenized[self.data_neg.df.iloc[neg_qids[i]]['question']])
                     input_tags.append(len(self.labels))
