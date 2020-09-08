@@ -1,21 +1,33 @@
+import abc
 from transformers import AutoTokenizer
 
 
 class CustomTokenizer(object):
-    def __init__(self, experiment):
-        self.experiment = experiment
-    
+    __metaclass__ = abc.ABCMeta
+
+    def __init__(self, config):
+        self.config = config
+
+    @abc.abstractmethod
     def encode(self, text, max_len):
+        ...
+
+    @abc.abstractmethod
+    def find_max_len(self, texts):
+        ...
+
+    @abc.abstractmethod
+    def save(self, target_location):
         ...
 
 
 class CustomAutoTokenizer(CustomTokenizer):
-    def __init__(self, experiment, location=None):
-        super().__init__(experiment)
-        if experiment.lowercase is not None:
-            self.tokenizer = AutoTokenizer.from_pretrained(location or experiment.model)
+    def __init__(self, config, location=None):
+        super().__init__(config)
+        if config.lowercase is not None:
+            self.tokenizer = AutoTokenizer.from_pretrained(location or config.model)
         else:
-            self.tokenizer = AutoTokenizer.from_pretrained(location or experiment.model, do_lower_case=experiment.lowercase)
+            self.tokenizer = AutoTokenizer.from_pretrained(location or config.model, do_lower_case=config.lowercase)
 
     def encode(self, text, max_len):
         return self.tokenizer.encode_plus(text,

@@ -28,7 +28,7 @@ class ConfigBase:
             descriptions = {}
 
             for attr in dir(config):
-                if attr != '_attrs' and attr != '_obj' and not attr.startswith('__'):
+                if attr not in ('_attrs', '_obj', 'describe', 'prepare') and not attr.startswith('__'):
                     obj = getattr(config, attr)
 
                     if any([isinstance(obj, t) for t in [str, bool, int, float]]) or obj is None:
@@ -62,8 +62,6 @@ class ClassConfigBase:
 
 class ExperimentConfigBase(ConfigBase):
     seed = 42
-    model = 'bert-base-uncased'
-    lowercase = True
 
     # Distributed computing
     ddp_master_address = '127.0.0.1'
@@ -83,7 +81,37 @@ class ExperimentConfigBase(ConfigBase):
                 os.makedirs(path)
 
 
-class BertModelConfigBase(ConfigBase):
+class BertConfigBase(ConfigBase):
+    optimizer = ClassConfigBase(AdamW, kwargs={
+        'lr': 2e-5,             # Default learning rate: 5e-5
+        'eps': 1e-8})           # Adam's epsilon, default: 1e-6
+    scheduler = ClassConfigBase(LinearScheduleWithWarmup, kwargs={
+        'num_warmup_steps': 0})
+    max_grad_norm = 1.0
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+
+
+class GanConfigBase(ConfigBase):
+    g_noise_size = 100
+
+    class Discriminator(BertConfigBase):
+        ...
+
+    class Generator(BertConfigBase):
+        ...
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.discriminator = GanConfigBase.Discriminator()
+        self.generator = GanConfigBase.Generator()
+
+
+class TrainConfigBase(ConfigBase):
+    model = 'bert-base-uncased'
+    lowercase = True
+
     epochs = 4
     batch_size = 32
     eval_ratio = .1
@@ -95,22 +123,16 @@ class BertModelConfigBase(ConfigBase):
     # The amount of negative examples
     neg_size = 1
 
+    # When using GANs, self.bert configuration will be ignored in favor of self.gan.discriminator.
+    # The discriminator's optimizer and scheduler will be applied to both BERT and the discriminator model.
+    use_gan = False
+
     # Set to True to drop the last incomplete batch, if the dataset size is not divisible
     # by the batch size. If False and the size of dataset is not divisible by the batch size,
     # then the last batch will be smaller.
     drop_last = False
 
-    class Bert(ConfigBase):
-        optimizer = ClassConfigBase(AdamW, kwargs={
-            'lr': 2e-5,             # Default learning rate: 5e-5
-            'eps': 1e-8})           # Adam's epsilon, default: 1e-6
-        scheduler = ClassConfigBase(LinearScheduleWithWarmup, kwargs={
-            'num_warmup_steps': 0})
-        max_grad_norm = 1.0
-
-        def __init__(self, **kwargs):
-            super().__init__(**kwargs)
-
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.bert = BertModelConfigBase.Bert()
+        self.bert = BertConfigBase()
+        self.gan = GanConfigBase()

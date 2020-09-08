@@ -165,4 +165,4 @@ class TrainSequenceClassification(TrainBase, SequenceClassificationBase):
                           drop_last=self.config.drop_last)
 
     def _train_forward(self, batch):
-        return self.model(*tuple(t.cuda(self.rank) for t in batch[1:-1]), labels=batch[-1].cuda(self.rank), return_dict=True).loss
+        return self.model(*tuple(t.cuda(self.rank) for t in batch[1:-1]), labels=batch[-1].cuda(self.rank), return_dict=True)

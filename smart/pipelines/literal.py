@@ -1,5 +1,8 @@
 from transformers import BertConfig
 
+from smart.data.base import Ontology
+from smart.data.tokenizers import CustomAutoTokenizer
+
 
 class LiteralTrainPipeline:
     def __init__(self, rank, world_size, experiment, data, shared, lock):
@@ -14,14 +17,19 @@ class LiteralTrainPipeline:
         labels = self.experiment.labels
         config = self.experiment.dataset.config
 
-        bert_config = BertConfig.from_pretrained(self.experiment.model)
+        bert_config = BertConfig.from_pretrained(config.model)
         bert_config.num_labels = len(labels) + 1
+        bert_config.g_noise_size = config.gan.g_noise_size
+
+        tokenizer = CustomAutoTokenizer(config)
+        ontology = Ontology(self.experiment).tokenize(tokenizer)
+        self.data.tokenize(ontology, tokenizer)
 
         data_literal = self.data.clone().literal
         data_resource = self.data.clone().resource
         data_literal.cap(config.data_size_cap)
 
-        model = self.experiment.dataset.classifier.from_pretrained(self.experiment.model, config=bert_config)
+        model = self.experiment.dataset.classifier.from_pretrained(config.model, config=bert_config)
         train = self.experiment.dataset.trainer(self.rank, self.world_size, self.experiment, model, data_literal, labels, config,
                                                 self.shared, self.lock, data_neg=data_resource)
 

@@ -56,19 +56,18 @@ class TrainBase(StageBase):
         model.cuda(rank)
 
         self.model = DistributedDataParallel(model, device_ids=[rank])
-        self.optimizer = self.config.bert.optimizer.cls(model.parameters(),
-                                                        *self.config.bert.optimizer.args,
-                                                        **self.config.bert.optimizer.kwargs)
 
-        if hasattr(self.optimizer, 'optimizer_'):
-            self.optimizer = self.optimizer.optimizer_
+        if self.config.use_gan:
+            self.optimizer = TrainBase._apply_optimizer(self.model.module.bert, self.config.gan.discriminator.optimizer)
+            self.scheduler = TrainBase._apply_scheduler(self.optimizer, self.config.gan.discriminator.scheduler, num_training_steps)
+            self.d_optimizer = TrainBase._apply_optimizer(self.model.module.classifier.discriminator, self.config.gan.discriminator.optimizer)
+            self.g_optimizer = TrainBase._apply_optimizer(self.model.module.classifier.generator, self.config.gan.generator.optimizer)
+            self.d_scheduler = TrainBase._apply_scheduler(self.d_optimizer, self.config.gan.discriminator.scheduler, num_training_steps)
+            self.g_scheduler = TrainBase._apply_scheduler(self.g_optimizer, self.config.gan.generator.scheduler, num_training_steps)
 
-        self.scheduler = self.config.bert.scheduler.cls(self.optimizer,
-                                                        num_training_steps=num_training_steps,
-                                                        *self.config.bert.scheduler.args,
-                                                        **self.config.bert.scheduler.kwargs)
-        if hasattr(self.scheduler, 'scheduler_'):
-            self.scheduler = self.scheduler.scheduler_
+        else:
+            self.optimizer = TrainBase._apply_optimizer(self.model.module, self.config.bert.optimizer)
+            self.scheduler = TrainBase._apply_scheduler(self.optimizer, self.config.bert.scheduler, num_training_steps)
 
         self.path_output = os.path.join(self.experiment.dataset.output_train, self.identifier)
         self.path_models = os.path.join(self.experiment.dataset.output_models, self.identifier)
@@ -83,8 +82,12 @@ class TrainBase(StageBase):
 
     def __call__(self):
         self.model.train()
-        loss = None
         dist.barrier()
+
+        return self.train() if not self.config.use_gan else self.train_gan()
+
+    def train(self):
+        loss = None
 
         for epoch in range(self.config.epochs):
             accumulated_loss = 0
@@ -95,11 +98,11 @@ class TrainBase(StageBase):
                                 if self.rank == 0 else enumerate(self.train_dataloader)):
                 self.optimizer.zero_grad()
 
-                loss = self._train_forward(batch)
+                loss = self._train_forward(batch).loss
                 loss.backward()
                 accumulated_loss += loss.item()
 
-                clip_grad_norm_(parameters=self.model.parameters(),
+                clip_grad_norm_(parameters=self.model.module.parameters(),
                                 max_norm=self.config.bert.max_grad_norm)
 
                 self.optimizer.step()
@@ -122,6 +125,72 @@ class TrainBase(StageBase):
 
         return self
 
+    def train_gan(self):
+        d_loss, g_loss = None, None
+
+        for epoch in range(self.config.epochs):
+            accumulated_d_loss = 0
+            accumulated_g_loss = 0
+            epoch_start = time.time()
+            self.sampler.set_epoch(epoch)
+
+            for step, batch in (enumerate(tqdm(self.train_dataloader, desc=f'GPU #{self.rank}: Training'))
+                                if self.rank == 0 else enumerate(self.train_dataloader)):
+                # Update BERT and discriminator's parameters with d_loss
+                self.optimizer.zero_grad()
+                self.d_optimizer.zero_grad()
+
+                loss = self._train_forward(batch)
+                d_loss, g_loss = loss.d_loss, loss.g_loss
+                d_loss.backward(retain_graph=True)
+
+                self.optimizer.step()
+                self.scheduler.step()
+
+                self.d_optimizer.step()
+                self.d_scheduler.step()
+
+                clip_grad_norm_(parameters=self.model.module.bert.parameters(),
+                                max_norm=self.config.gan.discriminator.max_grad_norm)
+                clip_grad_norm_(parameters=self.model.module.classifier.discriminator.parameters(),
+                                max_norm=self.config.gan.discriminator.max_grad_norm)
+
+                accumulated_d_loss += d_loss.item()
+
+                # Update generator's parameters with g_loss
+                self.g_optimizer.zero_grad()
+
+                g_loss.backward()
+
+                self.g_optimizer.step()
+                self.g_scheduler.step()
+
+                clip_grad_norm_(parameters=self.model.module.classifier.generator.parameters(),
+                                max_norm=self.config.gan.generator.max_grad_norm)
+
+                accumulated_g_loss += g_loss.item()
+
+            average_d_loss = accumulated_d_loss / len(self.train_dataloader)
+            average_g_loss = accumulated_g_loss / len(self.train_dataloader)
+            training_time = TrainBase._format_time(time.time() - epoch_start)
+
+            if self.rank == 0:
+                status = f'GPU #{self.rank}: Training epoch {epoch + 1} of {self.config.epochs} complete:\n'
+                status += f'.. Average discriminator loss: {average_d_loss}\n'
+                status += f'.. Average generator loss: {average_g_loss}\n'
+                status += f'.. Training time: {training_time}'
+                print(status)
+
+            self.train_records['loss'].append({'d_loss': average_d_loss, 'g_loss': average_g_loss})
+            self.train_records['train_time'].append(training_time)
+
+        self.checkpoint = {'epoch': self.config.epochs - 1, 'model': self.model.state_dict(),
+                           'optimizer': self.optimizer.state_dict(), 'scheduler': self.scheduler.state_dict(),
+                           'd_optimizer': self.d_optimizer.state_dict(), 'd_scheduler': self.d_scheduler.state_dict(), 'd_loss': d_loss,
+                           'g_optimizer': self.g_optimizer.state_dict(), 'g_scheduler': self.g_scheduler.state_dict(), 'g_loss': g_loss}
+
+        return self
+
     def save(self):
         if self.rank == 0:
             now = datetime.datetime.now()
@@ -137,14 +206,15 @@ class TrainBase(StageBase):
             with open(os.path.join(self.path_analyses, 'config.json'), 'w') as writer:
                 writer.write(self.experiment.describe())
 
-            loss = np.array(self.train_records['loss'])
-            plt.plot(loss, label='Training loss')
-            plt.title(f'{self.experiment.experiment}-{self.experiment.identifier}-{self.identifier}')
-            plt.ylabel('Loss')
-            plt.xlabel('Epochs')
-            plt.legend()
-            plt.savefig(os.path.join(self.path_analyses, 'loss.png'), dpi=300)
-            plt.clf()
+            chart_title = f'{self.experiment.experiment}-{self.experiment.identifier}-{self.identifier}'
+
+            if self.config.use_gan:
+                d_loss = np.array([loss['d_loss'] for loss in self.train_records['loss']])
+                g_loss = np.array([loss['g_loss'] for loss in self.train_records['loss']])
+                self._plot_loss(chart_title, 'loss.png', d_loss=d_loss, g_loss=g_loss)
+            else:
+                loss = np.array(self.train_records['loss'])
+                self._plot_loss(chart_title, 'loss.png', loss=loss)
 
         dist.barrier()
         return self
@@ -153,6 +223,20 @@ class TrainBase(StageBase):
         self.train_dataloader = self._build_dataloader(self.train_data)
         self.eval_dataloader = self._build_dataloader(self.eval_data)
         return self
+
+    def _plot_loss(self, title, file_name, loss=None, d_loss=None, g_loss=None):
+        if loss is not None:
+            plt.plot(loss, label='Training loss')
+        else:
+            plt.plot(d_loss, label='Discriminator loss')
+            plt.plot(g_loss, label='Generator loss')
+
+        plt.title(title)
+        plt.ylabel('Loss')
+        plt.xlabel('Epochs')
+        plt.legend()
+        plt.savefig(os.path.join(self.path_analyses, file_name), dpi=300)
+        plt.clf()
 
     def _save_evaluate(self, report, truths, answers):
         with open(os.path.join(self.path_analyses, 'eval_result.txt'), 'w') as writer:
@@ -168,6 +252,17 @@ class TrainBase(StageBase):
             writer.write(ndcg_result)
 
         return self
+
+    @staticmethod
+    def _apply_optimizer(model, config):
+        optimizer = config.cls(model.parameters(), *config.args, **config.kwargs)
+        return optimizer.optimizer_ if hasattr(optimizer, 'optimizer_') else optimizer
+
+    @staticmethod
+    def _apply_scheduler(optimizer, config, num_training_steps):
+        scheduler = config.cls(optimizer, num_training_steps=num_training_steps,
+                               *config.args, **config.kwargs)
+        return scheduler.scheduler_ if hasattr(scheduler, 'scheduler_') else scheduler
 
     @staticmethod
     def _format_time(elapsed):

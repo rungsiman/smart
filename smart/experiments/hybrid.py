@@ -2,7 +2,7 @@ import os
 
 from smart.models.bert import BertForMultipleLabelClassification as BML
 from smart.models.bert import BertForPairedBinaryClassification as BPB
-from smart.experiments.base import ExperimentConfigBase, ConfigBase, BertModelConfigBase as BMC
+from smart.experiments.base import ExperimentConfigBase, ConfigBase, TrainConfigBase as TCB
 from smart.train.multiple_label import TrainMultipleLabelClassification as TML
 from smart.train.paired_binary import TrainPairedBinaryClassification as TPB
 
@@ -10,12 +10,12 @@ from smart.train.paired_binary import TrainPairedBinaryClassification as TPB
 class HybridConfig:
     def __init__(self, labels, primary=None, secondary=None):
         self.labels = labels
-        self.primary_config, self.primary_classifier, self.primary_trainer = primary or (BMC(), BML, TML)
-        self.secondary_config, self.secondary_classifier, self.secondary_trainer = secondary or (BMC(), BPB, TPB)
+        self.primary_config, self.primary_classifier, self.primary_trainer = primary or (TCB(), BML, TML)
+        self.secondary_config, self.secondary_classifier, self.secondary_trainer = secondary or (TCB(), BPB, TPB)
 
 
 class HybridExperimentConfig(ExperimentConfigBase):
-    version = '0.9-aws'
+    version = '0.10-aws'
     experiment = 'bert-hybrid'
     identifier = 'sandbox'
     description = 'Sandbox for testing on AWS'

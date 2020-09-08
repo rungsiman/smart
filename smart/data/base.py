@@ -5,7 +5,7 @@ import re
 
 
 class Ontology:
-    def __init__(self, experiment, tokenizer):
+    def __init__(self, experiment):
         self.labels, self.ids = {}, []
         self.max_level = 0
 
@@ -24,12 +24,15 @@ class Ontology:
                 self.ids.append(item[0])
                 self.max_level = max(self.max_level, int(item[1]))
 
+    def tokenize(self, tokenizer):
         max_len = tokenizer.find_max_len([label['text'] for label in self.labels.values()])
 
         for label in self.labels.values():
             encoded = tokenizer.encode(label['text'], max_len)
             label['input_ids'] = encoded['input_ids']
             label['attention_mask'] = encoded['attention_mask']
+
+        return self
 
     def reverse(self, labels, level=None):
         reversed_labels = list(filter(lambda label: label not in labels, self.labels.keys()))
@@ -43,8 +46,10 @@ class Ontology:
 class DataBase:
     __metaclass__ = abc.ABCMeta
     df = ...
+    ontology = ...
+    tokenizer = ...
 
-    def __init__(self, experiment, ontology, tokenizer, tokenized=None):
+    def __init__(self, experiment, ontology=None, tokenizer=None, tokenized=None):
         self.experiment = experiment
         self.ontology = ontology
         self.tokenizer = tokenizer
@@ -86,8 +91,11 @@ class DataBase:
 
         return self
 
-    def tokenize(self):
+    def tokenize(self, ontology, tokenizer):
+        self.ontology = ontology
+        self.tokenizer = tokenizer
         self.tokenized = {}
+
         max_len_questions = self.tokenizer.find_max_len(self.df.question.values)
 
         for question in self.df.question.values:
@@ -118,21 +126,23 @@ class DataBase:
 
 
 class DataForTrain(DataBase):
-    def __init__(self, experiment, ontology, tokenizer, df=None, tokenized=None):
-        super().__init__(experiment, ontology, tokenizer, tokenized)
+    def __init__(self, experiment, df=None, ontology=None, tokenizer=None, tokenized=None):
+        super().__init__(experiment, ontology=ontology, tokenizer=tokenizer, tokenized=tokenized)
         self.df = pd.read_json(experiment.dataset.input_train) if df is None else df
 
     def clone(self):
-        return DataForTrain(self.experiment, self.ontology, self.tokenizer, df=self.df.copy(), tokenized=self.tokenized)
+        return DataForTrain(self.experiment,  df=self.df.copy(),
+                            ontology=self.ontology, tokenizer=self.tokenizer, tokenized=self.tokenized)
 
 
 class DataForTest(DataBase):
-    def __init__(self, experiment, ontology, tokenizer, df=None, tokenized=None):
-        super().__init__(experiment, ontology, tokenizer, tokenized)
+    def __init__(self, experiment, df=None, ontology=None, tokenizer=None, tokenized=None):
+        super().__init__(experiment, ontology=ontology, tokenizer=tokenizer, tokenized=tokenized)
         self.df = pd.read_json(experiment.dataset.input_test) if df is None else df
 
     def clone(self):
-        return DataForTest(self.experiment, self.ontology, self.tokenizer, df=self.df.copy(), tokenized=self.tokenized)
+        return DataForTest(self.experiment, df=self.df.copy(),
+                           ontology=self.ontology, tokenizer=self.tokenizer, tokenized=self.tokenized)
 
     def blind(self):
         self.df = self.df.drop(['category', 'type'])

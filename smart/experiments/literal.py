@@ -1,12 +1,12 @@
 import os
-from transformers import BertForSequenceClassification
 
-from smart.experiments.base import ExperimentConfigBase, ConfigBase, BertModelConfigBase
-from smart.train.sequence import TrainSequenceClassification
+from smart.experiments.base import ExperimentConfigBase, ConfigBase, TrainConfigBase as TCB
+from smart.models.bert import BertForMultipleLabelClassification as BML
+from smart.train.multiple_label import TrainMultipleLabelClassification as TML
 
 
 class LiteralExperimentConfig(ExperimentConfigBase):
-    version = '0.4-aws'
+    version = '0.5-aws'
     experiment = 'bert-literal'
     identifier = 'sandbox'
     description = 'Sandbox for testing on AWS'
@@ -40,9 +40,9 @@ class LiteralExperimentConfig(ExperimentConfigBase):
 
             LiteralExperimentConfig.prepare(self.output_root, self.output_train, self.output_test, self.output_models, self.output_analyses)
 
-            self.config = BertModelConfigBase()
-            self.classifier = BertForSequenceClassification
-            self.trainer = TrainSequenceClassification
+            self.config = TCB()
+            self.classifier = BML
+            self.trainer = TML
 
     class Wikidata(ConfigBase):
         name = 'wikidata'
@@ -61,9 +61,9 @@ class LiteralExperimentConfig(ExperimentConfigBase):
 
             LiteralExperimentConfig.prepare(self.output_root, self.output_train, self.output_test, self.output_models, self.output_analyses)
 
-            self.config = BertModelConfigBase()
-            self.classifier = BertForSequenceClassification
-            self.trainer = TrainSequenceClassification
+            self.config = TCB()
+            self.classifier = BML
+            self.trainer = TML
 
     def __init__(self, dataset):
         super().__init__()

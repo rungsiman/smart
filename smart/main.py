@@ -2,8 +2,7 @@ import argparse
 import torch
 import torch.multiprocessing as mp
 
-from smart.data.base import Ontology, DataForTrain, DataForTest
-from smart.data.tokenizers import CustomAutoTokenizer
+from smart.data.base import DataForTrain, DataForTest
 from smart.dist.multiprocessing import init_process
 from smart.experiments.hybrid import HybridExperimentConfig
 from smart.experiments.literal import LiteralExperimentConfig
@@ -18,11 +17,8 @@ def process(rank, world_size, experiment, stage, pipeline, shared, lock):
     torch.cuda.set_device(rank)
     init_process(rank, world_size, experiment)
 
-    tokenizer = CustomAutoTokenizer(experiment)
-    ontology = Ontology(experiment, tokenizer)
-
     if stage == 'train':
-        data = DataForTrain(experiment, ontology, tokenizer).clean().tokenize()
+        data = DataForTrain(experiment).clean()
 
         if pipeline == 'literal':
             train = LiteralTrainPipeline(rank, world_size, experiment, data, shared, lock)
@@ -32,7 +28,7 @@ def process(rank, world_size, experiment, stage, pipeline, shared, lock):
         train()
 
     else:
-        data = DataForTest(experiment, ontology, tokenizer).clean().blind().tokenize()
+        data = DataForTest(experiment).clean().blind()
         ...
 
 

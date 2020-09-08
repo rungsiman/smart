@@ -4,6 +4,7 @@ import sys
 import time
 import torch
 import torch.distributed as dist
+import torch.nn.functional as F
 from sklearn.metrics import classification_report
 from sklearn.model_selection import train_test_split
 from torch.utils.data import TensorDataset, DataLoader
@@ -112,7 +113,7 @@ class TrainPairedBinaryClassification(TrainBase, PairedBinaryClassificationBase)
         for step, batch in (enumerate(tqdm(self.eval_dataloader, desc=f'GPU #{self.rank}: Evaluating'))
                             if self.rank == 0 else enumerate(self.eval_dataloader)):
             logits = self.model(*tuple(t.cuda(self.rank) for t in batch[2:-1]), return_dict=True).logits
-            preds = torch.argmax(logits, dim=1).detach().cpu().numpy().tolist()
+            preds = (F.sigmoid(logits) >= 0.5).long().detach().cpu().numpy().tolist()
 
             with self.lock:
                 evaluation = self.shared['evaluation']
@@ -164,4 +165,4 @@ class TrainPairedBinaryClassification(TrainBase, PairedBinaryClassificationBase)
                           drop_last=self.config.drop_last)
 
     def _train_forward(self, batch):
-        return self.model(*tuple(t.cuda(self.rank) for t in batch[2:-1]), labels=batch[-1].cuda(self.rank), return_dict=True).loss
+        return self.model(*tuple(t.cuda(self.rank) for t in batch[2:-1]), labels=batch[-1].cuda(self.rank), return_dict=True)
