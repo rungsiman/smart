@@ -3,6 +3,7 @@ import os
 from datetime import datetime
 from transformers import AdamW
 
+from smart.experiments.bert import TrainConfigMixin
 from smart.utils.schedulers import LinearScheduleWithWarmup
 
 
@@ -10,7 +11,7 @@ class ConfigBase:
     """Skeleton class"""
     _obj = False
 
-    def __init__(self, **kwargs):
+    def __init__(self, *args, **kwargs):
         self._obj = True
 
         for key, value in kwargs.items():
@@ -18,30 +19,27 @@ class ConfigBase:
 
     @staticmethod
     def _attrs(config):
-        if (str(config).startswith('<class') and not getattr(config, '_obj', False)) or str(config).startswith('<function'):
+        if str(config).startswith('<function'):
+            return str(config)
+
+        elif str(config).startswith('<class') and not getattr(config, '_obj', False):
             return str(config)
 
         elif any([isinstance(config, t) for t in [str, bool, int, float]]) or config is None:
             return config
+
+        elif isinstance(config, list):
+            return [ConfigBase._attrs(item) for item in config]
+
+        elif isinstance(config, dict):
+            return {key: ConfigBase._attrs(value) for key, value in config.items()}
 
         else:
             descriptions = {}
 
             for attr in dir(config):
                 if attr not in ('_attrs', '_obj', 'describe', 'prepare') and not attr.startswith('__'):
-                    obj = getattr(config, attr)
-
-                    if any([isinstance(obj, t) for t in [str, bool, int, float]]) or obj is None:
-                        descriptions[attr] = getattr(config, attr)
-
-                    elif isinstance(obj, list):
-                        descriptions[attr] = [ConfigBase._attrs(item) for item in obj]
-
-                    elif isinstance(obj, dict):
-                        descriptions[attr] = {key: ConfigBase._attrs(value) for key, value in obj.items()}
-
-                    else:
-                        descriptions[attr] = ConfigBase._attrs(obj)
+                    descriptions[attr] = ConfigBase._attrs(getattr(config, attr))
 
             return descriptions
 
@@ -70,8 +68,22 @@ class ExperimentConfigBase(ConfigBase):
     # If set to None, the worker processes will utilize all available GPUs
     num_gpu = None
 
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+    class Dataset(ConfigBase):
+        name = ...
+
+        def __init__(self, paths, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+
+            self.output_root = os.path.join(paths.output, self.name)
+            self.output_train = os.path.join(self.output_root, 'io')
+            self.output_test = os.path.join(self.output_root, 'io')
+            self.output_models = os.path.join(self.output_root, 'models')
+            self.output_analyses = os.path.join(self.output_root, 'analyses')
+
+            ExperimentConfigBase.prepare(self.output_root, self.output_train, self.output_test, self.output_models, self.output_analyses)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
     @staticmethod
@@ -88,28 +100,30 @@ class BertConfigBase(ConfigBase):
     scheduler = ClassConfigBase(LinearScheduleWithWarmup, kwargs={
         'num_warmup_steps': 0})
     max_grad_norm = 1.0
+    hidden_dropout_prob = .1
 
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+    # Dropout prob for DistilBert
+    seq_classif_dropout = .2
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
 
 class GanConfigBase(ConfigBase):
-    g_noise_size = 100
-
     class Discriminator(BertConfigBase):
-        ...
+        pass
 
     class Generator(BertConfigBase):
-        ...
+        noise_size = 100
 
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.discriminator = GanConfigBase.Discriminator()
         self.generator = GanConfigBase.Generator()
 
 
-class TrainConfigBase(ConfigBase):
-    model = 'bert-base-uncased'
+class TrainConfigBase(TrainConfigMixin, ConfigBase):
+    model = 'distilbert-base-uncased'
     lowercase = True
 
     epochs = 4
@@ -125,14 +139,15 @@ class TrainConfigBase(ConfigBase):
 
     # When using GANs, self.bert configuration will be ignored in favor of self.gan.discriminator.
     # The discriminator's optimizer and scheduler will be applied to both BERT and the discriminator model.
-    use_gan = False
+    use_gan = True
 
     # Set to True to drop the last incomplete batch, if the dataset size is not divisible
     # by the batch size. If False and the size of dataset is not divisible by the batch size,
     # then the last batch will be smaller.
     drop_last = False
 
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+    def __init__(self, *, trainer, model=model, use_gan=use_gan, labels=None, **kwargs):
+        super().__init__(trainer=trainer, model=model, use_gan=use_gan, **kwargs)
         self.bert = BertConfigBase()
         self.gan = GanConfigBase()
+        self.labels = labels

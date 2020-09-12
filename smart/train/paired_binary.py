@@ -1,60 +1,21 @@
-import abc
 import random
 import sys
 import time
 import torch
 import torch.distributed as dist
-import torch.nn.functional as F
 from sklearn.metrics import classification_report
 from sklearn.model_selection import train_test_split
 from torch.utils.data import TensorDataset, DataLoader
 from torch.utils.data.distributed import DistributedSampler
 from tqdm import tqdm
 
+from smart.mixins.paired_binary import PairedBinaryClassificationMixin
 from smart.train.base import TrainBase
 
 
-class PairedBinaryClassificationBase(object):
-    __metaclass__ = abc.ABCMeta
-    data = ...
-
-    @abc.abstractmethod
-    def _get_data(self, y_ids):
-        ...
-
-    def _build_answers(self, y_ids, y_lids, y_pred):
-        answers = self._get_data(y_ids)
-
-        for answer in answers:
-            answer['type'] = []
-
-            for qid, lid, pred in zip(y_ids, y_lids, y_pred):
-                if (qid == answer['id'] or 'dbpedia_' + str(qid) == answer['id']) and pred == 1:
-                    answer['type'].append(self.data.ontology.ids[lid])
-
-            if len(answer['type']) == 0:
-                answer['category'] = 'resource'
-
-        return answers
-
-
-class TrainPairedBinaryClassification(TrainBase, PairedBinaryClassificationBase):
-    class Data:
-        class Tokens:
-            def __init__(self, items):
-                self.ids = torch.cat([item['input_ids'] for item in items], dim=0)
-                self.masks = torch.cat([item['attention_mask'] for item in items], dim=0)
-
-        def __init__(self, ids, lids, questions, labels, tags):
-            self.ids = torch.tensor(ids)
-            self.lids = torch.tensor(lids)
-            self.questions = TrainPairedBinaryClassification.Data.Tokens(questions)
-            self.labels = TrainPairedBinaryClassification.Data.Tokens(labels)
-            self.tags = torch.tensor(tags)
-
-    def __init__(self, rank, world_size, experiment, model, data, config, shared, lock, level=None):
-        self.identifier = f'level-{level + 1}-paired-binary' if level is not None else 'paired-binary'
-        super().__init__(rank, world_size, experiment, model, data, config, shared, lock)
+class TrainPairedBinaryClassification(PairedBinaryClassificationMixin, TrainBase):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
     def pack(self):
         ids = self.data.df.id.values
@@ -94,18 +55,22 @@ class TrainPairedBinaryClassification(TrainBase, PairedBinaryClassificationBase)
         # The tokenizer returns dictionaries containing id and mask tensors, among others.
         # These dictionaries need to be decomposed and tensors reassembled
         # before the outputs can be fed into TensorDataset
-        self.train_data = TrainPairedBinaryClassification.Data(train_ids, train_lids, train_questions, train_labels, train_tags)
-        self.eval_data = TrainPairedBinaryClassification.Data(eval_ids, eval_lids, eval_questions, eval_labels, eval_tags)
+        self.train_data = TrainPairedBinaryClassification.Data(train_ids, train_lids, train_questions, train_labels, tags=train_tags)
+        self.eval_data = TrainPairedBinaryClassification.Data(eval_ids, eval_lids, eval_questions, eval_labels, tags=eval_tags)
         return self
 
     def evaluate(self):
+        if self.config.eval_ratio is None or self.config.eval_ratio == 0:
+            print(f'GPU #{self.rank}: Skipped evaluation.')
+            return self
+
         self.model.eval()
 
         if self.rank == 0:
             with self.lock:
                 self.shared['evaluation'] = [{'y_ids': [], 'y_lids': [], 'y_true': [], 'y_pred': []} for _ in range(self.world_size)]
 
-        print(f'GPU #{self.rank}: Started evaluation')
+        print(f'GPU #{self.rank}: Started evaluation.')
         sys.stdout.flush()
         dist.barrier()
         eval_start = time.time()
@@ -113,7 +78,7 @@ class TrainPairedBinaryClassification(TrainBase, PairedBinaryClassificationBase)
         for step, batch in (enumerate(tqdm(self.eval_dataloader, desc=f'GPU #{self.rank}: Evaluating'))
                             if self.rank == 0 else enumerate(self.eval_dataloader)):
             logits = self.model(*tuple(t.cuda(self.rank) for t in batch[2:-1]), return_dict=True).logits
-            preds = (F.sigmoid(logits) >= 0.5).long().detach().cpu().numpy().tolist()
+            preds = (torch.sigmoid(logits) >= 0.5).long().detach().cpu().numpy().tolist()
 
             with self.lock:
                 evaluation = self.shared['evaluation']
@@ -124,7 +89,7 @@ class TrainPairedBinaryClassification(TrainBase, PairedBinaryClassificationBase)
                 self.shared['evaluation'] = evaluation
 
         pred_size = len(self.shared['evaluation'][self.rank]['y_pred'])
-        print(f'GPU #{self.rank}: Predictions for evaluation complete')
+        print(f'GPU #{self.rank}: Predictions for evaluation complete.')
         print(f'.. Prediction size: {pred_size}')
         dist.barrier()
         self.train_records['eval_time'] = TrainPairedBinaryClassification._format_time(time.time() - eval_start)
@@ -138,12 +103,11 @@ class TrainPairedBinaryClassification(TrainBase, PairedBinaryClassificationBase)
                 y_true += self.shared['evaluation'][i]['y_true']
                 y_pred += self.shared['evaluation'][i]['y_pred']
 
-            report = classification_report(y_true, y_pred, digits=4)
-            truths = self._get_data(y_ids)
-            answers = self._build_answers(y_ids, y_lids, y_pred)
+            self.eval_report = classification_report(y_true, y_pred, digits=4)
+            self.eval_truths = self._get_data(y_ids)
+            self.eval_answers = self._build_answers(y_ids, y_lids, y_pred)
 
-            self._save_evaluate(report, truths, answers)
-            print(report)
+            print(self.eval_report)
 
         return self
 

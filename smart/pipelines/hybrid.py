@@ -1,91 +1,146 @@
 import json
 import os
-from transformers import BertConfig
 
 from smart.data.base import Ontology
 from smart.data.tokenizers import CustomAutoTokenizer
+from smart.pipelines.base import PipelineBase
+from smart.utils.configs import override
 
 
-class HybridTrainPipeline:
-    def __init__(self, rank, world_size, experiment, data, shared, lock):
-        self.rank = rank
-        self.world_size = world_size
-        self.experiment = experiment
-        self.data = data
-        self.shared = shared
-        self.lock = lock
-
+class HybridTrainPipeline(PipelineBase):
     def __call__(self):
         self.data = self.data.resource
         pipeline_records = []
-        ontology = Ontology(self.experiment)
+        ontology = Ontology(self.experiment.dataset.input_ontology)
 
-        for level in range(ontology.max_level):
-            if level < len(self.experiment.dataset.hybrid):
-                hybrid = self.experiment.dataset.hybrid[level]
-            else:
-                hybrid = self.experiment.dataset.hybrid_default_config
+        for level in range(1, ontology.max_level + 1):
+            processed_labels = []
 
-            config = hybrid.primary_config
-            labels = hybrid.labels
-            reversed_labels = ontology.reverse(labels, level + 1)
+            if level <= len(self.experiment.dataset.hybrid):
+                for index, config in enumerate(self.experiment.dataset.hybrid[level - 1]):
+                    self._process(level, index, config, config.labels, ontology, processed_labels, pipeline_records, set_num_labels=True)
 
-            tokenizer = CustomAutoTokenizer(config)
-            ontology.tokenize(tokenizer)
-            self.data.tokenize(ontology, tokenizer)
+            config = self.experiment.dataset.hybrid_default
+            labels_reversed = ontology.reverse(processed_labels, level)
+            self._process(level, 'default', config, labels_reversed, ontology, processed_labels, pipeline_records)
 
-            bert_config = BertConfig.from_pretrained(config.model)
+        json.dump(pipeline_records, open(os.path.join(self.experiment.dataset.output_analyses, 'pipeline_train_records.json'), 'w'), indent=4)
+
+    def _process(self, level, index, config, labels, ontology, processed_labels, pipeline_records, set_num_labels=False):
+        labels_reversed = ontology.reverse(labels, level)
+        processed_labels += labels
+
+        tokenizer = CustomAutoTokenizer(config)
+        ontology.tokenize(tokenizer)
+        self.data.tokenize(ontology, tokenizer)
+
+        bert_config = config.bert_config.from_pretrained(config.model)
+        override(bert_config, config)
+
+        if set_num_labels:
             bert_config.num_labels = len(labels) + 1
-            bert_config.g_noise_size = config.gan.g_noise_size
 
-            # For secondary data, if filter only with (labels, reverse=True), the rest of the data on all levels will still be included.
-            # If filter only with (reversed_labels), questions having both primary and secondary types will be included.
-            data_primary = self.data.clone().filter(labels)
-            data_secondary = self.data.clone().filter(labels, reverse=True).filter(reversed_labels)
+        # For reversed data, if filter only with (labels, reverse=True), the rest of the data on all levels will still be included.
+        # If filter only with (labels_reversed), questions having both primary and secondary types will be included.
+        data_hybrid = self.data.clone().filter(labels)
+        data_reversed = self.data.clone().filter(labels, reverse=True).filter(labels_reversed)
 
-            pipeline_records.append({'primary': {'data': data_primary.size, 'labels': len(labels)},
-                                     'secondary': {'data': data_secondary.size, 'labels': len(reversed_labels)}})
+        if len(labels) and data_hybrid.size > 0:
+            data_hybrid.cap(config.data_size_cap)
+            model = config.classifier.from_pretrained(config.model, config=bert_config)
+            train = config.trainer(self.rank, self.world_size, self.experiment, model, data_hybrid, labels,
+                                   config, self.shared, self.lock, level=level, data_neg=data_reversed)
 
-            if len(labels) and data_primary.size > 0:
-                data_primary.cap(config.data_size_cap)
-                model = hybrid.primary_classifier.from_pretrained(config.model, config=bert_config)
-                train = hybrid.primary_trainer(self.rank, self.world_size, self.experiment, model, data_primary, labels,
-                                               config, self.shared, self.lock, level=level, data_neg=data_secondary)
-                self._train('primary', level, train, data_primary, labels, config)
+            status = f'GPU #{self.rank}: Training #{index} "{train.name}" on level {level}.\n'
+            status += f'.. Type count: {len(labels)}\n'
+            status += f'.. Data size: {data_hybrid.size} of {self.data.size}\n'
+            status += f'.. Negative data size: {data_reversed.size}'
 
-            elif self.rank == 0:
-                print(f'GPU #{self.rank}: Skipped primary classification on level {level + 1}')
+            if config.data_size_cap is not None:
+                status += f' (Data cap applied)'
 
-            if data_secondary.size > 0:
-                config = hybrid.secondary_config
-                data_secondary.cap(config.data_size_cap)
+            if self.rank == 0:
+                print(status)
 
-                tokenizer = CustomAutoTokenizer(config)
-                ontology.tokenize(tokenizer)
-                self.data.tokenize(ontology, tokenizer)
+            train().evaluate().save()
 
-                bert_config = BertConfig.from_pretrained(config.model)
-                bert_config.g_noise_size = config.gan.g_noise_size
+            pipeline_records.append({'level': level, 'index': index, 'classification': train.name,
+                                     'active': {'data': data_hybrid.size, 'data_neg': data_reversed.size, 'labels': len(labels)},
+                                     'reverse': {'data': data_reversed.size, 'data_neg': data_reversed.size, 'labels': len(labels_reversed)}})
 
-                model = hybrid.secondary_classifier.from_pretrained(config.model, config=bert_config)
-                train = hybrid.secondary_trainer(self.rank, self.world_size, self.experiment, model, data_secondary,
-                                                 config, self.shared, self.lock, level=level)
-                self._train('secondary', level, train, data_secondary, reversed_labels, config)
+        elif self.rank == 0:
+            print(f'GPU #{self.rank}: Skipped training #{index} on level {level}')
 
-            elif self.rank == 0:
-                print(f'GPU #{self.rank}: Skipped secondary classification on level {level + 1}')
 
-        json.dump(pipeline_records, open(os.path.join(self.experiment.dataset.output_analyses, 'pipeline_records.json'), 'w'), indent=4)
+class HybridTestPipeline(PipelineBase):
+    def __call__(self):
+        pipeline_records = []
+        ontology = Ontology(self.experiment.dataset.input_ontology)
 
-    def _train(self, identifier, level, train, data, labels, config):
-        status = f'GPU #{self.rank}: Processing {identifier} classification on level {level + 1}\n'
-        status += f'.. Type count: {len(labels)}\n'
-        status += f'.. Data size: {data.size} of {self.data.size}'
+        for level in range(1, ontology.max_level + 1):
+            if level <= len(self.experiment.dataset.hybrid):
+                processed_labels = []
 
-        if config.data_size_cap is not None:
-            status += f' (Data cap applied)'
+                for index, config in enumerate(self.experiment.dataset.hybrid[level - 1]):
+                    self._process(level, index, config, config.labels, ontology, pipeline_records, processed_labels)
+
+                config = self.experiment.dataset.hybrid_default
+                labels_reversed = ontology.reverse(processed_labels, level)
+                self._process(level, 'default', config, labels_reversed, ontology, pipeline_records, processed_labels)
 
         if self.rank == 0:
+            self.data.save(os.path.join(self.experiment.paths.final, 'answers.json'))
+            json.dump(pipeline_records, open(os.path.join(self.experiment.dataset.output_analyses, 'pipeline_test_records.json'), 'w'), indent=4)
+
+    def _process(self, level, index, config, labels, ontology, pipeline_records, processed_labels, test_remaining_label=False):
+        identifier = config.tester.resolve_identifier(level)
+        labels_parents = ontology.parents(ontology.reverse(processed_labels, level) if test_remaining_label else labels)
+        path_models = os.path.join(self.experiment.dataset.output_models, identifier)
+
+        bert_config = config.bert_config.from_pretrained(path_models)
+        override(bert_config, config)
+
+        tokenizer = CustomAutoTokenizer(config, path_models)
+        ontology = Ontology(self.experiment.dataset.input_ontology).tokenize(tokenizer)
+        self.data.tokenize(ontology, tokenizer)
+
+        data_test = self.data.clone() if level == 1 else self.data.clone().filter(labels_parents)
+
+        if len(labels) and data_test.size > 0:
+            model = config.classifier.from_pretrained(config.model, config=bert_config)
+            test = config.tester(self.rank, self.world_size, self.experiment, model, data_test, labels, config,
+                                 self.shared, self.lock, level=level)
+
+            status = f'GPU #{self.rank}: Testing #{index} "{test.name}" on level {level}.\n'
+            status += f'.. Type count: {len(labels)}\n'
+            status += f'.. Data size: {data_test.size} of {self.data.size}'
+
+            if config.data_size_cap is not None:
+                status += f' (Data cap applied)'
+
             print(status)
 
-        train().evaluate().save()
+            test()
+
+            if not test.skipped:
+                test.data.assign_answers(test.answers)
+                test.save()
+
+                num_existing_answers = self.data.count_answers()
+                self.data.assign_answers(test.answers)
+
+                if self.rank == 0:
+                    status = f'GPU #{self.rank}: Testing #{index} "{test.name}" on level {level} complete.\n'
+                    status += f'.. Answer count: {self.data.count_answers() - num_existing_answers}\n'
+                    status += f'.. Accumulated answer count: {self.data.count_answers()}'
+                    print(status)
+
+                pipeline_records.append({'level': level, 'index': index, 'classification': test.name,
+                                         'answer_count': self.data.count_answers() - num_existing_answers,
+                                         'accumulated_answer_count': self.data.count_answers()})
+
+            elif self.rank == 0:
+                print(f'GPU #{self.rank}: Skipped testing #{index} on level {level} (No eligible data)')
+
+        elif self.rank == 0:
+            print(f'GPU #{self.rank}: Skipped testing #{index} on level {level}')

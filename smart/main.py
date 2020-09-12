@@ -6,8 +6,8 @@ from smart.data.base import DataForTrain, DataForTest
 from smart.dist.multiprocessing import init_process
 from smart.experiments.hybrid import HybridExperimentConfig
 from smart.experiments.literal import LiteralExperimentConfig
-from smart.pipelines.hybrid import HybridTrainPipeline
-from smart.pipelines.literal import LiteralTrainPipeline
+from smart.pipelines.hybrid import HybridTrainPipeline, HybridTestPipeline
+from smart.pipelines.literal import LiteralTrainPipeline, LiteralTestPipeline
 from smart.utils.devices import describe_devices
 from smart.utils.reproducibility import set_seed
 
@@ -29,7 +29,13 @@ def process(rank, world_size, experiment, stage, pipeline, shared, lock):
 
     else:
         data = DataForTest(experiment).clean().blind()
-        ...
+
+        if pipeline == 'literal':
+            test = LiteralTestPipeline(rank, world_size, experiment, data, shared, lock)
+        else:
+            test = HybridTestPipeline(rank, world_size, experiment, data, shared, lock)
+
+        test()
 
 
 def run(stage, pipeline, dataset):

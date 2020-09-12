@@ -22,7 +22,6 @@ class NDCGConfig:
 
 
 class StageBase(object):
-    __metaclass__ = abc.ABCMeta
     data = ...
 
     def _get_data(self, y_ids):
@@ -33,15 +32,19 @@ class StageBase(object):
 
 
 class TrainBase(StageBase):
+    name = ...
     path_output, path_models, path_analyses = ..., ..., ...
     train_data, train_dataloader = ..., ...
     eval_data, eval_dataloader = ..., ...
+    eval_report, eval_truths, eval_answers = None, None, None
     train_records = ...
     checkpoint = ...
     sampler = ...
     identifier = ...
 
-    def __init__(self, rank, world_size, experiment, model, data, config, shared, lock):
+    def __init__(self, rank, world_size, experiment, model, data, labels, config, shared, lock, data_neg=None, *args, **kwargs):
+        super().__init__()
+
         self.train_records = {'loss': [], 'train_time': [], 'eval_time': None}
         self.rank = rank
         self.world_size = world_size
@@ -50,6 +53,12 @@ class TrainBase(StageBase):
         self.config = config
         self.lock = lock
         self.shared = shared
+        self.labels = labels
+        self.data_neg = data_neg
+
+        self.path_output = os.path.join(self.experiment.dataset.output_train, self.identifier)
+        self.path_models = os.path.join(self.experiment.dataset.output_models, self.identifier)
+        self.path_analyses = os.path.join(self.experiment.dataset.output_analyses, self.identifier)
 
         self.pack().build_dataloaders()
         num_training_steps = len(self.train_dataloader) * config.epochs
@@ -58,8 +67,8 @@ class TrainBase(StageBase):
         self.model = DistributedDataParallel(model, device_ids=[rank])
 
         if self.config.use_gan:
-            self.optimizer = TrainBase._apply_optimizer(self.model.module.bert, self.config.gan.discriminator.optimizer)
-            self.scheduler = TrainBase._apply_scheduler(self.optimizer, self.config.gan.discriminator.scheduler, num_training_steps)
+            self.optimizer = TrainBase._apply_optimizer(getattr(self.model.module, self.model.module.base_model_prefix), self.config.bert.optimizer)
+            self.scheduler = TrainBase._apply_scheduler(self.optimizer, self.config.bert.scheduler, num_training_steps)
             self.d_optimizer = TrainBase._apply_optimizer(self.model.module.classifier.discriminator, self.config.gan.discriminator.optimizer)
             self.g_optimizer = TrainBase._apply_optimizer(self.model.module.classifier.generator, self.config.gan.generator.optimizer)
             self.d_scheduler = TrainBase._apply_scheduler(self.d_optimizer, self.config.gan.discriminator.scheduler, num_training_steps)
@@ -68,10 +77,6 @@ class TrainBase(StageBase):
         else:
             self.optimizer = TrainBase._apply_optimizer(self.model.module, self.config.bert.optimizer)
             self.scheduler = TrainBase._apply_scheduler(self.optimizer, self.config.bert.scheduler, num_training_steps)
-
-        self.path_output = os.path.join(self.experiment.dataset.output_train, self.identifier)
-        self.path_models = os.path.join(self.experiment.dataset.output_models, self.identifier)
-        self.path_analyses = os.path.join(self.experiment.dataset.output_analyses, self.identifier)
 
         if rank == 0:
             for path in [self.path_output, self.path_models, self.path_analyses]:
@@ -150,8 +155,8 @@ class TrainBase(StageBase):
                 self.d_optimizer.step()
                 self.d_scheduler.step()
 
-                clip_grad_norm_(parameters=self.model.module.bert.parameters(),
-                                max_norm=self.config.gan.discriminator.max_grad_norm)
+                clip_grad_norm_(parameters=getattr(self.model.module, self.model.module.base_model_prefix).parameters(),
+                                max_norm=self.config.bert.max_grad_norm)
                 clip_grad_norm_(parameters=self.model.module.classifier.discriminator.parameters(),
                                 max_norm=self.config.gan.discriminator.max_grad_norm)
 
@@ -199,7 +204,7 @@ class TrainBase(StageBase):
             self.data.tokenizer.save(self.path_models)
             json.dump(self.train_records, open(os.path.join(self.path_analyses, 'train_records.json'), 'w'))
 
-            with open(os.path.join(self.path_analyses, 'train_env.txt'), 'w') as writer:
+            with open(os.path.join(self.path_analyses, 'train_records.txt'), 'w') as writer:
                 writer.write(f'Timestamp: {now.strftime("%Y-%m-%d %H:%M:%S")}\n')
                 writer.write(f'Number of GPUs: {self.world_size}')
 
@@ -216,7 +221,32 @@ class TrainBase(StageBase):
                 loss = np.array(self.train_records['loss'])
                 self._plot_loss(chart_title, 'loss.png', loss=loss)
 
+            if self.eval_report is not None:
+                self._save_evaluate()
+            elif self.rank == 0:
+                print(f'GPU #{self.rank}: Skipped saving evaluation results.')
+
         dist.barrier()
+        return self
+
+    def _save_evaluate(self):
+        with open(os.path.join(self.path_analyses, 'eval_result.txt'), 'w') as writer:
+            writer.write(self.eval_report)
+
+        json.dump(self.eval_truths, open(os.path.join(self.path_output, 'eval_truth.json'), 'w'), indent=4)
+        json.dump(self.eval_answers, open(os.path.join(self.path_output, 'eval_answers.json'), 'w'), indent=4)
+
+        try:
+            ndcg_config = NDCGConfig(self.experiment, self.path_output)
+            ndcg_result = ndcg_evaluate(ndcg_config)
+
+            with open(os.path.join(self.path_analyses, 'ndcg_result.txt'), 'w') as writer:
+                writer.write(ndcg_result)
+
+        except ZeroDivisionError:
+            if self.rank == 0:
+                print(f'GPU #{self.rank}: Skipped NDCG evaluation (division by zero).')
+
         return self
 
     def build_dataloaders(self):
@@ -237,21 +267,6 @@ class TrainBase(StageBase):
         plt.legend()
         plt.savefig(os.path.join(self.path_analyses, file_name), dpi=300)
         plt.clf()
-
-    def _save_evaluate(self, report, truths, answers):
-        with open(os.path.join(self.path_analyses, 'eval_result.txt'), 'w') as writer:
-            writer.write(report)
-
-        json.dump(truths, open(os.path.join(self.path_output, 'eval_truth.json'), 'w'), indent=4)
-        json.dump(answers, open(os.path.join(self.path_output, 'eval_answers.json'), 'w'), indent=4)
-
-        ndcg_config = NDCGConfig(self.experiment, self.path_output)
-        ndcg_result = ndcg_evaluate(ndcg_config)
-
-        with open(os.path.join(self.path_analyses, 'ndcg_result.txt'), 'w') as writer:
-            writer.write(ndcg_result)
-
-        return self
 
     @staticmethod
     def _apply_optimizer(model, config):

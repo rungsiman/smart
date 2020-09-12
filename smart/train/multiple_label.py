@@ -1,61 +1,22 @@
-import abc
 import numpy as np
 import random
 import sys
 import time
 import torch
 import torch.distributed as dist
-import torch.nn.functional as F
 from sklearn.metrics import classification_report
 from sklearn.model_selection import train_test_split
 from torch.utils.data import TensorDataset, DataLoader
 from torch.utils.data.distributed import DistributedSampler
 from tqdm import tqdm
 
+from smart.mixins.multiple_label import MultipleLabelClassificationMixin
 from smart.train.base import TrainBase
 
 
-class MultipleLabelClassificationBase(object):
-    __metaclass__ = abc.ABCMeta
-    labels = ...
-
-    class Data:
-        class Tokens:
-            def __init__(self, items):
-                self.ids = torch.cat([item['input_ids'] for item in items], dim=0)
-                self.masks = torch.cat([item['attention_mask'] for item in items], dim=0)
-
-        def __init__(self, ids, questions, tags):
-            self.ids = torch.tensor(ids)
-            self.questions = TrainMultipleLabelClassification.Data.Tokens(questions)
-            self.tags = torch.tensor(tags)
-
-    @abc.abstractmethod
-    def _get_data(self, y_ids):
-        ...
-
-    def _build_answers(self, y_ids, y_pred):
-        answers = self._get_data(y_ids)
-
-        for answer in answers:
-            answer['type'] = []
-
-            for qid, preds in zip(y_ids, y_pred):
-                if qid == answer['id'] or 'dbpedia_' + str(qid) == answer['id']:
-                    answer['type'] = [self.labels[i] for i in range(len(preds)) if i < len(self.labels) and preds[i] == 1]
-
-            if len(answer['type']) == 0:
-                answer['category'] = 'resource'
-
-        return answers
-
-
-class TrainMultipleLabelClassification(TrainBase, MultipleLabelClassificationBase):
-    def __init__(self, rank, world_size, experiment, model, data, labels, config, shared, lock, level=None, data_neg=None):
-        self.labels = labels
-        self.data_neg = data_neg
-        self.identifier = f'level-{level + 1}-multiple-label' if level is not None else 'multiple-label'
-        super().__init__(rank, world_size, experiment, model, data, config, shared, lock)
+class TrainMultipleLabelClassification(MultipleLabelClassificationMixin, TrainBase):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
     def pack(self):
         ids = self.data.df.id.values
@@ -93,18 +54,22 @@ class TrainMultipleLabelClassification(TrainBase, MultipleLabelClassificationBas
 
         train_ids, eval_ids, train_questions, eval_questions, train_tags, eval_tags = split
 
-        self.train_data = TrainMultipleLabelClassification.Data(train_ids, train_questions, train_tags)
-        self.eval_data = TrainMultipleLabelClassification.Data(eval_ids, eval_questions, eval_tags)
+        self.train_data = TrainMultipleLabelClassification.Data(train_ids, train_questions, tags=train_tags)
+        self.eval_data = TrainMultipleLabelClassification.Data(eval_ids, eval_questions, tags=eval_tags)
         return self
 
     def evaluate(self):
+        if self.config.eval_ratio is None or self.config.eval_ratio == 0:
+            print(f'GPU #{self.rank}: Skipped evaluation.')
+            return self
+
         self.model.eval()
 
         if self.rank == 0:
             with self.lock:
                 self.shared['evaluation'] = [{'y_ids': [], 'y_true': [], 'y_pred': []} for _ in range(self.world_size)]
 
-        print(f'GPU #{self.rank}: Started evaluation')
+        print(f'GPU #{self.rank}: Started evaluation.')
         sys.stdout.flush()
         dist.barrier()
         eval_start = time.time()
@@ -112,7 +77,7 @@ class TrainMultipleLabelClassification(TrainBase, MultipleLabelClassificationBas
         for step, batch in (enumerate(tqdm(self.eval_dataloader, desc=f'GPU #{self.rank}: Evaluating'))
                             if self.rank == 0 else enumerate(self.eval_dataloader)):
             logits = self.model(*tuple(t.cuda(self.rank) for t in batch[1:-1]), return_dict=True).logits
-            preds = (F.sigmoid(logits) >= 0.5).long().detach().cpu().numpy().tolist()
+            preds = (torch.sigmoid(logits) >= 0.5).long().detach().cpu().numpy().tolist()
 
             with self.lock:
                 evaluation = self.shared['evaluation']
@@ -122,7 +87,7 @@ class TrainMultipleLabelClassification(TrainBase, MultipleLabelClassificationBas
                 self.shared['evaluation'] = evaluation
 
         pred_size = len(self.shared['evaluation'][self.rank]['y_pred'])
-        print(f'GPU #{self.rank}: Predictions for evaluation complete')
+        print(f'GPU #{self.rank}: Predictions for evaluation complete.')
         print(f'.. Prediction size: {pred_size}')
         dist.barrier()
         self.train_records['eval_time'] = TrainMultipleLabelClassification._format_time(time.time() - eval_start)
@@ -135,12 +100,11 @@ class TrainMultipleLabelClassification(TrainBase, MultipleLabelClassificationBas
                 y_true += self.shared['evaluation'][i]['y_true']
                 y_pred += self.shared['evaluation'][i]['y_pred']
 
-            report = classification_report(np.array(y_true).reshape(-1), np.array(y_pred).reshape(-1), digits=4)
-            truths = self._get_data(y_ids)
-            answers = self._build_answers(y_ids, y_pred)
+            self.eval_report = classification_report(np.array(y_true).reshape(-1), np.array(y_pred).reshape(-1), digits=4)
+            self.eval_truths = self._get_data(y_ids)
+            self.eval_answers = self._build_answers(y_ids, y_pred)
 
-            self._save_evaluate(report, truths, answers)
-            print(report)
+            print(self.eval_report)
 
         return self
 

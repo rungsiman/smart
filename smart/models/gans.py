@@ -2,15 +2,15 @@ import abc
 import torch
 import torch.nn.functional as F
 from torch import nn
-from torch.nn import CrossEntropyLoss, BCEWithLogitsLoss, MSELoss
+from torch.nn import CrossEntropyLoss, BCEWithLogitsLoss
 
 
 class GanGenerator(nn.Module):
     def __init__(self, config, noise_size=100):
         super().__init__()
-        self.dense = nn.Linear(noise_size, config.hidden_size)
+        self.dense = nn.Linear(noise_size, config.gan_hidden_size)
         self.leaky_relu = nn.LeakyReLU()
-        self.dropout = nn.Dropout(config.hidden_dropout_prob)
+        self.dropout = nn.Dropout(config.g_hidden_dropout_prob)
         self.noise_size = noise_size
 
     def forward(self, noise):
@@ -24,10 +24,10 @@ class GanGenerator(nn.Module):
 class GanDiscriminator(nn.Module):
     def __init__(self, config):
         super().__init__()
-        self.dense = nn.Linear(config.hidden_size, config.hidden_size)
-        self.classifier = nn.Linear(config.hidden_size, config.num_labels + 1)
+        self.dense = nn.Linear(config.gan_hidden_size, config.gan_hidden_size)
+        self.classifier = nn.Linear(config.gan_hidden_size, config.num_labels + 1)
         self.leaky_relu = nn.LeakyReLU()
-        self.dropout = nn.Dropout(config.hidden_dropout_prob)
+        self.dropout = nn.Dropout(config.d_hidden_dropout_prob)
 
     def forward(self, hidden_states):
         hidden_states = self.dense(hidden_states)
@@ -113,5 +113,5 @@ class GanForPairedLabelClassification(GanForMultipleLabelClassification):
         return torch.sigmoid(logits)
 
     def _compute_ld_sup(self, d_real_sup_logits, labels):
-        loss_fct = MSELoss()
+        loss_fct = BCEWithLogitsLoss()
         return loss_fct(d_real_sup_logits.view(-1), labels.float().view(-1))

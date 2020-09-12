@@ -1,22 +1,13 @@
 import os
 
-from smart.models.bert import BertForMultipleLabelClassification as BML
-from smart.models.bert import BertForPairedBinaryClassification as BPB
-from smart.experiments.base import ExperimentConfigBase, ConfigBase, TrainConfigBase as TCB
-from smart.train.multiple_label import TrainMultipleLabelClassification as TML
-from smart.train.paired_binary import TrainPairedBinaryClassification as TPB
-
-
-class HybridConfig:
-    def __init__(self, labels, primary=None, secondary=None):
-        self.labels = labels
-        self.primary_config, self.primary_classifier, self.primary_trainer = primary or (TCB(), BML, TML)
-        self.secondary_config, self.secondary_classifier, self.secondary_trainer = secondary or (TCB(), BPB, TPB)
+from smart.experiments.base import ExperimentConfigBase, ConfigBase, TrainConfigBase
+from smart.experiments.literal import LiteralExperimentConfig
+from smart.utils.hybrid import HybridConfigFactory, class_dist_thresholds
 
 
 class HybridExperimentConfig(ExperimentConfigBase):
-    version = '0.10-aws'
-    experiment = 'bert-hybrid'
+    version = '0.11-aws'
+    experiment = 'distilbert-hybrid'
     identifier = 'sandbox'
     description = 'Sandbox for testing on AWS'
     
@@ -27,64 +18,56 @@ class HybridExperimentConfig(ExperimentConfigBase):
             super().__init__()
             self.input = os.path.join(self.root, 'input')
             self.output = os.path.join(self.root, f'intermediate/hybrid/{experiment}-{identifier}')
+            self.final = os.path.join(self.root, 'final')
 
-            HybridExperimentConfig.prepare(self.output)
+            HybridExperimentConfig.prepare(self.output, self.final)
 
-    class DBpedia(ConfigBase):
+    class Dataset(ExperimentConfigBase.Dataset):
+        def __init__(self, paths, *args, **kwargs):
+            super().__init__(paths, *args, **kwargs)
+            self.hybrid_default = TrainConfigBase(trainer='paired_binary')
+
+    class DBpedia(Dataset):
         name = 'dbpedia'
 
-        def __init__(self, paths):
-            super().__init__()
+        def __init__(self, paths, literal):
+            super().__init__(paths)
+
             self.input_root = os.path.join(paths.input, self.name)
             self.input_train = os.path.join(self.input_root, 'smarttask_dbpedia_train.json')
+            self.input_test = os.path.join(literal.dataset.output_test, f'{literal.dataset.config.tester.resolve_identifier()}/test_answers.json')
             self.input_ontology = os.path.join(self.input_root, 'dbpedia_types.tsv')
 
-            self.output_root = os.path.join(paths.output, self.name)
-            self.output_train = os.path.join(self.output_root, 'train')
-            self.output_test = os.path.join(self.output_root, 'test')
-            self.output_models = os.path.join(self.output_root, 'models')
-            self.output_analyses = os.path.join(self.output_root, 'analyses')
+            hybrid_factory = HybridConfigFactory(factory=class_dist_thresholds, config=TrainConfigBase, trainer='multiple_label',
+                                                 input_train=self.input_train, input_ontology=self.input_ontology,
+                                                 thresholds=(400,))
+            self.hybrid = hybrid_factory.pack().compile()
 
-            HybridExperimentConfig.prepare(self.output_root, self.output_train, self.output_test, self.output_models, self.output_analyses)
-
-            self.hybrid_default_config = HybridConfig([])
-            self.hybrid = [HybridConfig(['dbo:Place', 'dbo:Agent', 'dbo:Work']),
-                           HybridConfig(['dbo:Person', 'dbo:PopulatedPlace', 'dbo:Organisation']),
-                           HybridConfig(['dbo:Settlement', 'dbo:Country', 'dbo:State', 'dbo:Company']),
-                           HybridConfig(['dbo:City', 'dbo:University', 'dbo:Stream']),
-                           HybridConfig(['dbo:River'])]
-
-    class Wikidata(ConfigBase):
+    class Wikidata(Dataset):
         name = 'wikidata'
 
-        def __init__(self, paths):
-            super().__init__()
+        def __init__(self, paths, literal):
+            super().__init__(paths)
+
             self.input_root = os.path.join(paths.input, self.name)
             self.input_train = os.path.join(self.input_root, 'lcquad2_anstype_wikidata_train.json')
+            self.input_test = os.path.join(literal.dataset.output_test, f'{literal.dataset.tester.resolve_identifier()}/test_answers.json')
             self.input_ontology = os.path.join(self.input_root, 'wikidata_types.tsv')
 
-            self.output_root = os.path.join(paths.output, self.name)
-            self.output_train = os.path.join(self.output_root, 'train')
-            self.output_test = os.path.join(self.output_root, 'test')
-            self.output_models = os.path.join(self.output_root, 'models')
-            self.output_analyses = os.path.join(self.output_root, 'analyses')
-
-            HybridExperimentConfig.prepare(self.output_root, self.output_train, self.output_test, self.output_models, self.output_analyses)
-
-            self.hybrid_default_config = HybridConfig([])
-            self.hybrid = [HybridConfig(['omnivore']),
-                           HybridConfig(['natural person']),
-                           HybridConfig(['person', 'state']),
-                           HybridConfig(['human settlement']),
-                           HybridConfig(['city/town']),
-                           HybridConfig([]),
-                           HybridConfig(['political territorial entity']),
-                           HybridConfig(['country'])]
+            hybrid_factory = HybridConfigFactory(factory=class_dist_thresholds, config=TrainConfigBase, trainer='multiple_label',
+                                                 input_train=self.input_train, input_ontology=self.input_ontology,
+                                                 thresholds=(400,))
+            self.hybrid = hybrid_factory.pack().compile()
     
     def __init__(self, dataset):
         super().__init__()
+        self.literal = LiteralExperimentConfig(dataset)
         self.paths = HybridExperimentConfig.Paths(self.experiment, self.identifier)
-        self.dataset = HybridExperimentConfig.DBpedia(self.paths) if dataset == 'dbpedia' else HybridExperimentConfig.Wikidata(self.paths)
+
+        if dataset == 'dbpedia':
+            self.dataset = HybridExperimentConfig.DBpedia(self.paths, self.literal)
+        else:
+            self.dataset = HybridExperimentConfig.Wikidata(self.paths, self.literal)
 
         # Apply to sklearn.model_selection.train_test_split.
         # Controls the shuffling applied to the data before applying the split.

@@ -50,5 +50,5 @@ class CustomAutoTokenizer(CustomTokenizer):
         return max_len
 
     def save(self, target_location):
-        self.tokenizer.save_vocabulary(target_location)
+        self.tokenizer.save_pretrained(target_location)
         return self

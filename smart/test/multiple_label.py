@@ -1,30 +1,18 @@
+import pandas as pd
 import sys
 import time
-import torch
 import torch.distributed as dist
 import torch.nn.functional as F
 from torch.utils.data import TensorDataset, DataLoader
 from tqdm import tqdm
 
+from smart.mixins.multiple_label import MultipleLabelClassificationMixin
 from smart.test.base import TestBase
-from smart.train.multiple_label import MultipleLabelClassificationBase
 
 
-class TestMultipleLabelClassification(TestBase, MultipleLabelClassificationBase):
-    class Data:
-        class Tokens:
-            def __init__(self, items):
-                self.ids = torch.cat([item['input_ids'] for item in items], dim=0)
-                self.masks = torch.cat([item['attention_mask'] for item in items], dim=0)
-
-        def __init__(self, ids, questions):
-            self.ids = torch.tensor(ids)
-            self.questions = TestMultipleLabelClassification.Data.Tokens(questions)
-
-    def __init__(self, rank, world_size, experiment, model, data, labels, config, shared, lock, level=None):
-        self.labels = labels
-        self.identifier = f'level-{level + 1}-multiple-label' if level is not None else 'multiple-label'
-        super().__init__(rank, world_size, experiment, model, data, config, shared, lock)
+class TestMultipleLabelClassification(MultipleLabelClassificationMixin, TestBase):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
     def __call__(self):
         self.model.eval()
@@ -49,9 +37,9 @@ class TestMultipleLabelClassification(TestBase, MultipleLabelClassificationBase)
                 inference[self.rank]['y_pred'] += preds
                 self.shared['inference'] = inference
 
-        pred_size = len(self.shared['inference'][self.rank]['y_pred'])
+        self.pred_size = len(self.shared['inference'][self.rank]['y_pred'])
         print(f'GPU #{self.rank}: Predictions for testing complete')
-        print(f'.. Prediction size: {pred_size}')
+        print(f'.. Prediction size: {self.pred_size}')
         dist.barrier()
         self.test_records['test_time'] = TestMultipleLabelClassification._format_time(time.time() - test_start)
 
@@ -63,8 +51,10 @@ class TestMultipleLabelClassification(TestBase, MultipleLabelClassificationBase)
                 y_pred += self.shared['inference'][i]['y_pred']
 
             answers = self._build_answers(y_ids, y_pred)
-            self._save_evaluate(answers)
+            self.shared['answers'] = answers
 
+        dist.barrier()
+        self.answers = pd.DataFrame(self.shared['answers'])
         return self
 
     def pack(self):

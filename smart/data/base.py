@@ -1,15 +1,17 @@
 import abc
+import copy
 import csv
+import numpy as np
 import pandas as pd
 import re
 
 
 class Ontology:
-    def __init__(self, experiment):
+    def __init__(self, location):
         self.labels, self.ids = {}, []
         self.max_level = 0
 
-        with open(experiment.dataset.input_ontology) as reader:
+        with open(location) as reader:
             items = csv.reader(reader, delimiter='\t')
 
             # Skip header row
@@ -41,6 +43,12 @@ class Ontology:
             reversed_labels = list(filter(lambda label: self.labels[label]['level'] == level, reversed_labels))
 
         return reversed_labels
+
+    def parents(self, labels):
+        return [self.labels[label]['parent'] for label in labels]
+
+    def level(self, lv):
+        return {key: item for key, item in self.labels.items() if item['level'] == lv}
 
 
 class DataBase:
@@ -120,6 +128,10 @@ class DataBase:
 
         return self
 
+    def save(self, location):
+        self.df.to_json(location, orient="records", indent=4)
+        return self
+
     @abc.abstractmethod
     def clone(self):
         ...
@@ -131,8 +143,9 @@ class DataForTrain(DataBase):
         self.df = pd.read_json(experiment.dataset.input_train) if df is None else df
 
     def clone(self):
-        return DataForTrain(self.experiment,  df=self.df.copy(),
-                            ontology=self.ontology, tokenizer=self.tokenizer, tokenized=self.tokenized)
+        df_dict = self.df.to_dict(orient='records')
+        return DataForTest(self.experiment, df=pd.DataFrame(copy.deepcopy(df_dict)),
+                           ontology=self.ontology, tokenizer=self.tokenizer, tokenized=self.tokenized)
 
 
 class DataForTest(DataBase):
@@ -141,9 +154,37 @@ class DataForTest(DataBase):
         self.df = pd.read_json(experiment.dataset.input_test) if df is None else df
 
     def clone(self):
-        return DataForTest(self.experiment, df=self.df.copy(),
+        df_dict = self.df.to_dict(orient='records')
+        return DataForTest(self.experiment, df=pd.DataFrame(copy.deepcopy(df_dict)),
                            ontology=self.ontology, tokenizer=self.tokenizer, tokenized=self.tokenized)
 
     def blind(self):
-        self.df = self.df.drop(['category', 'type'])
+        self.df['category'] = ''
+        self.df['type'] = [[] for _ in range(len(self.df))]
         return self
+
+    def assign_categories(self):
+        for i, row in self.df.iterrows():
+            if len(row.type) == 0:
+                category = 'resource'
+            elif 'boolean' in row.type:
+                category = 'boolean'
+            else:
+                category = 'literal'
+
+            self.df.loc[self.df.id == row.id, 'category'] = category
+
+        return self
+
+    def assign_answers(self, df):
+        df_dict = self.df.to_dict(orient='records')
+
+        for row in df_dict:
+            if row['id'] in df.id.values:
+                row['type'] += df[df.id == row['id']]['type'].tolist()[0]
+
+        self.df = pd.DataFrame(df_dict)
+        return self
+
+    def count_answers(self):
+        return int(np.array([len(ans) for ans in self.df['type'].tolist()]).sum())

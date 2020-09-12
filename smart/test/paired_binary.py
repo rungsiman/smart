@@ -1,3 +1,4 @@
+import pandas as pd
 import sys
 import time
 import torch
@@ -5,34 +6,23 @@ import torch.distributed as dist
 from torch.utils.data import TensorDataset, DataLoader
 from tqdm import tqdm
 
+from smart.mixins.paired_binary import PairedBinaryClassificationMixin
 from smart.test.base import TestBase
-from smart.train.paired_binary import PairedBinaryClassificationBase
 
 
-class TestPairedBinaryClassification(TestBase, PairedBinaryClassificationBase):
-    class Data:
-        class Tokens:
-            def __init__(self, items):
-                self.ids = torch.cat([item['input_ids'] for item in items], dim=0)
-                self.masks = torch.cat([item['attention_mask'] for item in items], dim=0)
-
-        def __init__(self, ids, lids, questions, labels):
-            self.ids = torch.tensor(ids)
-            self.lids = torch.tensor(lids)
-            self.questions = TestPairedBinaryClassification.Data.Tokens(questions)
-            self.labels = TestPairedBinaryClassification.Data.Tokens(labels)
-
-    def __init__(self, rank, world_size, experiment, model, data, labels, config, shared, lock, level=None):
-        self.labels = labels
-        self.identifier = f'level-{level + 1}-paired-binary' if level is not None else 'paired-binary'
-        super().__init__(rank, world_size, experiment, model, data, config, shared, lock)
+class TestPairedBinaryClassification(PairedBinaryClassificationMixin, TestBase):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
     def __call__(self):
+        if self.skipped:
+            return self
+
         self.model.eval()
 
         if self.rank == 0:
             with self.lock:
-                self.shared['evaluation'] = [{'y_ids': [], 'y_lids': [], 'y_pred': []} for _ in range(self.world_size)]
+                self.shared['inference'] = [{'y_ids': [], 'y_lids': [], 'y_pred': []} for _ in range(self.world_size)]
 
         print(f'GPU #{self.rank}: Started testing')
         sys.stdout.flush()
@@ -51,9 +41,9 @@ class TestPairedBinaryClassification(TestBase, PairedBinaryClassificationBase):
                 inference[self.rank]['y_pred'] += preds
                 self.shared['inference'] = inference
 
-        pred_size = len(self.shared['inference'][self.rank]['y_pred'])
+        self.pred_size = len(self.shared['inference'][self.rank]['y_pred'])
         print(f'GPU #{self.rank}: Predictions for testing complete')
-        print(f'.. Prediction size: {pred_size}')
+        print(f'.. Prediction size: {self.pred_size}')
         dist.barrier()
         self.test_records['test_time'] = TestPairedBinaryClassification._format_time(time.time() - test_start)
 
@@ -66,27 +56,36 @@ class TestPairedBinaryClassification(TestBase, PairedBinaryClassificationBase):
                 y_pred += self.shared['inference'][i]['y_pred']
 
             answers = self._build_answers(y_ids, y_lids, y_pred)
-            self._save_evaluate(answers)
+            self.shared['answers'] = answers
 
+        dist.barrier()
+        self.answers = pd.DataFrame(self.shared['answers'])
         return self
 
     def pack(self):
         ids = self.data.df.id.values
         questions = self.data.df.question.values
+        answers = self.data.df.type.values
 
         test_ids = []
         test_lids = []
         test_questions = []
         test_labels = []
 
-        for qid, question in tqdm(zip(ids, questions)):
+        for qid, question, types in tqdm(zip(ids, questions, answers)):
             question_ids = self.data.tokenized[question]
-            test_ids += [int(qid.replace('dbpedia_', '')) if isinstance(qid, str) else qid] * len(self.labels)
-            test_lids += [self.data.ontology.labels[label]['id'] for label in self.labels]
-            test_questions += [question_ids] * len(self.labels)
-            test_labels += [self.data.ontology.labels[label] for label in self.labels]
+            labels = [label for label in self.labels if self.data.ontology.labels[label]['parent'] in types]
 
-        self.test_data = TestPairedBinaryClassification.Data(test_ids, test_lids, test_questions, test_labels)
+            test_ids += [int(qid.replace('dbpedia_', '')) if isinstance(qid, str) else qid] * len(labels)
+            test_lids += [self.data.ontology.labels[label]['id'] for label in labels]
+            test_questions += [question_ids] * len(labels)
+            test_labels += [self.data.ontology.labels[label] for label in labels]
+
+        if len(test_ids):
+            self.test_data = TestPairedBinaryClassification.Data(test_ids, test_lids, test_questions, test_labels)
+        else:
+            self.skipped = True
+
         return self
 
     def _build_dataloader(self, data):

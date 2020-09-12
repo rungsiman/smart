@@ -1,4 +1,3 @@
-import abc
 import random
 import sys
 import time
@@ -10,50 +9,13 @@ from torch.utils.data import TensorDataset, DataLoader
 from torch.utils.data.distributed import DistributedSampler
 from tqdm import tqdm
 
+from smart.mixins.sequence import SequenceClassificationMixin
 from smart.train.base import TrainBase
 
 
-class SequenceClassificationBase(object):
-    __metaclass__ = abc.ABCMeta
-    labels = ...
-
-    def _build_answers(self, y_ids, y_pred):
-        answers = self._get_data(y_ids)
-
-        for answer in answers:
-            answer['type'] = []
-
-            for qid, pred in zip(y_ids, y_pred):
-                if qid == answer['id'] or 'dbpedia_' + str(qid) == answer['id']:
-                    answer['type'] = [self.labels[pred]] if pred < len(self.labels) else []
-
-            if len(answer['type']) == 0:
-                answer['category'] = 'resource'
-
-        return answers
-
-    @abc.abstractmethod
-    def _get_data(self, y_ids):
-        ...
-
-
-class TrainSequenceClassification(TrainBase, SequenceClassificationBase):
-    class Data:
-        class Tokens:
-            def __init__(self, items):
-                self.ids = torch.cat([item['input_ids'] for item in items], dim=0)
-                self.masks = torch.cat([item['attention_mask'] for item in items], dim=0)
-
-        def __init__(self, ids, questions, tags):
-            self.ids = torch.tensor(ids)
-            self.questions = TrainSequenceClassification.Data.Tokens(questions)
-            self.tags = torch.tensor(tags)
-
-    def __init__(self, rank, world_size, experiment, model, data, labels, config, shared, lock, level=None, data_neg=None):
-        self.labels = labels
-        self.data_neg = data_neg
-        self.identifier = f'level-{level}-sequence' if level is not None else 'sequence'
-        super().__init__(rank, world_size, experiment, model, data, config, shared, lock)
+class TrainSequenceClassification(SequenceClassificationMixin, TrainBase):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
     def pack(self):
         ids = self.data.df.id.values
@@ -94,7 +56,7 @@ class TrainSequenceClassification(TrainBase, SequenceClassificationBase):
 
         if multiple_labels_found:
             warning = f'WARNING: {multiple_labels_found} questions have multiple tags.\n'
-            warning += '.. Consider using multiple-label classifier instead'
+            warning += '.. Consider using multiple-label classifier instead.'
             print(warning)
 
         split = train_test_split(input_ids, input_questions, input_tags,
@@ -108,13 +70,17 @@ class TrainSequenceClassification(TrainBase, SequenceClassificationBase):
         return self
 
     def evaluate(self):
+        if self.config.eval_ratio is None or self.config.eval_ratio == 0:
+            print(f'GPU #{self.rank}: Skipped evaluation.')
+            return self
+
         self.model.eval()
 
         if self.rank == 0:
             with self.lock:
                 self.shared['evaluation'] = [{'y_ids': [], 'y_true': [], 'y_pred': []} for _ in range(self.world_size)]
 
-        print(f'GPU #{self.rank}: Started evaluation')
+        print(f'GPU #{self.rank}: Started evaluation.')
         sys.stdout.flush()
         dist.barrier()
         eval_start = time.time()
@@ -132,7 +98,7 @@ class TrainSequenceClassification(TrainBase, SequenceClassificationBase):
                 self.shared['evaluation'] = evaluation
 
         pred_size = len(self.shared['evaluation'][self.rank]['y_pred'])
-        print(f'GPU #{self.rank}: Predictions for evaluation complete')
+        print(f'GPU #{self.rank}: Predictions for evaluation complete.')
         print(f'.. Prediction size: {pred_size}')
         dist.barrier()
         self.train_records['eval_time'] = TrainSequenceClassification._format_time(time.time() - eval_start)
@@ -145,12 +111,11 @@ class TrainSequenceClassification(TrainBase, SequenceClassificationBase):
                 y_true += self.shared['evaluation'][i]['y_true']
                 y_pred += self.shared['evaluation'][i]['y_pred']
 
-            report = classification_report(y_true, y_pred, digits=4)
-            truths = self._get_data(y_ids)
-            answers = self._build_answers(y_ids, y_pred)
+            self.eval_report = classification_report(y_true, y_pred, digits=4)
+            self.eval_truths = self._get_data(y_ids)
+            self.eval_answers = self._build_answers(y_ids, y_pred)
 
-            self._save_evaluate(report, truths, answers)
-            print(report)
+            print(self.eval_report)
 
         return self
 

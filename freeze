@@ -1,7 +1,27 @@
 #!/bin/bash
 
+while [[ $# -gt 0 ]] ; do
+  key="$1"
+
+  case $key in
+    -e|--exclude-models)
+      EXCLUDE_MODELS=true
+      shift
+      ;;
+  esac
+done
+
 NOW=$(date +"%Y-%m-%d_%H-%M-%S")
 cd ..
-tar -czvf "smart-$NOW.tar.gz" --exclude=smart/local smart
 mkdir -p smart/archive
+
+tar -czvf "smart-$NOW.tar.gz" --exclude=smart/local --exclude=smart/archive --exclude=*model.checkpoint --exclude=*vocab.txt --exclude=*special_tokens_map.json smart
 mv "smart-$NOW.tar.gz" smart/archive
+
+if [ "$EXCLUDE_MODELS" = true ]; then
+  echo "INFO: Model checkpoints excluded"
+else
+  echo "INFO: Model checkpoints included"
+  tar -czvf "smart-$NOW-all.tar.gz" --exclude=smart/local --exclude=smart/archive smart
+  mv "smart-$NOW-all.tar.gz" smart/archive
+fi
