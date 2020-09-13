@@ -38,7 +38,7 @@ def process(rank, world_size, experiment, stage, pipeline, shared, lock):
         test()
 
 
-def run(stage, pipeline, dataset):
+def main(stage, pipeline, dataset):
     if pipeline == 'literal':
         experiment = LiteralExperimentConfig(dataset)
     else:
@@ -76,4 +76,4 @@ if __name__ == '__main__':
     parser.add_argument('dataset', action='store')
     args = parser.parse_args()
     verify(args.stage, args.pipeline, args.dataset)
-    run(args.stage, args.pipeline, args.dataset)
+    main(args.stage, args.pipeline, args.dataset)
