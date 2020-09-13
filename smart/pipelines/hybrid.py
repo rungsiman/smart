@@ -10,7 +10,7 @@ from smart.utils.configs import override
 class HybridTrainPipeline(PipelineBase):
     def __call__(self):
         self.data = self.data.resource
-        pipeline_records = []
+        pipeline_records, pipeline_eval = [], []
         ontology = Ontology(self.experiment.dataset.input_ontology)
 
         for level in range(1, ontology.max_level + 1):
@@ -18,15 +18,19 @@ class HybridTrainPipeline(PipelineBase):
 
             if level <= len(self.experiment.dataset.hybrid):
                 for index, config in enumerate(self.experiment.dataset.hybrid[level - 1]):
-                    self._process(level, index, config, config.labels, ontology, processed_labels, pipeline_records, set_num_labels=True)
+                    self._process(level, index, config, config.labels, ontology,
+                                  processed_labels, pipeline_records, pipeline_eval, set_num_labels=True)
 
             config = self.experiment.dataset.hybrid_default
             labels_reversed = ontology.reverse(processed_labels, level)
-            self._process(level, 'default', config, labels_reversed, ontology, processed_labels, pipeline_records)
+            self._process(level, 'default', config, labels_reversed, ontology,
+                          processed_labels, pipeline_eval, pipeline_records)
 
-        json.dump(pipeline_records, open(os.path.join(self.experiment.dataset.output_analyses, 'pipeline_train_records.json'), 'w'), indent=4)
+        if self.rank == 0:
+            json.dump(pipeline_records, open(os.path.join(self.experiment.dataset.output_analyses, 'pipeline_train_records.json'), 'w'), indent=4)
+            json.dump(pipeline_eval, open(os.path.join(self.experiment.dataset.output_analyses, 'pipeline_eval_records.json'), 'w'), indent=4)
 
-    def _process(self, level, index, config, labels, ontology, processed_labels, pipeline_records, set_num_labels=False):
+    def _process(self, level, index, config, labels, ontology, processed_labels, pipeline_records, pipeline_eval, set_num_labels=False):
         labels_reversed = ontology.reverse(labels, level)
         processed_labels += labels
 
@@ -65,8 +69,14 @@ class HybridTrainPipeline(PipelineBase):
             train().evaluate().save()
 
             pipeline_records.append({'level': level, 'index': index, 'classification': train.name,
-                                     'active': {'data': data_hybrid.size, 'data_neg': data_reversed.size, 'labels': len(labels)},
-                                     'reverse': {'data': data_reversed.size, 'data_neg': data_reversed.size, 'labels': len(labels_reversed)}})
+                                     'data_size': data_hybrid.size, 'data_neg_size': data_reversed.size,
+                                     'label_size':  len(labels), 'reversed_label_size': len(labels_reversed)})
+
+            if train.eval_dict is not None:
+                pipeline_eval.append({'level': level, 'index': index, 'classification': train.name,
+                                      'f1-micro': train.eval_dict.get('micro avg', None),
+                                      'f1-macro': train.eval_dict.get('macro avg', None),
+                                      'f1-weighted': train.eval_dict.get('weighted avg', None)})
 
         elif self.rank == 0:
             print(f'GPU #{self.rank}: Skipped training #{index} on level {level}')

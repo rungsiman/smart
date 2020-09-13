@@ -36,7 +36,7 @@ class TrainBase(StageBase):
     path_output, path_models, path_analyses = ..., ..., ...
     train_data, train_dataloader = ..., ...
     eval_data, eval_dataloader = ..., ...
-    eval_report, eval_truths, eval_answers = None, None, None
+    eval_report, eval_dict, eval_truths, eval_answers, ndcg_result = None, None, None, None, None
     train_records = ...
     checkpoint = ...
     sampler = ...
@@ -238,10 +238,10 @@ class TrainBase(StageBase):
 
         try:
             ndcg_config = NDCGConfig(self.experiment, self.path_output)
-            ndcg_result = ndcg_evaluate(ndcg_config)
+            self.ndcg_result = ndcg_evaluate(ndcg_config)
 
             with open(os.path.join(self.path_analyses, 'ndcg_result.txt'), 'w') as writer:
-                writer.write(ndcg_result)
+                writer.write(self.ndcg_result)
 
         except ZeroDivisionError:
             if self.rank == 0:

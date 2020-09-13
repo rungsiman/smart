@@ -29,7 +29,7 @@ def retrieve_dbpedia(*, collection, cls, target, predicate, filters=''):
                 'query': query,
                 'format': 'application/sparql-results+json',
                 'CXML_redir_for_subjs': 'CXML_redir_for_hrefs',
-                'timeout': 30000,
+                'timeout': 3600000,
                 'debug': 'on',
                 'run': '+Run+Query+'}
 

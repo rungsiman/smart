@@ -112,6 +112,7 @@ class TrainSequenceClassification(SequenceClassificationMixin, TrainBase):
                 y_pred += self.shared['evaluation'][i]['y_pred']
 
             self.eval_report = classification_report(y_true, y_pred, digits=4)
+            self.eval_dict = classification_report(y_true, y_pred, output_dict=True)
             self.eval_truths = self._get_data(y_ids)
             self.eval_answers = self._build_answers(y_ids, y_pred)
 

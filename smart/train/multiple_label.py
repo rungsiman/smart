@@ -101,6 +101,7 @@ class TrainMultipleLabelClassification(MultipleLabelClassificationMixin, TrainBa
                 y_pred += self.shared['evaluation'][i]['y_pred']
 
             self.eval_report = classification_report(np.array(y_true).reshape(-1), np.array(y_pred).reshape(-1), digits=4)
+            self.eval_dict = classification_report(np.array(y_true).reshape(-1), np.array(y_pred).reshape(-1), output_dict=True)
             self.eval_truths = self._get_data(y_ids)
             self.eval_answers = self._build_answers(y_ids, y_pred)
 
