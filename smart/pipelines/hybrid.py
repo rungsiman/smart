@@ -24,7 +24,7 @@ class HybridTrainPipeline(PipelineBase):
             config = self.experiment.dataset.hybrid_default
             labels_reversed = ontology.reverse(processed_labels, level)
             self._process(level, 'default', config, labels_reversed, ontology,
-                          processed_labels, pipeline_eval, pipeline_records)
+                          processed_labels, pipeline_records, pipeline_eval)
 
         if self.rank == 0:
             json.dump(pipeline_records, open(os.path.join(self.experiment.dataset.output_analyses, 'pipeline_train_records.json'), 'w'), indent=4)
@@ -134,10 +134,12 @@ class HybridTestPipeline(PipelineBase):
 
             if not test.skipped:
                 test.data.assign_answers(test.answers)
+                test.data.assign_missing_answers()
                 test.save()
 
                 num_existing_answers = self.data.count_answers()
                 self.data.assign_answers(test.answers)
+                self.data.assign_missing_answers()
 
                 if self.rank == 0:
                     status = f'GPU #{self.rank}: Testing #{index} "{test.name}" on level {level} complete.\n'
