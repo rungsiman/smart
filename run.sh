@@ -11,3 +11,5 @@ echo "Experiment on Wikidata"
 ./train hybrid wikidata
 ./test literal wikidata
 ./test hybrid wikidata
+
+bash freeze --exclude-models
