@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 echo "Experiment on DBpedia"
 bash train literal dbpedia
