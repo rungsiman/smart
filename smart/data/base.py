@@ -186,5 +186,15 @@ class DataForTest(DataBase):
         self.df = pd.DataFrame(df_dict)
         return self
 
+    def assign_missing_answers(self):
+        df_dict = self.df.to_dict(orient='records')
+
+        for row in df_dict:
+            if 'dbo:Place' in row['type']:
+                row['type'].append('dbo:Location')
+
+        self.df = pd.DataFrame(df_dict)
+        return self
+
     def count_answers(self):
         return int(np.array([len(ans) for ans in self.df['type'].tolist()]).sum())
