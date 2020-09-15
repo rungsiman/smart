@@ -25,7 +25,7 @@ class TestBase(StageBase):
     pred_size = ...
     answers = ...
 
-    def __init__(self, rank, world_size, experiment, model, data, labels, config, shared, lock):
+    def __init__(self, rank, world_size, experiment, model, data, labels, config, shared, lock, *args, **kwargs):
         super().__init__()
 
         self.test_records = {'test_time': None}
