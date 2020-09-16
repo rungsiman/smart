@@ -2,6 +2,7 @@ import os
 
 from smart.experiments.base import ExperimentConfigBase, ConfigBase, TrainConfigBase
 from smart.experiments.literal import LiteralExperimentConfig
+from smart.utils.configs import select
 from smart.utils.hybrid import HybridConfigFactory, class_dist_thresholds
 
 
@@ -24,14 +25,14 @@ class HybridExperimentConfig(ExperimentConfigBase):
 
     class Dataset(ExperimentConfigBase.Dataset):
         def __init__(self, paths, *args, **kwargs):
-            super().__init__(paths, *args, **kwargs)
-            self.hybrid_default = TrainConfigBase(trainer='paired_binary')
+            super().__init__(paths, *args, **select(kwargs, 'dataset'))
+            self.hybrid_default = TrainConfigBase(trainer='paired_binary', **kwargs)
 
     class DBpedia(Dataset):
         name = 'dbpedia'
 
-        def __init__(self, paths, literal):
-            super().__init__(paths)
+        def __init__(self, paths, literal, *args, **kwargs):
+            super().__init__(paths, *args, **kwargs)
 
             self.input_root = os.path.join(paths.input, self.name)
             self.input_train = os.path.join(self.input_root, 'smarttask_dbpedia_train.json')
@@ -40,14 +41,14 @@ class HybridExperimentConfig(ExperimentConfigBase):
 
             hybrid_factory = HybridConfigFactory(factory=class_dist_thresholds, config=TrainConfigBase, trainer='multiple_label',
                                                  input_train=self.input_train, input_ontology=self.input_ontology,
-                                                 thresholds=(400,))
+                                                 thresholds=kwargs.get('class_dist_thresholds', (400,)), **kwargs)
             self.hybrid = hybrid_factory.pack().compile()
 
     class Wikidata(Dataset):
         name = 'wikidata'
 
-        def __init__(self, paths, literal):
-            super().__init__(paths)
+        def __init__(self, paths, literal, *args, **kwargs):
+            super().__init__(paths, *args, **kwargs)
 
             self.input_root = os.path.join(paths.input, self.name)
             self.input_train = os.path.join(self.input_root, 'lcquad2_anstype_wikidata_train.json')
@@ -56,18 +57,18 @@ class HybridExperimentConfig(ExperimentConfigBase):
 
             hybrid_factory = HybridConfigFactory(factory=class_dist_thresholds, config=TrainConfigBase, trainer='multiple_label',
                                                  input_train=self.input_train, input_ontology=self.input_ontology,
-                                                 thresholds=(400,))
+                                                 thresholds=kwargs.get('class_dist_thresholds', (400,)), **kwargs)
             self.hybrid = hybrid_factory.pack().compile()
     
-    def __init__(self, dataset):
-        super().__init__()
-        self.literal = LiteralExperimentConfig(dataset)
+    def __init__(self, dataset, *args, **kwargs):
+        super().__init__(*args, **select(kwargs, 'experiment-base'))
+        self.literal = LiteralExperimentConfig(dataset, *args, **select(kwargs, 'experiment-base-literal'))
         self.paths = HybridExperimentConfig.Paths(self.experiment, self.identifier)
 
         if dataset == 'dbpedia':
-            self.dataset = HybridExperimentConfig.DBpedia(self.paths, self.literal)
+            self.dataset = HybridExperimentConfig.DBpedia(self.paths, self.literal, **select(kwargs, 'train-base', 'test-base'))
         else:
-            self.dataset = HybridExperimentConfig.Wikidata(self.paths, self.literal)
+            self.dataset = HybridExperimentConfig.Wikidata(self.paths, self.literal, **select(kwargs, 'train-base', 'test-base'))
 
         # Apply to sklearn.model_selection.train_test_split.
         # Controls the shuffling applied to the data before applying the split.

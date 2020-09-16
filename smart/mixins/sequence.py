@@ -1,7 +1,7 @@
 import torch
 
 
-class SequenceClassificationMixin(object):
+class SequenceClassificationMixin:
     labels = ...
 
     class Data:
@@ -19,7 +19,7 @@ class SequenceClassificationMixin(object):
 
     def __init__(self, *args, **kwargs):
         self.name = 'sequence'
-        self.identifier = self.resolve_identifier(kwargs.get('level', None))
+        self.identifier = self.resolve_identifier(kwargs.get('level', None), kwargs.get('index', None))
         super().__init__(*args, **kwargs)
 
     def _build_answers(self, y_ids, y_pred):
@@ -38,5 +38,5 @@ class SequenceClassificationMixin(object):
         return answers
 
     @staticmethod
-    def resolve_identifier(level=None):
-        return f'level-{level}-sequence' if level is not None else 'sequence'
+    def resolve_identifier(level=None, index=None):
+        return f'level-{level}-id-{index}-sequence' if level is not None else 'sequence'

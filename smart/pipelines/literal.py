@@ -4,10 +4,12 @@ from smart.data.base import Ontology
 from smart.data.tokenizers import CustomAutoTokenizer
 from smart.pipelines.base import PipelineBase
 from smart.utils.configs import override
+from smart.utils.monitoring import TimeMonitor
 
 
 class LiteralTrainPipeline(PipelineBase):
     def __call__(self):
+        stopwatch = TimeMonitor()
         config = self.experiment.dataset.config
 
         bert_config = config.bert_config.from_pretrained(config.model)
@@ -37,9 +39,14 @@ class LiteralTrainPipeline(PipelineBase):
 
         train().evaluate().save()
 
+        if self.rank == self.experiment.main_rank:
+            with open(os.path.join(self.experiment.dataset.output_analyses, 'pipeline_train_records.txt'), 'w') as writer:
+                writer.write(f'Approximate training time: {stopwatch.watch()}')
+
 
 class LiteralTestPipeline(PipelineBase):
     def __call__(self):
+        stopwatch = TimeMonitor()
         config = self.experiment.dataset.config
         identifier = config.tester.resolve_identifier()
         path_models = os.path.join(self.experiment.dataset.output_models, identifier)
@@ -69,9 +76,13 @@ class LiteralTestPipeline(PipelineBase):
         test()
         test.data.assign_answers(test.answers)
         test.data.assign_categories()
-        test.save()
 
-        if self.rank == 0:
+        if self.rank == self.experiment.main_rank:
+            test.save()
             status = f'GPU #{self.rank}: Testing complete.\n'
+            status += f'.. Data size: {self.data.size} ({test.data.size} processed)\n'
             status += f'.. Answer count: {test.data.count_answers()}'
             print(status)
+
+            with open(os.path.join(self.experiment.dataset.output_analyses, 'pipeline_test_records.txt'), 'w') as writer:
+                writer.write(f'Approximate testing time: {stopwatch.watch()}')

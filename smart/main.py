@@ -8,6 +8,7 @@ from smart.experiments.hybrid import HybridExperimentConfig
 from smart.experiments.literal import LiteralExperimentConfig
 from smart.pipelines.hybrid import HybridTrainPipeline, HybridTestPipeline
 from smart.pipelines.literal import LiteralTrainPipeline, LiteralTestPipeline
+from smart.utils.args import parse_kwargs
 from smart.utils.devices import describe_devices
 from smart.utils.reproducibility import set_seed
 
@@ -28,7 +29,7 @@ def process(rank, world_size, experiment, stage, pipeline, shared, lock):
         train()
 
     else:
-        data = DataForTest(experiment).clean().blind()
+        data = DataForTest(experiment).clean()
 
         if pipeline == 'literal':
             test = LiteralTestPipeline(rank, world_size, experiment, data, shared, lock)
@@ -40,9 +41,9 @@ def process(rank, world_size, experiment, stage, pipeline, shared, lock):
 
 def main(stage, pipeline, dataset):
     if pipeline == 'literal':
-        experiment = LiteralExperimentConfig(dataset)
+        experiment = LiteralExperimentConfig(dataset, **kwargs)
     else:
-        experiment = HybridExperimentConfig(dataset)
+        experiment = HybridExperimentConfig(dataset, **kwargs)
 
     set_seed(experiment)
     describe_devices()
@@ -74,6 +75,7 @@ if __name__ == '__main__':
     parser.add_argument('stage', action='store')
     parser.add_argument('pipeline', action='store')
     parser.add_argument('dataset', action='store')
-    args = parser.parse_args()
+    args, kwargs = parser.parse_known_args()
+    kwargs = parse_kwargs(kwargs)
     verify(args.stage, args.pipeline, args.dataset)
     main(args.stage, args.pipeline, args.dataset)

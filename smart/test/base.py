@@ -25,7 +25,7 @@ class TestBase(StageBase):
     pred_size = ...
     answers = ...
 
-    def __init__(self, rank, world_size, experiment, model, data, labels, config, shared, lock, *args, **kwargs):
+    def __init__(self, rank, world_size, experiment, model, data, labels, config, shared, lock, level=None, *args, **kwargs):
         super().__init__()
 
         self.test_records = {'test_time': None}
@@ -35,8 +35,9 @@ class TestBase(StageBase):
         self.data = data
         self.labels = labels
         self.config = config
-        self.lock = lock
         self.shared = shared
+        self.lock = lock
+        self.level = level
 
         self.path_output = os.path.join(self.experiment.dataset.output_test, self.identifier)
         self.path_models = os.path.join(self.experiment.dataset.output_models, self.identifier)
@@ -50,7 +51,7 @@ class TestBase(StageBase):
         self.model = DistributedDataParallel(model, device_ids=[rank])
         self.model.load_state_dict(checkpoint['model'])
 
-        if rank == 0:
+        if rank == self.experiment.main_rank:
             for path in [self.path_output, self.path_analyses]:
                 if not os.path.exists(path):
                     os.makedirs(path)
@@ -66,7 +67,7 @@ class TestBase(StageBase):
         if self.skipped:
             return self
 
-        if self.rank == 0:
+        if self.rank == self.experiment.main_rank:
             now = datetime.datetime.now()
             json.dump(self.test_records, open(os.path.join(self.path_analyses, 'test_records.json'), 'w'))
             self.data.save(os.path.join(self.path_output, 'test_answers.json'))

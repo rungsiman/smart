@@ -3,7 +3,7 @@ import json
 from smart.data.base import Ontology
 
 
-def class_dist_thresholds(input_train=None, input_ontology=None, thresholds=None, **kwargs):
+def class_dist_thresholds(input_train=None, input_ontology=None, thresholds=None):
     ontology = Ontology(input_ontology)
     data = json.load(open(input_train))
     levels = []
@@ -32,25 +32,29 @@ def class_dist_thresholds(input_train=None, input_ontology=None, thresholds=None
 
 
 class HybridConfig:
-    def __init__(self, config, trainer, labels):
+    def __init__(self, config, trainer, labels, *args, **kwargs):
         self.config = config
         self.trainer = trainer
         self.labels = labels
+        self.args = args
+        self.kwargs = kwargs
 
-    def __call__(self, *args, **kwargs):
-        return self.config(trainer=self.trainer, labels=self.labels, *args, **kwargs)
+    def __call__(self):
+        return self.config(trainer=self.trainer, labels=self.labels, *self.args, **self.kwargs)
 
 
 class HybridConfigFactory:
-    def __init__(self, *, factory, config, trainer, **kwargs):
+    def __init__(self, factory, config, trainer, input_train=None, input_ontology=None, thresholds=None, *args, **kwargs):
         self.config = config
         self.trainer = trainer
-        self.levels = factory(**kwargs)
+        self.levels = factory(input_train, input_ontology, thresholds)
         self.hybrid = [[] for _ in range(len(self.levels))]
+        self.args = args
+        self.kwargs = kwargs
 
     def pack(self):
         for i, level in enumerate(self.levels):
-            self.hybrid[i] = [HybridConfig(self.config, self.trainer, lv_set) for lv_set in level]
+            self.hybrid[i] = [HybridConfig(self.config, self.trainer, lv_set, *self.args, **self.kwargs) for lv_set in level]
 
         return self
 

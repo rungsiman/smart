@@ -1,0 +1,4 @@
+#!/bin/bash
+
+rm -r -f data/intermediate/*
+rm -r -f data/final/*

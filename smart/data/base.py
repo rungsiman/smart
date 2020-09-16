@@ -190,7 +190,7 @@ class DataForTest(DataBase):
         df_dict = self.df.to_dict(orient='records')
 
         for row in df_dict:
-            if 'dbo:Place' in row['type']:
+            if 'dbo:Place' in row['type'] and 'dbo:Location' not in row['type']:
                 row['type'].append('dbo:Location')
 
         self.df = pd.DataFrame(df_dict)

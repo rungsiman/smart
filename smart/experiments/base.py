@@ -4,6 +4,7 @@ from datetime import datetime
 from transformers import AdamW
 
 from smart.experiments.bert import TrainConfigMixin
+from smart.utils.configs import select
 from smart.utils.schedulers import LinearScheduleWithWarmup
 
 
@@ -67,6 +68,7 @@ class ExperimentConfigBase(ConfigBase):
 
     # If set to None, the worker processes will utilize all available GPUs
     num_gpu = None
+    main_rank = 0
 
     class Dataset(ConfigBase):
         name = ...
@@ -94,32 +96,43 @@ class ExperimentConfigBase(ConfigBase):
 
 
 class BertConfigBase(ConfigBase):
-    optimizer = ClassConfigBase(AdamW, kwargs={
-        'lr': 2e-5,             # Default learning rate: 5e-5
-        'eps': 1e-8})           # Adam's epsilon, default: 1e-6
-    scheduler = ClassConfigBase(LinearScheduleWithWarmup, kwargs={
-        'num_warmup_steps': 0})
     max_grad_norm = 1.0
     hidden_dropout_prob = .1
 
     # Dropout prob for DistilBert
     seq_classif_dropout = .2
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    def __init__(self, optimizer=None, scheduler=None, *args, **kwargs):
+        super().__init__(*args, **select(kwargs, 'optimizer', 'scheduler', reverse=True))
+
+        self.optimizer = optimizer or ClassConfigBase(AdamW, kwargs={
+            'lr': 2e-5,  # Default learning rate: 5e-5
+            'eps': 1e-8})  # Adam's epsilon, default: 1e-6
+        self.scheduler = scheduler or ClassConfigBase(LinearScheduleWithWarmup, kwargs={
+            'num_warmup_steps': 0})
+
+        if len(select(kwargs, 'optimizer')):
+            self.optimizer.kwargs = {**self.optimizer.kwargs, **select(kwargs, 'optimizer')}
+
+        if len(select(kwargs, 'scheduler')):
+            self.scheduler.kwargs = {**self.scheduler.kwargs, **select(kwargs, 'scheduler')}
 
 
 class GanConfigBase(ConfigBase):
     class Discriminator(BertConfigBase):
-        pass
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
 
     class Generator(BertConfigBase):
         noise_size = 100
 
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.discriminator = GanConfigBase.Discriminator()
-        self.generator = GanConfigBase.Generator()
+        self.discriminator = GanConfigBase.Discriminator(**select(kwargs, 'discriminator'))
+        self.generator = GanConfigBase.Generator(**select(kwargs, 'generator'))
 
 
 class TrainConfigBase(TrainConfigMixin, ConfigBase):
@@ -146,8 +159,14 @@ class TrainConfigBase(TrainConfigMixin, ConfigBase):
     # then the last batch will be smaller.
     drop_last = False
 
-    def __init__(self, *, trainer, model=model, use_gan=use_gan, labels=None, **kwargs):
-        super().__init__(trainer=trainer, model=model, use_gan=use_gan, **kwargs)
-        self.bert = BertConfigBase()
-        self.gan = GanConfigBase()
+    def __init__(self, *, trainer, labels=None, **kwargs):
+        super().__init__(**kwargs)
+        self.trainer = trainer
+        self.bert = BertConfigBase(**select(kwargs, 'bert'))
+        self.gan = GanConfigBase(**select(kwargs, 'gan'))
         self.labels = labels
+
+        if self.neg_size is not None and self.neg_size > 0:
+            self.use_gan = False
+        else:
+            self.neg_size = 0

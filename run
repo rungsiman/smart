@@ -1,15 +1,8 @@
 #!/bin/bash
 
-echo "Experiment on DBpedia"
 bash train literal dbpedia
-bash train hybrid dbpedia
 bash test literal dbpedia
+bash train hybrid dbpedia
 bash test hybrid dbpedia
-
-echo "Experiment on Wikidata"
-bash train literal wikidata
-bash train hybrid wikidata
-bash test literal wikidata
-bash test hybrid wikidata
-
-bash freeze --exclude-models
+bash freeze --exclude-models --identifier=dbpedia
+bash clean

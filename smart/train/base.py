@@ -78,7 +78,7 @@ class TrainBase(StageBase):
             self.optimizer = TrainBase._apply_optimizer(self.model.module, self.config.bert.optimizer)
             self.scheduler = TrainBase._apply_scheduler(self.optimizer, self.config.bert.scheduler, num_training_steps)
 
-        if rank == 0:
+        if rank == self.experiment.main_rank:
             for path in [self.path_output, self.path_models, self.path_analyses]:
                 if not os.path.exists(path):
                     os.makedirs(path)
@@ -100,7 +100,7 @@ class TrainBase(StageBase):
             self.sampler.set_epoch(epoch)
 
             for step, batch in (enumerate(tqdm(self.train_dataloader, desc=f'GPU #{self.rank}: Training'))
-                                if self.rank == 0 else enumerate(self.train_dataloader)):
+                                if self.rank == self.experiment.main_rank else enumerate(self.train_dataloader)):
                 self.optimizer.zero_grad()
 
                 loss = self._train_forward(batch).loss
@@ -116,7 +116,7 @@ class TrainBase(StageBase):
             average_loss = accumulated_loss / len(self.train_dataloader)
             training_time = TrainBase._format_time(time.time() - epoch_start)
 
-            if self.rank == 0:
+            if self.rank == self.experiment.main_rank:
                 status = f'GPU #{self.rank}: Training epoch {epoch + 1} of {self.config.epochs} complete:\n'
                 status += f'.. Average loss: {average_loss}\n'
                 status += f'.. Training time: {training_time}'
@@ -140,7 +140,7 @@ class TrainBase(StageBase):
             self.sampler.set_epoch(epoch)
 
             for step, batch in (enumerate(tqdm(self.train_dataloader, desc=f'GPU #{self.rank}: Training'))
-                                if self.rank == 0 else enumerate(self.train_dataloader)):
+                                if self.rank == self.experiment.main_rank else enumerate(self.train_dataloader)):
                 # Update BERT and discriminator's parameters with d_loss
                 self.optimizer.zero_grad()
                 self.d_optimizer.zero_grad()
@@ -179,7 +179,7 @@ class TrainBase(StageBase):
             average_g_loss = accumulated_g_loss / len(self.train_dataloader)
             training_time = TrainBase._format_time(time.time() - epoch_start)
 
-            if self.rank == 0:
+            if self.rank == self.experiment.main_rank:
                 status = f'GPU #{self.rank}: Training epoch {epoch + 1} of {self.config.epochs} complete:\n'
                 status += f'.. Average discriminator loss: {average_d_loss}\n'
                 status += f'.. Average generator loss: {average_g_loss}\n'
@@ -197,7 +197,7 @@ class TrainBase(StageBase):
         return self
 
     def save(self):
-        if self.rank == 0:
+        if self.rank == self.experiment.main_rank:
             now = datetime.datetime.now()
             torch.save(self.checkpoint, os.path.join(self.path_models, 'model.checkpoint'))
             self.model.module.config.to_json_file(os.path.join(self.path_models, 'config.json'))
@@ -223,7 +223,7 @@ class TrainBase(StageBase):
 
             if self.eval_report is not None:
                 self._save_evaluate()
-            elif self.rank == 0:
+            elif self.rank == self.experiment.main_rank:
                 print(f'GPU #{self.rank}: Skipped saving evaluation results.')
 
         dist.barrier()
@@ -244,7 +244,7 @@ class TrainBase(StageBase):
                 writer.write(self.ndcg_result)
 
         except ZeroDivisionError:
-            if self.rank == 0:
+            if self.rank == self.experiment.main_rank:
                 print(f'GPU #{self.rank}: Skipped NDCG evaluation (division by zero).')
 
         return self

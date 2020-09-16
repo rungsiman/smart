@@ -1,7 +1,7 @@
 import torch
 
 
-class PairedBinaryClassificationMixin(object):
+class PairedBinaryClassificationMixin:
     data = ...
 
     class Data:
@@ -21,7 +21,7 @@ class PairedBinaryClassificationMixin(object):
 
     def __init__(self, *args, **kwargs):
         self.name = 'paired-binary'
-        self.identifier = self.resolve_identifier(kwargs.get('level', None))
+        self.identifier = self.resolve_identifier(kwargs.get('level', None), kwargs.get('index', None))
         super().__init__(*args, **kwargs)
 
     def _build_answers(self, y_ids, y_lids, y_pred):
@@ -40,5 +40,5 @@ class PairedBinaryClassificationMixin(object):
         return answers
 
     @staticmethod
-    def resolve_identifier(level=None):
-        return f'level-{level}-paired-binary' if level is not None else 'paired-binary'
+    def resolve_identifier(level=None, index=None):
+        return f'level-{level}-id-{index}-paired-binary' if level is not None else 'paired-binary'

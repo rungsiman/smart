@@ -20,7 +20,7 @@ class TestPairedBinaryClassification(PairedBinaryClassificationMixin, TestBase):
 
         self.model.eval()
 
-        if self.rank == 0:
+        if self.rank == self.experiment.main_rank:
             with self.lock:
                 self.shared['inference'] = [{'y_ids': [], 'y_lids': [], 'y_pred': []} for _ in range(self.world_size)]
 
@@ -30,7 +30,7 @@ class TestPairedBinaryClassification(PairedBinaryClassificationMixin, TestBase):
         test_start = time.time()
 
         for step, batch in (enumerate(tqdm(self.test_dataloader, desc=f'GPU #{self.rank}: Testing'))
-                            if self.rank == 0 else enumerate(self.test_dataloader)):
+                            if self.rank == self.experiment.main_rank else enumerate(self.test_dataloader)):
             logits = self.model(*tuple(t.cuda(self.rank) for t in batch[2:]), return_dict=True).logits
             preds = torch.argmax(logits, dim=1).detach().cpu().numpy().tolist()
 
@@ -47,7 +47,7 @@ class TestPairedBinaryClassification(PairedBinaryClassificationMixin, TestBase):
         dist.barrier()
         self.test_records['test_time'] = TestPairedBinaryClassification._format_time(time.time() - test_start)
 
-        if self.rank == 0:
+        if self.rank == self.experiment.main_rank:
             y_ids, y_lids, y_pred = [], [], []
 
             for i in range(self.world_size):
@@ -62,7 +62,7 @@ class TestPairedBinaryClassification(PairedBinaryClassificationMixin, TestBase):
         self.answers = pd.DataFrame(self.shared['answers'])
         return self
 
-    def pack(self):
+    def pack(self, **kwargs):
         ids = self.data.df.id.values
         questions = self.data.df.question.values
         answers = self.data.df.type.values
@@ -74,7 +74,11 @@ class TestPairedBinaryClassification(PairedBinaryClassificationMixin, TestBase):
 
         for qid, question, types in tqdm(zip(ids, questions, answers)):
             question_ids = self.data.tokenized[question]
-            labels = [label for label in self.labels if self.data.ontology.labels[label]['parent'] in types]
+
+            if self.level == 1:
+                labels = self.labels
+            else:
+                labels = [label for label in self.labels if self.data.ontology.labels[label]['parent'] in types]
 
             test_ids += [int(qid.replace('dbpedia_', '')) if isinstance(qid, str) else qid] * len(labels)
             test_lids += [self.data.ontology.labels[label]['id'] for label in labels]

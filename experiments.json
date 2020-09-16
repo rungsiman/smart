@@ -1,0 +1,7 @@
+{
+  "train-base-model": ["distilbert-base-uncased"],
+  "train-base-epochs": [1],
+  "train-base-neg_size": [10, null],
+  "train-base-batch_size": [64],
+  "train-base-class_dist_thresholds": [[400, 100]]
+}

@@ -76,7 +76,7 @@ class TrainSequenceClassification(SequenceClassificationMixin, TrainBase):
 
         self.model.eval()
 
-        if self.rank == 0:
+        if self.rank == self.experiment.main_rank:
             with self.lock:
                 self.shared['evaluation'] = [{'y_ids': [], 'y_true': [], 'y_pred': []} for _ in range(self.world_size)]
 
@@ -86,7 +86,7 @@ class TrainSequenceClassification(SequenceClassificationMixin, TrainBase):
         eval_start = time.time()
 
         for step, batch in (enumerate(tqdm(self.eval_dataloader, desc=f'GPU #{self.rank}: Evaluating'))
-                            if self.rank == 0 else enumerate(self.eval_dataloader)):
+                            if self.rank == self.experiment.main_rank else enumerate(self.eval_dataloader)):
             logits = self.model(*tuple(t.cuda(self.rank) for t in batch[1:-1]), return_dict=True).logits
             preds = torch.argmax(logits, dim=1).detach().cpu().numpy().tolist()
 
@@ -103,7 +103,7 @@ class TrainSequenceClassification(SequenceClassificationMixin, TrainBase):
         dist.barrier()
         self.train_records['eval_time'] = TrainSequenceClassification._format_time(time.time() - eval_start)
 
-        if self.rank == 0:
+        if self.rank == self.experiment.main_rank:
             y_ids, y_true, y_pred = [], [], []
 
             for i in range(self.world_size):

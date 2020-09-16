@@ -8,3 +8,17 @@ def override(bert_config, config):
     }
 
     bert_config.update(config_dict)
+
+
+def select(kwargs, *classes, reverse=False):
+    if reverse:
+        return {key: value for key, value in kwargs.items() if all(not key.startswith(cls) for cls in classes)}
+    else:
+        filtered_kwargs = {}
+
+        for cls in classes:
+            for key, value in kwargs.items():
+                if key.startswith(cls):
+                    filtered_kwargs[key.replace(f'{cls}-', '')] = value
+
+        return filtered_kwargs

@@ -13,12 +13,13 @@ from smart.train.paired_binary import *
 from smart.train.sequence import *
 
 
-class TrainConfigMixin(object):
-    def __init__(self, *, trainer, model=None, use_gan=None, **kwargs):
-        super().__init__()
-        self.model = model
-        self.trainer = trainer
-        self.use_gan = use_gan
+class TrainConfigMixin:
+    trainer = ...
+    model = ...
+    use_gan = ...
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
     @property
     def trainer(self):

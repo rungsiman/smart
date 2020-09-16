@@ -5,6 +5,6 @@ export PYTHONHASHSEED=42
 
 echo "INFO: Python hash seed = $PYTHONHASHSEED"
 
-python3 smart/main.py test $1 $2
+python3 smart/main.py test $@
 
 echo "WARNING: Don't forget to freeze by executing 'bash freeze'"

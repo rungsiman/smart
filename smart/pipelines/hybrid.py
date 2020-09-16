@@ -5,11 +5,14 @@ from smart.data.base import Ontology
 from smart.data.tokenizers import CustomAutoTokenizer
 from smart.pipelines.base import PipelineBase
 from smart.utils.configs import override
+from smart.utils.monitoring import TimeMonitor
 
 
 class HybridTrainPipeline(PipelineBase):
     def __call__(self):
+        self.all_data_size = self.data.size
         self.data = self.data.resource
+        stopwatch = TimeMonitor()
         pipeline_records, pipeline_eval = [], []
         ontology = Ontology(self.experiment.dataset.input_ontology)
 
@@ -26,9 +29,12 @@ class HybridTrainPipeline(PipelineBase):
             self._process(level, 'default', config, labels_reversed, ontology,
                           processed_labels, pipeline_records, pipeline_eval)
 
-        if self.rank == 0:
+        if self.rank == self.experiment.main_rank:
             json.dump(pipeline_records, open(os.path.join(self.experiment.dataset.output_analyses, 'pipeline_train_records.json'), 'w'), indent=4)
             json.dump(pipeline_eval, open(os.path.join(self.experiment.dataset.output_analyses, 'pipeline_eval_records.json'), 'w'), indent=4)
+
+            with open(os.path.join(self.experiment.dataset.output_analyses, 'pipeline_train_records.txt'), 'w') as writer:
+                writer.write(f'Approximate training time: {stopwatch.watch()}')
 
     def _process(self, level, index, config, labels, ontology, processed_labels, pipeline_records, pipeline_eval, set_num_labels=False):
         labels_reversed = ontology.reverse(labels, level)
@@ -45,25 +51,26 @@ class HybridTrainPipeline(PipelineBase):
             bert_config.num_labels = len(labels) + 1
 
         # For reversed data, if filter only with (labels, reverse=True), the rest of the data on all levels will still be included.
-        # If filter only with (labels_reversed), questions having both primary and secondary types will be included.
+        # If filter only with (labels_reversed), questions having both positive and negative types will be included.
+        # Use both to filter only negative samples on the same level.
         data_hybrid = self.data.clone().filter(labels)
-        data_reversed = self.data.clone().filter(labels, reverse=True).filter(labels_reversed)
+        data_reversed = self.data.clone().filter(labels, reverse=True)
 
         if len(labels) and data_hybrid.size > 0:
             data_hybrid.cap(config.data_size_cap)
             model = config.classifier.from_pretrained(config.model, config=bert_config)
             train = config.trainer(self.rank, self.world_size, self.experiment, model, data_hybrid, labels,
-                                   config, self.shared, self.lock, level=level, data_neg=data_reversed)
+                                   config, self.shared, self.lock, level=level, index=index, data_neg=data_reversed)
 
             status = f'GPU #{self.rank}: Training #{index} "{train.name}" on level {level}.\n'
             status += f'.. Type count: {len(labels)}\n'
-            status += f'.. Data size: {data_hybrid.size} of {self.data.size}\n'
+            status += f'.. Data size: {data_hybrid.size} of {self.data.size} ({self.all_data_size} including literal)\n'
             status += f'.. Negative data size: {data_reversed.size}'
 
             if config.data_size_cap is not None:
                 status += f' (Data cap applied)'
 
-            if self.rank == 0:
+            if self.rank == self.experiment.main_rank:
                 print(status)
 
             train().evaluate().save()
@@ -78,12 +85,13 @@ class HybridTrainPipeline(PipelineBase):
                                       'f1-macro': train.eval_dict.get('macro avg', None),
                                       'f1-weighted': train.eval_dict.get('weighted avg', None)})
 
-        elif self.rank == 0:
+        elif self.rank == self.experiment.main_rank:
             print(f'GPU #{self.rank}: Skipped training #{index} on level {level}')
 
 
 class HybridTestPipeline(PipelineBase):
     def __call__(self):
+        stopwatch = TimeMonitor()
         pipeline_records = []
         ontology = Ontology(self.experiment.dataset.input_ontology)
 
@@ -92,20 +100,26 @@ class HybridTestPipeline(PipelineBase):
                 processed_labels = []
 
                 for index, config in enumerate(self.experiment.dataset.hybrid[level - 1]):
-                    self._process(level, index, config, config.labels, ontology, pipeline_records, processed_labels)
+                    self._process(level, index, config, config.labels, pipeline_records, processed_labels)
 
                 config = self.experiment.dataset.hybrid_default
-                labels_reversed = ontology.reverse(processed_labels, level)
-                self._process(level, 'default', config, labels_reversed, ontology, pipeline_records, processed_labels)
+                reversed_labels = ontology.reverse(processed_labels, level)
+                self._process(level, 'default', config, reversed_labels, pipeline_records, processed_labels)
 
-        if self.rank == 0:
+        if self.rank == self.experiment.main_rank:
             self.data.save(os.path.join(self.experiment.paths.final, 'answers.json'))
             json.dump(pipeline_records, open(os.path.join(self.experiment.dataset.output_analyses, 'pipeline_test_records.json'), 'w'), indent=4)
 
-    def _process(self, level, index, config, labels, ontology, pipeline_records, processed_labels, test_remaining_label=False):
-        identifier = config.tester.resolve_identifier(level)
-        labels_parents = ontology.parents(ontology.reverse(processed_labels, level) if test_remaining_label else labels)
+            with open(os.path.join(self.experiment.dataset.output_analyses, 'pipeline_test_records.txt'), 'w') as writer:
+                writer.write(f'Approximate testing time: {stopwatch.watch()}')
+
+    def _process(self, level, index, config, labels, pipeline_records, processed_labels):
+        identifier = config.tester.resolve_identifier(level, index)
         path_models = os.path.join(self.experiment.dataset.output_models, identifier)
+
+        if not os.path.exists(path_models):
+            print(f'GPU #{self.rank}: Skipped testing #{index} on level {level} (trained model not found)')
+            return
 
         bert_config = config.bert_config.from_pretrained(path_models)
         override(bert_config, config)
@@ -114,12 +128,19 @@ class HybridTestPipeline(PipelineBase):
         ontology = Ontology(self.experiment.dataset.input_ontology).tokenize(tokenizer)
         self.data.tokenize(ontology, tokenizer)
 
-        data_test = self.data.clone() if level == 1 else self.data.clone().filter(labels_parents)
+        if level == 1:
+            data_test = self.data.clone().resource
 
-        if len(labels) and data_test.size > 0:
+            if index == 'default' or index > 0:
+                data_test = self.data.clone().resource.filter(processed_labels, reverse=True)
+
+        else:
+            data_test = self.data.clone().resource.filter(ontology.parents(labels))
+
+        if data_test.size > 0:
             model = config.classifier.from_pretrained(config.model, config=bert_config)
             test = config.tester(self.rank, self.world_size, self.experiment, model, data_test, labels, config,
-                                 self.shared, self.lock, level=level)
+                                 self.shared, self.lock, level=level, index=index)
 
             status = f'GPU #{self.rank}: Testing #{index} "{test.name}" on level {level}.\n'
             status += f'.. Type count: {len(labels)}\n'
@@ -133,7 +154,7 @@ class HybridTestPipeline(PipelineBase):
             test()
 
             if not test.skipped:
-                test.data.assign_answers(test.answers)
+                test.data.blind().assign_answers(test.answers)
                 test.data.assign_missing_answers()
                 test.save()
 
@@ -141,18 +162,23 @@ class HybridTestPipeline(PipelineBase):
                 self.data.assign_answers(test.answers)
                 self.data.assign_missing_answers()
 
-                if self.rank == 0:
+                if self.rank == self.experiment.main_rank:
                     status = f'GPU #{self.rank}: Testing #{index} "{test.name}" on level {level} complete.\n'
+                    status += f'.. Data size: {self.data.size} ({test.data.size} processed by this classifier)\n'
                     status += f'.. Answer count: {self.data.count_answers() - num_existing_answers}\n'
                     status += f'.. Accumulated answer count: {self.data.count_answers()}'
                     print(status)
 
                 pipeline_records.append({'level': level, 'index': index, 'classification': test.name,
                                          'answer_count': self.data.count_answers() - num_existing_answers,
-                                         'accumulated_answer_count': self.data.count_answers()})
+                                         'accumulated_answer_count': self.data.count_answers(),
+                                         'data_processed_size': test.data.size,
+                                         'data_size': self.data.size})
 
-            elif self.rank == 0:
-                print(f'GPU #{self.rank}: Skipped testing #{index} on level {level} (No eligible data)')
+            elif self.rank == self.experiment.main_rank:
+                print(f'GPU #{self.rank}: Skipped testing #{index} on level {level} (no eligible data)')
 
-        elif self.rank == 0:
-            print(f'GPU #{self.rank}: Skipped testing #{index} on level {level}')
+        elif self.rank == self.experiment.main_rank:
+            print(f'GPU #{self.rank}: Skipped testing #{index} on level {level} (no data to test after filtering)')
+
+        processed_labels += labels

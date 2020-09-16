@@ -1,7 +1,7 @@
 import torch
 
 
-class MultipleLabelClassificationMixin(object):
+class MultipleLabelClassificationMixin:
     labels = ...
 
     class Data:
@@ -19,7 +19,7 @@ class MultipleLabelClassificationMixin(object):
 
     def __init__(self, *args, **kwargs):
         self.name = 'multiple-label'
-        self.identifier = self.resolve_identifier(kwargs.get('level', None))
+        self.identifier = self.resolve_identifier(kwargs.get('level', None), kwargs.get('index', None))
         super().__init__(*args, **kwargs)
 
     def _build_answers(self, y_ids, y_pred):
@@ -38,5 +38,5 @@ class MultipleLabelClassificationMixin(object):
         return answers
 
     @staticmethod
-    def resolve_identifier(level=None):
-        return f'level-{level}-multiple-label' if level is not None else 'multiple-label'
+    def resolve_identifier(level=None, index=None):
+        return f'level-{level}-id-{index}-multiple-label' if level is not None else 'multiple-label'
