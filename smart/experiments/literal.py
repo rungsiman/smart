@@ -5,10 +5,10 @@ from smart.utils.configs import select
 
 
 class LiteralExperimentConfig(ExperimentConfigBase):
-    version = '0.8'
-    experiment = 'phuc-literal'
-    identifier = 'base'
-    description = 'Experiments run by Phuc'
+    version = '0.9-aws'
+    experiment = 'distilbert-literal'
+    identifier = 'sandbox'
+    description = 'Sandbox for testing on AWS'
 
     class Paths(ConfigBase):
         root = 'data'
@@ -50,14 +50,14 @@ class LiteralExperimentConfig(ExperimentConfigBase):
             self.input_ontology = os.path.join(self.input_root, 'wikidata_types.tsv')
 
     def __init__(self, dataset, *args, **kwargs):
-        super().__init__(*args, **select(kwargs, 'experiment-base'))
+        super().__init__(*args, **select(kwargs, 'experiment-base-literal'))
 
         self.paths = LiteralExperimentConfig.Paths(self.experiment, self.identifier)
 
         if dataset == 'dbpedia':
-            self.dataset = LiteralExperimentConfig.DBpedia(self.paths, **select(kwargs, 'train-base', 'test-base'))
+            self.dataset = LiteralExperimentConfig.DBpedia(self.paths, **select(kwargs, 'train-base-literal', 'test-base-literal'))
         else:
-            self.dataset = LiteralExperimentConfig.Wikidata(self.paths, **select(kwargs, 'train-base', 'test-base'))
+            self.dataset = LiteralExperimentConfig.Wikidata(self.paths, **select(kwargs, 'train-base-literal', 'test-base-literal'))
 
         # Apply to sklearn.model_selection.train_test_split.
         # Controls the shuffling applied to the data before applying the split.
