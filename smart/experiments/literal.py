@@ -5,10 +5,10 @@ from smart.utils.configs import select
 
 
 class LiteralExperimentConfig(ExperimentConfigBase):
-    version = '0.10'
-    experiment = 'cat-literal'
+    version = '0.11'
+    experiment = 'master-literal'
     identifier = 'base'
-    description = 'Experiments run by Cat'
+    description = 'Master code'
 
     class Paths(ConfigBase):
         root = 'data'
