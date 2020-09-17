@@ -1,13 +1,13 @@
 {
-  "train-base-literal-model": ["distilbert-base-uncased"],
-  "train-base-literal-epochs": [1],
-  "train-base-literal-neg_size": [10, null],
-  "train-base-literal-batch_size": [64],
-  "train-base-literal-class_dist_thresholds": [[400, 100]],
+  "train-base-literal-model": ["bert-large-uncased", "roberta-large"],
+  "train-base-literal-epochs": [1, 2],
+  "train-base-literal-neg_size": [5, 10, null],
+  "train-base-literal-batch_size": [32],
 
-  "train-base-hybrid-model": ["distilbert-base-uncased"],
-  "train-base-hybrid-epochs": [1],
-  "train-base-hybrid-neg_size": [10, null],
-  "train-base-hybrid-batch_size": [64],
-  "train-base-hybrid-class_dist_thresholds": [[400, 100]]
+  "train-base-hybrid-model": ["bert-large-uncased", "roberta-large"],
+  "train-base-hybrid-epochs": [2, 5, 10],
+  "train-base-hybrid-neg_size": [5, 10, null],
+  "train-base-hybrid-batch_size": [32],
+  "train-base-hybrid-class_dist_thresholds": [[500], [400], [100]],
+  "test-base-hybrid-dataset-test_strategy": ["dependent", "independent", "top-down", "bottom-up"]
 }
