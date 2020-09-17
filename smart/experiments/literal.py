@@ -5,7 +5,7 @@ from smart.utils.configs import select
 
 
 class LiteralExperimentConfig(ExperimentConfigBase):
-    version = '0.9-aws'
+    version = '0.10-aws'
     experiment = 'distilbert-literal'
     identifier = 'sandbox'
     description = 'Sandbox for testing on AWS'
@@ -55,9 +55,15 @@ class LiteralExperimentConfig(ExperimentConfigBase):
         self.paths = LiteralExperimentConfig.Paths(self.experiment, self.identifier)
 
         if dataset == 'dbpedia':
-            self.dataset = LiteralExperimentConfig.DBpedia(self.paths, **select(kwargs, 'train-base-literal', 'test-base-literal'))
+            self.dataset = LiteralExperimentConfig.DBpedia(self.paths,
+                                                           **select(kwargs,
+                                                                    'train-base-literal', 'test-base-literal',
+                                                                    'train-base-all', 'test-base-all'))
         else:
-            self.dataset = LiteralExperimentConfig.Wikidata(self.paths, **select(kwargs, 'train-base-literal', 'test-base-literal'))
+            self.dataset = LiteralExperimentConfig.Wikidata(self.paths,
+                                                            **select(kwargs,
+                                                                     'train-base-literal', 'test-base-literal',
+                                                                     'train-base-all', 'test-base-all'))
 
         # Apply to sklearn.model_selection.train_test_split.
         # Controls the shuffling applied to the data before applying the split.
