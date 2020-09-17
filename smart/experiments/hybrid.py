@@ -7,8 +7,8 @@ from smart.utils.hybrid import HybridConfigFactory, class_dist_thresholds
 
 
 class HybridExperimentConfig(ExperimentConfigBase):
-    version = '0.15-aws'
-    experiment = 'distilbert-hybrid'
+    version = '0.16-aws'
+    experiment = 'dev-hybrid'
     identifier = 'sandbox'
     description = 'Sandbox for testing on AWS'
     

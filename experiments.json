@@ -4,6 +4,5 @@
   "train-base-all-batch_size": [32],
   "train-base-literal-epochs": [1, 2],
   "train-base-hybrid-epochs": [2, 5, 10],
-  "train-base-hybrid-class_dist_thresholds": [[500], [400], [100]],
-  "test-base-hybrid-dataset-test_strategy": ["dependent", "independent", "top-down", "bottom-up"]
+  "train-base-hybrid-class_dist_thresholds": [[500], [400], [100]]
 }
