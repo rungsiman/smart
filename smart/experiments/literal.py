@@ -5,7 +5,7 @@ from smart.utils.configs import select
 
 
 class LiteralExperimentConfig(ExperimentConfigBase):
-    version = '0.10-aws'
+    version = '0.10'
     experiment = 'cat-literal'
     identifier = 'base'
     description = 'Experiments run by Cat'
