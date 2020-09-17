@@ -77,8 +77,6 @@ class LiteralTestPipeline(PipelineBase):
         test.data.assign_answers(test.answers)
         test.data.assign_categories()
 
-        print(f'>>> GPU #{self.rank}: ANSWER ASSIGNMENT PASS')
-
         if self.rank == self.experiment.main_rank:
             test.save()
 

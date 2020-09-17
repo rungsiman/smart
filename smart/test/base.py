@@ -3,7 +3,6 @@ import datetime
 import json
 import os
 import torch
-import torch.distributed as dist
 from torch.nn.parallel import DistributedDataParallel
 
 from smart.train.base import StageBase
@@ -77,7 +76,6 @@ class TestBase(StageBase):
                 writer.write(f'Number of GPUs: {self.world_size}')
                 writer.write(f'Prediction size: {self.pred_size}')
 
-        dist.barrier()
         return self
 
     @staticmethod

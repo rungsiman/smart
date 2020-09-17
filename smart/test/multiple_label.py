@@ -4,6 +4,7 @@ import time
 import torch.distributed as dist
 import torch.nn.functional as F
 from torch.utils.data import TensorDataset, DataLoader
+from torch.utils.data.distributed import DistributedSampler
 from tqdm import tqdm
 
 from smart.mixins.multiple_label import MultipleLabelClassificationMixin
@@ -43,7 +44,6 @@ class TestMultipleLabelClassification(MultipleLabelClassificationMixin, TestBase
 
         dist.barrier()
         self.test_records['test_time'] = TestMultipleLabelClassification._format_time(time.time() - test_start)
-        print(f'>>> GPU #{self.rank}: EVAL BARRIER PASS')
 
         if self.rank == self.experiment.main_rank:
             y_ids, y_pred = [], []
@@ -54,10 +54,11 @@ class TestMultipleLabelClassification(MultipleLabelClassificationMixin, TestBase
 
             answers = self._build_answers(y_ids, y_pred)
             self.shared['answers'] = answers
+            print(f'GPU #{self.rank}: Combined all prediction subsets')
+            print(f'.. Combined prediction size: {len(y_ids)}')
 
         dist.barrier()
         self.answers = pd.DataFrame(self.shared['answers'])
-        print(f'>>> GPU #{self.rank}: ANSWER DISTRIBUTION PASS')
         return self
 
     def pack(self):
@@ -76,4 +77,8 @@ class TestMultipleLabelClassification(MultipleLabelClassificationMixin, TestBase
 
     def _build_dataloader(self, data):
         dataset = TensorDataset(data.ids, data.questions.ids, data.questions.masks)
-        return DataLoader(dataset, batch_size=self.config.batch_size, drop_last=self.config.drop_last)
+        self.sampler = DistributedSampler(dataset, rank=self.rank, num_replicas=self.world_size,
+                                          shuffle=False, seed=self.experiment.seed)
+        return DataLoader(dataset,
+                          sampler=self.sampler,
+                          batch_size=self.config.batch_size)

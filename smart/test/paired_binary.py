@@ -4,6 +4,7 @@ import time
 import torch
 import torch.distributed as dist
 from torch.utils.data import TensorDataset, DataLoader
+from torch.utils.data.distributed import DistributedSampler
 from tqdm import tqdm
 
 from smart.mixins.paired_binary import PairedBinaryClassificationMixin
@@ -94,4 +95,8 @@ class TestPairedBinaryClassification(PairedBinaryClassificationMixin, TestBase):
 
     def _build_dataloader(self, data):
         dataset = TensorDataset(data.ids, data.lids, data.questions.ids, data.questions.masks, data.labels.ids, data.labels.masks)
-        return DataLoader(dataset, batch_size=self.config.batch_size, drop_last=self.config.drop_last)
+        self.sampler = DistributedSampler(dataset, rank=self.rank, num_replicas=self.world_size,
+                                          shuffle=True, seed=self.experiment.seed)
+        return DataLoader(dataset,
+                          sampler=self.sampler,
+                          batch_size=self.config.batch_size)
