@@ -6,9 +6,9 @@ from smart.utils.configs import select
 
 class LiteralExperimentConfig(ExperimentConfigBase):
     version = '0.10-aws'
-    experiment = 'distilbert-literal'
-    identifier = 'sandbox'
-    description = 'Sandbox for testing on AWS'
+    experiment = 'cat-literal'
+    identifier = 'base'
+    description = 'Experiments run by Cat'
 
     class Paths(ConfigBase):
         root = 'data'
