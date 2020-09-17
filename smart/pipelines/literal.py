@@ -77,12 +77,18 @@ class LiteralTestPipeline(PipelineBase):
         test.data.assign_answers(test.answers)
         test.data.assign_categories()
 
+        print(f'>>> GPU #{self.rank}: ANSWER ASSIGNMENT PASS')
+
         if self.rank == self.experiment.main_rank:
             test.save()
-            status = f'GPU #{self.rank}: Testing complete.\n'
-            status += f'.. Data size: {self.data.size} ({test.data.size} processed)\n'
-            status += f'.. Answer count: {test.data.count_answers()}'
-            print(status)
+
+            num_q_with_answers = test.data.count_questions_with_answers()
+            status = f'.. Approximate testing time: {stopwatch.watch()}\n'
+            status += f'.. All questions: {test.data.size} ({self.data.size} total)\n'
+            status += f'.. Questions with answers: {num_q_with_answers} (%.4f%%)\n' % (num_q_with_answers / test.data.size * 100)
+            status += f'.. Unique answers: {test.data.count_answers()}'
 
             with open(os.path.join(self.experiment.dataset.output_analyses, 'pipeline_test_records.txt'), 'w') as writer:
-                writer.write(f'Approximate testing time: {stopwatch.watch()}')
+                writer.write(status.replace('.. ', ''))
+
+            print(f'GPU #{self.rank}: Testing complete.\n' + status)

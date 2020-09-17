@@ -107,11 +107,20 @@ class HybridTestPipeline(PipelineBase):
                 self._process(level, 'default', config, reversed_labels, pipeline_records, processed_labels)
 
         if self.rank == self.experiment.main_rank:
-            self.data.save(os.path.join(self.experiment.paths.final, 'answers.json'))
+            self.data.apply_test_strategy()
+            self.data.save(os.path.join(self.experiment.paths.final, f'answers-{self.experiment.dataset.name}.json'))
             json.dump(pipeline_records, open(os.path.join(self.experiment.dataset.output_analyses, 'pipeline_test_records.json'), 'w'), indent=4)
 
+            num_q_with_answers = self.data.count_questions_with_answers()
+            status = f'.. Approximate testing time: {stopwatch.watch()}\n'
+            status += f'.. All questions: {self.data.size}\n'
+            status += f'.. Questions with answers: {num_q_with_answers} (%.4f%%)\n' % (num_q_with_answers / self.data.size * 100)
+            status += f'.. Unique answers: {self.data.count_answers()}'
+
             with open(os.path.join(self.experiment.dataset.output_analyses, 'pipeline_test_records.txt'), 'w') as writer:
-                writer.write(f'Approximate testing time: {stopwatch.watch()}')
+                writer.write(status.replace('.. ', ''))
+
+            print(f'GPU #{self.rank}: Testing complete.\n' + status)
 
     def _process(self, level, index, config, labels, pipeline_records, processed_labels):
         identifier = config.tester.resolve_identifier(level, index)
@@ -128,10 +137,12 @@ class HybridTestPipeline(PipelineBase):
         ontology = Ontology(self.experiment.dataset.input_ontology).tokenize(tokenizer)
         self.data.tokenize(ontology, tokenizer)
 
-        if level == 1:
-            data_test = self.data.clone().resource
-
-            if index == 'default' or index > 0:
+        # Assuming that the default index will always be the paired-label classification
+        if level == 1 or (self.experiment.dataset.test_strategy != 'dependent' and
+                          (self.experiment.dataset.independent_paired_label or index != 'default')):
+            if index != 'default':
+                data_test = self.data.clone().resource
+            else:
                 data_test = self.data.clone().resource.filter(processed_labels, reverse=True)
 
         else:

@@ -50,6 +50,22 @@ class Ontology:
     def level(self, lv):
         return {key: item for key, item in self.labels.items() if item['level'] == lv}
 
+    def trace(self, label, reverse=False):
+        branch = self._trace(label, [])[1:]
+
+        if not reverse:
+            branch.reverse()
+
+        return branch
+
+    def _trace(self, label, branch):
+        branch.append(label)
+
+        if self.labels[label]['level'] > 1:
+            return self._trace(self.labels[label]['parent'], branch)
+
+        return branch
+
 
 class DataBase:
     __metaclass__ = abc.ABCMeta
@@ -189,12 +205,47 @@ class DataForTest(DataBase):
     def assign_missing_answers(self):
         df_dict = self.df.to_dict(orient='records')
 
-        for row in df_dict:
-            if 'dbo:Place' in row['type'] and 'dbo:Location' not in row['type']:
-                row['type'].append('dbo:Location')
+        # Removed following SMART Task organizers' reply on getting rid of dbo:Location entirely
+        # for row in df_dict:
+        #    if 'dbo:Place' in row['type'] and 'dbo:Location' not in row['type']:
+        #        row['type'].append('dbo:Location')
 
         self.df = pd.DataFrame(df_dict)
         return self
 
     def count_answers(self):
         return int(np.array([len(ans) for ans in self.df['type'].tolist()]).sum())
+
+    def count_questions_with_answers(self):
+        return int(np.array([int(len(ans) > 0) for ans in self.df['type'].tolist()]).sum())
+
+    def apply_test_strategy(self):
+        if self.experiment.dataset.test_strategy in ('top-down', 'bottom-up'):
+            df_dict = self.df.to_dict(orient='records')
+
+            for row in df_dict:
+                if row['category'] == 'resource':
+                    if self.experiment.dataset.test_strategy == 'top-down':
+                        labels = []
+
+                        for label in row['type']:
+                            branch = self.ontology.trace(label)
+
+                            if all([element in row['type'] for element in branch]):
+                                labels.append(label)
+
+                        row['type'] = labels
+
+                    else:
+                        labels = []
+
+                        for label in row['type']:
+                            labels += self.ontology.trace(label)
+
+                        for label in labels:
+                            if label not in row['type']:
+                                row['type'].append(label)
+
+            self.df = pd.DataFrame(df_dict)
+
+        return self

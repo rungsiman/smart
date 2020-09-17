@@ -3,34 +3,6 @@ import json
 from smart.data.base import Ontology
 
 
-def class_dist_thresholds(input_train=None, input_ontology=None, thresholds=None):
-    ontology = Ontology(input_ontology)
-    data = json.load(open(input_train))
-    levels = []
-
-    for cls in ontology.labels.values():
-        cls['count'] = 0
-
-    for question in data:
-        for label in question['type']:
-            if label in ontology.labels:
-                ontology.labels[label]['count'] += 1
-
-    for lv in range(ontology.max_level):
-        lv_counts = [(label, item['count']) for label, item in ontology.level(lv).items()]
-        lv_counts.sort(key=lambda t: t[1], reverse=True)
-        lv_sets = [[] for _ in range(len(thresholds))]
-
-        for i, threshold in enumerate(thresholds):
-            for lv_count in lv_counts:
-                if lv_count[1] >= threshold and (i < 1 or lv_count[1] < thresholds[i - 1]):
-                    lv_sets[i].append(lv_count[0])
-
-        levels.append(lv_sets)
-
-    return levels[1:]
-
-
 class HybridConfig:
     def __init__(self, config, trainer, labels, *args, **kwargs):
         self.config = config
@@ -65,3 +37,31 @@ class HybridConfigFactory:
             hybrid[i] = [config() for config in level]
 
         return hybrid
+
+
+def class_dist_thresholds(input_train=None, input_ontology=None, thresholds=None):
+    ontology = Ontology(input_ontology)
+    data = json.load(open(input_train))
+    levels = []
+
+    for cls in ontology.labels.values():
+        cls['count'] = 0
+
+    for question in data:
+        for label in question['type']:
+            if label in ontology.labels:
+                ontology.labels[label]['count'] += 1
+
+    for lv in range(ontology.max_level):
+        lv_counts = [(label, item['count']) for label, item in ontology.level(lv).items()]
+        lv_counts.sort(key=lambda t: t[1], reverse=True)
+        lv_sets = [[] for _ in range(len(thresholds))]
+
+        for i, threshold in enumerate(thresholds):
+            for lv_count in lv_counts:
+                if lv_count[1] >= threshold and (i < 1 or lv_count[1] < thresholds[i - 1]):
+                    lv_sets[i].append(lv_count[0])
+
+        levels.append(lv_sets)
+
+    return levels[1:]

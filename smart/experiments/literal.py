@@ -5,7 +5,7 @@ from smart.utils.configs import select
 
 
 class LiteralExperimentConfig(ExperimentConfigBase):
-    version = '0.7-aws'
+    version = '0.8-aws'
     experiment = 'distilbert-literal'
     identifier = 'sandbox'
     description = 'Sandbox for testing on AWS'

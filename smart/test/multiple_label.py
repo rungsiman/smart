@@ -40,8 +40,10 @@ class TestMultipleLabelClassification(MultipleLabelClassificationMixin, TestBase
         self.pred_size = len(self.shared['inference'][self.rank]['y_pred'])
         print(f'GPU #{self.rank}: Predictions for testing complete')
         print(f'.. Prediction size: {self.pred_size}')
+
         dist.barrier()
         self.test_records['test_time'] = TestMultipleLabelClassification._format_time(time.time() - test_start)
+        print(f'>>> GPU #{self.rank}: EVAL BARRIER PASS')
 
         if self.rank == self.experiment.main_rank:
             y_ids, y_pred = [], []
@@ -55,6 +57,7 @@ class TestMultipleLabelClassification(MultipleLabelClassificationMixin, TestBase
 
         dist.barrier()
         self.answers = pd.DataFrame(self.shared['answers'])
+        print(f'>>> GPU #{self.rank}: ANSWER DISTRIBUTION PASS')
         return self
 
     def pack(self):

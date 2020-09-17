@@ -74,14 +74,13 @@ class ExperimentConfigBase(ConfigBase):
         name = ...
 
         def __init__(self, paths, *args, **kwargs):
-            super().__init__(*args, **kwargs)
-
             self.output_root = os.path.join(paths.output, self.name)
             self.output_train = os.path.join(self.output_root, 'io')
             self.output_test = os.path.join(self.output_root, 'io')
             self.output_models = os.path.join(self.output_root, 'models')
             self.output_analyses = os.path.join(self.output_root, 'analyses')
 
+            super().__init__(*args, **kwargs)
             ExperimentConfigBase.prepare(self.output_root, self.output_train, self.output_test, self.output_models, self.output_analyses)
 
     def __init__(self, *args, **kwargs):
@@ -130,9 +129,9 @@ class GanConfigBase(ConfigBase):
             super().__init__(*args, **kwargs)
 
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
         self.discriminator = GanConfigBase.Discriminator(**select(kwargs, 'discriminator'))
         self.generator = GanConfigBase.Generator(**select(kwargs, 'generator'))
+        super().__init__(*args, **kwargs)
 
 
 class TrainConfigBase(TrainConfigMixin, ConfigBase):
@@ -160,11 +159,11 @@ class TrainConfigBase(TrainConfigMixin, ConfigBase):
     drop_last = False
 
     def __init__(self, *, trainer, labels=None, **kwargs):
-        super().__init__(**kwargs)
         self.trainer = trainer
         self.bert = BertConfigBase(**select(kwargs, 'bert'))
         self.gan = GanConfigBase(**select(kwargs, 'gan'))
         self.labels = labels
+        super().__init__(**kwargs)
 
         if self.neg_size is not None and self.neg_size > 0:
             self.use_gan = False

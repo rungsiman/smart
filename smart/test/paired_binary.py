@@ -75,7 +75,7 @@ class TestPairedBinaryClassification(PairedBinaryClassificationMixin, TestBase):
         for qid, question, types in tqdm(zip(ids, questions, answers)):
             question_ids = self.data.tokenized[question]
 
-            if self.level == 1:
+            if self.level == 1 or self.experiment.dataset.independent_paired_label:
                 labels = self.labels
             else:
                 labels = [label for label in self.labels if self.data.ontology.labels[label]['parent'] in types]
