@@ -139,12 +139,12 @@ class TrainConfigBase(TrainConfigMixin, ConfigBase):
     lowercase = True
 
     epochs = 4
-    batch_size = 32
+    batch_size = 64
     eval_ratio = .1
 
     # IMPORTANT: For evaluating the source code on low-performance machine only.
     # Set to None for full training
-    data_size_cap = 500
+    data_size_cap = None
 
     # The amount of negative examples
     neg_size = 1
