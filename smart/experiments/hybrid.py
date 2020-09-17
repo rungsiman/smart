@@ -7,10 +7,10 @@ from smart.utils.hybrid import HybridConfigFactory, class_dist_thresholds
 
 
 class HybridExperimentConfig(ExperimentConfigBase):
-    version = '0.13-aws'
-    experiment = 'distilbert-hybrid'
-    identifier = 'sandbox'
-    description = 'Sandbox for testing on AWS'
+    version = '0.13'
+    experiment = 'phuc-hybrid'
+    identifier = 'base'
+    description = 'Experiments run by Phuc'
     
     class Paths(ConfigBase):
         root = 'data'

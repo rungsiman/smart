@@ -5,10 +5,10 @@ from smart.utils.configs import select
 
 
 class LiteralExperimentConfig(ExperimentConfigBase):
-    version = '0.8-aws'
-    experiment = 'distilbert-literal'
-    identifier = 'sandbox'
-    description = 'Sandbox for testing on AWS'
+    version = '0.8'
+    experiment = 'phuc-literal'
+    identifier = 'base'
+    description = 'Experiments run by Phuc'
 
     class Paths(ConfigBase):
         root = 'data'
