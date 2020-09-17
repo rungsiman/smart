@@ -74,9 +74,15 @@ class HybridExperimentConfig(ExperimentConfigBase):
         self.paths = HybridExperimentConfig.Paths(self.experiment, self.identifier)
 
         if dataset == 'dbpedia':
-            self.dataset = HybridExperimentConfig.DBpedia(self.paths, self.literal, **select(kwargs, 'train-base-hybrid', 'test-base-hybrid'))
+            self.dataset = HybridExperimentConfig.DBpedia(self.paths, self.literal,
+                                                          **select(kwargs,
+                                                                   'train-base-hybrid', 'test-base-hybrid',
+                                                                   'train-base-all', 'test-base-all'))
         else:
-            self.dataset = HybridExperimentConfig.Wikidata(self.paths, self.literal, **select(kwargs, 'train-base-hybrid', 'test-base-hybrid'))
+            self.dataset = HybridExperimentConfig.Wikidata(self.paths, self.literal,
+                                                           **select(kwargs,
+                                                                    'train-base-hybrid', 'test-base-hybrid',
+                                                                    'train-base-all', 'test-base-all'))
 
         # Apply to sklearn.model_selection.train_test_split.
         # Controls the shuffling applied to the data before applying the split.
