@@ -7,7 +7,7 @@ from smart.utils.hybrid import HybridConfigFactory, class_dist_thresholds
 
 
 class HybridExperimentConfig(ExperimentConfigBase):
-    version = '0.13-aws'
+    version = '0.14-aws'
     experiment = 'distilbert-hybrid'
     identifier = 'sandbox'
     description = 'Sandbox for testing on AWS'
@@ -69,14 +69,14 @@ class HybridExperimentConfig(ExperimentConfigBase):
             super().__init__(paths, *args, **kwargs)
     
     def __init__(self, dataset, *args, **kwargs):
-        super().__init__(*args, **select(kwargs, 'experiment-base'))
-        self.literal = LiteralExperimentConfig(dataset, *args, **select(kwargs, 'experiment-base-literal'))
+        super().__init__(*args, **select(kwargs, 'experiment-base-hybrid'))
+        self.literal = LiteralExperimentConfig(dataset, *args, **select(kwargs, 'experiment-base-hybrid-literal'))
         self.paths = HybridExperimentConfig.Paths(self.experiment, self.identifier)
 
         if dataset == 'dbpedia':
-            self.dataset = HybridExperimentConfig.DBpedia(self.paths, self.literal, **select(kwargs, 'train-base', 'test-base'))
+            self.dataset = HybridExperimentConfig.DBpedia(self.paths, self.literal, **select(kwargs, 'train-base-hybrid', 'test-base-hybrid'))
         else:
-            self.dataset = HybridExperimentConfig.Wikidata(self.paths, self.literal, **select(kwargs, 'train-base', 'test-base'))
+            self.dataset = HybridExperimentConfig.Wikidata(self.paths, self.literal, **select(kwargs, 'train-base-hybrid', 'test-base-hybrid'))
 
         # Apply to sklearn.model_selection.train_test_split.
         # Controls the shuffling applied to the data before applying the split.
