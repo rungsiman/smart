@@ -15,7 +15,7 @@ def build(writer, config, choices):
     else:
         params = ' '.join('--%s="%s"' % (list(config.keys())[i], str(choices[i]).replace(' ', '')) for i in range(len(config)))
 
-        for dataset in ['dbpedia', 'wikidata']:
+        for dataset in ['wikidata']:
             for task in ['literal', 'hybrid']:
                 for stage in ['train', 'test']:
                     writer.write(f'bash {stage} {task} {dataset} {params}\n')

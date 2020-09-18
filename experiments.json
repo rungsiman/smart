@@ -1,8 +1,11 @@
 {
-  "train-base-all-model": ["bert-large-uncased", "roberta-large"],
-  "train-base-all-neg_size": [5, 10, null],
-  "train-base-all-batch_size": [32],
   "train-base-literal-epochs": [1, 2],
-  "train-base-hybrid-epochs": [2, 5, 10],
-  "train-base-hybrid-class_dist_thresholds": [[500], [400], [100]]
+  "train-base-literal-model": ["bert-base-uncased", "roberta-base"],
+  "train-base-literal-neg_size": [null],
+  "train-base-literal-batch_size": [16],
+  "train-base-hybrid-model": ["bert-base-uncased", "roberta-base"],
+  "train-base-hybrid-epochs": [5],
+  "train-base-hybrid-neg_size": [0],
+  "train-base-hybrid-batch_size": [16],
+  "train-base-hybrid-class_dist_thresholds": [[400]]
 }
