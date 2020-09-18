@@ -239,7 +239,7 @@ class TrainBase(StageBase):
         json.dump(self.eval_truths, open(os.path.join(self.path_output, 'eval_truth.json'), 'w'), indent=4)
         json.dump(self.eval_answers, open(os.path.join(self.path_output, 'eval_answers.json'), 'w'), indent=4)
 
-        if self.experiment.dataset == 'dbpedia':
+        if self.experiment.dataset.name == 'dbpedia':
             try:
                 ndcg_config = NDCGConfig(self.experiment, self.path_output)
                 self.ndcg_result = ndcg_evaluate(ndcg_config)
