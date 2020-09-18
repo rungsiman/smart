@@ -42,7 +42,8 @@ class TrainBase(StageBase):
     sampler = ...
     identifier = ...
 
-    def __init__(self, rank, world_size, experiment, model, data, labels, config, shared, lock, data_neg=None, *args, **kwargs):
+    def __init__(self, rank, world_size, experiment, model, data, labels, config, shared, lock,
+                 data_neg=None, level=None, index=None, *args, **kwargs):
         super().__init__()
 
         self.train_records = {'loss': [], 'train_time': [], 'eval_time': None}
@@ -55,6 +56,8 @@ class TrainBase(StageBase):
         self.shared = shared
         self.labels = labels
         self.data_neg = data_neg
+        self.level = level
+        self.index = index
 
         self.path_output = os.path.join(self.experiment.dataset.output_train, self.identifier)
         self.path_models = os.path.join(self.experiment.dataset.output_models, self.identifier)
@@ -236,16 +239,20 @@ class TrainBase(StageBase):
         json.dump(self.eval_truths, open(os.path.join(self.path_output, 'eval_truth.json'), 'w'), indent=4)
         json.dump(self.eval_answers, open(os.path.join(self.path_output, 'eval_answers.json'), 'w'), indent=4)
 
-        try:
-            ndcg_config = NDCGConfig(self.experiment, self.path_output)
-            self.ndcg_result = ndcg_evaluate(ndcg_config)
+        if self.experiment.dataset == 'dbpedia':
+            try:
+                ndcg_config = NDCGConfig(self.experiment, self.path_output)
+                self.ndcg_result = ndcg_evaluate(ndcg_config)
 
-            with open(os.path.join(self.path_analyses, 'ndcg_result.txt'), 'w') as writer:
-                writer.write(self.ndcg_result)
+                with open(os.path.join(self.path_analyses, 'ndcg_result.txt'), 'w') as writer:
+                    writer.write(self.ndcg_result)
 
-        except ZeroDivisionError:
-            if self.rank == self.experiment.main_rank:
-                print(f'GPU #{self.rank}: Skipped NDCG evaluation (division by zero).')
+            except ZeroDivisionError:
+                if self.rank == self.experiment.main_rank:
+                    print(f'GPU #{self.rank}: Skipped NDCG evaluation (division by zero).')
+
+        elif self.rank == self.experiment.main_rank:
+            print(f'GPU #{self.rank}: Skipped NDCG evaluation (preconfigured for WikiData)')
 
         return self
 
