@@ -7,7 +7,7 @@ from smart.utils.hybrid import HybridConfigFactory, class_dist_thresholds
 
 
 class HybridExperimentConfig(ExperimentConfigBase):
-    version = '0.16'
+    version = '0.17'
     experiment = 'master-hybrid'
     identifier = 'base'
     description = 'Master code'
