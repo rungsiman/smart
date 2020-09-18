@@ -7,10 +7,10 @@ from smart.utils.hybrid import HybridConfigFactory, class_dist_thresholds
 
 
 class HybridExperimentConfig(ExperimentConfigBase):
-    version = '0.16'
-    experiment = 'phuc-hybrid'
+    version = '0.17'
+    experiment = 'master-hybrid'
     identifier = 'base'
-    description = 'Experiments run by Phuc'
+    description = 'Master code'
     
     class Paths(ConfigBase):
         root = 'data'
@@ -59,7 +59,7 @@ class HybridExperimentConfig(ExperimentConfigBase):
         def __init__(self, paths, literal, *args, **kwargs):
             self.input_root = os.path.join(paths.input, self.name)
             self.input_train = os.path.join(self.input_root, 'lcquad2_anstype_wikidata_train.json')
-            self.input_test = os.path.join(literal.dataset.output_test, f'{literal.dataset.tester.resolve_identifier()}/test_answers.json')
+            self.input_test = os.path.join(literal.dataset.output_test, f'{literal.dataset.config.tester.resolve_identifier()}/test_answers.json')
             self.input_ontology = os.path.join(self.input_root, 'wikidata_types.tsv')
 
             hybrid_factory = HybridConfigFactory(factory=class_dist_thresholds, config=TrainConfigBase, trainer='multiple_label',
