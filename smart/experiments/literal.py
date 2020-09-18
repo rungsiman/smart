@@ -6,9 +6,9 @@ from smart.utils.configs import select
 
 class LiteralExperimentConfig(ExperimentConfigBase):
     version = '0.11'
-    experiment = 'master-literal'
+    experiment = 'mango-literal'
     identifier = 'base'
-    description = 'Master code'
+    description = 'Experiments run by Mango'
 
     class Paths(ConfigBase):
         root = 'data'

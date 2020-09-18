@@ -1,8 +1,11 @@
 {
-  "train-base-all-model": ["bert-large-uncased", "roberta-large"],
-  "train-base-all-neg_size": [5, 10, null],
-  "train-base-all-batch_size": [32],
-  "train-base-literal-epochs": [1, 2],
-  "train-base-hybrid-epochs": [2, 5, 10],
-  "train-base-hybrid-class_dist_thresholds": [[500], [400], [100]]
+  "train-base-all-model": ["distilbert-base-uncased"],
+  "train-base-all-neg_size": [null],
+  "train-base-all-batch_size": [64],
+  "train-base-literal-epochs": [1],
+  "train-base-literal-bert-optimizer-lr": ["2.5e-5"],
+  "train-base-literal-gan-discriminator-optimizer-lr": ["2.5e-5"],
+  "train-base-literal-gan-generator-optimizer-lr": ["2.5e-5"],
+  "train-base-hybrid-epochs": [5, 10],
+  "train-base-hybrid-class_dist_thresholds": [[100], [400, 100, 50], [50]]
 }
