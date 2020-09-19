@@ -1,5 +1,5 @@
 {
-  "all-base-all-model": ["bert-base-uncased", "roberta-base"],
+  "all-base-all-model": ["bert-large-uncased", "roberta-large"],
   "all-base-all-batch_size": [16],
 
   "all-literal-base-all-epochs": [1, 2, 4, 10],
