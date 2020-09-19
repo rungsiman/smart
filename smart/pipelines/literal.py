@@ -29,19 +29,21 @@ class LiteralTrainPipeline(PipelineBase):
                                self.shared, self.lock, data_neg=data_resource)
 
         status = f'GPU #{self.rank}: Processing category/literal training\n'
-        status += f'.. Type count: {len(config.labels)}\n'
-        status += f'.. Data size: {data_literal.size} of {self.data.size}'
+        intro_status = f'.. Type count: {len(config.labels)}\n'
+        intro_status += f'.. Data size: {data_literal.size} of {self.data.size}\n'
+        intro_status += f'.. Negative data size: {data_resource.size}'
 
         if config.data_size_cap is not None:
-            status += f' (Capped data size: {data_literal.size})'
+            intro_status += f' (Capped data size: {data_literal.size})'
 
-        print(status)
+        print(status + intro_status)
 
         train().evaluate().save()
 
         if self.rank == self.experiment.main_rank:
             with open(os.path.join(self.experiment.dataset.output_analyses, 'pipeline_train_records.txt'), 'w') as writer:
-                writer.write(f'Approximate training time: {stopwatch.watch()}')
+                writer.write(f'Approximate training time: {stopwatch.watch()}\n')
+                writer.write(intro_status.replace('.. ', ''))
 
 
 class LiteralTestPipeline(PipelineBase):

@@ -22,7 +22,9 @@ class TrainMultipleLabelClassification(MultipleLabelClassificationMixin, TrainBa
         ids = self.data.df.id.values
         questions = self.data.df.question.values
         labels = self.data.df.type.values
+
         neg_qids = []
+        neg_size = self.data.size if self.config.neg_size == 'mirror' else self.config.neg_size
 
         if self.data_neg is not None:
             if self.data.size <= self.data_neg.size:
@@ -43,10 +45,10 @@ class TrainMultipleLabelClassification(MultipleLabelClassificationMixin, TrainBa
                 input_questions.append(self.data.tokenized[question])
                 input_tags.append([int(label in question_labels) for label in self.labels] + [0])
 
-                if self.data_neg is not None and (self.config.neg_size is None or i < self.config.neg_size):
-                    input_ids.append(neg_qids[i])
-                    input_questions.append(self.data.tokenized[self.data_neg.df.iloc[neg_qids[i]]['question']])
-                    input_tags.append([0] * len(self.labels) + [1])
+        for i in range(neg_size):
+            input_ids.append(neg_qids[i])
+            input_questions.append(self.data.tokenized[self.data_neg.df.iloc[neg_qids[i]]['question']])
+            input_tags.append([0] * len(self.labels) + [1])
 
         split = train_test_split(input_ids, input_questions, input_tags,
                                  random_state=self.experiment.split_random_state,

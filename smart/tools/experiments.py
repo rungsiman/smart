@@ -1,3 +1,4 @@
+import argparse
 import json
 
 
@@ -6,6 +7,7 @@ OUTPUT_FILE = 'run'
 
 
 def build(writer, config, choices):
+    global build_datasets
     global freezer_counter
 
     if len(config) > len(choices):
@@ -15,7 +17,7 @@ def build(writer, config, choices):
     else:
         params = ' '.join('--%s="%s"' % (list(config.keys())[i], str(choices[i]).replace(' ', '')) for i in range(len(config)))
 
-        for dataset in ['wikidata']:
+        for dataset in (['dbpedia', 'wikidata'] if build_datasets == 'all' else [build_datasets]):
             for task in ['literal', 'hybrid']:
                 for stage in ['train', 'test']:
                     writer.write(f'bash {stage} {task} {dataset} {params}\n')
@@ -23,7 +25,7 @@ def build(writer, config, choices):
             writer.write('bash freeze --identifier="id-%04d-dependent" --exclude-models\n' % freezer_counter)
 
             for strategy in ['independent', 'top-down', 'bottom-up']:
-                writer.write(f'bash test hybrid {dataset} {params} --test-base-hybrid-dataset-test_strategy={strategy}\n')
+                writer.write(f'bash test hybrid {dataset} {params} --all-hybrid-dataset-test_strategy={strategy}\n')
                 writer.write(f'bash freeze --identifier="id-%04d-{strategy}" --exclude-models\n' % freezer_counter)
 
             writer.write('bash clean\n\n')
@@ -41,4 +43,8 @@ def run():
 
 if __name__ == '__main__':
     freezer_counter = 1
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--dataset', dest='dataset', action='store', default='all')
+    args = parser.parse_args()
+    build_datasets = args.dataset
     run()
