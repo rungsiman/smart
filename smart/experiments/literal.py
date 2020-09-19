@@ -5,7 +5,7 @@ from smart.utils.configs import select
 
 
 class LiteralExperimentConfig(ExperimentConfigBase):
-    version = '0.11'
+    version = '0.12'
     experiment = 'master-literal'
     identifier = 'base'
     description = 'Master code'
