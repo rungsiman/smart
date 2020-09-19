@@ -19,7 +19,7 @@ class HybridConfigFactory:
     def __init__(self, factory, config, trainer, input_train=None, input_ontology=None, thresholds=None, **kwargs):
         self.config = config
         self.trainer = trainer
-        self.labels = factory(input_train, input_ontology, thresholds, **select('level'))
+        self.labels = factory(input_train, input_ontology, thresholds, **select(kwargs, 'level'))
         self.hybrid = [[] for _ in range(len(self.labels))]
         self.kwargs = kwargs
 
@@ -56,15 +56,17 @@ def class_dist_thresholds(input_train=None, input_ontology=None, thresholds=None
             if label in ontology.labels:
                 ontology.labels[label]['count'] += 1
 
-    for lv_i in range(ontology.max_level):
+    for lv_i in range(ontology.max_level + 1):
         lv_counts = [(label, item['count']) for label, item in ontology.level(lv_i).items()]
         lv_counts.sort(key=lambda t: t[1], reverse=True)
-        lv_sets = [[] for _ in range(len(thresholds))]
+        lv_sets = [[] for _ in range(len(kwargs.get(f'{lv_i}-thresholds', thresholds)))]
+        counted = []
 
         for threshold_i, threshold in enumerate(kwargs.get(f'{lv_i}-thresholds', thresholds)):
             for lv_count in lv_counts:
-                if lv_count[1] >= threshold and (threshold_i < 1 or lv_count[1] < thresholds[threshold_i - 1]):
+                if lv_count[1] >= threshold and (threshold_i < 1 or lv_count[1] < thresholds[threshold_i - 1]) and lv_count[0] not in counted:
                     lv_sets[threshold_i].append(lv_count[0])
+                    counted.append(lv_count[0])
 
         levels.append(lv_sets)
 
