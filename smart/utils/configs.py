@@ -1,3 +1,6 @@
+import re
+
+
 def override(bert_config, config):
     config_dict = {
         'hidden_dropout_prob': config.bert.hidden_dropout_prob,
@@ -19,6 +22,6 @@ def select(kwargs, *classes, reverse=False):
         for cls in classes:
             for key, value in kwargs.items():
                 if key.startswith(cls):
-                    filtered_kwargs[key.replace(f'{cls}-', '')] = value
+                    filtered_kwargs[re.sub(rf'^{cls}-', '', key)] = value
 
         return filtered_kwargs

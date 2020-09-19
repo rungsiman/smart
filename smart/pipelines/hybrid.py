@@ -21,13 +21,25 @@ class HybridTrainPipeline(PipelineBase):
 
             if level <= len(self.experiment.dataset.hybrid):
                 for index, config in enumerate(self.experiment.dataset.hybrid[level - 1]):
-                    self._process(level, index, config, config.labels, ontology,
-                                  processed_labels, pipeline_records, pipeline_eval, set_num_labels=True)
+                    if self.experiment.dataset.selective_train is None or \
+                            f'id-{index}' in self.experiment.dataset.selective_train or \
+                            f'level-{level}' in self.experiment.dataset.selective_train or \
+                            f'level-{level}-id-{index}' in self.experiment.dataset.selective_train:
+                        self._process(level, index, config, config.labels, ontology,
+                                      processed_labels, pipeline_records, pipeline_eval, set_num_labels=True)
 
-            config = self.experiment.dataset.hybrid_default
-            labels_reversed = ontology.reverse(processed_labels, level)
-            self._process(level, 'default', config, labels_reversed, ontology,
-                          processed_labels, pipeline_records, pipeline_eval)
+            if self.experiment.dataset.hybrid_default is not None:
+                if self.experiment.dataset.selective_train is None or \
+                        f'default' in self.experiment.dataset.selective_train or \
+                        f'level-{level}' in self.experiment.dataset.selective_train or \
+                        f'level-{level}-default' in self.experiment.dataset.selective_train:
+                    config = self.experiment.dataset.hybrid_default
+                    labels_reversed = ontology.reverse(processed_labels, level)
+                    self._process(level, 'default', config, labels_reversed, ontology,
+                                  processed_labels, pipeline_records, pipeline_eval)
+
+            elif self.rank == self.experiment.main_rank:
+                print(f'GPU #{self.rank}: Skipped training default classifier on level {level}.')
 
         if self.rank == self.experiment.main_rank:
             json.dump(pipeline_records, open(os.path.join(self.experiment.dataset.output_analyses, 'pipeline_train_records.json'), 'w'), indent=4)
@@ -96,15 +108,19 @@ class HybridTestPipeline(PipelineBase):
         ontology = Ontology(self.experiment.dataset.input_ontology)
 
         for level in range(1, ontology.max_level + 1):
-            if level <= len(self.experiment.dataset.hybrid):
-                processed_labels = []
+            processed_labels = []
 
+            if level <= len(self.experiment.dataset.hybrid):
                 for index, config in enumerate(self.experiment.dataset.hybrid[level - 1]):
                     self._process(level, index, config, config.labels, pipeline_records, processed_labels)
 
+            if self.experiment.dataset.hybrid_default is not None:
                 config = self.experiment.dataset.hybrid_default
                 reversed_labels = ontology.reverse(processed_labels, level)
                 self._process(level, 'default', config, reversed_labels, pipeline_records, processed_labels)
+
+            elif self.rank == self.experiment.main_rank:
+                print(f'GPU #{self.rank}: Skipped testing default classifier on level {level}.')
 
         if self.rank == self.experiment.main_rank:
             self.data.apply_test_strategy()
