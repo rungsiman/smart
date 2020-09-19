@@ -8,9 +8,9 @@ from smart.utils.hybrid import HybridConfigFactory, class_dist_thresholds
 
 class HybridExperimentConfig(ExperimentConfigBase):
     version = '0.18'
-    experiment = 'mango-hybrid'
+    experiment = 'master-hybrid'
     identifier = 'base'
-    description = 'Experiments run by Mango'
+    description = 'Master code'
     
     class Paths(ConfigBase):
         root = 'data'
