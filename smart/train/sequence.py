@@ -21,7 +21,9 @@ class TrainSequenceClassification(SequenceClassificationMixin, TrainBase):
         ids = self.data.df.id.values
         questions = self.data.df.question.values
         labels = self.data.df.type.values
+
         neg_qids = []
+        neg_size = self.data.size if self.config.neg_size == 'mirror' else self.config.neg_size
 
         if self.data_neg is not None:
             if self.data.size >= self.data_neg.size:
@@ -49,10 +51,10 @@ class TrainSequenceClassification(SequenceClassificationMixin, TrainBase):
                 if len(tags) > 1:
                     multiple_labels_found += 1
 
-                if self.data_neg is not None and (self.config.neg_size is None or i < self.config.neg_size):
-                    input_ids.append(neg_qids[i])
-                    input_questions.append(self.data.tokenized[self.data_neg.df.iloc[neg_qids[i]]['question']])
-                    input_tags.append(len(self.labels))
+        for i in range(neg_size):
+            input_ids.append(neg_qids[i])
+            input_questions.append(self.data.tokenized[self.data_neg.df.iloc[neg_qids[i]]['question']])
+            input_tags.append(len(self.labels))
 
         if multiple_labels_found:
             warning = f'WARNING: {multiple_labels_found} questions have multiple tags.\n'

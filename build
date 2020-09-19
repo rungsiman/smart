@@ -1,3 +1,14 @@
 #!/bin/bash
 
-python3 smart/tools/experiments.py
+DATASET=all
+
+for key in "$@" ; do
+  case $key in
+    -d=*|--dataset=*)
+      DATASET="${key#*=}"
+      shift
+      ;;
+  esac
+done
+
+python3 smart/tools/experiments.py --dataset="$DATASET"

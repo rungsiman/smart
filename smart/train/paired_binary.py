@@ -33,11 +33,12 @@ class TrainPairedBinaryClassification(PairedBinaryClassificationMixin, TrainBase
         for qid, question, labels_pos in tqdm(zip(ids, questions, labels)):
             if len(labels_pos):
                 question_ids = self.data.tokenized[question]
-                input_questions += [question_ids] * (len(labels_pos) + self.config.neg_size)
+                input_questions += [question_ids] * (len(labels_pos) * 2 if self.config.neg_size == 'mirror' else
+                                                     len(labels_pos) + self.config.neg_size)
                 input_labels += [self.data.ontology.labels[label] for label in labels_pos]
 
                 choices = list(filter(lambda label: label not in labels_pos, self.data.ontology.labels.keys()))
-                labels_neg = [random.choice(choices) for _ in range(self.config.neg_size)]
+                labels_neg = [random.choice(choices) for _ in range(len(labels_pos) if self.config.neg_size == 'mirror' else self.config.neg_size)]
                 input_labels += [self.data.ontology.labels[label] for label in labels_neg]
 
                 # Set tags to 1 for valid question-label pairs and 0 for invalid pairs

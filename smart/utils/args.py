@@ -18,7 +18,7 @@ def parse_kwargs(kwargs_list):
             value = json.loads(value)
 
         elif value.lower() in ('true', 'false'):
-            value = value == 'true'
+            value = value.lower() == 'true'
 
         elif value.lower() == 'none':
             value = None
