@@ -6,6 +6,7 @@
   "all-literal-base-all-use_gan": [true, false],
 
   "all-hybrid-base-all-epochs": [4],
+  "all-hybrid-base-all-use_gan": [false],
 
   "dbpedia-hybrid-class_dist_thresholds": [[1000]],
   "dbpedia-hybrid-base-level-1-thresholds": [[2000]],
