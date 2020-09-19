@@ -35,8 +35,6 @@ class HybridExperimentConfig(ExperimentConfigBase):
             self.test_strategy = 'dependent'
             self.independent_paired_label = False
 
-            print('>>> ' + str(kwargs))
-
             if kwargs.get('skip_default_classifier', False):
                 self.hybrid_default = None
             else:
