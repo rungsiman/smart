@@ -8,7 +8,7 @@
   "all-hybrid-base-all-epochs": [4],
 
   "dbpedia-hybrid-class_dist_thresholds": [[1000]],
-  "dbpedia-hybrid-base-level-1-thresholds": [[4000]],
+  "dbpedia-hybrid-base-level-1-thresholds": [[2000]],
   "dbpedia-hybrid-base-level-2-thresholds": [[1000]],
   "dbpedia-hybrid-base-level-3-thresholds": [[400]],
   "dbpedia-hybrid-base-level-4-thresholds": [[500]],
