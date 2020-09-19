@@ -12,7 +12,7 @@ class ConfigBase:
     """Skeleton class"""
     _obj = False
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, **kwargs):
         self._obj = True
 
         for key, value in kwargs.items():
@@ -73,18 +73,18 @@ class ExperimentConfigBase(ConfigBase):
     class Dataset(ConfigBase):
         name = ...
 
-        def __init__(self, paths, *args, **kwargs):
+        def __init__(self, paths, **kwargs):
             self.output_root = os.path.join(paths.output, self.name)
             self.output_train = os.path.join(self.output_root, 'io')
             self.output_test = os.path.join(self.output_root, 'io')
             self.output_models = os.path.join(self.output_root, 'models')
             self.output_analyses = os.path.join(self.output_root, 'analyses')
 
-            super().__init__(*args, **kwargs)
+            super().__init__(**kwargs)
             ExperimentConfigBase.prepare(self.output_root, self.output_train, self.output_test, self.output_models, self.output_analyses)
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
     @staticmethod
@@ -101,8 +101,8 @@ class BertConfigBase(ConfigBase):
     # Dropout prob for DistilBert
     seq_classif_dropout = .2
 
-    def __init__(self, optimizer=None, scheduler=None, *args, **kwargs):
-        super().__init__(*args, **select(kwargs, 'optimizer', 'scheduler', reverse=True))
+    def __init__(self, optimizer=None, scheduler=None, **kwargs):
+        super().__init__(**select(kwargs, 'optimizer', 'scheduler', reverse=True))
 
         self.optimizer = optimizer or ClassConfigBase(AdamW, kwargs={
             'lr': 2e-5,  # Default learning rate: 5e-5
@@ -119,27 +119,27 @@ class BertConfigBase(ConfigBase):
 
 class GanConfigBase(ConfigBase):
     class Discriminator(BertConfigBase):
-        def __init__(self, *args, **kwargs):
-            super().__init__(*args, **kwargs)
+        def __init__(self, **kwargs):
+            super().__init__(**kwargs)
 
     class Generator(BertConfigBase):
         noise_size = 100
 
-        def __init__(self, *args, **kwargs):
-            super().__init__(*args, **kwargs)
+        def __init__(self, **kwargs):
+            super().__init__(**kwargs)
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, **kwargs):
         self.discriminator = GanConfigBase.Discriminator(**select(kwargs, 'discriminator'))
         self.generator = GanConfigBase.Generator(**select(kwargs, 'generator'))
-        super().__init__(*args, **kwargs)
+        super().__init__(**kwargs)
 
 
 class TrainConfigBase(TrainConfigMixin, ConfigBase):
     model = 'distilbert-base-uncased'
     lowercase = True
 
-    epochs = 4
-    batch_size = 64
+    epochs = 1
+    batch_size = 32
     eval_ratio = .1
 
     # IMPORTANT: For evaluating the source code on low-performance machine only.
@@ -147,7 +147,7 @@ class TrainConfigBase(TrainConfigMixin, ConfigBase):
     data_size_cap = None
 
     # The amount of negative examples
-    neg_size = 1
+    neg_size = 'mirror'
 
     # When using GANs, self.bert configuration will be ignored in favor of self.gan.discriminator.
     # The discriminator's optimizer and scheduler will be applied to both BERT and the discriminator model.
@@ -160,12 +160,7 @@ class TrainConfigBase(TrainConfigMixin, ConfigBase):
 
     def __init__(self, *, trainer, labels=None, **kwargs):
         self.trainer = trainer
+        self.labels = labels
         self.bert = BertConfigBase(**select(kwargs, 'bert'))
         self.gan = GanConfigBase(**select(kwargs, 'gan'))
-        self.labels = labels
         super().__init__(**kwargs)
-
-        if self.neg_size is not None and self.neg_size > 0:
-            self.use_gan = False
-        else:
-            self.neg_size = 0
