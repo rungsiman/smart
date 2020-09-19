@@ -6,9 +6,9 @@ from smart.utils.configs import select
 
 class LiteralExperimentConfig(ExperimentConfigBase):
     version = '0.12'
-    experiment = 'master-literal'
+    experiment = 'phuc-literal'
     identifier = 'base'
-    description = 'Master code'
+    description = 'Experiments run by Phuc'
 
     class Paths(ConfigBase):
         root = 'data'
