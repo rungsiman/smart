@@ -22,17 +22,20 @@ class TrainSequenceClassification(SequenceClassificationMixin, TrainBase):
         questions = self.data.df.question.values
         labels = self.data.df.type.values
 
-        neg_qids = []
+        neg_ids = self.data_neg.df.id.values
+        neg_questions = self.data_neg.df.question.values
+
+        neg_orders = []
         neg_size = self.data.size if self.config.neg_size == 'mirror' else self.config.neg_size
 
         if self.data_neg is not None:
-            if self.data.size >= self.data_neg.size:
-                neg_qids = random.sample(range(self.data_neg.size), self.data.size)
+            if neg_size <= self.data_neg.size:
+                neg_orders = random.sample(range(self.data_neg.size), neg_size)
             else:
-                while len(neg_qids) < self.data_neg.size:
-                    neg_qids += random.sample(range(self.data_neg.size), self.data_neg.size)
+                while len(neg_orders) < neg_size:
+                    neg_orders += random.sample(range(self.data_neg.size), self.data_neg.size)
 
-                neg_qids = neg_qids[:self.data_neg.size]
+                neg_orders = neg_orders[:neg_size]
 
         input_ids = []
         input_questions = []
@@ -51,9 +54,9 @@ class TrainSequenceClassification(SequenceClassificationMixin, TrainBase):
                 if len(tags) > 1:
                     multiple_labels_found += 1
 
-        for i in range(neg_size):
-            input_ids.append(neg_qids[i])
-            input_questions.append(self.data.tokenized[self.data_neg.df.iloc[neg_qids[i]]['question']])
+        for i in neg_orders:
+            input_ids.append(int(neg_ids[i].replace('dbpedia_', '')) if isinstance(neg_ids[i], str) else neg_ids[i])
+            input_questions.append(self.data_neg.tokenized[neg_questions[i]])
             input_tags.append(len(self.labels))
 
         if multiple_labels_found:
