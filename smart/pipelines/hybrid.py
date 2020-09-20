@@ -21,12 +21,14 @@ class HybridTrainPipeline(PipelineBase):
 
             if level <= len(self.experiment.dataset.hybrid):
                 for index, config in enumerate(self.experiment.dataset.hybrid[level - 1]):
+                    processed_labels += config.labels
+
                     if self.experiment.dataset.selective_train is None or \
                             f'id-{index}' in self.experiment.dataset.selective_train or \
                             f'level-{level}' in self.experiment.dataset.selective_train or \
                             f'level-{level}-id-{index}' in self.experiment.dataset.selective_train:
                         self._process(level, index, config, config.labels, ontology,
-                                      processed_labels, pipeline_records, pipeline_eval, set_num_labels=True)
+                                      pipeline_records, pipeline_eval, set_num_labels=True)
 
             if self.experiment.dataset.hybrid_default is not None:
                 if self.experiment.dataset.selective_train is None or \
@@ -36,7 +38,7 @@ class HybridTrainPipeline(PipelineBase):
                     config = self.experiment.dataset.hybrid_default
                     labels_reversed = ontology.reverse(processed_labels, level)
                     self._process(level, 'default', config, labels_reversed, ontology,
-                                  processed_labels, pipeline_records, pipeline_eval)
+                                  pipeline_records, pipeline_eval)
 
             elif self.rank == self.experiment.main_rank:
                 print(f'GPU #{self.rank}: Skipped training default classifier on level {level}.')
@@ -48,9 +50,8 @@ class HybridTrainPipeline(PipelineBase):
             with open(os.path.join(self.experiment.dataset.output_analyses, 'pipeline_train_records.txt'), 'w') as writer:
                 writer.write(f'Approximate training time: {stopwatch.watch()}')
 
-    def _process(self, level, index, config, labels, ontology, processed_labels, pipeline_records, pipeline_eval, set_num_labels=False):
+    def _process(self, level, index, config, labels, ontology, pipeline_records, pipeline_eval, set_num_labels=False):
         labels_reversed = ontology.reverse(labels, level)
-        processed_labels += labels
 
         tokenizer = CustomAutoTokenizer(config)
         ontology.tokenize(tokenizer)

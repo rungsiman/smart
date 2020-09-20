@@ -48,6 +48,9 @@ class TrainMultipleLabelClassification(MultipleLabelClassificationMixin, TrainBa
                 input_questions.append(self.data.tokenized[question])
                 input_tags.append([int(label in question_labels) for label in self.labels] + [0])
 
+            else:
+                print(f'WARNING: [TrainMultiLabel.pack] No ground-truth labels for question: {qid}')
+
         for i in neg_orders:
             input_ids.append(int(neg_ids[i].replace('dbpedia_', '')) if isinstance(neg_ids[i], str) else neg_ids[i])
             input_questions.append(self.data_neg.tokenized[neg_questions[i]])

@@ -31,7 +31,7 @@ class PairedBinaryClassificationMixin:
             answer['type'] = []
 
             for qid, lid, pred in zip(y_ids, y_lids, y_pred):
-                if (qid == answer['id'] or 'dbpedia_' + str(qid) == answer['id']) and pred == 1:
+                if (qid == answer['id'] or 'dbpedia_' + str(qid) == answer['id']) and pred[0] == 1:
                     answer['type'].append(self.data.ontology.ids[lid])
 
             if len(answer['type']) == 0:
