@@ -8,9 +8,9 @@ from smart.utils.hybrid import HybridConfigFactory, class_dist_thresholds
 
 class HybridExperimentConfig(ExperimentConfigBase):
     version = '0.18'
-    experiment = 'cat-hybrid'
+    experiment = 'phuc-hybrid'
     identifier = 'base'
-    description = 'Experiments run by Cat'
+    description = 'Experiments run by Phuc'
     
     class Paths(ConfigBase):
         root = 'data'
