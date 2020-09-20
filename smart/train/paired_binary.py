@@ -28,6 +28,8 @@ class TrainPairedBinaryClassification(PairedBinaryClassificationMixin, TrainBase
         input_labels = []
         input_tags = []
 
+        counter = 0
+
         # For each question, generate pairs of question-label for every label,
         # as well as for a certain amount of invalid labels (negative examples)
         for qid, question, labels_pos in tqdm(zip(ids, questions, labels)):
@@ -46,6 +48,12 @@ class TrainPairedBinaryClassification(PairedBinaryClassificationMixin, TrainBase
                 input_ids += [int(qid.replace('dbpedia_', '')) if isinstance(qid, str) else qid] * (len(labels_pos) + len(labels_neg))
                 input_lids += [self.data.ontology.labels[label]['id'] for label in labels_pos] + \
                               [self.data.ontology.labels[label]['id'] for label in labels_neg]
+
+            else:
+                status = 'WARNING: No positive labels:\n'
+                status += f'.. Question ID: {qid}'
+                status += f'.. Question: {question}'
+                print(status)
 
         split = train_test_split(input_ids, input_lids, input_questions, input_labels, input_tags,
                                  random_state=self.experiment.split_random_state,
