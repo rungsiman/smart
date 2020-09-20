@@ -15,7 +15,9 @@ def build(writer, config, choices):
             build(writer, config, choices + [item])
 
     else:
-        params = ' '.join('--%s="%s"' % (list(config.keys())[i], str(choices[i]).replace(' ', '')) for i in range(len(config)))
+        params = ' '.join('--%s="%s"' % (list(config.keys())[i],
+                                         str(choices[i]).replace(' ', '').replace("'", "\\\""))
+                          for i in range(len(config)))
 
         for dataset in (['dbpedia', 'wikidata'] if build_datasets == 'all' else [build_datasets]):
             for task in ['literal', 'hybrid']:

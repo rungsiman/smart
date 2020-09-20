@@ -19,7 +19,7 @@ class Ontology:
 
             for i, item in enumerate(items):
                 text = ' '.join(re.findall('[A-Z][^A-Z]*', item[0])).lower()
-                self.labels[item[0]] = {'id': i - 1,
+                self.labels[item[0]] = {'id': i,
                                         'text': text,
                                         'level': int(item[1]),
                                         'parent': item[2]}
