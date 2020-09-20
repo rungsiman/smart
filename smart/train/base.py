@@ -23,11 +23,17 @@ class NDCGConfig:
 
 class StageBase(object):
     data = ...
+    data_neg = None
 
     def _get_data(self, y_ids):
         y_dbpedia_ids = ['dbpedia_' + str(qid) for qid in y_ids]
         data = self.data.df.loc[self.data.df.id.isin(y_ids)].to_dict('records')
         data += self.data.df.loc[self.data.df.id.isin(y_dbpedia_ids)].to_dict('records')
+
+        if self.data_neg is not None:
+            data += self.data_neg.df.loc[self.data_neg.df.id.isin(y_ids)].to_dict('records')
+            data += self.data_neg.df.loc[self.data_neg.df.id.isin(y_dbpedia_ids)].to_dict('records')
+
         return data
 
 
