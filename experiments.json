@@ -2,12 +2,14 @@
   "all-base-all-model": ["bert-base-uncased", "roberta-base"],
   "all-base-all-batch_size": [16],
 
-  "all-literal-base-all-epochs": [1, 2, 4, 10],
-  "all-literal-base-all-use_gan": [true, false],
+  "all-literal-base-all-epochs": [1, 5, 10, 20],
+  "all-literal-base-all-use_gan": [false],
 
-  "all-hybrid-base-all-epochs": [4],
+  "all-hybrid-base-all-epochs": [5],
   "all-hybrid-base-all-use_gan": [false],
 
+
+  "dbpedia-hybrid-dataset-selective_train": [["level-1-id-0"]],
   "dbpedia-hybrid-class_dist_thresholds": [[1000]],
   "dbpedia-hybrid-base-level-1-thresholds": [[2000]],
   "dbpedia-hybrid-base-level-2-thresholds": [[1000]],
@@ -15,6 +17,7 @@
   "dbpedia-hybrid-base-level-4-thresholds": [[500]],
   "dbpedia-hybrid-base-default-neg_size": [10],
 
+  "wikidata-hybrid-dataset-selective_train": [["level-1-id-0"]],
   "wikidata-hybrid-class_dist_thresholds": [[1000]],
   "wikidata-hybrid-base-level-1-thresholds": [[1000, 300]],
   "wikidata-hybrid-base-level-2-thresholds": [[1000]],
