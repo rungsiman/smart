@@ -1,8 +1,8 @@
 import pandas as pd
 import sys
 import time
+import torch
 import torch.distributed as dist
-import torch.nn.functional as F
 from torch.utils.data import TensorDataset, DataLoader
 from torch.utils.data.distributed import DistributedSampler
 from tqdm import tqdm
@@ -30,7 +30,7 @@ class TestMultipleLabelClassification(MultipleLabelClassificationMixin, TestBase
         for step, batch in (enumerate(tqdm(self.test_dataloader, desc=f'GPU #{self.rank}: Testing'))
                             if self.rank == self.experiment.main_rank else enumerate(self.test_dataloader)):
             logits = self.model(*tuple(t.cuda(self.rank) for t in batch[1:]), return_dict=True).logits
-            preds = (F.softmax(logits, dim=1) >= 0.5).long().detach().cpu().numpy().tolist()
+            preds = (torch.sigmoid(logits) >= 0.5).long().detach().cpu().numpy().tolist()
 
             with self.lock:
                 inference = self.shared['inference']
