@@ -33,7 +33,6 @@ class HybridExperimentConfig(ExperimentConfigBase):
             # Paired-label classification in all independent strategies will still be dependent to avoid excessive computation requirement,
             # unless 'independent_paired_label' is true.
             self.test_strategy = 'dependent'
-            self.independent_paired_label = False
 
             if kwargs.get('skip_default_classifier', False):
                 self.hybrid_default = None

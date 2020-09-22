@@ -86,17 +86,21 @@ class HybridTrainPipeline(PipelineBase):
             if self.rank == self.experiment.main_rank:
                 print(status)
 
-            train().evaluate().save()
+            if not train.skipped:
+                train().evaluate().save()
 
-            pipeline_records.append({'level': level, 'index': index, 'classification': train.name,
-                                     'data_size': data_hybrid.size, 'data_neg_size': data_reversed.size,
-                                     'label_size':  len(labels), 'reversed_label_size': len(labels_reversed)})
+                pipeline_records.append({'level': level, 'index': index, 'classification': train.name,
+                                         'data_size': data_hybrid.size, 'data_neg_size': data_reversed.size,
+                                         'label_size':  len(labels), 'reversed_label_size': len(labels_reversed)})
 
-            if train.eval_dict is not None:
-                pipeline_eval.append({'level': level, 'index': index, 'classification': train.name,
-                                      'f1-micro': train.eval_dict.get('micro avg', None),
-                                      'f1-macro': train.eval_dict.get('macro avg', None),
-                                      'f1-weighted': train.eval_dict.get('weighted avg', None)})
+                if train.eval_dict is not None:
+                    pipeline_eval.append({'level': level, 'index': index, 'classification': train.name,
+                                          'f1-micro': train.eval_dict.get('micro avg', None),
+                                          'f1-macro': train.eval_dict.get('macro avg', None),
+                                          'f1-weighted': train.eval_dict.get('weighted avg', None)})
+
+            elif self.rank == self.experiment.main_rank:
+                print(f'GPU #{self.rank}: Skipped training #{index} on level {level} (no eligible data)')
 
         elif self.rank == self.experiment.main_rank:
             print(f'GPU #{self.rank}: Skipped training #{index} on level {level}')
@@ -114,6 +118,7 @@ class HybridTestPipeline(PipelineBase):
             if level <= len(self.experiment.dataset.hybrid):
                 for index, config in enumerate(self.experiment.dataset.hybrid[level - 1]):
                     self._process(level, index, config, config.labels, pipeline_records, processed_labels)
+                    processed_labels += config.labels
 
             if self.experiment.dataset.hybrid_default is not None:
                 config = self.experiment.dataset.hybrid_default
@@ -155,8 +160,7 @@ class HybridTestPipeline(PipelineBase):
         self.data.tokenize(ontology, tokenizer)
 
         # Assuming that the default index will always be the paired-label classification
-        if level == 1 or (self.experiment.dataset.test_strategy != 'dependent' and
-                          (self.experiment.dataset.independent_paired_label or index != 'default')):
+        if level == 1 or (self.experiment.dataset.test_strategy != 'dependent' and index != 'default'):
             if index != 'default':
                 data_test = self.data.clone().resource
             else:
@@ -179,9 +183,8 @@ class HybridTestPipeline(PipelineBase):
 
             print(status)
 
-            test()
-
             if not test.skipped:
+                test()
                 test.data.blind().assign_answers(test.answers)
                 test.data.assign_missing_answers()
                 test.save()
@@ -208,5 +211,3 @@ class HybridTestPipeline(PipelineBase):
 
         elif self.rank == self.experiment.main_rank:
             print(f'GPU #{self.rank}: Skipped testing #{index} on level {level} (no data to test after filtering)')
-
-        processed_labels += labels
