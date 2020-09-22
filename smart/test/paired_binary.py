@@ -16,16 +16,13 @@ class TestPairedBinaryClassification(PairedBinaryClassificationMixin, TestBase):
         super().__init__(*args, **kwargs)
 
     def __call__(self):
-        if self.skipped:
-            return self
-
         self.model.eval()
 
         if self.rank == self.experiment.main_rank:
             with self.lock:
                 self.shared['inference'] = [{'y_ids': [], 'y_lids': [], 'y_pred': []} for _ in range(self.world_size)]
 
-        print(f'GPU #{self.rank}: Started testing')
+        print(f'GPU #{self.rank}: Started testing.')
         sys.stdout.flush()
         dist.barrier()
         test_start = time.time()
@@ -33,7 +30,7 @@ class TestPairedBinaryClassification(PairedBinaryClassificationMixin, TestBase):
         for step, batch in (enumerate(tqdm(self.test_dataloader, desc=f'GPU #{self.rank}: Testing'))
                             if self.rank == self.experiment.main_rank else enumerate(self.test_dataloader)):
             logits = self.model(*tuple(t.cuda(self.rank) for t in batch[2:]), return_dict=True).logits
-            preds = torch.argmax(logits, dim=1).detach().cpu().numpy().tolist()
+            preds = (torch.sigmoid(logits) >= 0.5).long().detach().cpu().numpy().tolist()
 
             with self.lock:
                 inference = self.shared['inference']
@@ -76,8 +73,8 @@ class TestPairedBinaryClassification(PairedBinaryClassificationMixin, TestBase):
         for qid, question, types in tqdm(zip(ids, questions, answers)):
             question_ids = self.data.tokenized[question]
 
-            if self.level == 1 or self.experiment.dataset.independent_paired_label:
-                labels = self.labels
+            if self.level == 1:
+                labels = [label for label in self.labels if self.data.ontology.labels[label]['count'] >= self.config.test_classes_min_dist]
             else:
                 labels = [label for label in self.labels if self.data.ontology.labels[label]['parent'] in types]
 
@@ -86,10 +83,11 @@ class TestPairedBinaryClassification(PairedBinaryClassificationMixin, TestBase):
             test_questions += [question_ids] * len(labels)
             test_labels += [self.data.ontology.labels[label] for label in labels]
 
-        if len(test_ids):
-            self.test_data = TestPairedBinaryClassification.Data(test_ids, test_lids, test_questions, test_labels)
-        else:
+        if len(test_ids) == 0:
             self.skipped = True
+            return self
+
+        self.test_data = TestPairedBinaryClassification.Data(test_ids, test_lids, test_questions, test_labels)
 
         return self
 

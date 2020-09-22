@@ -1,6 +1,7 @@
 import abc
 import copy
 import csv
+import json
 import numpy as np
 import pandas as pd
 import re
@@ -50,6 +51,17 @@ class Ontology:
     def level(self, lv):
         return {key: item for key, item in self.labels.items() if item['level'] == lv}
 
+    def dist(self, input_train):
+        data = json.load(open(input_train))
+
+        for cls in self.labels.values():
+            cls['count'] = 0
+
+        for question in data:
+            for label in question['type']:
+                if label in self.labels:
+                    self.labels[label]['count'] += 1
+
     def trace(self, label, reverse=False):
         branch = self._trace(label, [])[1:]
 
@@ -59,6 +71,9 @@ class Ontology:
         return branch
 
     def _trace(self, label, branch):
+        if label in branch:
+            return branch
+
         branch.append(label)
 
         if self.labels[label]['level'] > 1:
@@ -158,6 +173,9 @@ class DataForTrain(DataBase):
         super().__init__(experiment, ontology=ontology, tokenizer=tokenizer, tokenized=tokenized)
         self.df = pd.read_json(experiment.dataset.input_train) if df is None else df
 
+        if ontology is not None:
+            self.ontology.dist(experiment.dataset.input_train)
+
     def clone(self):
         df_dict = self.df.to_dict(orient='records')
         return DataForTest(self.experiment, df=pd.DataFrame(copy.deepcopy(df_dict)),
@@ -168,6 +186,9 @@ class DataForTest(DataBase):
     def __init__(self, experiment, df=None, ontology=None, tokenizer=None, tokenized=None):
         super().__init__(experiment, ontology=ontology, tokenizer=tokenizer, tokenized=tokenized)
         self.df = pd.read_json(experiment.dataset.input_test) if df is None else df
+
+        if ontology is not None:
+            self.ontology.dist(experiment.dataset.input_train)
 
     def clone(self):
         df_dict = self.df.to_dict(orient='records')
