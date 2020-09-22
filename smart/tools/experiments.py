@@ -8,6 +8,7 @@ OUTPUT_FILE = 'run'
 
 def build(writer, config, choices):
     global build_datasets
+    global do_not_clean
     global freezer_counter
 
     if len(config) > len(choices):
@@ -15,7 +16,9 @@ def build(writer, config, choices):
             build(writer, config, choices + [item])
 
     else:
-        params = ' '.join('--%s="%s"' % (list(config.keys())[i], str(choices[i]).replace(' ', '')) for i in range(len(config)))
+        params = ' '.join('--%s="%s"' % (list(config.keys())[i],
+                                         str(choices[i]).replace(' ', '').replace("'", "\\\""))
+                          for i in range(len(config)))
 
         for dataset in (['dbpedia', 'wikidata'] if build_datasets == 'all' else [build_datasets]):
             for task in ['literal', 'hybrid']:
@@ -28,7 +31,11 @@ def build(writer, config, choices):
                 writer.write(f'bash test hybrid {dataset} {params} --all-hybrid-dataset-test_strategy={strategy}\n')
                 writer.write(f'bash freeze --identifier="id-%04d-{strategy}" --exclude-models\n' % freezer_counter)
 
-            writer.write('bash clean\n\n')
+            if do_not_clean:
+                writer.write('\n')
+            else:
+                writer.write('bash clean\n\n')
+
             freezer_counter += 1
 
 
@@ -45,6 +52,8 @@ if __name__ == '__main__':
     freezer_counter = 1
     parser = argparse.ArgumentParser()
     parser.add_argument('--dataset', dest='dataset', action='store', default='all')
+    parser.add_argument('--do-not-clean', action='store_true')
     args = parser.parse_args()
     build_datasets = args.dataset
+    do_not_clean = args.do_not_clean
     run()

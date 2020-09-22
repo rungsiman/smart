@@ -102,8 +102,6 @@ class BertConfigBase(ConfigBase):
     seq_classif_dropout = .2
 
     def __init__(self, optimizer=None, scheduler=None, **kwargs):
-        super().__init__(**select(kwargs, 'optimizer', 'scheduler', reverse=True))
-
         self.optimizer = optimizer or ClassConfigBase(AdamW, kwargs={
             'lr': 2e-5,  # Default learning rate: 5e-5
             'eps': 1e-8})  # Adam's epsilon, default: 1e-6
@@ -115,6 +113,8 @@ class BertConfigBase(ConfigBase):
 
         if len(select(kwargs, 'scheduler')):
             self.scheduler.kwargs = {**self.scheduler.kwargs, **select(kwargs, 'scheduler')}
+
+        super().__init__(**select(kwargs, 'optimizer', 'scheduler', reverse=True))
 
 
 class GanConfigBase(ConfigBase):
@@ -158,9 +158,15 @@ class TrainConfigBase(TrainConfigMixin, ConfigBase):
     # then the last batch will be smaller.
     drop_last = False
 
+    # Current for paired-binary classification only.
+    # The minimum number of training samples for a class to be included in training/testing.
+    # This constraint will only applied for independent-based test strategies.
+    train_classes_min_dist = 0
+    test_classes_min_dist = 0
+
     def __init__(self, *, trainer, labels=None, **kwargs):
         self.trainer = trainer
         self.labels = labels
         self.bert = BertConfigBase(**select(kwargs, 'bert'))
         self.gan = GanConfigBase(**select(kwargs, 'gan'))
-        super().__init__(**kwargs)
+        super().__init__(**select(kwargs, 'bert', 'gan', reverse=True))

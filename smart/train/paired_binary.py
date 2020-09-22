@@ -28,18 +28,22 @@ class TrainPairedBinaryClassification(PairedBinaryClassificationMixin, TrainBase
         input_labels = []
         input_tags = []
 
-        counter = 0
-
         # For each question, generate pairs of question-label for every label,
         # as well as for a certain amount of invalid labels (negative examples)
         for qid, question, labels_pos in tqdm(zip(ids, questions, labels)):
+            if len(labels_pos) == 0:
+                print(f'WARNING: [TrainPairedBinary.pack] No ground-truth labels for question: {qid}')
+            else:
+                labels_pos = [label for label in labels_pos if self.data.ontology.labels[label]['count'] >= self.config.train_classes_min_dist
+                              and label in self.labels]
+
             if len(labels_pos):
                 question_ids = self.data.tokenized[question]
                 input_questions += [question_ids] * (len(labels_pos) * 2 if self.config.neg_size == 'mirror' else
                                                      len(labels_pos) + self.config.neg_size)
                 input_labels += [self.data.ontology.labels[label] for label in labels_pos]
 
-                choices = list(filter(lambda label: label not in labels_pos, self.data.ontology.labels.keys()))
+                choices = list(filter(lambda label: label not in labels_pos, self.labels))
                 labels_neg = [random.choice(choices) for _ in range(len(labels_pos) if self.config.neg_size == 'mirror' else self.config.neg_size)]
                 input_labels += [self.data.ontology.labels[label] for label in labels_neg]
 
@@ -49,11 +53,9 @@ class TrainPairedBinaryClassification(PairedBinaryClassificationMixin, TrainBase
                 input_lids += [self.data.ontology.labels[label]['id'] for label in labels_pos] + \
                               [self.data.ontology.labels[label]['id'] for label in labels_neg]
 
-            else:
-                status = 'WARNING: No positive labels:\n'
-                status += f'.. Question ID: {qid}'
-                status += f'.. Question: {question}'
-                print(status)
+        if len(input_ids) == 0:
+            self.skipped = True
+            return self
 
         split = train_test_split(input_ids, input_lids, input_questions, input_labels, input_tags,
                                  random_state=self.experiment.split_random_state,
@@ -122,13 +124,8 @@ class TrainPairedBinaryClassification(PairedBinaryClassificationMixin, TrainBase
         return self
 
     def _build_dataloader(self, data):
-        dataset = TensorDataset(data.ids,
-                                data.lids,
-                                data.questions.ids,
-                                data.questions.masks,
-                                data.labels.ids,
-                                data.labels.masks,
-                                data.tags)
+        dataset = TensorDataset(data.ids, data.lids, data.questions.ids, data.questions.masks,
+                                data.labels.ids, data.labels.masks, data.tags)
 
         self.sampler = DistributedSampler(dataset, rank=self.rank, num_replicas=self.world_size,
                                           shuffle=True, seed=self.experiment.seed)
