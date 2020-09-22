@@ -37,6 +37,17 @@ class Ontology:
 
         return self
 
+    def dist(self, input_train):
+        data = json.load(open(input_train))
+
+        for cls in self.labels.values():
+            cls['count'] = 0
+
+        for question in data:
+            for label in question['type']:
+                if label in self.labels:
+                    self.labels[label]['count'] += 1
+
     def reverse(self, labels, level=None):
         reversed_labels = list(filter(lambda label: label not in labels, self.labels.keys()))
 
@@ -51,16 +62,8 @@ class Ontology:
     def level(self, lv):
         return {key: item for key, item in self.labels.items() if item['level'] == lv}
 
-    def dist(self, input_train):
-        data = json.load(open(input_train))
-
-        for cls in self.labels.values():
-            cls['count'] = 0
-
-        for question in data:
-            for label in question['type']:
-                if label in self.labels:
-                    self.labels[label]['count'] += 1
+    def cap(self, threshold):
+        return {key: item for key, item in self.labels.items() if item['count'] >= threshold}
 
     def trace(self, label, reverse=False):
         branch = self._trace(label, [])[1:]

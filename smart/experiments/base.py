@@ -159,9 +159,10 @@ class TrainConfigBase(TrainConfigMixin, ConfigBase):
     drop_last = False
 
     # Current for paired-binary classification only.
-    # The minimum number of training samples for a class to be included in training/testing.
+    # The minimum/maximum number of training samples for a class to be included in training/testing.
     # This constraint will only applied for independent-based test strategies.
     train_classes_min_dist = 0
+    train_classes_max_dist = 0
     test_classes_min_dist = 0
 
     def __init__(self, *, trainer, labels=None, **kwargs):

@@ -30,18 +30,14 @@ class HybridTrainPipeline(PipelineBase):
                         self._process(level, index, config, config.labels, ontology,
                                       pipeline_records, pipeline_eval, set_num_labels=True)
 
-            if self.experiment.dataset.hybrid_default is not None:
-                if self.experiment.dataset.selective_train is None or \
-                        f'default' in self.experiment.dataset.selective_train or \
-                        f'level-{level}' in self.experiment.dataset.selective_train or \
-                        f'level-{level}-default' in self.experiment.dataset.selective_train:
-                    config = self.experiment.dataset.hybrid_default
-                    labels_reversed = ontology.reverse(processed_labels, level)
-                    self._process(level, 'default', config, labels_reversed, ontology,
-                                  pipeline_records, pipeline_eval)
+        if self.experiment.dataset.hybrid_default is not None and \
+                (self.experiment.dataset.selective_train is None or 'default' in self.experiment.dataset.selective_train):
+            config = self.experiment.dataset.hybrid_default
+            labels = ontology.cap(config.train_classes_max_dist).keys()
+            self._process(None, 'default', config, labels, ontology, pipeline_records, pipeline_eval)
 
-            elif self.rank == self.experiment.main_rank:
-                print(f'GPU #{self.rank}: Skipped training default classifier on level {level}.')
+        elif self.rank == self.experiment.main_rank:
+            print(f'GPU #{self.rank}: Skipped training default classifier.')
 
         if self.rank == self.experiment.main_rank:
             json.dump(pipeline_records, open(os.path.join(self.experiment.dataset.output_analyses, 'pipeline_train_records.json'), 'w'), indent=4)
@@ -51,8 +47,6 @@ class HybridTrainPipeline(PipelineBase):
                 writer.write(f'Approximate training time: {stopwatch.watch()}')
 
     def _process(self, level, index, config, labels, ontology, pipeline_records, pipeline_eval, set_num_labels=False):
-        labels_reversed = ontology.reverse(labels, level)
-
         tokenizer = CustomAutoTokenizer(config)
         ontology.tokenize(tokenizer)
         self.data.tokenize(ontology, tokenizer)
@@ -75,7 +69,11 @@ class HybridTrainPipeline(PipelineBase):
             train = config.trainer(self.rank, self.world_size, self.experiment, model, data_hybrid, labels,
                                    config, self.shared, self.lock, level=level, index=index, data_neg=data_reversed)
 
-            status = f'GPU #{self.rank}: Training #{index} "{train.name}" on level {level}.\n'
+            if level is None:
+                status = f'GPU #{self.rank}: Training #{index} "{train.name}".\n'
+            else:
+                status = f'GPU #{self.rank}: Training #{index} "{train.name}" on level {level}.\n'
+
             status += f'.. Type count: {len(labels)}\n'
             status += f'.. Data size: {data_hybrid.size} of {self.data.size} ({self.all_data_size} including literal)\n'
             status += f'.. Negative data size: {data_reversed.size}'
@@ -91,7 +89,7 @@ class HybridTrainPipeline(PipelineBase):
 
                 pipeline_records.append({'level': level, 'index': index, 'classification': train.name,
                                          'data_size': data_hybrid.size, 'data_neg_size': data_reversed.size,
-                                         'label_size':  len(labels), 'reversed_label_size': len(labels_reversed)})
+                                         'label_size':  len(labels)})
 
                 if train.eval_dict is not None:
                     pipeline_eval.append({'level': level, 'index': index, 'classification': train.name,
