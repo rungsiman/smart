@@ -1,10 +1,50 @@
-{
-  "all-base-all-use_gan": [false, true],
-  "all-base-all-model": ["distilbert-base-uncased", "bert-large-uncased", "roberta-large"],
-  "all-base-all-batch_size": [16],
-  "all-base-all-bert-optimizer-lr": [5e-5],
-  "all-base-all-gan-discriminator-optimizer-lr": [5e-5],
-  "all-base-all-gan-generator-optimizer-lr": [5e-5],
+[
+  {
+    "all-base-all-model": ["bert-base-uncased", "roberta-base"],
+    "all-base-all-batch_size": [16],
+    "all-skip_default_classifier": [true],
 
-  "dbpedia-literal-base-all-epochs": [1, 3, 5]
-}
+    "dbpedia-hybrid-class_dist_thresholds": [[400, 100, 50]],
+    "dbpedia-hybrid-base-id-0-all-epochs": [5],
+    "dbpedia-hybrid-base-id-1-all-epochs": [15],
+    "dbpedia-hybrid-base-id-2-all-epochs": [25],
+
+    "wikidata-hybrid-class_dist_thresholds": [[1000, 300, 100, 50]],
+    "wikidata-hybrid-base-id-0-all-epochs": [5],
+    "wikidata-hybrid-base-id-1-all-epochs": [15],
+    "wikidata-hybrid-base-id-2-all-epochs": [25],
+    "wikidata-hybrid-base-id-3-all-epochs": [35]
+  },
+  {
+    "all-base-all-model": ["bert-base-uncased", "roberta-base"],
+    "all-base-all-batch_size": [16],
+    "all-skip_default_classifier": [true],
+
+    "dbpedia-hybrid-class_dist_thresholds": [[400, 100, 50]],
+    "dbpedia-hybrid-base-id-0-all-epochs": [10],
+    "dbpedia-hybrid-base-id-1-all-epochs": [20],
+    "dbpedia-hybrid-base-id-2-all-epochs": [30],
+
+    "wikidata-hybrid-class_dist_thresholds": [[1000, 300, 100, 50]],
+    "wikidata-hybrid-base-id-0-all-epochs": [10],
+    "wikidata-hybrid-base-id-1-all-epochs": [20],
+    "wikidata-hybrid-base-id-2-all-epochs": [30],
+    "wikidata-hybrid-base-id-3-all-epochs": [40]
+  },
+  {
+    "all-base-all-model": ["bert-base-uncased", "roberta-base"],
+    "all-base-all-batch_size": [16],
+    "all-skip_default_classifier": [true],
+
+    "dbpedia-hybrid-class_dist_thresholds": [[400, 100, 50]],
+    "dbpedia-hybrid-base-id-0-all-epochs": [15],
+    "dbpedia-hybrid-base-id-1-all-epochs": [25],
+    "dbpedia-hybrid-base-id-2-all-epochs": [35],
+
+    "wikidata-hybrid-class_dist_thresholds": [[1000, 300, 100, 50]],
+    "wikidata-hybrid-base-id-0-all-epochs": [15],
+    "wikidata-hybrid-base-id-1-all-epochs": [25],
+    "wikidata-hybrid-base-id-2-all-epochs": [35],
+    "wikidata-hybrid-base-id-3-all-epochs": [45]
+  }
+]
