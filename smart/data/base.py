@@ -48,6 +48,8 @@ class Ontology:
                 if label in self.labels:
                     self.labels[label]['count'] += 1
 
+        return self
+
     def reverse(self, labels, level=None):
         reversed_labels = list(filter(lambda label: label not in labels, self.labels.keys()))
 
@@ -62,8 +64,9 @@ class Ontology:
     def level(self, lv):
         return {key: item for key, item in self.labels.items() if item['level'] == lv}
 
-    def cap(self, threshold):
-        return {key: item for key, item in self.labels.items() if item['count'] >= threshold}
+    def cap(self, lower_threshold=0, upper_threshold=None):
+        return {key: item for key, item in self.labels.items() if item['count'] >= lower_threshold and (
+                upper_threshold is None or item['count'] < upper_threshold)}
 
     def trace(self, label, reverse=False):
         branch = self._trace(label, [])[1:]
