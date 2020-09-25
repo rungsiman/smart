@@ -1,29 +1,50 @@
-{
-  "all-base-all-model": ["bert-large-uncased", "roberta-large"],
-  "all-base-all-batch_size": [16],
+[
+  {
+    "all-base-all-model": ["bert-base-uncased", "roberta-base"],
+    "all-base-all-batch_size": [16],
+    "all-skip_default_classifier": [true],
 
-  "all-literal-base-all-epochs": [1, 2, 4, 10],
-  "all-literal-base-all-use_gan": [true, false],
+    "dbpedia-hybrid-class_dist_thresholds": [[400, 100, 50]],
+    "dbpedia-hybrid-base-id-0-all-epochs": [5],
+    "dbpedia-hybrid-base-id-1-all-epochs": [15],
+    "dbpedia-hybrid-base-id-2-all-epochs": [25],
 
-  "all-hybrid-base-all-epochs": [4],
-  "all-hybrid-base-all-use_gan": [false],
+    "wikidata-hybrid-class_dist_thresholds": [[1000, 300, 100, 50]],
+    "wikidata-hybrid-base-id-0-all-epochs": [5],
+    "wikidata-hybrid-base-id-1-all-epochs": [15],
+    "wikidata-hybrid-base-id-2-all-epochs": [25],
+    "wikidata-hybrid-base-id-3-all-epochs": [35]
+  },
+  {
+    "all-base-all-model": ["bert-base-uncased", "roberta-base"],
+    "all-base-all-batch_size": [16],
+    "all-skip_default_classifier": [true],
 
+    "dbpedia-hybrid-class_dist_thresholds": [[400, 100, 50]],
+    "dbpedia-hybrid-base-id-0-all-epochs": [10],
+    "dbpedia-hybrid-base-id-1-all-epochs": [20],
+    "dbpedia-hybrid-base-id-2-all-epochs": [30],
 
-  "dbpedia-hybrid-class_dist_thresholds": [[1000]],
-  "dbpedia-hybrid-base-level-1-thresholds": [[2000]],
-  "dbpedia-hybrid-base-level-2-thresholds": [[1000]],
-  "dbpedia-hybrid-base-level-3-thresholds": [[400]],
-  "dbpedia-hybrid-base-level-4-thresholds": [[500]],
-  "dbpedia-hybrid-base-default-neg_size": [10],
+    "wikidata-hybrid-class_dist_thresholds": [[1000, 300, 100, 50]],
+    "wikidata-hybrid-base-id-0-all-epochs": [10],
+    "wikidata-hybrid-base-id-1-all-epochs": [20],
+    "wikidata-hybrid-base-id-2-all-epochs": [30],
+    "wikidata-hybrid-base-id-3-all-epochs": [40]
+  },
+  {
+    "all-base-all-model": ["bert-base-uncased", "roberta-base"],
+    "all-base-all-batch_size": [16],
+    "all-skip_default_classifier": [true],
 
-  "wikidata-hybrid-class_dist_thresholds": [[1000]],
-  "wikidata-hybrid-base-level-1-thresholds": [[1000, 300]],
-  "wikidata-hybrid-base-level-2-thresholds": [[1000]],
-  "wikidata-hybrid-base-level-3-thresholds": [[1000, 300]],
-  "wikidata-hybrid-base-level-4-thresholds": [[500, 200]],
-  "wikidata-hybrid-base-level-5-thresholds": [[400]],
-  "wikidata-hybrid-base-level-6-thresholds": [[99]],
-  "wikidata-hybrid-base-level-7-thresholds": [[500]],
-  "wikidata-hybrid-base-level-8-thresholds": [[500, 150]],
-  "wikidata-hybrid-skip_default_classifier": [true]
-}
+    "dbpedia-hybrid-class_dist_thresholds": [[400, 100, 50]],
+    "dbpedia-hybrid-base-id-0-all-epochs": [15],
+    "dbpedia-hybrid-base-id-1-all-epochs": [25],
+    "dbpedia-hybrid-base-id-2-all-epochs": [35],
+
+    "wikidata-hybrid-class_dist_thresholds": [[1000, 300, 100, 50]],
+    "wikidata-hybrid-base-id-0-all-epochs": [15],
+    "wikidata-hybrid-base-id-1-all-epochs": [25],
+    "wikidata-hybrid-base-id-2-all-epochs": [35],
+    "wikidata-hybrid-base-id-3-all-epochs": [45]
+  }
+]

@@ -1,3 +1,4 @@
+import pandas as pd
 import random
 import sys
 import time
@@ -18,40 +19,36 @@ class TrainPairedBinaryClassification(PairedBinaryClassificationMixin, TrainBase
         super().__init__(*args, **kwargs)
 
     def pack(self):
-        ids = self.data.df.id.values
-        questions = self.data.df.question.values
-        labels = self.data.df.type.values
-
         input_ids = []
         input_lids = []
         input_questions = []
         input_labels = []
         input_tags = []
 
-        # For each question, generate pairs of question-label for every label,
-        # as well as for a certain amount of invalid labels (negative examples)
-        for qid, question, labels_pos in tqdm(zip(ids, questions, labels)):
-            if len(labels_pos) == 0:
-                print(f'WARNING: [TrainPairedBinary.pack] No ground-truth labels for question: {qid}')
+        data = pd.concat([self.data.df, self.data_neg.df], ignore_index=True).to_dict(orient='records')
+
+        for label in self.labels:
+            qis_pos = [i for i in range(len(data)) if label in data[i]['type']]
+
+            if len(qis_pos) == 0:
+                neg_size = self.config.paired_binary_default_neg_size
+            elif self.config.neg_size == 'mirror':
+                neg_size = len(qis_pos)
+            elif 'x' in self.config.neg_size:
+                neg_size = len(qis_pos) * int(self.config.neg_size.replace('x', ''))
             else:
-                labels_pos = [label for label in labels_pos if self.data.ontology.labels[label]['count'] >= self.config.train_classes_min_dist
-                              and label in self.labels]
+                neg_size = self.config.neg_size
 
-            if len(labels_pos):
-                question_ids = self.data.tokenized[question]
-                input_questions += [question_ids] * (len(labels_pos) * 2 if self.config.neg_size == 'mirror' else
-                                                     len(labels_pos) + self.config.neg_size)
-                input_labels += [self.data.ontology.labels[label] for label in labels_pos]
+            qis_neg = list(filter(lambda i: i not in qis_pos, range(len(data))))
+            qis_neg = [random.choice(qis_neg) for _ in range(neg_size)]
 
-                choices = list(filter(lambda label: label not in labels_pos, self.labels))
-                labels_neg = [random.choice(choices) for _ in range(len(labels_pos) if self.config.neg_size == 'mirror' else self.config.neg_size)]
-                input_labels += [self.data.ontology.labels[label] for label in labels_neg]
-
-                # Set tags to 1 for valid question-label pairs and 0 for invalid pairs
-                input_tags += [1] * len(labels_pos) + [0] * len(labels_neg)
-                input_ids += [int(qid.replace('dbpedia_', '')) if isinstance(qid, str) else qid] * (len(labels_pos) + len(labels_neg))
-                input_lids += [self.data.ontology.labels[label]['id'] for label in labels_pos] + \
-                              [self.data.ontology.labels[label]['id'] for label in labels_neg]
+            input_ids += [int(str(data[qi]['id']).replace('dbpedia_', '')) for qi in qis_pos] + \
+                         [int(str(data[qi]['id']).replace('dbpedia_', '')) for qi in qis_neg]
+            input_lids += [self.data.ontology.labels[label]['id']] * (len(qis_pos) + len(qis_neg))
+            input_questions += [self.data.tokenized[data[qi]['question']] for qi in qis_pos] + \
+                               [self.data_neg.tokenized[data[qi]['question']] for qi in qis_neg]
+            input_labels += [self.data.ontology.labels[label]] * (len(qis_pos) + len(qis_neg))
+            input_tags += [1] * len(qis_pos) + [0] * len(qis_neg)
 
         if len(input_ids) == 0:
             self.skipped = True
@@ -79,7 +76,8 @@ class TrainPairedBinaryClassification(PairedBinaryClassificationMixin, TrainBase
 
         if self.rank == self.experiment.main_rank:
             with self.lock:
-                self.shared['evaluation'] = [{'y_ids': [], 'y_lids': [], 'y_true': [], 'y_pred': []} for _ in range(self.world_size)]
+                self.shared['evaluation'] = [{'y_ids': [], 'y_lids': [], 'y_true': [], 'y_prob': [], 'y_pred': []}
+                                             for _ in range(self.world_size)]
 
         print(f'GPU #{self.rank}: Started evaluation.')
         sys.stdout.flush()
@@ -89,6 +87,7 @@ class TrainPairedBinaryClassification(PairedBinaryClassificationMixin, TrainBase
         for step, batch in (enumerate(tqdm(self.eval_dataloader, desc=f'GPU #{self.rank}: Evaluating'))
                             if self.rank == self.experiment.main_rank else enumerate(self.eval_dataloader)):
             logits = self.model(*tuple(t.cuda(self.rank) for t in batch[2:-1]), return_dict=True).logits
+            probs = torch.sigmoid(logits).detach().cpu().numpy().tolist()
             preds = (torch.sigmoid(logits) >= 0.5).long().detach().cpu().numpy().tolist()
 
             with self.lock:
@@ -96,6 +95,7 @@ class TrainPairedBinaryClassification(PairedBinaryClassificationMixin, TrainBase
                 evaluation[self.rank]['y_ids'] += batch[0].tolist()
                 evaluation[self.rank]['y_lids'] += batch[1].tolist()
                 evaluation[self.rank]['y_true'] += batch[-1].tolist()
+                evaluation[self.rank]['y_prob'] += probs
                 evaluation[self.rank]['y_pred'] += preds
                 self.shared['evaluation'] = evaluation
 
@@ -106,12 +106,13 @@ class TrainPairedBinaryClassification(PairedBinaryClassificationMixin, TrainBase
         self.train_records['eval_time'] = TrainPairedBinaryClassification._format_time(time.time() - eval_start)
 
         if self.rank == self.experiment.main_rank:
-            y_ids, y_lids, y_true, y_pred = [], [], [], []
+            y_ids, y_lids, y_true, y_prob, y_pred = [], [], [], [], []
 
             for i in range(self.world_size):
                 y_ids += self.shared['evaluation'][i]['y_ids']
                 y_lids += self.shared['evaluation'][i]['y_lids']
                 y_true += self.shared['evaluation'][i]['y_true']
+                y_prob += self.shared['evaluation'][i]['y_prob']
                 y_pred += self.shared['evaluation'][i]['y_pred']
 
             self.eval_report = classification_report(y_true, y_pred, digits=4)

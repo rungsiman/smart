@@ -1,8 +1,26 @@
 #!/bin/bash
 
-bash train literal dbpedia
-bash test literal dbpedia
-bash train hybrid dbpedia
-bash test hybrid dbpedia
-bash freeze --exclude-models --identifier=dbpedia
+bash train hybrid dbpedia --all-base-all-model="bert-base-uncased" --all-base-all-batch_size="16" --all-skip_default_classifier="True" --dbpedia-hybrid-class_dist_thresholds="[400,100,50]" --dbpedia-hybrid-base-id-0-all-epochs="5" --dbpedia-hybrid-base-id-1-all-epochs="15" --dbpedia-hybrid-base-id-2-all-epochs="25" --wikidata-hybrid-class_dist_thresholds="[1000,300,100,50]" --wikidata-hybrid-base-id-0-all-epochs="5" --wikidata-hybrid-base-id-1-all-epochs="15" --wikidata-hybrid-base-id-2-all-epochs="25" --wikidata-hybrid-base-id-3-all-epochs="35"
+bash freeze --identifier="id-0001-hybrid" --exclude-models
 bash clean
+
+bash train hybrid dbpedia --all-base-all-model="roberta-base" --all-base-all-batch_size="16" --all-skip_default_classifier="True" --dbpedia-hybrid-class_dist_thresholds="[400,100,50]" --dbpedia-hybrid-base-id-0-all-epochs="5" --dbpedia-hybrid-base-id-1-all-epochs="15" --dbpedia-hybrid-base-id-2-all-epochs="25" --wikidata-hybrid-class_dist_thresholds="[1000,300,100,50]" --wikidata-hybrid-base-id-0-all-epochs="5" --wikidata-hybrid-base-id-1-all-epochs="15" --wikidata-hybrid-base-id-2-all-epochs="25" --wikidata-hybrid-base-id-3-all-epochs="35"
+bash freeze --identifier="id-0002-hybrid" --exclude-models
+bash clean
+
+bash train hybrid dbpedia --all-base-all-model="bert-base-uncased" --all-base-all-batch_size="16" --all-skip_default_classifier="True" --dbpedia-hybrid-class_dist_thresholds="[400,100,50]" --dbpedia-hybrid-base-id-0-all-epochs="10" --dbpedia-hybrid-base-id-1-all-epochs="20" --dbpedia-hybrid-base-id-2-all-epochs="30" --wikidata-hybrid-class_dist_thresholds="[1000,300,100,50]" --wikidata-hybrid-base-id-0-all-epochs="10" --wikidata-hybrid-base-id-1-all-epochs="20" --wikidata-hybrid-base-id-2-all-epochs="30" --wikidata-hybrid-base-id-3-all-epochs="40"
+bash freeze --identifier="id-0003-hybrid" --exclude-models
+bash clean
+
+bash train hybrid dbpedia --all-base-all-model="roberta-base" --all-base-all-batch_size="16" --all-skip_default_classifier="True" --dbpedia-hybrid-class_dist_thresholds="[400,100,50]" --dbpedia-hybrid-base-id-0-all-epochs="10" --dbpedia-hybrid-base-id-1-all-epochs="20" --dbpedia-hybrid-base-id-2-all-epochs="30" --wikidata-hybrid-class_dist_thresholds="[1000,300,100,50]" --wikidata-hybrid-base-id-0-all-epochs="10" --wikidata-hybrid-base-id-1-all-epochs="20" --wikidata-hybrid-base-id-2-all-epochs="30" --wikidata-hybrid-base-id-3-all-epochs="40"
+bash freeze --identifier="id-0004-hybrid" --exclude-models
+bash clean
+
+bash train hybrid dbpedia --all-base-all-model="bert-base-uncased" --all-base-all-batch_size="16" --all-skip_default_classifier="True" --dbpedia-hybrid-class_dist_thresholds="[400,100,50]" --dbpedia-hybrid-base-id-0-all-epochs="15" --dbpedia-hybrid-base-id-1-all-epochs="25" --dbpedia-hybrid-base-id-2-all-epochs="35" --wikidata-hybrid-class_dist_thresholds="[1000,300,100,50]" --wikidata-hybrid-base-id-0-all-epochs="15" --wikidata-hybrid-base-id-1-all-epochs="25" --wikidata-hybrid-base-id-2-all-epochs="35" --wikidata-hybrid-base-id-3-all-epochs="45"
+bash freeze --identifier="id-0005-hybrid" --exclude-models
+bash clean
+
+bash train hybrid dbpedia --all-base-all-model="roberta-base" --all-base-all-batch_size="16" --all-skip_default_classifier="True" --dbpedia-hybrid-class_dist_thresholds="[400,100,50]" --dbpedia-hybrid-base-id-0-all-epochs="15" --dbpedia-hybrid-base-id-1-all-epochs="25" --dbpedia-hybrid-base-id-2-all-epochs="35" --wikidata-hybrid-class_dist_thresholds="[1000,300,100,50]" --wikidata-hybrid-base-id-0-all-epochs="15" --wikidata-hybrid-base-id-1-all-epochs="25" --wikidata-hybrid-base-id-2-all-epochs="35" --wikidata-hybrid-base-id-3-all-epochs="45"
+bash freeze --identifier="id-0006-hybrid" --exclude-models
+bash clean
+
