@@ -103,7 +103,7 @@ class BertConfigBase(ConfigBase):
 
     def __init__(self, optimizer=None, scheduler=None, **kwargs):
         self.optimizer = optimizer or ClassConfigBase(AdamW, kwargs={
-            'lr': 2e-5,  # Default learning rate: 5e-5
+            'lr': 5e-5,  # Default learning rate: 5e-5
             'eps': 1e-8})  # Adam's epsilon, default: 1e-6
         self.scheduler = scheduler or ClassConfigBase(LinearScheduleWithWarmup, kwargs={
             'num_warmup_steps': 0})
@@ -155,7 +155,7 @@ class TrainConfigBase(TrainConfigMixin, ConfigBase):
 
     # When using GANs, self.bert configuration will be ignored in favor of self.gan.discriminator.
     # The discriminator's optimizer and scheduler will be applied to both BERT and the discriminator model.
-    use_gan = True
+    use_gan = False
 
     # Set to True to drop the last incomplete batch, if the dataset size is not divisible
     # by the batch size. If False and the size of dataset is not divisible by the batch size,
