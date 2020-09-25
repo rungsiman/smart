@@ -137,6 +137,7 @@ class GanConfigBase(ConfigBase):
 class TrainConfigBase(TrainConfigMixin, ConfigBase):
     model = 'distilbert-base-uncased'
     lowercase = True
+    skip = False
 
     epochs = 1
     batch_size = 32
@@ -149,6 +150,9 @@ class TrainConfigBase(TrainConfigMixin, ConfigBase):
     # The amount of negative examples
     neg_size = 'mirror'
 
+    # In cases of classes with no positive samples in paired-binary classification
+    paired_binary_default_neg_size = 10
+
     # When using GANs, self.bert configuration will be ignored in favor of self.gan.discriminator.
     # The discriminator's optimizer and scheduler will be applied to both BERT and the discriminator model.
     use_gan = True
@@ -159,9 +163,10 @@ class TrainConfigBase(TrainConfigMixin, ConfigBase):
     drop_last = False
 
     # Current for paired-binary classification only.
-    # The minimum number of training samples for a class to be included in training/testing.
+    # The minimum/maximum number of training samples for a class to be included in training/testing.
     # This constraint will only applied for independent-based test strategies.
     train_classes_min_dist = 0
+    train_classes_max_dist = None
     test_classes_min_dist = 0
 
     def __init__(self, *, trainer, labels=None, **kwargs):

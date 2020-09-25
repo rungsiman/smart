@@ -1,31 +1,10 @@
 {
-  "all-base-all-model": ["bert-base-uncased", "roberta-base"],
+  "all-base-all-use_gan": [false, true],
+  "all-base-all-model": ["distilbert-base-uncased", "bert-large-uncased", "roberta-large"],
   "all-base-all-batch_size": [16],
+  "all-base-all-bert-optimizer-lr": [5e-5],
+  "all-base-all-gan-discriminator-optimizer-lr": [5e-5],
+  "all-base-all-gan-generator-optimizer-lr": [5e-5],
 
-  "all-literal-base-all-epochs": [1, 5, 10, 20],
-  "all-literal-base-all-use_gan": [false],
-
-  "all-hybrid-base-all-epochs": [5],
-  "all-hybrid-base-all-use_gan": [false],
-
-
-  "dbpedia-hybrid-dataset-selective_train": [["level-1-id-0"]],
-  "dbpedia-hybrid-class_dist_thresholds": [[1000]],
-  "dbpedia-hybrid-base-level-1-thresholds": [[2000]],
-  "dbpedia-hybrid-base-level-2-thresholds": [[1000]],
-  "dbpedia-hybrid-base-level-3-thresholds": [[400]],
-  "dbpedia-hybrid-base-level-4-thresholds": [[500]],
-  "dbpedia-hybrid-base-default-neg_size": [10],
-
-  "wikidata-hybrid-dataset-selective_train": [["level-1-id-0"]],
-  "wikidata-hybrid-class_dist_thresholds": [[1000]],
-  "wikidata-hybrid-base-level-1-thresholds": [[1000, 300]],
-  "wikidata-hybrid-base-level-2-thresholds": [[1000]],
-  "wikidata-hybrid-base-level-3-thresholds": [[1000, 300]],
-  "wikidata-hybrid-base-level-4-thresholds": [[500, 200]],
-  "wikidata-hybrid-base-level-5-thresholds": [[400]],
-  "wikidata-hybrid-base-level-6-thresholds": [[99]],
-  "wikidata-hybrid-base-level-7-thresholds": [[500]],
-  "wikidata-hybrid-base-level-8-thresholds": [[500, 150]],
-  "wikidata-hybrid-skip_default_classifier": [true]
+  "dbpedia-literal-base-all-epochs": [1, 3, 5]
 }

@@ -24,7 +24,7 @@ class TestBase(StageBase):
     pred_size = ...
     answers = ...
 
-    def __init__(self, rank, world_size, experiment, model, data, labels, config, shared, lock, level=None, *args, **kwargs):
+    def __init__(self, rank, world_size, experiment, model, data, labels, config, shared, lock, level=None, index=None, *args, **kwargs):
         super().__init__()
 
         self.test_records = {'test_time': None}
@@ -39,7 +39,7 @@ class TestBase(StageBase):
         self.level = level
 
         self.path_output = os.path.join(self.experiment.dataset.output_test, self.identifier)
-        self.path_models = os.path.join(self.experiment.dataset.output_models, self.identifier)
+        self.path_models = os.path.join(self.experiment.dataset.output_models, 'paired-binary' if index == 'default' else self.identifier)
         self.path_analyses = os.path.join(self.experiment.dataset.output_analyses, self.identifier)
 
         self.pack().build_dataloaders()

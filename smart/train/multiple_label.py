@@ -27,7 +27,13 @@ class TrainMultipleLabelClassification(MultipleLabelClassificationMixin, TrainBa
         neg_questions = self.data_neg.df.question.values
 
         neg_orders = []
-        neg_size = self.data.size if self.config.neg_size == 'mirror' else self.config.neg_size
+
+        if self.config.neg_size == 'mirror':
+            neg_size = self.data.size
+        elif 'x' in self.config.neg_size:
+            neg_size = self.data.size * int(self.config.neg_size.replace('x', ''))
+        else:
+            neg_size = self.config.neg_size
 
         if self.data_neg is not None:
             if neg_size <= self.data_neg.size:

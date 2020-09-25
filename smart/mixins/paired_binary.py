@@ -24,18 +24,32 @@ class PairedBinaryClassificationMixin:
         self.identifier = self.resolve_identifier(kwargs.get('level', None), kwargs.get('index', None))
         super().__init__(*args, **kwargs)
 
-    def _build_answers(self, y_ids, y_lids, y_pred):
+    def _build_answers(self, y_ids, y_lids, y_pred, y_prob=None):
         answers = super()._get_data(y_ids)
 
-        for answer in answers:
-            answer['type'] = []
+        if y_prob is None:
+            for answer in answers:
+                answer['type'] = []
 
-            for qid, lid, pred in zip(y_ids, y_lids, y_pred):
-                if (qid == answer['id'] or 'dbpedia_' + str(qid) == answer['id']) and pred[0] == 1:
-                    answer['type'].append(self.data.ontology.ids[lid])
+                for qid, lid, pred in zip(y_ids, y_lids, y_pred):
+                    if (qid == answer['id'] or 'dbpedia_' + str(qid) == answer['id']) and pred[0] == 1:
+                        answer['type'].append(self.data.ontology.ids[lid])
 
-            if len(answer['type']) == 0:
-                answer['category'] = 'resource'
+                if len(answer['type']) == 0:
+                    answer['category'] = 'resource'
+
+        else:
+            for answer in answers:
+                answer['type'] = []
+                prob_threshold = 0.5
+
+                for qid, lid, prob in zip(y_ids, y_lids, y_prob):
+                    if qid == answer['id'] or 'dbpedia_' + str(qid) == answer['id'] and prob[0] >= prob_threshold:
+                        answer['type'] = [self.data.ontology.ids[lid]]
+                        prob_threshold = prob[0]
+
+                if len(answer['type']) == 0:
+                    answer['category'] = 'resource'
 
         return answers
 
