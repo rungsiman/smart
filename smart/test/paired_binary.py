@@ -20,7 +20,7 @@ class TestPairedBinaryClassification(PairedBinaryClassificationMixin, TestBase):
 
         if self.rank == self.experiment.main_rank:
             with self.lock:
-                self.shared['inference'] = [{'y_ids': [], 'y_lids': [], 'y_pred': []} for _ in range(self.world_size)]
+                self.shared['inference'] = [{'y_ids': [], 'y_lids': [], 'y_prob': [], 'y_pred': []} for _ in range(self.world_size)]
 
         print(f'GPU #{self.rank}: Started testing.')
         sys.stdout.flush()
@@ -30,12 +30,14 @@ class TestPairedBinaryClassification(PairedBinaryClassificationMixin, TestBase):
         for step, batch in (enumerate(tqdm(self.test_dataloader, desc=f'GPU #{self.rank}: Testing'))
                             if self.rank == self.experiment.main_rank else enumerate(self.test_dataloader)):
             logits = self.model(*tuple(t.cuda(self.rank) for t in batch[2:]), return_dict=True).logits
+            probs = torch.sigmoid(logits).detach().cpu().numpy().tolist()
             preds = (torch.sigmoid(logits) >= 0.5).long().detach().cpu().numpy().tolist()
 
             with self.lock:
                 inference = self.shared['inference']
                 inference[self.rank]['y_ids'] += batch[0].tolist()
                 inference[self.rank]['y_lids'] += batch[1].tolist()
+                inference[self.rank]['y_prob'] += probs
                 inference[self.rank]['y_pred'] += preds
                 self.shared['inference'] = inference
 
@@ -46,11 +48,12 @@ class TestPairedBinaryClassification(PairedBinaryClassificationMixin, TestBase):
         self.test_records['test_time'] = TestPairedBinaryClassification._format_time(time.time() - test_start)
 
         if self.rank == self.experiment.main_rank:
-            y_ids, y_lids, y_pred = [], [], []
+            y_ids, y_lids, y_prob, y_pred = [], [], [], []
 
             for i in range(self.world_size):
                 y_ids += self.shared['inference'][i]['y_ids']
                 y_lids += self.shared['inference'][i]['y_lids']
+                y_prob += self.shared['inference'][i]['y_prob']
                 y_pred += self.shared['inference'][i]['y_pred']
 
             answers = self._build_answers(y_ids, y_lids, y_pred)
@@ -60,7 +63,7 @@ class TestPairedBinaryClassification(PairedBinaryClassificationMixin, TestBase):
         self.answers = pd.DataFrame(self.shared['answers'])
         return self
 
-    def pack(self, **kwargs):
+    def pack(self):
         ids = self.data.df.id.values
         questions = self.data.df.question.values
         answers = self.data.df.type.values

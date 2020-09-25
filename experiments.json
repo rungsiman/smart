@@ -1,13 +1,10 @@
 {
-  "all-base-all-model": ["distilbert-base-uncased"],
-  "all-base-all-batch_size": [64],
+  "all-base-all-use_gan": [false, true],
+  "all-base-all-model": ["distilbert-base-uncased", "bert-large-uncased", "roberta-large"],
+  "all-base-all-batch_size": [16],
+  "all-base-all-bert-optimizer-lr": [5e-5],
+  "all-base-all-gan-discriminator-optimizer-lr": [5e-5],
+  "all-base-all-gan-generator-optimizer-lr": [5e-5],
 
-  "all-literal-base-all-epochs": [2],
-  "all-hybrid-base-all-epochs": [5],
-
-  "dbpedia-hybrid-class_dist_thresholds": [[400, 100, 50]],
-  "dbpedia-hybrid-base-default-neg_size": [10],
-
-  "wikidata-hybrid-class_dist_thresholds": [[1000, 300, 100, 50]],
-  "wikidata-hybrid-skip_default_classifier": [true]
+  "dbpedia-literal-base-all-epochs": [1, 3, 5]
 }
