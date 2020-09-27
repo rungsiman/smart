@@ -52,9 +52,10 @@ def class_dist_thresholds(input_train=None, input_ontology=None, thresholds=None
         cls['count'] = 0
 
     for question in data:
-        for label in question['type']:
-            if label in ontology.labels:
-                ontology.labels[label]['count'] += 1
+        if question['category'] == 'resource':
+            for label in question['type']:
+                if label in ontology.labels:
+                    ontology.labels[label]['count'] += 1
 
     for lv_i in range(ontology.max_level + 1):
         lv_counts = [(label, item['count']) for label, item in ontology.level(lv_i).items()]
