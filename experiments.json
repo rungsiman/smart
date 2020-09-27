@@ -4,39 +4,6 @@
     "all-base-all-eval_ratio": [0],
     "all-skip_default_classifier": [true],
 
-    "dbpedia-hybrid-class_dist_thresholds": [[400, 100, 50]],
-
-    "dbpedia-hybrid-base-level-1-id-0-model": ["bert-base-uncased"],
-    "dbpedia-hybrid-base-level-1-id-0-epochs": [15],
-    "dbpedia-hybrid-base-level-1-id-1-model": ["bert-base-uncased"],
-    "dbpedia-hybrid-base-level-1-id-1-epochs": [15],
-    "dbpedia-hybrid-base-level-1-id-2-model": ["roberta-base"],
-    "dbpedia-hybrid-base-level-1-id-2-epochs": [30],
-
-    "dbpedia-hybrid-base-level-2-id-0-model": ["bert-base-uncased"],
-    "dbpedia-hybrid-base-level-2-id-0-epochs": [10],
-    "dbpedia-hybrid-base-level-2-id-1-model": ["bert-base-uncased"],
-    "dbpedia-hybrid-base-level-2-id-1-epochs": [15],
-    "dbpedia-hybrid-base-level-2-id-2-model": ["roberta-base"],
-    "dbpedia-hybrid-base-level-2-id-2-epochs": [35],
-
-    "dbpedia-hybrid-base-level-3-id-0-model": ["bert-base-uncased"],
-    "dbpedia-hybrid-base-level-3-id-0-epochs": [15],
-    "dbpedia-hybrid-base-level-3-id-1-model": ["bert-base-uncased"],
-    "dbpedia-hybrid-base-level-3-id-1-epochs": [20],
-    "dbpedia-hybrid-base-level-3-id-2-model": ["roberta-base"],
-    "dbpedia-hybrid-base-level-3-id-2-epochs": [30],
-
-    "dbpedia-hybrid-base-level-4-id-0-model": ["bert-base-uncased"],
-    "dbpedia-hybrid-base-level-4-id-0-epochs": [10],
-    "dbpedia-hybrid-base-level-4-id-1-model": ["roberta-base"],
-    "dbpedia-hybrid-base-level-4-id-1-epochs": [25],
-    "dbpedia-hybrid-base-level-4-id-2-model": ["roberta-base"],
-    "dbpedia-hybrid-base-level-4-id-2-epochs": [35],
-
-    "dbpedia-hybrid-base-level-5-id-1-model": ["bert-base-uncased"],
-    "dbpedia-hybrid-base-level-5-id-1-epochs": [15],
-
     "wikidata-hybrid-class_dist_thresholds": [[1000, 300, 100, 50]],
 
     "wikidata-hybrid-base-level-1-id-0-model": ["roberta-base"],
