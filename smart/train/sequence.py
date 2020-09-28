@@ -64,14 +64,18 @@ class TrainSequenceClassification(SequenceClassificationMixin, TrainBase):
             warning += '.. Consider using multiple-label classifier instead.'
             print(warning)
 
-        split = train_test_split(input_ids, input_questions, input_tags,
-                                 random_state=self.experiment.split_random_state,
-                                 test_size=self.config.eval_ratio)
+        if self.config.eval_ratio is None or self.config.eval_ratio == 0:
+            self.train_data = TrainSequenceClassification.Data(input_ids, input_questions, tags=input_tags)
+        else:
+            split = train_test_split(input_ids, input_questions, input_tags,
+                                     random_state=self.experiment.split_random_state,
+                                     test_size=self.config.eval_ratio)
 
-        train_ids, eval_ids, train_questions, eval_questions, train_tags, eval_tags = split
+            train_ids, eval_ids, train_questions, eval_questions, train_tags, eval_tags = split
 
-        self.train_data = TrainSequenceClassification.Data(train_ids, train_questions, train_tags)
-        self.eval_data = TrainSequenceClassification.Data(eval_ids, eval_questions, eval_tags)
+            self.train_data = TrainSequenceClassification.Data(train_ids, train_questions, train_tags)
+            self.eval_data = TrainSequenceClassification.Data(eval_ids, eval_questions, eval_tags)
+
         return self
 
     def evaluate(self):

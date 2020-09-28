@@ -54,17 +54,21 @@ class TrainPairedBinaryClassification(PairedBinaryClassificationMixin, TrainBase
             self.skipped = True
             return self
 
-        split = train_test_split(input_ids, input_lids, input_questions, input_labels, input_tags,
-                                 random_state=self.experiment.split_random_state,
-                                 test_size=self.config.eval_ratio)
+        if self.config.eval_ratio is None or self.config.eval_ratio == 0:
+            self.train_data = TrainPairedBinaryClassification.Data(input_ids, input_lids, input_questions, input_labels, tags=input_tags)
+        else:
+            split = train_test_split(input_ids, input_lids, input_questions, input_labels, input_tags,
+                                     random_state=self.experiment.split_random_state,
+                                     test_size=self.config.eval_ratio)
 
-        train_ids, eval_ids, train_lids, eval_lids, train_questions, eval_questions, train_labels, eval_labels, train_tags, eval_tags = split
+            train_ids, eval_ids, train_lids, eval_lids, train_questions, eval_questions, train_labels, eval_labels, train_tags, eval_tags = split
 
-        # The tokenizer returns dictionaries containing id and mask tensors, among others.
-        # These dictionaries need to be decomposed and tensors reassembled
-        # before the outputs can be fed into TensorDataset
-        self.train_data = TrainPairedBinaryClassification.Data(train_ids, train_lids, train_questions, train_labels, tags=train_tags)
-        self.eval_data = TrainPairedBinaryClassification.Data(eval_ids, eval_lids, eval_questions, eval_labels, tags=eval_tags)
+            # The tokenizer returns dictionaries containing id and mask tensors, among others.
+            # These dictionaries need to be decomposed and tensors reassembled
+            # before the outputs can be fed into TensorDataset
+            self.train_data = TrainPairedBinaryClassification.Data(train_ids, train_lids, train_questions, train_labels, tags=train_tags)
+            self.eval_data = TrainPairedBinaryClassification.Data(eval_ids, eval_lids, eval_questions, eval_labels, tags=eval_tags)
+
         return self
 
     def evaluate(self):

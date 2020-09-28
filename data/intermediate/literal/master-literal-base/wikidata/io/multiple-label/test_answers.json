@@ -84,6 +84,7 @@
         "question":"In what area does the Rideau Canal join the Ottawa River?",
         "category":"literal",
         "type":[
+            "string",
             "number"
         ]
     },
@@ -298,9 +299,9 @@
     {
         "id":15468,
         "question":"What are the borders of Southern Africa?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "number"
         ]
     },
     {
@@ -314,9 +315,9 @@
     {
         "id":28985,
         "question":"Which is the arterial supply for the human nose?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "number"
         ]
     },
     {
@@ -498,9 +499,9 @@
     {
         "id":16022,
         "question":"Who introduced the prize received of Semyon Budyonny?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "date"
+
         ]
     },
     {
@@ -1066,9 +1067,9 @@
     {
         "id":26937,
         "question":"What is Quecha's Wikimedia language code?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "string"
         ]
     },
     {
@@ -1490,9 +1491,9 @@
     {
         "id":4719,
         "question":"What position does Giorgio Vasari hold at House of Medici?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "string"
         ]
     },
     {
@@ -2026,17 +2027,17 @@
     {
         "id":5425,
         "question":"When Demi Moore got married to Bruce Willis?",
-        "category":"literal",
+        "category":"boolean",
         "type":[
-            "date"
+            "boolean"
         ]
     },
     {
         "id":9466,
         "question":"What is Gene Hackman's nomination area for the 43rd Academy Awards?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "number"
         ]
     },
     {
@@ -2530,9 +2531,9 @@
     {
         "id":5672,
         "question":"How long was Henry VII king of England?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "date"
         ]
     },
     {
@@ -2714,9 +2715,9 @@
     {
         "id":20971,
         "question":"Where Charles Darwin was living ?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "number"
+
         ]
     },
     {
@@ -2954,9 +2955,9 @@
     {
         "id":28778,
         "question":"Which is the season start for the A-League?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "date"
         ]
     },
     {
@@ -3274,9 +3275,9 @@
     {
         "id":21510,
         "question":"Where is the grave of Sun Yat-sen?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "string"
+
         ]
     },
     {
@@ -3684,7 +3685,7 @@
         "question":"what is decimal of radix",
         "category":"literal",
         "type":[
-            "number"
+            "string"
         ]
     },
     {
@@ -4203,9 +4204,9 @@
     {
         "id":12094,
         "question":"Is a truffle not the same as the species Tuber aestivum?",
-        "category":"boolean",
+        "category":"resource",
         "type":[
-            "boolean"
+
         ]
     },
     {
@@ -4259,9 +4260,9 @@
     {
         "id":26455,
         "question":"Which is the patronage of the Berlin U-Bahn?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "number"
         ]
     },
     {
@@ -4419,9 +4420,9 @@
     {
         "id":28925,
         "question":"Which is the statistical leader of LeBron James?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "number"
         ]
     },
     {
@@ -4651,9 +4652,9 @@
     {
         "id":16070,
         "question":"Who was formed as the leader of Momoiro Clover Z?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "date"
         ]
     },
     {
@@ -5427,9 +5428,9 @@
     {
         "id":8596,
         "question":"When is deuterium the isotope of hydrogen?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "date"
         ]
     },
     {
@@ -5707,9 +5708,9 @@
     {
         "id":8870,
         "question":"In which year were the Carpenters nominated for the Grammy Award for Album of the Year?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "date"
         ]
     },
     {
@@ -5851,9 +5852,9 @@
     {
         "id":9411,
         "question":"which series of jeremiah that of judaism?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "string"
         ]
     },
     {
@@ -6603,9 +6604,9 @@
     {
         "id":28888,
         "question":"What is nitrogen's common procurement vocabulary?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "number"
+
         ]
     },
     {
@@ -7197,7 +7198,7 @@
         "question":"How many unit symbols mean liter?",
         "category":"literal",
         "type":[
-            "number"
+            "string"
         ]
     },
     {
@@ -8163,9 +8164,9 @@
     {
         "id":17520,
         "question":"Which is the birth year of the discoverer of law of superposition?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "date"
         ]
     },
     {
@@ -8339,17 +8340,17 @@
     {
         "id":22591,
         "question":"What countries did the Russian Empire span?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "number"
+
         ]
     },
     {
         "id":29030,
         "question":"What is the address of James Madison?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "string"
         ]
     },
     {
@@ -10836,9 +10837,9 @@
     {
         "id":22099,
         "question":"Of what country was Jefferson Davis a citizen?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "number"
         ]
     },
     {
@@ -10932,9 +10933,9 @@
     {
         "id":16519,
         "question":"What is the river at Cape Canaveral?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "number"
         ]
     },
     {
@@ -11348,9 +11349,9 @@
     {
         "id":25803,
         "question":"Which is the distributor for The Gold Rush?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "number"
         ]
     },
     {
@@ -12004,9 +12005,9 @@
     {
         "id":28442,
         "question":"Which is the scanned file on WIkimedia Commons for The Jungle Book?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "string"
         ]
     },
     {
@@ -12044,9 +12045,9 @@
     {
         "id":21225,
         "question":"What's Dallas Cowboys ' American Football Stadium?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "number"
         ]
     },
     {
@@ -12335,15 +12336,15 @@
         "question":"What's the name of the Sun Yat-sen museum?",
         "category":"literal",
         "type":[
-            "string"
+            "number"
         ]
     },
     {
         "id":28898,
         "question":"When was the Sierpinski Triangle discovered?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "date"
         ]
     },
     {
@@ -12701,9 +12702,9 @@
     {
         "id":16983,
         "question":"What is the coat of arms of lithium's findspot?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "string"
+
         ]
     },
     {
@@ -12717,9 +12718,9 @@
     {
         "id":28196,
         "question":"Which is the tracklist for A Day in the Life?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "number"
         ]
     },
     {
@@ -12821,9 +12822,9 @@
     {
         "id":1453,
         "question":"How many nominations did Lewis Hamilton receive?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "number"
+
         ]
     },
     {
@@ -12853,9 +12854,9 @@
     {
         "id":25777,
         "question":"What is the employer of ASUS?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "number"
         ]
     },
     {
@@ -13021,9 +13022,10 @@
     {
         "id":15392,
         "question":"What is the river mouth of Orange River's tributary?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "string",
+            "number"
         ]
     },
     {
@@ -13165,17 +13167,17 @@
     {
         "id":13702,
         "question":"Where is the Home Depot in Montego Bay located?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "string"
         ]
     },
     {
         "id":28496,
         "question":"Which is the cell component for cholesterol?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "number"
         ]
     },
     {
@@ -13501,9 +13503,9 @@
     {
         "id":7485,
         "question":"How long is a basketball game excluding the time-out?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "number"
+
         ]
     },
     {
@@ -13741,9 +13743,9 @@
     {
         "id":29303,
         "question":"Which means Name Assigning Authority Number in the Indiana University ?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "string"
+
         ]
     },
     {
@@ -14149,9 +14151,9 @@
     {
         "id":28466,
         "question":"Which is Hornbostel-Sachs classification for bass drum?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "string"
+
         ]
     },
     {
@@ -14183,6 +14185,7 @@
         "question":"Which is the gestation period for alpaca?",
         "category":"literal",
         "type":[
+            "date",
             "number"
         ]
     },
@@ -14205,17 +14208,17 @@
     {
         "id":20301,
         "question":"State the latest version of federalist papers?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "string"
+
         ]
     },
     {
         "id":17274,
         "question":"When the the discoverer of distillation die?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "date"
+
         ]
     },
     {
@@ -14653,9 +14656,9 @@
     {
         "id":21459,
         "question":"When is the marriage of significant event forf Franz Joseph I of Austria?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "date"
+
         ]
     },
     {
@@ -15637,9 +15640,9 @@
     {
         "id":28584,
         "question":"Whats the spore print color of Enikitake?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "string"
+
         ]
     },
     {
@@ -15941,9 +15944,9 @@
     {
         "id":16662,
         "question":"Who gave theformat of prequel of of Contra ?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "string"
+
         ]
     },
     {
@@ -16021,9 +16024,9 @@
     {
         "id":17896,
         "question":"Who is native to jurisdiction for Breach of contract ?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "number"
+
         ]
     },
     {
@@ -16173,9 +16176,9 @@
     {
         "id":20726,
         "question":"What are people who live in Venice called?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "number"
         ]
     },
     {
@@ -16557,9 +16560,9 @@
     {
         "id":7571,
         "question":"Did Gotthold Ephrain Lessing obtain the Master's degree?",
-        "category":"boolean",
+        "category":"resource",
         "type":[
-            "boolean"
+
         ]
     },
     {
@@ -17117,9 +17120,9 @@
     {
         "id":1421,
         "question":"How many degrees are equaling the master's degree ?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "number"
         ]
     },
     {
@@ -17613,9 +17616,9 @@
     {
         "id":28704,
         "question":"Which is the atomic number of cobalt?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "string"
+
         ]
     },
     {
@@ -18093,9 +18096,9 @@
     {
         "id":7945,
         "question":"When was Eleftheros Venizelos replaced as Prime Minister of Greece?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "date"
         ]
     },
     {
@@ -18253,9 +18256,9 @@
     {
         "id":1404,
         "question":"How many times did Billie Jean King obtain a victory?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "number"
+
         ]
     },
     {
@@ -18325,9 +18328,9 @@
     {
         "id":1360,
         "question":"Who distributes GTA III?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "number"
+
         ]
     },
     {
@@ -18477,9 +18480,9 @@
     {
         "id":26969,
         "question":"What's the legal form of University of Paris VI: Pierre-and-Marie-Curie University?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "string"
         ]
     },
     {
@@ -18717,9 +18720,9 @@
     {
         "id":3759,
         "question":"when was the consecration held for Augustine of Hippo which was a significant event?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "date"
+
         ]
     },
     {
@@ -18949,9 +18952,9 @@
     {
         "id":27645,
         "question":"What is the Nickel-Strunz \"Tenth Edition\" review (of the Ninth Edition\/ 2009 update) of the epidote?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "string"
         ]
     },
     {
@@ -19909,17 +19912,17 @@
     {
         "id":27570,
         "question":"What is En\u00fbma Eli\u0161' font?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "string"
         ]
     },
     {
         "id":16719,
         "question":"Who thought the class of Antonio Ermolao Paoletti?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "string"
         ]
     },
     {
@@ -20109,9 +20112,9 @@
     {
         "id":16035,
         "question":"WHEN DID STRETCH ARMSTRONG & THE FLEX FIGHTERS DISTRIBUTED BY SECTOR?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "date"
         ]
     },
     {
@@ -20357,9 +20360,9 @@
     {
         "id":21146,
         "question":"What was the original name of the Northern Territory?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "string"
         ]
     },
     {
@@ -20829,9 +20832,9 @@
     {
         "id":16809,
         "question":"Where is personnel of product of Boeing 777 ?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "number"
+
         ]
     },
     {
@@ -20869,9 +20872,9 @@
     {
         "id":21674,
         "question":"What is the big city for the European Union's headquarters?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "number"
+
         ]
     },
     {
@@ -22237,9 +22240,9 @@
     {
         "id":16450,
         "question":"how to measured by  of quantity of crab?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "number"
+
         ]
     },
     {
@@ -22317,9 +22320,9 @@
     {
         "id":11469,
         "question":"When did Kelsey Grammer get divorced, and who was he married to?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "date"
         ]
     },
     {
@@ -23101,9 +23104,9 @@
     {
         "id":17892,
         "question":"Java Man is the taxon parent of what time?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "date"
         ]
     },
     {
@@ -23389,9 +23392,9 @@
     {
         "id":14911,
         "question":"What is in the department on street of convento de las Clarisas?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "string"
+
         ]
     },
     {
@@ -24221,9 +24224,9 @@
     {
         "id":5334,
         "question":"Where is Tama Cemetery cited as the location of Togo Heihachirpo`s burial plot?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "string"
         ]
     },
     {
@@ -24421,9 +24424,9 @@
     {
         "id":16548,
         "question":"Does Iullus Antonius have a father and brother?",
-        "category":"boolean",
+        "category":"resource",
         "type":[
-            "boolean"
+
         ]
     },
     {
@@ -24541,9 +24544,9 @@
     {
         "id":6203,
         "question":"What is the (software version) of (Python) that is (version type). Is this the (stable version)?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "string"
         ]
     },
     {
@@ -24621,9 +24624,9 @@
     {
         "id":14530,
         "question":"What is the domain name for the nationality of Paulino Alc\u00e1ntara?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "string"
+
         ]
     },
     {
@@ -25565,9 +25568,9 @@
     {
         "id":1396,
         "question":"Franklin Chang Diaz already made as many missions astronauts?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "number"
+
         ]
     },
     {
@@ -25653,9 +25656,9 @@
     {
         "id":17309,
         "question":"WHO MEASURED THE MATERIAL PRODUCED BY EURASIAN NATURAL RESOURCES CORPORATION?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "number"
+
         ]
     },
     {
@@ -27021,9 +27024,9 @@
     {
         "id":8743,
         "question":"when did coordinate location for university has headquaters location as leiden",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "string"
         ]
     },
     {
@@ -27493,9 +27496,9 @@
     {
         "id":16210,
         "question":"What is the postcode of the county seat of the Province of Georgia?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "string"
         ]
     },
     {
@@ -28045,9 +28048,9 @@
     {
         "id":11525,
         "question":"When did residence of Ivan Turgenev and earliest date?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "date"
         ]
     },
     {
@@ -28087,8 +28090,7 @@
         "question":"What is the geographic location of Andhra Pradesh ?",
         "category":"literal",
         "type":[
-            "string",
-            "number"
+            "string"
         ]
     },
     {
@@ -28830,9 +28832,9 @@
     {
         "id":29151,
         "question":"Which is the periapsis for 10 Hygiea?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "number"
+
         ]
     },
     {
@@ -29344,6 +29346,7 @@
         "question":"Which is the run time of the play of Toronto Maple Leafs?",
         "category":"literal",
         "type":[
+            "date",
             "number"
         ]
     },
@@ -29358,9 +29361,9 @@
     {
         "id":25929,
         "question":"What is Ext4 maximum size or capacity?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "number"
         ]
     },
     {
@@ -29518,9 +29521,9 @@
     {
         "id":20595,
         "question":"What is Claude Monet's child's name?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "string"
         ]
     },
     {
@@ -29846,9 +29849,9 @@
     {
         "id":17451,
         "question":"What does deciple Sergey Nikolsky study?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "string"
         ]
     },
     {
@@ -30158,9 +30161,9 @@
     {
         "id":17428,
         "question":"What is displacement treated by  cancer ?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "number"
         ]
     },
     {
@@ -30998,9 +31001,9 @@
     {
         "id":11242,
         "question":"When did John Ruskin get married?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "date"
         ]
     },
     {
@@ -31070,9 +31073,9 @@
     {
         "id":3010,
         "question":"What is the minimum viable temperature for a strain with a biosafety level of 1?",
-        "category":"boolean",
+        "category":"literal",
         "type":[
-            "boolean"
+            "number"
         ]
     },
     {
@@ -31526,9 +31529,9 @@
     {
         "id":28318,
         "question":"Which is the software version for JavaScript?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "string"
+
         ]
     },
     {
@@ -31791,9 +31794,9 @@
     {
         "id":21272,
         "question":"Do you know what human incluenced JRR Tolkien?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "string"
+
         ]
     },
     {
@@ -31887,9 +31890,9 @@
     {
         "id":19728,
         "question":"What is the location of the area of Kinshasa?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "number"
         ]
     },
     {
@@ -31991,9 +31994,9 @@
     {
         "id":27353,
         "question":"What is in the category connector of USB-C ?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "string"
         ]
     },
     {
@@ -32543,9 +32546,9 @@
     {
         "id":253,
         "question":"Has Bill Murray ever been in a movie that was nominated for the Academy Award for Best Picture?",
-        "category":"boolean",
+        "category":"resource",
         "type":[
-            "boolean"
+
         ]
     },
     {
@@ -32655,9 +32658,9 @@
     {
         "id":15331,
         "question":"Where did Albert Einstein live?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "number"
+
         ]
     },
     {
@@ -32847,9 +32850,9 @@
     {
         "id":14847,
         "question":"What is the energy source of gamma-aminobutyric acid?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "number"
+
         ]
     },
     {
@@ -32871,9 +32874,9 @@
     {
         "id":21027,
         "question":"The name for the information leark for Juan Carlos I's significant event is what?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "string"
+
         ]
     },
     {
@@ -33623,9 +33626,9 @@
     {
         "id":28732,
         "question":"What is the person is use researchgate of James Hanson",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "string"
+
         ]
     },
     {
@@ -34599,9 +34602,9 @@
     {
         "id":17793,
         "question":"Tell me the geographic data of the country of Kampala.",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "string"
         ]
     },
     {
@@ -35041,7 +35044,7 @@
         "question":"Which is the century breaks for Joe Davis?",
         "category":"literal",
         "type":[
-            "number"
+            "date"
         ]
     },
     {
@@ -35135,9 +35138,9 @@
     {
         "id":27744,
         "question":"Where was Voyager 1 travelling?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "number"
+
         ]
     },
     {
@@ -35847,9 +35850,9 @@
     {
         "id":22474,
         "question":"What is ASEAN?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "string"
+
         ]
     },
     {
@@ -36103,9 +36106,9 @@
     {
         "id":25783,
         "question":"WHICH IS THE ISSN OF FOREIGN AFFAIRS",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "string"
+
         ]
     },
     {
