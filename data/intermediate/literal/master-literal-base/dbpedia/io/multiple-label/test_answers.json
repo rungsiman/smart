@@ -1714,9 +1714,9 @@
     {
         "id":"dbpedia_16931",
         "question":"Franklin Chang Diaz already made as many missions astronauts?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "number"
         ]
     },
     {
@@ -1866,9 +1866,9 @@
     {
         "id":"dbpedia_14516",
         "question":"What is  in the satellite bus of X Window System ?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "string"
         ]
     },
     {
@@ -2162,9 +2162,9 @@
     {
         "id":"dbpedia_23390",
         "question":"Who developed Slack?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "number"
+
         ]
     },
     {
@@ -2346,9 +2346,9 @@
     {
         "id":"dbpedia_14453",
         "question":"Which is the arterial supply for the human nose?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "number"
+
         ]
     },
     {
@@ -2946,9 +2946,9 @@
     {
         "id":"dbpedia_16675",
         "question":"What position was held by Obama, and when was this position held?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "date"
         ]
     },
     {
@@ -3378,9 +3378,9 @@
     {
         "id":"dbpedia_6353",
         "question":"What is the distance of Epsom Derby?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "number"
+
         ]
     },
     {
@@ -3506,9 +3506,9 @@
     {
         "id":"dbpedia_12174",
         "question":"Where would I find medical information about specific visual impairments?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "number"
         ]
     },
     {
@@ -3626,9 +3626,9 @@
     {
         "id":"dbpedia_3039",
         "question":"What is the name in the original language of the daughter of Tyr?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "string"
+
         ]
     },
     {
@@ -3676,6 +3676,7 @@
         "question":"Which is the fastest lap of Alberto Ascari?",
         "category":"literal",
         "type":[
+            "string",
             "number"
         ]
     },
@@ -3994,9 +3995,9 @@
     {
         "id":"dbpedia_23423",
         "question":"List the children of Margaret Thatcher.",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "number"
         ]
     },
     {
@@ -4610,9 +4611,9 @@
     {
         "id":"dbpedia_14926",
         "question":"Which was established, before there was Mission San Carlos Borromeo de Carmelo?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "date"
         ]
     },
     {
@@ -4682,9 +4683,9 @@
     {
         "id":"dbpedia_17463",
         "question":"When did John Ruskin get married?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "date"
+
         ]
     },
     {
@@ -4794,9 +4795,9 @@
     {
         "id":"dbpedia_20095",
         "question":"What things have founded place as United States and New Mexico?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "date"
+
         ]
     },
     {
@@ -5042,9 +5043,9 @@
     {
         "id":"dbpedia_19083",
         "question":"what are some famous people out of the Filipinos?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "number"
+
         ]
     },
     {
@@ -6522,9 +6523,9 @@
     {
         "id":"dbpedia_9155",
         "question":"When did educated at of Sheryl Sandberg and academic major?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "date"
+
         ]
     },
     {
@@ -8754,9 +8755,9 @@
     {
         "id":"dbpedia_2126",
         "question":"What\u2019s the most common form of dementia in the Americas?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "number"
+
         ]
     },
     {
@@ -8786,9 +8787,9 @@
     {
         "id":"dbpedia_17801",
         "question":"I s Santiago Calatrava a structural engineer?",
-        "category":"boolean",
+        "category":"resource",
         "type":[
-            "boolean"
+
         ]
     },
     {
@@ -9082,12 +9083,9 @@
     {
         "id":"dbpedia_13960",
         "question":"na",
-        "category":"boolean",
+        "category":"resource",
         "type":[
-            "boolean",
-            "string",
-            "date",
-            "number"
+
         ]
     },
     {
@@ -9573,9 +9571,9 @@
     {
         "id":"dbpedia_13445",
         "question":"On which website we can find location information for HongKong headquarters?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "string"
+
         ]
     },
     {
@@ -10549,9 +10547,9 @@
     {
         "id":"dbpedia_11363",
         "question":"What is the sacred language of Hildegard of Bingen?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "string"
+
         ]
     },
     {
@@ -11325,9 +11323,9 @@
     {
         "id":"dbpedia_17838",
         "question":"At what elevation above sea level is the highest peak of Kebnekaise, in Sweden?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "number"
+
         ]
     },
     {
@@ -11589,9 +11587,9 @@
     {
         "id":"dbpedia_14894",
         "question":"What is the Gram staining for Gram-positive?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "number"
+
         ]
     },
     {
@@ -11885,9 +11883,9 @@
     {
         "id":"dbpedia_16458",
         "question":"Where is {personnel} of {product of} {Boeing 777} ?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "number"
+
         ]
     },
     {
@@ -12221,9 +12219,9 @@
     {
         "id":"dbpedia_3778",
         "question":"What time of animation is Looney Tunes?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "number"
+
         ]
     },
     {
@@ -12517,9 +12515,9 @@
     {
         "id":"dbpedia_4981",
         "question":"When did church building for patron saint of Anthony of Padua?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "date"
         ]
     },
     {
@@ -12901,9 +12899,9 @@
     {
         "id":"dbpedia_1896",
         "question":"Who was the plaintiff in the Nuremberg trials?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "number"
         ]
     },
     {
@@ -14429,9 +14427,9 @@
     {
         "id":"dbpedia_5478",
         "question":"What would be the penalty of blasphemy?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "number"
+
         ]
     },
     {
@@ -16293,9 +16291,9 @@
     {
         "id":"dbpedia_13727",
         "question":"At what angle from the vertical is the Leaning TOwer of PIza",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "number"
+
         ]
     },
     {
@@ -19821,9 +19819,9 @@
     {
         "id":"dbpedia_23070",
         "question":"Who is the daughter of Robert Kennedy married to?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "string"
         ]
     },
     {
@@ -19861,9 +19859,9 @@
     {
         "id":"dbpedia_19660",
         "question":"Give the distinct number of other party of the people which have one of the party as Janata Party ?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "number"
+
         ]
     },
     {
@@ -19973,9 +19971,9 @@
     {
         "id":"dbpedia_4417",
         "question":"IDoes the house mouse have a minimum frequency of audible sound of 1000",
-        "category":"resource",
+        "category":"boolean",
         "type":[
-
+            "boolean"
         ]
     },
     {
@@ -20373,9 +20371,9 @@
     {
         "id":"dbpedia_6814",
         "question":"what is the symbol which measures angstrom?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "string"
         ]
     },
     {
@@ -20485,9 +20483,9 @@
     {
         "id":"dbpedia_13528",
         "question":"Who gave the  {dimension} of {on the shore of} of {Northern England} ?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "number"
+
         ]
     },
     {
@@ -20717,9 +20715,9 @@
     {
         "id":"dbpedia_11499",
         "question":"WHICH IS THE UNITED WORLD WRESTLING IS FOR MIJAIN LOPEZ",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "string"
+
         ]
     },
     {
@@ -20909,9 +20907,9 @@
     {
         "id":"dbpedia_9127",
         "question":"Which is the motto text of New Jersey?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "string"
+
         ]
     },
     {
@@ -21599,7 +21597,7 @@
         "question":"What is the postal code for Cardiff University, whose headquarters is in Cardiff?",
         "category":"literal",
         "type":[
-            "string"
+            "number"
         ]
     },
     {
@@ -22829,9 +22827,9 @@
     {
         "id":"dbpedia_5462",
         "question":"What is the Christian name for Peter Garrett, it is said to the same as Petelo",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "string"
+
         ]
     },
     {
@@ -23175,7 +23173,6 @@
         "question":"Which is the ISQ dimension for energy?",
         "category":"literal",
         "type":[
-            "string",
             "number"
         ]
     },
@@ -24214,9 +24211,9 @@
     {
         "id":"dbpedia_4100",
         "question":"Which is the significant event for A-League?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "date"
         ]
     },
     {
@@ -25254,9 +25251,9 @@
     {
         "id":"dbpedia_5989",
         "question":"What biographical articles does the Library of Congress of Chile have about Bernardo O'Higgins?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "string"
         ]
     },
     {
@@ -25462,9 +25459,9 @@
     {
         "id":"dbpedia_23165",
         "question":"Who developed Skype?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "date"
+
         ]
     },
     {
@@ -25670,9 +25667,9 @@
     {
         "id":"dbpedia_7049",
         "question":"How awards received are for Alexy Sudayev?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "number"
+
         ]
     },
     {
@@ -25766,9 +25763,9 @@
     {
         "id":"dbpedia_5847",
         "question":"What is the stop of the genetic association of Parkinson disease?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "date"
+
         ]
     },
     {
@@ -26062,9 +26059,9 @@
     {
         "id":"dbpedia_18918",
         "question":"Who all are buried in Arlington national cementary?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "number"
+
         ]
     },
     {
@@ -26598,9 +26595,9 @@
     {
         "id":"dbpedia_10966",
         "question":"which award is received to Konrad Lorenz and at what time?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "date"
         ]
     },
     {
@@ -27742,9 +27739,9 @@
     {
         "id":"dbpedia_6070",
         "question":"Who are the carries for the Confederation Bridge?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "number"
+
         ]
     },
     {
@@ -27910,9 +27907,9 @@
     {
         "id":"dbpedia_15332",
         "question":"What is the time in Dhaka Divison as located in the administrative territorial entity of the Dominion of Pakistan?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "date"
+
         ]
     },
     {
@@ -28102,9 +28099,9 @@
     {
         "id":"dbpedia_22718",
         "question":"Where was James H. Fields buried ?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "number"
+
         ]
     },
     {
@@ -28264,7 +28261,6 @@
         "question":"What is Filippo Brunelleschi's birthday, given that he was born earlier than 1584 AD?",
         "category":"literal",
         "type":[
-            "date",
             "number"
         ]
     },
@@ -28479,9 +28475,9 @@
     {
         "id":"dbpedia_8424",
         "question":"What is the position  elected in  for  Robert Gascoyne - Cecil, 3rd Marquess of Salisbury held as  Member of the 18th Parliament of the United Kingdom ?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "date"
+
         ]
     },
     {
@@ -29759,9 +29755,9 @@
     {
         "id":"dbpedia_13611",
         "question":"Which is the record held of 100 metres\/",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "number"
+
         ]
     },
     {
@@ -29799,9 +29795,9 @@
     {
         "id":"dbpedia_7521",
         "question":"Which is the single entity of population for the official residence of Parthian Empire?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "number"
         ]
     },
     {
@@ -29895,9 +29891,9 @@
     {
         "id":"dbpedia_7279",
         "question":"When is the preterite tense used in Italian?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "date"
         ]
     },
     {
@@ -29911,9 +29907,9 @@
     {
         "id":"dbpedia_13298",
         "question":"Which is the titled poem by Langston Hughes?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "string"
+
         ]
     },
     {
@@ -30567,9 +30563,9 @@
     {
         "id":"dbpedia_2190",
         "question":"In Syracuse Orange football, what position did Jim Brown hold?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "date"
+
         ]
     },
     {
@@ -30639,9 +30635,9 @@
     {
         "id":"dbpedia_4184",
         "question":"Where did Niccol\u00f2 Machiavelli die in Sant'Andrea in Percussina?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "string"
+
         ]
     },
     {
@@ -31047,9 +31043,9 @@
     {
         "id":"dbpedia_15427",
         "question":"Which is the first appearance of Mario?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "date"
         ]
     },
     {
@@ -31463,9 +31459,9 @@
     {
         "id":"dbpedia_7619",
         "question":"What is the version of the operating system of the video game \"Myst?\"",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "string"
         ]
     },
     {
@@ -31543,9 +31539,9 @@
     {
         "id":"dbpedia_20750",
         "question":"Who was succeeded by Arthur Gegei as the office ho0lder ?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "string"
         ]
     },
     {
@@ -31567,9 +31563,9 @@
     {
         "id":"dbpedia_8166",
         "question":"What year did astronaut Scott Carpenter die?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "date"
         ]
     },
     {
@@ -31623,9 +31619,9 @@
     {
         "id":"dbpedia_13193",
         "question":"What pop art has Q48460 influenced?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "string"
+
         ]
     },
     {
@@ -32495,9 +32491,9 @@
     {
         "id":"dbpedia_11445",
         "question":"How was Lemmy Kilmister, who was taking the prescription drug hydroxyurea, murdered?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "string"
         ]
     },
     {
@@ -33055,9 +33051,9 @@
     {
         "id":"dbpedia_62",
         "question":"What does the painting Grade Odalisque represent which has DRTL backwards?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "string"
+
         ]
     },
     {
@@ -33135,9 +33131,9 @@
     {
         "id":"dbpedia_12286",
         "question":"What does Universal Declaration of Human Rights mean in Portuguese?",
-        "category":"literal",
+        "category":"resource",
         "type":[
-            "string"
+
         ]
     },
     {
@@ -33319,9 +33315,9 @@
     {
         "id":"dbpedia_9801",
         "question":"What position in office did W. Marvin Watson hold?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "date"
         ]
     },
     {
@@ -33423,9 +33419,9 @@
     {
         "id":"dbpedia_1615",
         "question":"What is in the category of Henry Parkes?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "string"
         ]
     },
     {
@@ -33655,9 +33651,9 @@
     {
         "id":"dbpedia_3537",
         "question":"What is social media account on publishing house of Puyo Puyo Fever 2 ?",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "string"
         ]
     },
     {
@@ -33865,8 +33861,7 @@
         "question":"What is position angle of east ?",
         "category":"literal",
         "type":[
-            "string",
-            "number"
+            "string"
         ]
     },
     {
@@ -34392,9 +34387,9 @@
     {
         "id":"dbpedia_441",
         "question":"Is Paul Gascoigne a member of a sports team?",
-        "category":"boolean",
+        "category":"resource",
         "type":[
-            "boolean"
+
         ]
     },
     {
@@ -34584,9 +34579,9 @@
     {
         "id":"dbpedia_12732",
         "question":"Tell me the dimension of the topic called introduction to entropy.",
-        "category":"resource",
+        "category":"literal",
         "type":[
-
+            "number"
         ]
     },
     {

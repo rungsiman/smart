@@ -240,6 +240,9 @@ class TrainBase(StageBase):
         return self
 
     def _save_evaluate(self):
+        if self.config.eval_ratio is None or self.config.eval_ratio == 0:
+            return self
+
         with open(os.path.join(self.path_analyses, 'eval_result.txt'), 'w') as writer:
             writer.write(self.eval_report)
 
@@ -265,7 +268,10 @@ class TrainBase(StageBase):
 
     def build_dataloaders(self):
         self.train_dataloader = self._build_dataloader(self.train_data)
-        self.eval_dataloader = self._build_dataloader(self.eval_data)
+
+        if self.config.eval_ratio is not None and self.config.eval_ratio > 0:
+            self.eval_dataloader = self._build_dataloader(self.eval_data)
+
         return self
 
     def _plot_loss(self, title, file_name, loss=None, d_loss=None, g_loss=None):
