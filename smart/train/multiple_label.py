@@ -62,14 +62,18 @@ class TrainMultipleLabelClassification(MultipleLabelClassificationMixin, TrainBa
             input_questions.append(self.data_neg.tokenized[neg_questions[i]])
             input_tags.append([0] * len(self.labels) + [0])
 
-        split = train_test_split(input_ids, input_questions, input_tags,
-                                 random_state=self.experiment.split_random_state,
-                                 test_size=self.config.eval_ratio)
+        if self.config.eval_ratio is None or self.config.eval_ratio == 0:
+            self.train_data = TrainMultipleLabelClassification.Data(input_ids, input_questions, tags=input_tags)
+        else:
+            split = train_test_split(input_ids, input_questions, input_tags,
+                                     random_state=self.experiment.split_random_state,
+                                     test_size=self.config.eval_ratio)
 
-        train_ids, eval_ids, train_questions, eval_questions, train_tags, eval_tags = split
+            train_ids, eval_ids, train_questions, eval_questions, train_tags, eval_tags = split
 
-        self.train_data = TrainMultipleLabelClassification.Data(train_ids, train_questions, tags=train_tags)
-        self.eval_data = TrainMultipleLabelClassification.Data(eval_ids, eval_questions, tags=eval_tags)
+            self.train_data = TrainMultipleLabelClassification.Data(train_ids, train_questions, tags=train_tags)
+            self.eval_data = TrainMultipleLabelClassification.Data(eval_ids, eval_questions, tags=eval_tags)
+
         return self
 
     def evaluate(self):
