@@ -16,87 +16,37 @@
                                                  "level-8-id-2"]],
 
     "wikidata-hybrid-base-level-1-id-1-model": ["roberta-large"],
-    "wikidata-hybrid-base-level-1-id-1-epochs": [15],
+    "wikidata-hybrid-base-level-1-id-1-epochs": [25],
     "wikidata-hybrid-base-level-1-id-2-model": ["bert-large-uncased"],
-    "wikidata-hybrid-base-level-1-id-2-epochs": [20],
+    "wikidata-hybrid-base-level-1-id-2-epochs": [30],
     "wikidata-hybrid-base-level-1-id-3-model": ["roberta-large"],
-    "wikidata-hybrid-base-level-1-id-3-epochs": [35],
+    "wikidata-hybrid-base-level-1-id-3-epochs": [10],
 
     "wikidata-hybrid-base-level-2-id-2-model": ["bert-large-uncased"],
-    "wikidata-hybrid-base-level-2-id-2-epochs": [15],
+    "wikidata-hybrid-base-level-2-id-2-epochs": [10],
     "wikidata-hybrid-base-level-2-id-3-model": ["roberta-large"],
-    "wikidata-hybrid-base-level-2-id-3-epochs": [25],
+    "wikidata-hybrid-base-level-2-id-3-epochs": [20],
 
     "wikidata-hybrid-base-level-3-id-3-model": ["bert-large-uncased"],
-    "wikidata-hybrid-base-level-3-id-3-epochs": [30],
+    "wikidata-hybrid-base-level-3-id-3-epochs": [40],
 
     "wikidata-hybrid-base-level-4-id-1-model": ["roberta-large"],
-    "wikidata-hybrid-base-level-4-id-1-epochs": [10],
+    "wikidata-hybrid-base-level-4-id-1-epochs": [3],
     "wikidata-hybrid-base-level-4-id-2-model": ["bert-large-uncased"],
-    "wikidata-hybrid-base-level-4-id-2-epochs": [15],
+    "wikidata-hybrid-base-level-4-id-2-epochs": [10],
     "wikidata-hybrid-base-level-4-id-3-model": ["roberta-large"],
-    "wikidata-hybrid-base-level-4-id-3-epochs": [25],
+    "wikidata-hybrid-base-level-4-id-3-epochs": [35],
 
     "wikidata-hybrid-base-level-5-id-3-model": ["roberta-large"],
-    "wikidata-hybrid-base-level-5-id-3-epochs": [30],
+    "wikidata-hybrid-base-level-5-id-3-epochs": [40],
 
     "wikidata-hybrid-base-level-6-id-3-model": ["bert-large-uncased"],
-    "wikidata-hybrid-base-level-6-id-3-epochs": [25],
+    "wikidata-hybrid-base-level-6-id-3-epochs": [35],
 
     "wikidata-hybrid-base-level-7-id-3-model": ["roberta-large"],
-    "wikidata-hybrid-base-level-7-id-3-epochs": [30],
+    "wikidata-hybrid-base-level-7-id-3-epochs": [40],
 
     "wikidata-hybrid-base-level-8-id-2-model": ["roberta-large"],
-    "wikidata-hybrid-base-level-8-id-2-epochs": [20]
-  },
-  {
-    "all-base-all-batch_size": [16],
-    "all-base-all-eval_ratio": [0.1],
-    "all-skip_default_classifier": [true],
-
-    "wikidata-hybrid-class_dist_thresholds": [[1000, 300, 100, 50]],
-
-    "wikidata-hybrid-dataset-selective_train": [["level-1-id-1", "level-1-id-2", "level-1-id-3",
-                                                 "level-2-id-2", "level-2-id-3",
-                                                 "level-3-id-3",
-                                                 "level-4-id-1", "level-4-id-2", "level-4-id-3",
-                                                 "level-5-id-3",
-                                                 "level-6-id-3",
-                                                 "level-7-id-3",
-                                                 "level-8-id-2"]],
-
-    "wikidata-hybrid-base-level-1-id-1-model": ["roberta-large"],
-    "wikidata-hybrid-base-level-1-id-1-epochs": [20],
-    "wikidata-hybrid-base-level-1-id-2-model": ["bert-large-uncased"],
-    "wikidata-hybrid-base-level-1-id-2-epochs": [25],
-    "wikidata-hybrid-base-level-1-id-3-model": ["roberta-large"],
-    "wikidata-hybrid-base-level-1-id-3-epochs": [40],
-
-    "wikidata-hybrid-base-level-2-id-2-model": ["bert-large-uncased"],
-    "wikidata-hybrid-base-level-2-id-2-epochs": [20],
-    "wikidata-hybrid-base-level-2-id-3-model": ["roberta-large"],
-    "wikidata-hybrid-base-level-2-id-3-epochs": [30],
-
-    "wikidata-hybrid-base-level-3-id-3-model": ["bert-large-uncased"],
-    "wikidata-hybrid-base-level-3-id-3-epochs": [35],
-
-    "wikidata-hybrid-base-level-4-id-1-model": ["roberta-large"],
-    "wikidata-hybrid-base-level-4-id-1-epochs": [15],
-    "wikidata-hybrid-base-level-4-id-2-model": ["bert-large-uncased"],
-    "wikidata-hybrid-base-level-4-id-2-epochs": [20],
-    "wikidata-hybrid-base-level-4-id-3-model": ["roberta-large"],
-    "wikidata-hybrid-base-level-4-id-3-epochs": [30],
-
-    "wikidata-hybrid-base-level-5-id-3-model": ["roberta-large"],
-    "wikidata-hybrid-base-level-5-id-3-epochs": [35],
-
-    "wikidata-hybrid-base-level-6-id-3-model": ["bert-large-uncased"],
-    "wikidata-hybrid-base-level-6-id-3-epochs": [30],
-
-    "wikidata-hybrid-base-level-7-id-3-model": ["roberta-large"],
-    "wikidata-hybrid-base-level-7-id-3-epochs": [35],
-
-    "wikidata-hybrid-base-level-8-id-2-model": ["roberta-large"],
-    "wikidata-hybrid-base-level-8-id-2-epochs": [25]
+    "wikidata-hybrid-base-level-8-id-2-epochs": [4]
   }
 ]
